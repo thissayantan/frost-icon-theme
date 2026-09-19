@@ -18,6 +18,14 @@ export const CONTEXTS: Record<string, string> = {
   apps: "Applications",
   devices: "Devices",
 };
+/** Symbolic status icons (ADR-005): plain recolourable SVG, copied as-is into this directory. */
+export const SYMBOLIC_DIR = "symbolic/status";
+export function symbolicSources(): { name: string; file: string }[] {
+  return walk(join(SRC, "status")).filter((f) => f.endsWith(".svg"))
+    .map((file) => ({ name: file.slice(file.lastIndexOf("/") + 1, -4), file }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 export const LAYERS = ["shadow", "glow", "back", "frost", "lift", "plate", "rim", "glyph"] as const;
 /** `lift` (plate contact shadow) is optional: only icons whose plate leaves the back shape need it. */
 export const REQUIRED_LAYERS = ["shadow", "glow", "back", "frost", "plate", "rim", "glyph"];

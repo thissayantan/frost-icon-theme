@@ -20,7 +20,8 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
 3. **No trademarked logos redrawn or redistributed** (Chrome, Firefox, VS Code, Spotify…).
    Brand apps are left to inherit. The owner's *personal* brand icons (official Chrome/Chrome Dev, language-folder
    logos) live only in the git-ignored `local/` overlay applied by `install:local` — never committed (owner, 2026-09-19).
-4. **Symbolic icons (`*-symbolic`) are out of scope** — they inherit from Adwaita so GTK can recolour them.
+4. **Symbolic icons:** only the top-bar *status* set (owner request 2026-09-19, ADR-005, DESIGN §8) — plain
+   recolourable SVG from `tools/gen-status.py`. All other `*-symbolic` icons inherit so GTK can recolour them.
 5. **Glass is baked, not live.** Shipped files must not depend on SVG filters rendering at runtime
    (see ADR-001). Filters live in `src/`; `dist/` gets PNGs.
 6. **Verify visually.** Never call an icon done without looking at the rendered preview sheet on

@@ -127,5 +127,38 @@
     "font-woff",
     "font-woff2",
     "application-x-font-ttf"
+  ],
+  "battery-level-100-symbolic": [
+    "battery-full-symbolic"
+  ],
+  "battery-level-70-symbolic": [
+    "battery-good-symbolic"
+  ],
+  "battery-level-20-symbolic": [
+    "battery-low-symbolic"
+  ],
+  "battery-level-10-symbolic": [
+    "battery-caution-symbolic"
+  ],
+  "battery-level-0-symbolic": [
+    "battery-empty-symbolic"
+  ],
+  "battery-level-100-charging-symbolic": [
+    "battery-full-charging-symbolic"
+  ],
+  "battery-level-70-charging-symbolic": [
+    "battery-good-charging-symbolic"
+  ],
+  "battery-level-20-charging-symbolic": [
+    "battery-low-charging-symbolic"
+  ],
+  "battery-level-10-charging-symbolic": [
+    "battery-caution-charging-symbolic"
+  ],
+  "battery-level-0-charging-symbolic": [
+    "battery-empty-charging-symbolic"
+  ],
+  "battery-level-100-charged-symbolic": [
+    "battery-full-charged-symbolic"
   ]
 }

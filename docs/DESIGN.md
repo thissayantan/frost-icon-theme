@@ -129,8 +129,34 @@ opacity top stop, never add an outline.
   open "A" (two legs + crossbar) is a drawn symbol for type, not text. Page-family line weight is 6 units
   (bars and strokes); on graphite pages every glyph part is full white — 78 % white on the pale graphite
   plate has too little contrast on light backgrounds.
-- **Core apps** — only generic GNOME apps (Files, Terminal, Settings, Text Editor, Calculator,
-  System Monitor/Resources, Software, Tweaks, Disks, Extensions). No brand logos.
+- **Core apps (app family)** — only generic GNOME/Ubuntu apps; no brand logos (brand apps inherit; the owner's
+  official Chrome lives in the local overlay). Anatomy: **back** = colour squircle (12,12 → 116,116, r28);
+  **plate** = the app's *object* in frosted glass, inside the back (a glass gear, window, ghost, page, card, disc);
+  **glyph** = one white detail on the plate. Not macOS: no 3D, no realism, no material rendering — flat colour,
+  one glass pane, one symbol. Colour follows §3 meanings (Settings/Resources green, Terminal/Disks/Logs graphite,
+  Files blue…). On yellow backs every glyph part is full white. 16 px uses the knockout (§4).
+  Template: `src/_templates/app.svg`.
+
+## 8. Status icons (symbolic, ADR-005)
+Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The state language:**
+
+| State | How it looks | Colour |
+|---|---|---|
+| Normal / on | full glyph | none — the bar stays calm |
+| Level (signal, volume, mic, battery) | lit part full, remaining part at 35 % | none |
+| Off (user turned it off) | glyph at 35 % with a 1-px gap + a 2-px `\` slash | none |
+| Connecting | glyph at 35 % + three dots | none |
+| Connected, no internet | full glyph + "!" disc bottom-right | `warning` |
+| Unavailable / no network | glyph at 35 % + "×" disc | none |
+| Battery 20 % | fill | `warning` |
+| Battery 10 / 0 % | frame + "!" instead of fill | `error` |
+| Charging | fill + bolt inside the body (fill cut around it) | bolt `success` |
+| Plugged in, not charging | fill + plug inside the body | none |
+| Charged (100, on AC) | full fill | `success` |
+| Over-amplified volume | outer wave | `warning` |
+
+Every coloured state also changes *shape* ("!", ×, bolt, slash) — never colour alone (WCAG 1.4.1). Privacy
+indicators (camera, mic in use, screen share) stay one colour: the Shell already paints them.
 
 ## 7. Quality bar (checklist per icon)
 - [ ] Reads instantly at 48 px on light and dark

@@ -52,9 +52,9 @@ official logo; language folders (Android, Go, Node, Python…) should show their
 ## M4b — Status icons (symbolic, owner request 2026-09-19)
 Top-bar / panel status icons whose *state* reads at a glance (Wi-Fi, VPN, Bluetooth, volume, mic, battery,
 power profile, airplane, DND, privacy indicators…). Exception to rule 4, decided by the owner.
-- [ ] Research (names GNOME Shell 50 actually requests, symbolic recolouring classes, state language) → RESEARCH.md
-- [ ] ADR-005: symbolic icons ship as plain SVG (recolourable), not baked PNG; state colour via `success/warning/error` classes
-- [ ] Design the state language in DESIGN.md §8 (levels, off, acquiring, warning, critical; never colour alone)
+- [x] Research (names GNOME Shell 50 actually requests, symbolic recolouring classes, state language) → RESEARCH.md
+- [x] ADR-005: symbolic icons ship as plain SVG (recolourable), not baked PNG; state colour via `success/warning/error` classes
+- [x] Design the state language in DESIGN.md §8 (levels, off, acquiring, warning, critical; never colour alone)
 - [ ] Draw the status set; test in the real top bar (owner screenshot) on dark and light
 
 ## M5 — Release (v1.0)

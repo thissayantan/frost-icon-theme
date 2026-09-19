@@ -2,7 +2,7 @@
 // and a real GTK lookup (tools/lookup.py) of every shipped name and alias.
 import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
-import { CONTEXTS, DIST, NAME_RE, ROOT, SCALES, SIZES, SRC, THEME, THEME_DIR, aliases, dirName, sources, walk } from "./lib";
+import { CONTEXTS, DIST, NAME_RE, ROOT, SCALES, SIZES, SRC, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, dirName, sources, symbolicSources, walk } from "./lib";
 import { lint } from "./lint";
 
 const BUDGET_MB = 25;
@@ -51,6 +51,11 @@ else {
   for (const d of listed) {
     const s = ini.get(d);
     if (!s) { fail(`index.theme: no [${d}] section`); continue; }
+    if (d === SYMBOLIC_DIR) {
+      if (s.get("Type") !== "Scalable" || s.get("Size") !== "16") fail(`index.theme: [${d}] must be Type=Scalable, Size=16`);
+      if (!existsSync(join(THEME_DIR, d))) fail(`index.theme: ${d} listed but missing on disk`);
+      continue;
+    }
     if (!existsSync(join(THEME_DIR, d))) fail(`index.theme: ${d} listed but missing on disk`);
     const size = Number(s.get("Size"));
     if (!Number.isInteger(size) || size <= 0) fail(`index.theme: [${d}] Size must be a positive integer`);
@@ -75,7 +80,8 @@ for (const f of walk(THEME_DIR)) {
   const rel = relative(THEME_DIR, f);
   const base = f.slice(f.lastIndexOf("/") + 1);
   if (base === "index.theme" || base === "icon-theme.cache") continue;
-  if (!base.endsWith(".png")) fail(`dist: ${rel} is not a PNG (ADR-001: ship PNG only)`);
+  const symbolic = rel.startsWith(SYMBOLIC_DIR + "/");
+  if (symbolic ? !base.endsWith("-symbolic.svg") : !base.endsWith(".png")) fail(`dist: ${rel} — PNG only, except *-symbolic.svg in ${SYMBOLIC_DIR} (ADR-001/005)`);
   if (!NAME_RE.test(base)) fail(`dist: ${rel} has a name gtk-update-icon-cache will reject`);
   const l = lstatSync(f);
   if (l.isSymbolicLink()) {
@@ -92,7 +98,9 @@ for (const s of list) {
     if (!existsSync(join(THEME_DIR, dirName(size, scale, s.context), `${s.name}.png`))) fail(`dist: ${s.name} missing at ${size}@${scale}x`);
   }
 }
-for (const [target, alias] of Object.entries(aliases())) if (list.some((s) => s.name === target)) names.push(...alias);
+const symbolicNames = symbolicSources().map((s) => s.name);
+names.push(...symbolicNames);
+for (const [target, alias] of Object.entries(aliases())) if (list.some((s) => s.name === target) || symbolicNames.includes(target)) names.push(...alias);
 
 const cache = join(THEME_DIR, "icon-theme.cache");
 if (!existsSync(cache)) fail("dist: icon-theme.cache missing");
