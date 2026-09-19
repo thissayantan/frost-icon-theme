@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "hyaline",
+      "name": "frost",
       "devDependencies": {
         "@resvg/resvg-js": "^2.6.2",
         "@types/bun": "^1.4.2",

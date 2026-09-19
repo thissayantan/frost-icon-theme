@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline app-family template. Back = colour squircle (12,12 → 116,116, r28); plate = the app's object in
+  <!-- Frost app-family template. Back = colour squircle (12,12 → 116,116, r28); plate = the app's object in
        frosted glass, kept inside the back; glyph = one white detail on the plate. Change the tint stops,
        #plate-shape and #glyph only. -->
   <defs>

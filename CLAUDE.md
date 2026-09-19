@@ -1,6 +1,6 @@
-# Hyaline — frosted-glass icon theme for Linux
+# Frost — frosted-glass icon theme for Linux
 
-Hyaline (Greek *hyalos*, "glass") is a clean, minimal icon theme with a frosted-glass
+Frost (renamed from Hyaline on 2026-09-19 — the owner wanted a short, easy name) is a clean, minimal icon theme with a frosted-glass
 look: a vivid gradient back shape seen through a soft frosted plate, with a crisp white glyph.
 It targets GNOME 50 / GTK 4.22 on Ubuntu 26.04 (the owner's machine) and must also look
 right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
@@ -10,7 +10,7 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
 - `docs/ARCHITECTURE.md` — source → build → dist pipeline and the decisions (ADRs) behind it.
 - `docs/ROADMAP.md` — milestones with checklists. Work the current milestone top-down; tick items as they land.
 - `docs/RESEARCH.md` — what we learned and the sources. Add to it when you learn something new.
-- Skills in `.claude/skills/` load automatically when relevant: `hyaline-design`, `icon-theme-spec`, `build-preview`, `release`.
+- Skills in `.claude/skills/` load automatically when relevant: `frost-design`, `icon-theme-spec`, `build-preview`, `release`.
 
 ## Ground rules
 1. **Minimal first.** Fewer, better icons beat broad coverage. Anything not shipped falls back
@@ -26,15 +26,16 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
    (see ADR-001). Filters live in `src/`; `dist/` gets PNGs.
 6. **Verify visually.** Never call an icon done without looking at the rendered preview sheet on
    both a light and a dark background, at 16, 24, 48 and 128 px.
-7. **Don't touch the owner's system state** beyond `~/.local/share/icons/Hyaline*` (install target).
-   Never change their active icon theme without being asked; their current theme is `Folio`.
+7. **Don't touch the owner's system state** beyond `~/.local/share/icons/Frost*` (install target).
+   Never change their active icon theme without being asked. Since 2026-09-19 the owner uses `Frost` itself
+   (previous: `Folio`).
 
 ## Commands (create these in milestone M1; keep this list accurate)
 - `bun install` — toolchain (resvg-js, sharp, @xmldom/xmldom)
-- `bun run build` — `src/**/*.svg` → `dist/Hyaline/` PNGs at every size + `index.theme` + cache
+- `bun run build` — `src/**/*.svg` → `dist/Frost/` PNGs at every size + `index.theme` + cache
 - `bun run preview` — contact sheet `dist/preview/sheet.png` (light + dark rows, all sizes)
 - `bun run verify` — lint SVG sources, check naming/coverage, validate `index.theme`, run `tools/lookup.py`
-- `bun run install:local` — copy `dist/Hyaline` to `~/.local/share/icons/` and refresh the cache
+- `bun run install:local` — copy `dist/Frost` to `~/.local/share/icons/` and refresh the cache
 - `bun run coverage` — regenerate `docs/COVERAGE.md` (shipped vs inherited, via real GTK lookup)
 - `bun run typecheck` — `tsc` over `tools/`
 - `bun run preview --from-src` renders sources in memory (no dist); `--grid --out docs/preview.png` makes the README shot

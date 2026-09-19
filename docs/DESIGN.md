@@ -1,9 +1,9 @@
-# Hyaline design language
+# Frost design language
 
 > Clean. Minimal. Glass. Every icon is **two shapes and a glyph** — nothing more.
 
 Reference mood: *Glassmorphism – Glass Icon set (Free)* by Kristaps Elsiņš / uibits
-(Figma Community, CC BY 4.0). Inspiration only — Hyaline geometry is original.
+(Figma Community, CC BY 4.0). Inspiration only — Frost geometry is original.
 
 ## 1. Anatomy (the only allowed structure)
 

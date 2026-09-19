@@ -15,7 +15,7 @@ for (const e of lint()) fail(`lint: ${e}`);
 // 2. dist exists and is fresh
 const indexFile = join(THEME_DIR, "index.theme");
 if (!existsSync(indexFile)) {
-  console.error("✗ dist/Hyaline/index.theme missing — run `bun run build`");
+  console.error("✗ dist/Frost/index.theme missing — run `bun run build`");
   process.exit(1);
 }
 const built = statSync(indexFile).mtimeMs;
@@ -61,7 +61,7 @@ else {
     if (!Number.isInteger(size) || size <= 0) fail(`index.theme: [${d}] Size must be a positive integer`);
     if (!d.startsWith(`${size}x${size}`)) fail(`index.theme: [${d}] Size=${size} does not match its path`);
     const type = s.get("Type") ?? "Threshold";
-    if (type !== "Fixed") fail(`index.theme: [${d}] Type=${type}, Hyaline ships Fixed PNGs (ADR-001)`);
+    if (type !== "Fixed") fail(`index.theme: [${d}] Type=${type}, Frost ships Fixed PNGs (ADR-001)`);
     const scale = Number(s.get("Scale") ?? 1);
     if (scale !== (d.includes("@2x") ? 2 : 1)) fail(`index.theme: [${d}] Scale=${scale} does not match its path`);
     const ctx = d.split("/")[1];

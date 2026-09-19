@@ -1,6 +1,6 @@
 ---
 name: icon-theme-spec
-description: Use when deciding icon names, directory layout, index.theme contents, aliases, inheritance or cache behaviour for Hyaline, or when an icon "doesn't show up" in an app. Freedesktop icon theme + naming spec, applied.
+description: Use when deciding icon names, directory layout, index.theme contents, aliases, inheritance or cache behaviour for Frost, or when an icon "doesn't show up" in an app. Freedesktop icon theme + naming spec, applied.
 ---
 
 # Icon theme mechanics (what actually matters)
@@ -24,15 +24,15 @@ at 128 will be *scaled* at 16 instead of inherited. Ship every size (the build d
 ## index.theme
 Every directory must appear in `Directories=` (and `@2x` ones also in `ScaledDirectories=`) with a
 section giving `Size`, optional `Scale`, `Context`, `Type`. Unlisted directories are ignored silently.
-Hyaline uses `Type=Fixed` everywhere (PNG, ADR-001).
+Frost uses `Type=Fixed` everywhere (PNG, ADR-001).
 
 ## Cache
 `gtk-update-icon-cache -f -t <theme>` after every install. "The generated cache was invalid" =
 a filename with spaces/non-ASCII, or a broken symlink. Fix the file, never ship without a cache.
 
 ## Proving it works
-`python3 tools/lookup.py Hyaline folder user-home application-pdf` prints the file GTK would
-load for each name at several sizes. Anything resolving outside `Hyaline/` is inherited — expected
+`python3 tools/lookup.py Frost folder user-home application-pdf` prints the file GTK would
+load for each name at several sizes. Anything resolving outside `Frost/` is inherited — expected
 only for names we don't ship.
 
 ## Don'ts

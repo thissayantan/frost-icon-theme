@@ -1,4 +1,4 @@
-// Shared helpers for the Hyaline pipeline: paths, palette, source discovery, size derivation.
+// Shared helpers for the Frost pipeline: paths, palette, source discovery, size derivation.
 import { DOMParser, XMLSerializer } from "@xmldom/xmldom";
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -6,7 +6,7 @@ import { join, relative } from "node:path";
 export const ROOT = join(import.meta.dir, "..");
 export const SRC = join(ROOT, "src");
 export const DIST = join(ROOT, "dist");
-export const THEME = "Hyaline";
+export const THEME = "Frost";
 export const THEME_DIR = join(DIST, THEME);
 
 /** Every size we ship (DESIGN §4), each at @1x and @2x. */

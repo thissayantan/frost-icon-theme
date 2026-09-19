@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Ptyxis — app family. Terminal — a glass window with a prompt and a block cursor. -->
+  <!-- Frost org.gnome.Ptyxis — app family. Terminal — a glass window with a prompt and a block cursor. -->
   <defs>
     <!-- palette token: graphite (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">

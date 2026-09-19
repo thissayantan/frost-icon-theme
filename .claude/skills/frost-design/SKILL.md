@@ -1,9 +1,9 @@
 ---
-name: hyaline-design
-description: Use when drawing, editing or reviewing any Hyaline icon SVG — the glass layer recipe, grid, palette tokens, small-size rules and quality checklist. Load before touching anything in src/.
+name: frost-design
+description: Use when drawing, editing or reviewing any Frost icon SVG — the glass layer recipe, grid, palette tokens, small-size rules and quality checklist. Load before touching anything in src/.
 ---
 
-# Drawing a Hyaline icon
+# Drawing a Frost icon
 
 1. **Start from the template**: `cp src/_templates/glass.svg src/<context>/<icon-name>.svg`.
    The file name is the exact freedesktop/app icon name.

@@ -1,15 +1,15 @@
 ---
 name: build-preview
-description: Use when building Hyaline, generating or reading the preview sheet, installing locally, or verifying that GTK really loads Hyaline's files. The build → look → verify loop.
+description: Use when building Frost, generating or reading the preview sheet, installing locally, or verifying that GTK really loads Frost's files. The build → look → verify loop.
 ---
 
 # Build → look → verify
 
 ```bash
-bun run build          # src → dist/Hyaline (PNG @1x/@2x, aliases, index.theme, cache)
+bun run build          # src → dist/Frost (PNG @1x/@2x, aliases, index.theme, cache)
 bun run preview        # dist/preview/sheet.png
 bun run verify         # lint + index.theme validation + GTK lookup for every shipped name
-bun run install:local  # → ~/.local/share/icons/Hyaline, cache refreshed
+bun run install:local  # → ~/.local/share/icons/Frost, cache refreshed
 ```
 
 ## Looking is mandatory
@@ -21,8 +21,8 @@ background; sizes 16 / 24 / 48 / 128 in each group. Zoom by rendering a single i
 ## Real-desktop check (only when a milestone closes)
 1. `bun run install:local`
 2. Temporarily preview in an isolated way: `GTK_THEME=Adwaita:dark gtk4-icon-browser` if installed,
-   or `python3 tools/lookup.py Hyaline <names…>`.
-3. Only if the owner asks: switch with `gsettings set org.gnome.desktop.interface icon-theme Hyaline`
+   or `python3 tools/lookup.py Frost <names…>`.
+3. Only if the owner asks: switch with `gsettings set org.gnome.desktop.interface icon-theme Frost`
    and always tell them how to switch back to `Folio`.
 
 ## When something renders wrong

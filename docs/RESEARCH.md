@@ -71,8 +71,8 @@
 
 ## Mimetype lookup order (verified M3, GTK 4.22)
 - A file's `GThemedIcon` carries names like `[image-png, image-x-generic, image-png-symbolic]`.
-  `Gtk.IconTheme.lookup_by_gicon` tries **every name inside Hyaline first**, then the inherited themes —
-  so `image-x-generic` from Hyaline beats Papirus's specific `image-png`. Verified for image/png,
+  `Gtk.IconTheme.lookup_by_gicon` tries **every name inside Frost first**, then the inherited themes —
+  so `image-x-generic` from Frost beats Papirus's specific `image-png`. Verified for image/png,
   text/plain, application/zip, application/pdf, inode/directory against `dist/`.
 - application/pdf's generic fallback is `x-office-document`, not `application-x-generic`.
 - Not verified for Qt/KDE or GTK 3, whose loops may run name-by-name through the whole chain. Symlink

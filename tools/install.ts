@@ -1,4 +1,4 @@
-// Copy dist/Hyaline to ~/.local/share/icons/Hyaline and refresh its cache.
+// Copy dist/Frost to ~/.local/share/icons/Frost and refresh its cache.
 // Never touches any other theme and never changes the active icon theme.
 import { cpSync, existsSync, rmSync } from "node:fs";
 import { homedir } from "node:os";
@@ -8,7 +8,7 @@ import { applyLocalOverlay } from "./local";
 
 const target = join(homedir(), ".local/share/icons", THEME);
 if (!existsSync(join(THEME_DIR, "index.theme"))) {
-  console.error("dist/Hyaline missing — run `bun run build` first");
+  console.error("dist/Frost missing — run `bun run build` first");
   process.exit(1);
 }
 if (!target.endsWith(`/icons/${THEME}`)) throw new Error(`refusing to write to ${target}`);

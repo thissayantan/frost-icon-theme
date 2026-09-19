@@ -1,5 +1,5 @@
-// Every installed app (system, local, snap, flatpak) → its Icon= and where the *installed* Hyaline resolves it:
-// Hyaline art, the personal overlay, an inherited theme, or an absolute path no theme can touch.
+// Every installed app (system, local, snap, flatpak) → its Icon= and where the *installed* Frost resolves it:
+// Frost art, the personal overlay, an inherited theme, or an absolute path no theme can touch.
 //   bun run inventory [--md docs/INVENTORY.md]
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
@@ -32,7 +32,7 @@ const status = (a: App) => {
   if (!a.icon) return "no icon";
   if (a.icon.startsWith("/")) return "absolute path (unthemable)";
   const p = where.get(a.icon) ?? "";
-  if (p.includes(`/${THEME}/`)) return readlinkish(p) ? "overlay (official)" : "Hyaline";
+  if (p.includes(`/${THEME}/`)) return readlinkish(p) ? "overlay (official)" : "Frost";
   return p ? `inherited: ${p.match(/\/icons\/([^/]+)\//)?.[1] ?? p}` : "missing";
 };
 function readlinkish(p: string) {

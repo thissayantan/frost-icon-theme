@@ -7,7 +7,7 @@ Usage: python3 tools/lookup.py <theme> <icon-name> [<icon-name> ...] [--sizes 16
 --search-path DIR prepends DIR to GTK's icon search path (e.g. dist/ to test a build before install).
 
 Exit code 1 if any name resolves to nothing. Names resolving outside the theme's own
-directory are reported as "inherited" (expected only for icons Hyaline doesn't ship).
+directory are reported as "inherited" (expected only for icons Frost doesn't ship).
 """
 import json
 import sys

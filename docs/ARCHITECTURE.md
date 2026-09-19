@@ -15,9 +15,9 @@ docs/DESIGN.md tokens ─────┘   ┌───────────�
                                │ 7. gtk-update-icon-cache            │
                                └─────────────────────────────────────┘
                                             │
-                              dist/Hyaline/{16,22,24,32,48,64,96,128,256}x…/{context}/*.png
-                              dist/Hyaline/…@2x/…
-                              dist/Hyaline/index.theme  (Inherits=Papirus,Adwaita,hicolor)
+                              dist/Frost/{16,22,24,32,48,64,96,128,256}x…/{context}/*.png
+                              dist/Frost/…@2x/…
+                              dist/Frost/index.theme  (Inherits=Papirus,Adwaita,hicolor)
                               dist/preview/sheet.png
 ```
 
@@ -38,7 +38,7 @@ and GNOME Shell has its own path. A filter-heavy SVG in `dist/` would look diffe
 **Cost.** Larger install (budget: < 25 MB for v0.1). Re-evaluate when GtkSvg handles theme icons.
 
 ### ADR-002 — Overlay theme, not a full theme
-Ship only what Hyaline redraws; everything else inherits `Papirus, Adwaita, hicolor`.
+Ship only what Frost redraws; everything else inherits `Papirus, Adwaita, hicolor`.
 Keeps scope honest and matches the owner's setup. README states Papirus is recommended.
 
 ### ADR-003 — Layer ids drive size variants
@@ -63,7 +63,7 @@ classes `success|warning|error` only, dimming via group opacity, gaps via clip g
 ## index.theme shape (generated)
 ```ini
 [Icon Theme]
-Name=Hyaline
+Name=Frost
 Comment=Frosted-glass icons — clean, minimal
 Inherits=Papirus,Adwaita,hicolor
 Example=folder

@@ -1,6 +1,6 @@
 // Personal overlay, applied only to the installed copy by `install:local` — never committed (CLAUDE.md rule 3).
 //  • Official Chrome / Chrome Dev icons: symlinks to the PNGs Chrome itself installs in /opt/google.
-//  • Language folders: the Hyaline folder with the real brand mark (Simple Icons, CC0 paths) as a white glyph.
+//  • Language folders: the Frost folder with the real brand mark (Simple Icons, CC0 paths) as a white glyph.
 //    Logos are fetched once into git-ignored local/logos/ and never leave this machine.
 import { existsSync, mkdirSync, readFileSync, symlinkSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";

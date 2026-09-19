@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Hyaline's symbolic status icons (src/status/*-symbolic.svg) — DESIGN §8, ADR-005.
+"""Generate Frost's symbolic status icons (src/status/*-symbolic.svg) — DESIGN §8, ADR-005.
 
 Why a generator: families like battery (34 states) and signal bars are parametric; one geometry, every state.
 Rules the output obeys (GNOME Shell 50 St recolouring, see RESEARCH.md):

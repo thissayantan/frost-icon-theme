@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+- **Renamed Hyaline → Frost** (short, easy to say; theme dir `Frost`, repo folder `frost`). v0.1.0 was tagged as Hyaline.
+- App family (24 core GNOME/Ubuntu apps), symbolic status icons (ADR-005), personal overlay, folder tagging, scene renderer, inventory.
+
 ## v0.1.0 — 2026-09-19
 First usable set: folders, places and common file types. Everything else inherits from Papirus → Adwaita.
 

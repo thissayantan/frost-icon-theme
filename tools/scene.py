@@ -3,7 +3,7 @@
 
   python3 tools/scene.py files DIR [DIR…]   Files-style grid of a directory (special dirs, folder tags, mimetypes)
   python3 tools/scene.py apps [ID…]         dock row + app grid (default: every visible installed app)
-Options: --theme Hyaline  --size 64  --light  --search-path DIR (prepend, e.g. dist)  --out PATH
+Options: --theme Frost  --size 64  --light  --search-path DIR (prepend, e.g. dist)  --out PATH
 
 Icons resolve exactly as GTK would for the named theme (inheritance included), and each tile is marked
 with a small dot when the icon came from outside the theme (inherited) — so gaps are visible at a glance.
@@ -35,7 +35,7 @@ def opt(name, default=None):
     return default
 
 
-THEME = opt("--theme", "Hyaline")
+THEME = opt("--theme", "Frost")
 SIZE = int(opt("--size", "64"))
 OUT = opt("--out", "dist/preview/scene.png")
 SEARCH = opt("--search-path")
@@ -74,7 +74,7 @@ def surface_for(gicon, size):
     out = cairo.ImageSurface(cairo.FORMAT_ARGB32, size, size)
     if path:
         pb = GdkPixbuf.Pixbuf.new_from_file_at_size(path, size, size)
-        tmp = os.path.join(GLib.get_tmp_dir(), f"hyaline-scene-{os.getpid()}.png")
+        tmp = os.path.join(GLib.get_tmp_dir(), f"frost-scene-{os.getpid()}.png")
         pb.savev(tmp, "png", [], [])
         img = cairo.ImageSurface.create_from_png(tmp)
         os.unlink(tmp)
@@ -180,7 +180,7 @@ def apps_scene(ids):
     dock = draw_tiles([(a.get_display_name(), a.get_icon() or Gio.ThemedIcon.new("application-x-executable"))
                        for a in fav], "Dock (favourites) — 48 px", max(len(fav), 1), 88, 48 + 44, 48)
     grid = draw_tiles([(a.get_display_name(), a.get_icon() or Gio.ThemedIcon.new("application-x-executable"))
-                       for a in infos], f"App grid — {SIZE} px   (orange dot = inherited, not Hyaline)", 10,
+                       for a in infos], f"App grid — {SIZE} px   (orange dot = inherited, not Frost)", 10,
                       max(SIZE + 40, 112), SIZE + 52, SIZE)
     return stack([dock, grid])
 

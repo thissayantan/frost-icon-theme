@@ -1,4 +1,4 @@
-// src/**/*.svg → dist/Hyaline: PNG at every size @1x/@2x, alias symlinks, index.theme, icon cache.
+// src/**/*.svg → dist/Frost: PNG at every size @1x/@2x, alias symlinks, index.theme, icon cache.
 import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
 import { copyFileSync, existsSync, mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";

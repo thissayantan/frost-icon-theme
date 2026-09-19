@@ -1,8 +1,8 @@
 {
-  "name": "hyaline",
+  "name": "frost",
   "version": "0.1.0",
   "private": true,
-  "description": "Hyaline \u2014 frosted-glass icon theme for Linux",
+  "description": "Frost \u2014 frosted-glass icon theme for Linux",
   "license": "MIT",
   "type": "module",
   "scripts": {

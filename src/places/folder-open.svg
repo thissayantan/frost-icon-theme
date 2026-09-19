@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline folder-open — folder family; the flap leans forward (a parallelogram kept inside the back) to read as open. -->
+  <!-- Frost folder-open — folder family; the flap leans forward (a parallelogram kept inside the back) to read as open. -->
   <defs>
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#8CB8FF"/>

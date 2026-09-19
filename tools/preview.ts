@@ -28,7 +28,7 @@ function entries(): Entry[] {
     // Same derive + render path as the build, in memory — for iterating without touching dist/.
     return sources(only).map((s) => ({ label: s.name, png: (size, scale) => renderPng(s, size, scale) }));
   }
-  if (!existsSync(join(THEME_DIR, "index.theme"))) throw new Error("dist/Hyaline missing — run `bun run build` first");
+  if (!existsSync(join(THEME_DIR, "index.theme"))) throw new Error("dist/Frost missing — run `bun run build` first");
   return sources(only).map((s) => ({
     label: s.name,
     png: async (size, scale) => readFileSync(join(THEME_DIR, dirName(size, scale, s.context), `${s.name}.png`)),
@@ -123,7 +123,7 @@ async function grid(list: Entry[], size: number) {
   for (const [p, bg] of BACKGROUNDS.entries()) {
     const y0 = p * panelH;
     if (!bg.fill) labels += `<rect x="16" y="${y0 + 10}" width="170" height="26" rx="13" fill="#000000" fill-opacity=".35"/>`;
-    labels += text(24, y0 + 28, `Hyaline — ${bg.name}`, bg.ink, 15, "start", 600);
+    labels += text(24, y0 + 28, `Frost — ${bg.name}`, bg.ink, 15, "start", 600);
     for (const [i, e] of list.entries()) {
       const cx = 24 + (i % cols) * cell, cy = y0 + title + Math.floor(i / cols) * (cell + labelH);
       layers.push({ input: await e.png(size, 1), left: cx + 28, top: cy + 20 });

@@ -4,7 +4,7 @@
 //   bun run tag-folders [--dry-run] [--undo] [ROOT…]      default roots: ~/everything/code
 // Home-level: ~/Android → folder-android, ~/go → folder-go. Project roots are found by marker files
 // (first match wins, see RULES) and are not descended into. Only folders with no custom icon, or with
-// one Hyaline set, are touched; `--undo` removes exactly those. Refresh Files (F5) to see changes.
+// one Frost set, are touched; `--undo` removes exactly those. Refresh Files (F5) to see changes.
 import { existsSync, readdirSync, statSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
