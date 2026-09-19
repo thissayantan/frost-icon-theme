@@ -339,9 +339,9 @@ def crescent(c1, r1, c2, r2):
     a = (r1 * r1 - r2 * r2 + d * d) / (2 * d); h = math.sqrt(r1 * r1 - a * a)
     mx, my = x1 + a * (x2 - x1) / d, y1 + a * (y2 - y1) / d
     p1 = (mx + h * (y2 - y1) / d, my - h * (x2 - x1) / d); p2 = (mx - h * (y2 - y1) / d, my + h * (x2 - x1) / d)
-    return (f"M{f(p1[0])} {f(p1[1])}A{f(r1)} {f(r1)} 0 1 1 {f(p2[0])} {f(p2[1])}"
-            f"A{f(r2)} {f(r2)} 0 0 0 {f(p1[0])} {f(p1[1])}z")
-ICONS["night-light-symbolic"] = svg(g(crescent((8, 8), 6.5, (11.2, 5.2), 5.6)))
+    return (f"M{f(p1[0])} {f(p1[1])}A{f(r1)} {f(r1)} 0 1 0 {f(p2[0])} {f(p2[1])}"
+            f"A{f(r2)} {f(r2)} 0 0 1 {f(p1[0])} {f(p1[1])}z")
+ICONS["night-light-symbolic"] = svg(g(crescent((8, 8.5), 6.5, (12, 4.5), 5.2)))
 PLANE = ("M7.1 1.6c0-.9 1.8-.9 1.8 0v4.3l5.6 3.3v1.7l-5.6-1.6v3.1l1.7 1.3v1.3L8 14.2l-2.6.8v-1.3l1.7-1.3V9.3"
          "l-5.6 1.6V9.2l5.6-3.3z")
 ICONS["airplane-mode-symbolic"] = svg(g(PLANE))
