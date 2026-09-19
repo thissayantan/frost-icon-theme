@@ -271,6 +271,7 @@ function sheet(doc: Document, size: number, hinted: boolean) {
     label.parentNode?.removeChild(label);
   }
   const glyph = byId(doc, "glyph");
+  if (size < 48) glyph?.removeAttribute("filter"); // yellow's lift shadow is for the glass sizes only
   if (size < 48 && !hinted && label && glyph) {
     const shift = Number(doc.documentElement?.getAttribute("data-glyph-shift") ?? 0);
     // no label: room to grow — the glyph moves to the glass centre and scales up 1.3×

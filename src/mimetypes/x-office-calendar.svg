@@ -11,7 +11,7 @@
     </linearGradient>
     <linearGradient id="glass-fill" x1="0" y1="0" x2=".7" y2="1">
       <stop offset="0" stop-color="#FF8E80" stop-opacity=".92"/>
-      <stop offset="1" stop-color="#FF8E80" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#FF8E80" stop-opacity=".78"/>
     </linearGradient>
     <linearGradient id="depth-fill" x1="0" y1="0" x2="1" y2="1">
       <stop offset=".35" stop-color="#EE3048" stop-opacity="0"/>
@@ -42,6 +42,7 @@
     <path id="plate-shape-48" d="M25.333 8 H77.333 L98.667 29.333 V100 a12 12 0 0 1 -12 12 H25.333 a12 12 0 0 1 -12 -12 V20 a12 12 0 0 1 12 -12 Z"/>
     <path id="back-shape-48" d="M50.667 21.333 H104 a13.333 13.333 0 0 1 13.333 13.333 V106.667 a13.333 13.333 0 0 1 -13.333 13.333 H50.667 a13.333 13.333 0 0 1 -13.333 -13.333 V34.667 a13.333 13.333 0 0 1 13.333 -13.333 Z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <mask id="outside-plate"><rect width="128" height="128" fill="#FFFFFF"/><use xlink:href="#plate-shape" fill="#000000"/></mask>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
     <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
@@ -49,7 +50,7 @@
 
   <ellipse id="shadow" cx="66" cy="117" rx="42" ry="4" fill="#000000" opacity=".16" filter="url(#blur-shadow)"/>
   <use id="glow" xlink:href="#back-shape" fill="#EE3048" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
-  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)"/>
+  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)" mask="url(#outside-plate)"/>
   <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" fill="#EE3048" filter="url(#blur-frost)"/></g>
   <use id="plate" xlink:href="#plate-shape" fill="url(#glass-fill)"/>
   <g id="depth"><use xlink:href="#plate-shape" fill="url(#depth-fill)"/><use xlink:href="#plate-shape" fill="url(#sheen-fill)"/></g>

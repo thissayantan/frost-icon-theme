@@ -82,15 +82,15 @@ VEC = {
 PIX = {
     "A": ".#.|#.#|###|#.#|#.#", "B": "##.|#.#|##.|#.#|##.", "C": ".##|#..|#..|#..|.##", "D": "##.|#.#|#.#|#.#|##.",
     "E": "###|#..|##.|#..|###", "F": "###|#..|##.|#..|#..", "G": ".##|#..|#.#|#.#|.##", "H": "#.#|#.#|###|#.#|#.#",
-    "I": "###|.#.|.#.|.#.|###", "J": "..#|..#|..#|#.#|.#.", "K": "#.#|#.#|##.|#.#|#.#", "L": "#..|#..|#..|#..|###",
+    "I": "###|.#.|.#.|.#.|###", "J": "..#|..#|..#|#.#|.#.", "K": "#.#|##.|#..|##.|#.#", "L": "#..|#..|#..|#..|###",
     "M": "#...#|##.##|#.#.#|#...#|#...#", "N": "#..#|##.#|#.##|#..#|#..#", "O": ".#.|#.#|#.#|#.#|.#.",
     "P": "##.|#.#|##.|#..|#..", "Q": ".#.|#.#|#.#|#.#|.##", "R": "##.|#.#|##.|#.#|#.#", "S": ".##|#..|.#.|..#|##.",
     "T": "###|.#.|.#.|.#.|.#.", "U": "#.#|#.#|#.#|#.#|###", "V": "#.#|#.#|#.#|#.#|.#.", "W": "#...#|#...#|#.#.#|##.##|#...#",
     "X": "#.#|#.#|.#.|#.#|#.#", "Y": "#.#|#.#|.#.|.#.|.#.", "Z": "###|..#|.#.|#..|###",
-    "1": ".#.|##.|.#.|.#.|###", "2": "##.|..#|.#.|#..|###", "3": "##.|..#|.#.|..#|##.", "4": "#.#|#.#|###|..#|..#",
+    "1": ".#.|##.|.#.|.#.|###", "2": ".#.|#.#|..#|.#.|###", "3": "##.|..#|.#.|..#|##.", "4": "#.#|#.#|###|..#|..#",
     "7": "###|..#|.#.|.#.|.#.",
 }
-VGAP = 2.6
+VGAP = 3.4
 def label_vec(text, cx=GLYPH_C[0], cy=LABEL_CY, h=14, sw=3.8):
     s = h / 16; w = (sum(VEC[ch][0] for ch in text) + VGAP * (len(text) - 1)) * s; x = cx - w / 2; out = []
     for ch in text:
@@ -121,19 +121,20 @@ def mirror16(rects): return [(16 - x - w, y, w, h) for x, y, w, h in rects]
 def mirror24(rects): return [(22 - x - w, y, w, h) for x, y, w, h in rects]
 
 CAT = {}
-def cat(name, tok, desc, g128, h16, h24, h22=None, legacy=False):
-    CAT[name] = dict(tok=tok, desc=desc, g128=g128, h16=h16, h24=h24, h22=h22, legacy=legacy)
+def cat(name, tok, desc, g128, h16, h24, h22=None, legacy=False, dy16=0, dy24=0):
+    """dy16 / dy24: whole-pixel vertical nudge so every category sits at the same height (22 follows 24)."""
+    CAT[name] = dict(tok=tok, desc=desc, g128=g128, h16=h16, h24=h24, h22=h22, legacy=legacy, dy16=dy16, dy24=dy24)
 
 # legacy (existing) symbols: 16 px hints unchanged; 22/24 hints were drawn for the old flap, so they are
 # re-used with a (-1, -5) offset that lands them on the glass page's centre.
 cat("text", "graphite", "three text lines",
     [r(-18, -11, 36, 6, F, 3), r(-18, -1, 36, 6, F, 3), r(-18, 9, 22, 6, F, 3)],
     px((5, 8, 6, 1), (5, 10, 6, 1), (5, 12, 4, 1)),
-    px((8, 14, 8, 1), (8, 16, 8, 1), (8, 18, 5, 1)), px((7, 13, 8, 1), (7, 15, 8, 1), (7, 17, 5, 1)), legacy=True)
+    px((8, 14, 8, 1), (8, 16, 8, 1), (8, 18, 5, 1)), px((7, 13, 8, 1), (7, 15, 8, 1), (7, 17, 5, 1)), legacy=True, dy16=-1)
 cat("binary", "graphite", "three dots: some file",
     [c(-14, 0, 5.5), c(0, 0, 5.5), c(14, 0, 5.5)],
     px((4, 9, 2, 2), (7, 9, 2, 2), (10, 9, 2, 2)),
-    px((8, 16, 2, 2), (11, 16, 2, 2), (14, 16, 2, 2)), px((7, 14, 2, 2), (10, 14, 2, 2), (13, 14, 2, 2)), legacy=True)
+    px((8, 16, 2, 2), (11, 16, 2, 2), (14, 16, 2, 2)), px((7, 14, 2, 2), (10, 14, 2, 2), (13, 14, 2, 2)), legacy=True, dy16=-1)
 cat("log", "graphite", "log lines, each led by a dot",
     [c(-15, -8, 3.6), r(-8, -11, 26, 6, F, 3), c(-15, 2, 3.6), r(-8, -1, 26, 6, F, 3), c(-15, 12, 3.6), r(-8, 9, 18, 6, F, 3)],
     px((4, 7, 1, 1), (6, 7, 6, 1), (4, 9, 1, 1), (6, 9, 6, 1), (4, 11, 1, 1), (6, 11, 4, 1)),
@@ -141,12 +142,13 @@ cat("log", "graphite", "log lines, each led by a dot",
 cat("markdown", "blue", "M and a down arrow (the public-domain Markdown mark)",
     [st("M-19 13 V-13 L-10 0 L-1 -13 V13") + st("M13 -13 V11") + st("M6 5 L13 12 L20 5")],
     px((4, 6, 1, 6), (5, 7, 1, 1), (6, 8, 1, 1), (7, 7, 1, 1), (8, 6, 1, 6), (11, 6, 1, 5), (10, 9, 1, 1), (12, 9, 1, 1)),
-    px((4, 7, 2, 9), (10, 7, 2, 9), (6, 8, 1, 2), (7, 9, 1, 2), (8, 9, 1, 2), (9, 8, 1, 2),
-       (15, 7, 2, 8), (13, 11, 2, 2), (17, 11, 2, 2), (14, 13, 1, 2), (17, 13, 1, 2)))
+    px((4, 7, 2, 9), (9, 7, 2, 9), (6, 8, 1, 2), (7, 9, 1, 2), (8, 8, 1, 2),
+       (14, 7, 2, 8), (12, 11, 2, 2), (16, 11, 2, 2), (13, 13, 1, 2), (16, 13, 1, 2)),
+    px((4, 6, 2, 9), (9, 6, 2, 9), (6, 7, 1, 1), (7, 8, 1, 1), (8, 7, 1, 1), (13, 6, 2, 8), (12, 10, 1, 2), (15, 10, 1, 2)))
 cat("document", "blue", "heading and paragraph",
     [r(-18, -17, 20, 8, F, 4), r(-18, -3, 36, 6, W78, 3), r(-18, 9, 36, 6, W78, 3)],
     px((5, 7, 4, 2)) + px((5, 10, 6, 1), (5, 12, 6, 1), a=W78),
-    px((8, 13, 5, 2)) + px((8, 16, 8, 1), (8, 18, 8, 1), a=W78), px((7, 12, 5, 2)) + px((7, 15, 8, 1), (7, 17, 8, 1), a=W78), legacy=True)
+    px((8, 13, 5, 2)) + px((8, 16, 8, 1), (8, 18, 8, 1), a=W78), px((7, 12, 5, 2)) + px((7, 15, 8, 1), (7, 17, 8, 1), a=W78), legacy=True, dy16=-1)
 cat("contact", "blue", "person: head and shoulders",
     [c(0, -8, 8.5), p("M-16 18 C-16 8 -9 3 0 3 C9 3 16 8 16 18 Z")],
     px((7, 5, 2, 1), (6, 6, 4, 2), (7, 8, 2, 1), (5, 10, 6, 1), (4, 11, 8, 2)),
@@ -155,25 +157,29 @@ cat("spreadsheet", "green", "3×3 grid, header row solid",
     [r(-18 + i * 13, -15 + j * 11, 10, 8, F if j == 0 else W78, 2) for j in range(3) for i in range(3)],
     "".join(r(4 + i * 3, 6 + j * 3, 2, 2, F if j == 0 else W78) for j in range(3) for i in range(3)),
     "".join(r(8 + i * 3, 13 + j * 3, 2, 2, F if j == 0 else W78) for j in range(3) for i in range(3)),
-    "".join(r(7 + i * 3, 11 + j * 3, 2, 2, F if j == 0 else W78) for j in range(3) for i in range(3)), legacy=True)
+    "".join(r(7 + i * 3, 11 + j * 3, 2, 2, F if j == 0 else W78) for j in range(3) for i in range(3)), legacy=True, dy16=-1)
 cat("script", "green", "prompt: chevron and cursor",
     [st("M-17 -10 L-8 0 L-17 10"), r(-2, 7, 20, 6, W78, 3)],
-    st("M5 8 L7.5 10.5 L5 13", 1.4) + r(9, 12, 3, 1, W78),
-    st("M8.5 14 L11.5 17 L8.5 20", 1.5) + r(13, 19, 4, 1, W78), st("M7.5 13 L10 15.5 L7.5 18", 1.4) + r(11, 17, 4, 1, W78), legacy=True)
+    stairs([(5, 7), (6, 8), (7, 9), (6, 10), (5, 11)]) + r(9, 11, 3, 1, W78),
+    px((7, 13, 2, 1), (8, 14, 2, 1), (9, 15, 2, 1), (10, 16, 2, 1), (9, 17, 2, 1), (8, 18, 2, 1), (7, 19, 2, 1)) + r(13, 19, 4, 1, W78),
+    None, legacy=True)
 cat("json", "yellow", "curly braces around a dot: structured data",
-    [brace("l"), brace("r"), c(0, 0, 3.6, W78)],
+    [brace("l"), brace("r"), c(0, 0, 3.6)],
     px((5, 6, 2, 1), (5, 7, 1, 2), (4, 9, 1, 1), (5, 10, 1, 2), (5, 12, 2, 1), *mirror16([(5, 6, 2, 1), (5, 7, 1, 2), (4, 9, 1, 1), (5, 10, 1, 2), (5, 12, 2, 1)])),
     px((7, 6, 3, 2), (6, 7, 2, 3), (4, 10, 3, 2), (6, 12, 2, 3), (7, 15, 3, 2),
-       *mirror24([(7, 6, 3, 2), (6, 7, 2, 3), (4, 10, 3, 2), (6, 12, 2, 3), (7, 15, 3, 2)])) + r(10, 10, 2, 2, W78))
+       *mirror24([(7, 6, 3, 2), (6, 7, 2, 3), (4, 10, 3, 2), (6, 12, 2, 3), (7, 15, 3, 2)])) + r(10, 10, 2, 2),
+    px((7, 5, 2, 2), (6, 6, 2, 3), (4, 9, 3, 2), (6, 11, 2, 3), (7, 14, 2, 2),
+       *[(20 - x - w, y, w, h) for x, y, w, h in [(7, 5, 2, 2), (6, 6, 2, 3), (4, 9, 3, 2), (6, 11, 2, 3), (7, 14, 2, 2)]]) + r(9, 9, 2, 2))
 cat("certificate", "yellow", "rosette with two ribbon tails",
-    ['<path d="M-7 6 L-12 20 L-5 17 L-2 23 L2 10 Z M7 6 L12 20 L5 17 L2 23 L-2 10 Z" fill="#FFFFFF" fill-opacity=".78"/>',
+    ['<path d="M-7 6 L-12 20 L-5 17 L-2 23 L2 10 Z M7 6 L12 20 L5 17 L2 23 L-2 10 Z" fill="#FFFFFF"/>',
      c(0, -4, 13), f'<circle cx="0" cy="-4" r="6.5" fill="none" stroke="TOKDEEP" stroke-opacity=".55" stroke-width="3"/>'],
-    px((7, 5, 2, 1), (6, 6, 4, 3), (7, 9, 2, 1)) + px((6, 10, 1, 3), (9, 10, 1, 3), a=W78),
-    px((9, 5, 4, 1), (8, 6, 6, 1), (7, 7, 8, 4), (8, 11, 6, 1), (9, 12, 4, 1)) + r(10, 8, 2, 2, DEEP()) + px((8, 13, 2, 4), (12, 13, 2, 4), a=W78))
+    px((7, 5, 2, 1), (6, 6, 4, 3), (7, 9, 2, 1), (6, 10, 1, 3), (9, 10, 1, 3)),
+    px((9, 5, 4, 1), (8, 6, 6, 1), (7, 7, 8, 4), (8, 11, 6, 1), (9, 12, 4, 1)) + r(10, 8, 2, 2, DEEP()) + px((8, 13, 2, 4), (12, 13, 2, 4)))
 cat("key", "yellow", "key: ring, shaft and two teeth",
     [f'<circle cx="-10" cy="0" r="8" fill="none" stroke="#FFFFFF" stroke-width="6"/>', st("M-2 0 H18") + st("M11 0 V7") + st("M17 0 V9")],
-    px((4, 7, 2, 1), (3, 8, 1, 2), (6, 8, 1, 2), (4, 10, 2, 1), (7, 8, 6, 1), (10, 9, 1, 2), (12, 9, 1, 2)),
-    '<path d="M5 8h5v1h1v5h-1v1h-5v-1h-1v-5h1z M6 10v3h3v-3z" fill-rule="evenodd" fill="#FFFFFF"/>' + px((11, 10, 7, 2), (15, 12, 1, 2), (17, 12, 1, 3)))
+    px((5, 7, 2, 1), (4, 8, 1, 2), (7, 8, 1, 2), (5, 10, 2, 1), (8, 8, 4, 1), (9, 9, 1, 2), (11, 9, 1, 2)),
+    '<path d="M5 8h5v1h1v5h-1v1h-5v-1h-1v-5h1z M6 10v3h3v-3z" fill-rule="evenodd" fill="#FFFFFF"/>' + px((11, 10, 7, 2), (15, 12, 1, 2), (17, 12, 1, 3)),
+    px((5, 7, 4, 1), (4, 8, 2, 4), (8, 8, 2, 4), (5, 12, 4, 1), (6, 8, 2, 1), (6, 11, 2, 1), (10, 9, 6, 2), (13, 11, 1, 2), (15, 11, 1, 3)))
 cat("lock", "graphite", "padlock: a dependency lock file",
     [st("M-9 -4 V-9 A9 9 0 0 1 9 -9 V-4"), r(-16, -5, 32, 24, F, 5), c(0, 5, 3.6, DEEP()), r(-1.5, 6, 3, 6, DEEP())],
     px((6, 5, 4, 1), (5, 6, 1, 2), (10, 6, 1, 2), (4, 8, 8, 5)) + r(7, 9, 2, 2, DEEP()),
@@ -181,28 +187,30 @@ cat("lock", "graphite", "padlock: a dependency lock file",
 cat("presentation", "orange", "rising bar chart",
     [r(-17, 3, 9, 14, W78, 2.5), r(-4.5, -7, 9, 24, W78, 2.5), r(8, -17, 9, 34, F, 2.5)],
     px((4, 10, 2, 3), (7, 8, 2, 5), a=W78) + r(10, 6, 2, 7),
-    px((8, 18, 2, 3), (11, 16, 2, 5), a=W78) + r(14, 14, 2, 7), px((7, 16, 2, 3), (10, 14, 2, 5), a=W78) + r(13, 12, 2, 7), legacy=True)
+    px((8, 18, 2, 3), (11, 16, 2, 5), a=W78) + r(14, 14, 2, 7), px((7, 16, 2, 3), (10, 14, 2, 5), a=W78) + r(13, 12, 2, 7), legacy=True, dy24=-1)
 cat("archive", "orange", "zipper with pull tab",
     [r(-8, -21, 8, 5, F, 1.5), r(0, -16, 8, 5, F, 1.5), r(-8, -11, 8, 5, F, 1.5), r(0, -6, 8, 5, F, 1.5), r(-11, 1, 22, 16, F, 4), r(-3, 6, 6, 5, DEEP(".6"), 1.5)],
     px((7, 6, 1, 1), (8, 7, 1, 1), (7, 8, 1, 1), (8, 9, 1, 1), (6, 10, 4, 3)) + r(7, 11, 2, 1, DEEP(".6")),
-    px((11, 12, 2, 1), (12, 13, 2, 1), (11, 14, 2, 1), (12, 15, 2, 1), (10, 16, 5, 4)) + r(12, 17, 1, 2, DEEP(".6")),
-    px((10, 11, 1, 1), (11, 12, 1, 1), (10, 13, 1, 1), (11, 14, 1, 1), (9, 15, 4, 3)) + r(10, 16, 2, 1, DEEP(".6")), legacy=True)
+    px((11, 10, 2, 2), (13, 12, 2, 2), (11, 14, 2, 2), (9, 16, 6, 5)) + r(11, 18, 2, 2, DEEP(".6")),
+    None, legacy=True)
 cat("package", "orange", "box with a down arrow: an installer",
     [st("M0 -21 V-5") + st("M-8 -12 L0 -4 L8 -12"), r(-18, 3, 36, 16, F, 4), r(-18, 3, 36, 5, DEEP(".35"), 0)],
     px((7, 4, 2, 3), (5, 7, 6, 1), (6, 8, 4, 1), (7, 9, 2, 1), (4, 11, 8, 3)),
-    px((10, 4, 2, 5), (7, 8, 8, 2), (8, 10, 6, 1), (9, 11, 4, 1), (10, 12, 2, 1), (5, 14, 12, 5)))
+    px((10, 4, 2, 5), (7, 8, 8, 2), (8, 10, 6, 1), (9, 11, 4, 1), (10, 12, 2, 1), (5, 14, 12, 5)),
+    px((9, 3, 2, 4), (6, 6, 8, 2), (7, 8, 6, 1), (8, 9, 4, 1), (9, 10, 2, 1), (4, 12, 12, 4)))
 cat("disc", "orange", "optical disc with its hole",
     [c(0, 0, 18), c(0, 0, 5.5, DEEP(".6")), f'<path d="M-11 -6 A12.5 12.5 0 0 1 -3 -12" fill="none" stroke="TOKDEEP" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>'],
     px((6, 6, 4, 1), (5, 7, 6, 1), (4, 8, 8, 4), (5, 12, 6, 1), (6, 13, 4, 1)) + r(7, 9, 2, 2, DEEP(".6")),
-    px((9, 5, 4, 1), (7, 6, 8, 1), (6, 7, 10, 1), (5, 8, 12, 6), (6, 14, 10, 1), (7, 15, 8, 1), (9, 16, 4, 1)) + r(10, 10, 2, 2, DEEP(".6")))
+    px((9, 5, 4, 1), (7, 6, 8, 1), (6, 7, 10, 1), (5, 8, 12, 6), (6, 14, 10, 1), (7, 15, 8, 1), (9, 16, 4, 1)) + r(10, 10, 2, 2, DEEP(".6")), dy16=-1)
 cat("pdf", "red", "print layout: heading, image block, text lines",
     [r(-18, -18, 36, 8, F, 4), r(-18, -5, 16, 16, F, 3), r(2, -4, 16, 6, W78, 3), r(2, 6, 16, 6, W78, 3)],
     px((5, 7, 6, 2), (5, 10, 3, 3)) + px((9, 10, 2, 1), (9, 12, 2, 1), a=W78),
     px((8, 13, 8, 2), (8, 16, 4, 4)) + px((13, 16, 3, 1), (13, 18, 3, 1), a=W78),
-    px((7, 12, 8, 2), (7, 15, 3, 3)) + px((11, 15, 4, 1), (11, 17, 4, 1), a=W78), legacy=True)
+    px((7, 12, 8, 2), (7, 15, 3, 3)) + px((11, 15, 4, 1), (11, 17, 4, 1), a=W78), legacy=True, dy16=-1)
 cat("video", "red", "play triangle",
     ['<path d="M-7 -14 L-7 14 L16 0 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>'],
-    p("M6 7.5 V13.5 L11 10.5 Z"), p("M9.5 13 V21 L16 17 Z"), p("M8.5 12 V19 L14.5 15.5 Z"), legacy=True)
+    px((7, 6, 1, 7), (8, 7, 1, 5), (9, 8, 1, 3), (10, 9, 1, 1)),
+    px((10, 13, 2, 8), (12, 14, 1, 6), (13, 15, 1, 4), (14, 16, 1, 2)), None, legacy=True)
 cat("calendar", "red", "calendar: rings, header and day dots",
     [st("M-8 -20 V-12") + st("M8 -20 V-12"), r(-18, -14, 36, 32, W78, 5), r(-18, -14, 36, 10, F, 5), r(-18, -8, 36, 4, F),
      r(-11, 2, 5, 5, DEEP(), 1), r(-2.5, 2, 5, 5, DEEP(), 1), r(6, 2, 5, 5, DEEP(), 1), r(-11, 10, 5, 5, DEEP(), 1), r(-2.5, 10, 5, 5, DEEP(), 1)],
@@ -210,12 +218,13 @@ cat("calendar", "red", "calendar: rings, header and day dots",
     px((8, 4, 2, 3), (13, 4, 2, 3), (5, 6, 12, 3)) + r(5, 9, 12, 9, W78) + px((7, 11, 2, 2), (10, 11, 2, 2), (13, 11, 2, 2), (7, 14, 2, 2), (10, 14, 2, 2), a=DEEP()))
 cat("executable", "red", "lightning bolt: runs",
     ['<path d="M5 -21 L-12 3 H-1 L-4 21 L13 -3 H2 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>'],
-    p("M9.5 4 L5 9.2 H8 L6.5 14 L11 8.3 H8 Z"), p("M13 4 L7 12 H11 L9 19 L16 10 H12 Z"))
+    px((9, 5, 1, 1), (8, 6, 1, 1), (7, 7, 1, 1), (6, 8, 4, 1), (8, 9, 1, 1), (7, 10, 1, 1), (6, 11, 1, 1)),
+    px((13, 5, 2, 1), (12, 6, 2, 1), (11, 7, 2, 1), (10, 8, 2, 1), (9, 9, 2, 1), (8, 10, 7, 2), (12, 12, 2, 1), (11, 13, 2, 1), (10, 14, 2, 1), (9, 15, 2, 1), (9, 16, 1, 1)))
 cat("image", "pink", "mountains under a sun",
     [c(11, -12, 6, W78), p("M-20 15 L-8 -4.5 a3.5 3.5 0 0 1 6 0 L6.5 9 L9.5 4.5 a3 3 0 0 1 5 0 L20 13 V15 a4 4 0 0 1 -4 4 H-16 a4 4 0 0 1 -4 -4 Z")],
-    r(10, 7, 2, 2, W78) + p("M4 13 L7.5 8.5 L11 13 Z") + p("M9 13 L10.5 11 L12 13 Z"),
-    r(14, 13, 2, 2, W78) + p("M8 21 L11.5 15.5 L15 21 Z") + p("M12.5 21 L14.5 18 L16.5 21 Z"),
-    r(13, 12, 2, 2, W78) + p("M7 19 L10.5 14 L14 19 Z") + p("M11.5 19 L13.5 16.5 L15.5 19 Z"), legacy=True)
+    r(10, 7, 2, 2, W78) + px((7, 9, 1, 1), (6, 10, 3, 1), (5, 11, 6, 1), (4, 12, 8, 1)),
+    r(14, 13, 2, 2, W78) + px((11, 16, 1, 1), (10, 17, 3, 1), (9, 18, 6, 1), (8, 19, 8, 1), (8, 20, 9, 1)),
+    None, legacy=True, dy16=-1)
 cat("mail", "pink", "envelope",
     [r(-19, -13, 38, 28, F, 5), st("M-14 -7 L0 4 L14 -7", 4, .55, "TOKDEEP")],
     r(4, 6, 8, 6) + px((5, 7, 1, 1), (6, 8, 1, 1), (7, 9, 2, 1), (9, 8, 1, 1), (10, 7, 1, 1), a=DEEP()),
@@ -223,19 +232,22 @@ cat("mail", "pink", "envelope",
 cat("ebook", "pink", "open book",
     [p("M-2 -12 C-7 -16 -14 -16 -20 -13 V15 C-14 12 -7 12 -2 16 Z"), p("M2 -12 C7 -16 14 -16 20 -13 V15 C14 12 7 12 2 16 Z", W78)],
     r(4, 6, 4, 7) + r(8, 6, 4, 7, W78),
-    p("M5 7 Q8 5 10.5 7 V18 Q8 16 5 18 Z") + p("M11.5 7 Q14 5 17 7 V18 Q14 16 11.5 18 Z", W78))
+    px((6, 6, 3, 1), (5, 7, 5, 11)) + px((13, 6, 3, 1), (12, 7, 5, 11), a=W78))
 cat("audio", "violet", "two beamed notes",
     ['<g fill="#FFFFFF" transform="scale(.83) translate(-68 -88)"><ellipse cx="52" cy="104" rx="7" ry="5.5" transform="rotate(-20 52 104)"/><ellipse cx="78" cy="100" rx="7" ry="5.5" transform="rotate(-20 78 100)"/><rect x="54" y="78" width="6" height="26"/><rect x="80" y="73" width="6" height="27"/><path d="M54 78 L86 72 V79.5 L54 85.5 Z"/></g>'],
     px((7, 7, 5, 2), (7, 9, 1, 3), (11, 9, 1, 2), (5, 11, 3, 2), (9, 10, 3, 2)),
     px((9, 13, 7, 2), (9, 15, 2, 4), (14, 15, 2, 3), (7, 18, 4, 2), (12, 17, 4, 2)),
-    px((8, 12, 7, 2), (8, 14, 2, 4), (13, 14, 2, 3), (6, 17, 4, 2), (11, 16, 4, 2)), legacy=True)
+    px((8, 12, 7, 2), (8, 14, 2, 4), (13, 14, 2, 3), (6, 17, 4, 2), (11, 16, 4, 2)), legacy=True, dy16=-1)
 cat("font", "violet", "open A: two legs and a crossbar (a symbol for type)",
     [st("M-15 16 L0 -17 L15 16"), st("M-7.5 6 H7.5")],
-    st("M5 13.5 L8 7 L11 13.5", 1.3) + r(6, 11, 4, 1),
-    st("M8.5 20.5 L12 13 L15.5 20.5", 1.5) + r(9.5, 18, 5, 1), st("M7.5 18.5 L11 12 L14.5 18.5", 1.4) + r(8.5, 16, 5, 1), legacy=True)
+    stairs([(7, 6), (8, 6), (6, 7), (9, 7), (6, 8), (9, 8), (5, 9), (10, 9), (5, 10), (10, 10), (5, 11), (10, 11)]) + r(6, 9, 4, 1),
+    px((11, 13, 2, 1), (10, 14, 4, 1), (9, 15, 2, 1), (13, 15, 2, 1), (9, 16, 2, 1), (13, 16, 2, 1), (8, 17, 2, 1), (14, 17, 2, 1),
+       (8, 18, 8, 1), (8, 19, 2, 1), (14, 19, 2, 1), (8, 20, 2, 1), (14, 20, 2, 1)),
+    None, legacy=True)
 cat("config", "violet", "gear",
     [gear(0, 0, 18, 13.5, 5.5)],
-    gear_px(8, 9.5, 2.6, 4), gear_px(11, 11.5, 3.8, 4.8), gear_px(10, 10.5, 3.4, 4.4))
+    px((7, 5, 2, 1), (5, 6, 6, 2), (4, 8, 3, 2), (9, 8, 3, 2), (5, 10, 6, 2), (7, 12, 2, 1)),
+    px((9, 4, 4, 2), (6, 6, 10, 3), (5, 9, 4, 4), (13, 9, 4, 4), (6, 13, 10, 3), (9, 16, 4, 2)))
 cat("diff", "violet", "plus over minus: changes",
     [st("M0 -19 V-3") + st("M-8 -11 H8") + st("M-8 12 H8")],
     px((7, 4, 2, 6), (5, 6, 6, 2), (5, 11, 6, 2)),
@@ -244,16 +256,18 @@ cat("source", "teal", "angle brackets and slash: source code",
     [st("M-9 -10 L-16 0 L-9 10"), st("M9 -10 L16 0 L9 10"), st("M3 -11 L-3 11", 5, .78)],
     stairs([(6, 8), (5, 9), (4, 10), (5, 11), (6, 12), (9, 8), (10, 9), (11, 10), (10, 11), (9, 12)]),
     stairs([(10, 14), (9, 15), (8, 16), (7, 17), (8, 18), (9, 19), (10, 20), (14, 14), (15, 15), (16, 16), (17, 17), (16, 18), (15, 19), (14, 20)]) + stairs([(13, 14), (13, 15), (12, 16), (12, 17), (12, 18), (11, 19), (11, 20)], W78),
-    stairs([(9, 12), (8, 13), (7, 14), (6, 15), (7, 16), (8, 17), (9, 18), (13, 12), (14, 13), (15, 14), (16, 15), (15, 16), (14, 17), (13, 18)]) + stairs([(12, 12), (12, 13), (11, 14), (11, 15), (11, 16), (10, 17), (10, 18)], W78), legacy=True)
+    stairs([(9, 12), (8, 13), (7, 14), (6, 15), (7, 16), (8, 17), (9, 18), (13, 12), (14, 13), (15, 14), (16, 15), (15, 16), (14, 17), (13, 18)]) + stairs([(12, 12), (12, 13), (11, 14), (11, 15), (11, 16), (10, 17), (10, 18)], W78), legacy=True, dy16=-1, dy24=-1)
 cat("database", "teal", "database cylinder",
     ['<path d="M-17 -12 V12 A17 6.5 0 0 0 17 12 V-12 Z" fill="#FFFFFF" fill-opacity=".78"/>', '<ellipse cx="0" cy="-12" rx="17" ry="6.5" fill="#FFFFFF"/>',
      '<path d="M-17 0 A17 6.5 0 0 0 17 0" fill="none" stroke="TOKDEEP" stroke-opacity=".45" stroke-width="3"/>'],
     px((5, 4, 6, 1), (4, 5, 8, 2)) + px((4, 7, 8, 5), (5, 12, 6, 1), a=W78) + r(4, 9, 8, 1, DEEP(".45")),
-    px((7, 4, 8, 1), (5, 5, 12, 1), (4, 6, 14, 2), (5, 8, 12, 1)) + px((4, 9, 14, 7), (5, 16, 12, 1), (7, 17, 8, 1), a=W78) + r(4, 12, 14, 1, DEEP(".45")))
+    px((7, 4, 8, 1), (5, 5, 12, 1), (4, 6, 14, 2), (5, 8, 12, 1)) + px((4, 9, 14, 7), (5, 16, 12, 1), (7, 17, 8, 1), a=W78) + r(4, 12, 14, 1, DEEP(".45")),
+    px((6, 3, 8, 1), (5, 4, 10, 1), (4, 5, 12, 2), (5, 7, 10, 1)) + px((4, 8, 12, 6), (5, 14, 10, 1), (6, 15, 8, 1), a=W78) + r(4, 11, 12, 1, DEEP(".45")))
 cat("container", "teal", "stacked crates: a container recipe",
     [r(-20, 3, 12, 12, F, 2.5), r(-6, 3, 12, 12, F, 2.5), r(8, 3, 12, 12, F, 2.5), r(-13, -11, 12, 12, W78, 2.5), r(1, -11, 12, 12, W78, 2.5)],
     px((4, 10, 2, 2), (7, 10, 2, 2), (10, 10, 2, 2)) + px((5, 7, 2, 2), (8, 7, 2, 2), a=W78),
-    px((4, 13, 4, 4), (9, 13, 4, 4), (14, 13, 4, 4)) + px((7, 8, 4, 4), (12, 8, 4, 4), a=W78))
+    px((4, 12, 4, 4), (9, 12, 4, 4), (14, 12, 4, 4)) + px((7, 7, 4, 4), (12, 7, 4, 4), a=W78),
+    px((5, 11, 3, 3), (9, 11, 3, 3), (13, 11, 3, 3)) + px((7, 7, 3, 3), (11, 7, 3, 3), a=W78))
 cat("git", "teal", "branch: two commits and a fork",
     [c(-8, -14, 5), c(-8, 14, 5), c(10, -6, 5), st("M-8 -9 V9"), st("M10 -1 C10 7 -8 4 -8 9")],
     px((5, 4, 2, 2), (5, 11, 2, 2), (9, 6, 2, 2), (6, 6, 1, 5), (9, 8, 1, 1), (8, 9, 1, 1), (7, 10, 1, 1)),
@@ -291,7 +305,7 @@ t("application-toml", "config", "TOML", "text-x-toml")
 t("text-x-iniconf", "config", "CONF")
 t("text-x-dotenv", "config", "ENV")
 t("text-x-gomod", "config", "MOD")
-t("application-x-desktop", "config", "APP")
+t("application-x-desktop", "config", "DESK")
 t("text-x-lockfile", "lock", "LOCK")
 t("text-x-gosum", "lock", "SUM")
 t("text-x-patch", "diff", "DIFF", "text-x-diff")
@@ -413,20 +427,24 @@ def svg(name, category, label):
     glyph = "".join(C["g128"]).replace("TOKDEEP", deep)
     hints = []
     for size in (16, 22, 24):
-        body = C[f"h{size}"]
-        tr = f"scale({fmt(128 / size)})"
-        if body is None:                       # 22 from 24, one pixel up-left
-            body = C["h24"]; tr += " translate(-1 -1)"
-        elif C["legacy"] and size != 16:       # old flap hints → glass page centre
-            tr += " translate(-1 -5)"
+        body, ox, oy = C[f"h{size}"], 0, 0
+        if C["legacy"] and size != 16: ox, oy = -1, -5   # old flap hints → glass page centre
+        if body is None: body = C["h24"]; ox, oy = ox - 1, oy - 1  # 22 from 24, one pixel up-left
+        oy += C["dy16"] if size == 16 else C["dy24"]
+        tr = f"scale({fmt(128 / size)})" + (f" translate({ox} {oy})" if ox or oy else "")
         hints.append(f'    <g id="glyph-{size}" transform="{tr}">{body.replace("TOKDEEP", deep)}</g>')
     for size, (pl, bk) in PX.items():
         hints.append(f'    <path id="plate-shape-{size}" d="{px_page(size, pl)}"/>')
         if bk: hints.append(f'    <path id="back-shape-{size}" d="{px_page(size, bk)}"/>')
+    # yellow is too light for white alone (about 1.4:1): a soft deep contact shadow lifts glyph and label (>= 48 px)
+    yellow = C["tok"] == "yellow"
+    lift = (f'\n    <filter id="lift" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1" stdDeviation="1" '
+            f'flood-color="{deep}" flood-opacity=".5"/></filter>') if yellow else ""
+    lift_attr = ' filter="url(#lift)"' if yellow else ""
     lab = ""
     if label:
         hints.append(f'    <g id="label-48" transform="scale({fmt(128 / 48)})">{label_px(label)}</g>')
-        lab = f'\n  <g id="label">{label_vec(label)}</g>'
+        lab = f'\n  <g id="label"{lift_attr}>{label_vec(label)}</g>'
     desc = f"{C['desc']}" + (f"; label {label}" if label else "; generic (no label)")
     return f'''{HEAD.format(shift=shift)}
   <!-- Frost {name} — sheet family (DESIGN §6), category {category}, token {C["tok"]}: {desc}. Generated by tools/gen-mimetypes.py. -->
@@ -441,7 +459,7 @@ def svg(name, category, label):
     </linearGradient>
     <linearGradient id="glass-fill" x1="0" y1="0" x2=".7" y2="1">
       <stop offset="0" stop-color="{light}" stop-opacity=".92"/>
-      <stop offset="1" stop-color="{light}" stop-opacity=".62"/>
+      <stop offset="1" stop-color="{light}" stop-opacity=".78"/>
     </linearGradient>
     <linearGradient id="depth-fill" x1="0" y1="0" x2="1" y2="1">
       <stop offset=".35" stop-color="{deep}" stop-opacity="0"/>
@@ -461,6 +479,7 @@ def svg(name, category, label):
     <!-- pixel-grid hints: derive() swaps these in at 16/22/24/32/48 px (units = target pixels × 128/size) -->
 {chr(10).join(hints)}
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <mask id="outside-plate"><rect width="128" height="128" fill="#FFFFFF"/><use xlink:href="#plate-shape" fill="#000000"/></mask>{lift}
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
     <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
@@ -468,12 +487,12 @@ def svg(name, category, label):
 
   <ellipse id="shadow" cx="66" cy="117" rx="42" ry="4" fill="#000000" opacity=".16" filter="url(#blur-shadow)"/>
   <use id="glow" xlink:href="#back-shape" fill="{deep}" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
-  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)"/>
+  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)" mask="url(#outside-plate)"/>
   <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" fill="{deep}" filter="url(#blur-frost)"/></g>
   <use id="plate" xlink:href="#plate-shape" fill="url(#glass-fill)"/>
   <g id="depth"><use xlink:href="#plate-shape" fill="url(#depth-fill)"/><use xlink:href="#plate-shape" fill="url(#sheen-fill)"/></g>
   <g id="rim" clip-path="url(#plate-clip)"><use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/></g>
-  <g id="glyph" transform="translate({gx} {gy}){"" if label else " scale(1.3)"}">{glyph}</g>{lab}
+  <g id="glyph" transform="translate({gx} {gy}){"" if label else " scale(1.3)"}"{lift_attr}>{glyph}</g>{lab}
 </svg>
 '''
 

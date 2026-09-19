@@ -11,7 +11,7 @@
     </linearGradient>
     <linearGradient id="glass-fill" x1="0" y1="0" x2=".7" y2="1">
       <stop offset="0" stop-color="#FF8E80" stop-opacity=".92"/>
-      <stop offset="1" stop-color="#FF8E80" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#FF8E80" stop-opacity=".78"/>
     </linearGradient>
     <linearGradient id="depth-fill" x1="0" y1="0" x2="1" y2="1">
       <stop offset=".35" stop-color="#EE3048" stop-opacity="0"/>
@@ -43,6 +43,7 @@
     <path id="back-shape-48" d="M50.667 21.333 H104 a13.333 13.333 0 0 1 13.333 13.333 V106.667 a13.333 13.333 0 0 1 -13.333 13.333 H50.667 a13.333 13.333 0 0 1 -13.333 -13.333 V34.667 a13.333 13.333 0 0 1 13.333 -13.333 Z"/>
     <g id="label-48" transform="scale(2.667)"><rect x="16" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="18" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="16" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="18" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="21" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="22" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="20" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="20" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="20" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="21" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="22" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="25" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="26" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="25" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="26" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="25" y="35" width="1" height="1" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <mask id="outside-plate"><rect width="128" height="128" fill="#FFFFFF"/><use xlink:href="#plate-shape" fill="#000000"/></mask>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
     <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
@@ -50,11 +51,11 @@
 
   <ellipse id="shadow" cx="66" cy="117" rx="42" ry="4" fill="#000000" opacity=".16" filter="url(#blur-shadow)"/>
   <use id="glow" xlink:href="#back-shape" fill="#EE3048" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
-  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)"/>
+  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)" mask="url(#outside-plate)"/>
   <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" fill="#EE3048" filter="url(#blur-frost)"/></g>
   <use id="plate" xlink:href="#plate-shape" fill="url(#glass-fill)"/>
   <g id="depth"><use xlink:href="#plate-shape" fill="url(#depth-fill)"/><use xlink:href="#plate-shape" fill="url(#sheen-fill)"/></g>
   <g id="rim" clip-path="url(#plate-clip)"><use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/></g>
   <g id="glyph" transform="translate(57 50)"><path d="M-8 -20 V-12" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 -20 V-12" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="-18" y="-14" width="36" height="32" rx="5" fill="#FFFFFF" fill-opacity=".78"/><rect x="-18" y="-14" width="36" height="10" rx="5" fill="#FFFFFF"/><rect x="-18" y="-8" width="36" height="4" fill="#FFFFFF"/><rect x="-11" y="2" width="5" height="5" rx="1" fill="#EE3048" fill-opacity=".55"/><rect x="-2.5" y="2" width="5" height="5" rx="1" fill="#EE3048" fill-opacity=".55"/><rect x="6" y="2" width="5" height="5" rx="1" fill="#EE3048" fill-opacity=".55"/><rect x="-11" y="10" width="5" height="5" rx="1" fill="#EE3048" fill-opacity=".55"/><rect x="-2.5" y="10" width="5" height="5" rx="1" fill="#EE3048" fill-opacity=".55"/></g>
-  <g id="label"><path d="M2 2 V14" transform="translate(44.225 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 4.2 A4 6 0 1 0 8.2 11.8" transform="translate(50 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 3.6 C7.5 2.5 6.4 2 5 2 C3.3 2 2 3.2 2 4.9 C2 8.5 8 7.4 8 11 C8 12.8 6.7 14 5 14 C3.5 14 2.4 13.4 1.8 12.3" transform="translate(61.025 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="label"><path d="M2 2 V14" transform="translate(43.525 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 4.2 A4 6 0 1 0 8.2 11.8" transform="translate(50 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 3.6 C7.5 2.5 6.4 2 5 2 C3.3 2 2 3.2 2 4.9 C2 8.5 8 7.4 8 11 C8 12.8 6.7 14 5 14 C3.5 14 2.4 13.4 1.8 12.3" transform="translate(61.725 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

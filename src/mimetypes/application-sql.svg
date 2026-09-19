@@ -11,7 +11,7 @@
     </linearGradient>
     <linearGradient id="glass-fill" x1="0" y1="0" x2=".7" y2="1">
       <stop offset="0" stop-color="#86E3DC" stop-opacity=".92"/>
-      <stop offset="1" stop-color="#86E3DC" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#86E3DC" stop-opacity=".78"/>
     </linearGradient>
     <linearGradient id="depth-fill" x1="0" y1="0" x2="1" y2="1">
       <stop offset=".35" stop-color="#12A3B0" stop-opacity="0"/>
@@ -30,7 +30,7 @@
     <path id="plate-shape" d="M26 8 H78 L100 30 V100 a12 12 0 0 1 -12 12 H26 a12 12 0 0 1 -12 -12 V20 a12 12 0 0 1 12 -12 Z"/>
     <!-- pixel-grid hints: derive() swaps these in at 16/22/24/32/48 px (units = target pixels × 128/size) -->
     <g id="glyph-16" transform="scale(8)"><rect x="5" y="4" width="6" height="1" fill="#FFFFFF"/><rect x="4" y="5" width="8" height="2" fill="#FFFFFF"/><rect x="4" y="7" width="8" height="5" fill="#FFFFFF" fill-opacity=".78"/><rect x="5" y="12" width="6" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="4" y="9" width="8" height="1" fill="#12A3B0" fill-opacity=".45"/></g>
-    <g id="glyph-22" transform="scale(5.818) translate(-1 -1)"><rect x="7" y="4" width="8" height="1" fill="#FFFFFF"/><rect x="5" y="5" width="12" height="1" fill="#FFFFFF"/><rect x="4" y="6" width="14" height="2" fill="#FFFFFF"/><rect x="5" y="8" width="12" height="1" fill="#FFFFFF"/><rect x="4" y="9" width="14" height="7" fill="#FFFFFF" fill-opacity=".78"/><rect x="5" y="16" width="12" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="17" width="8" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="4" y="12" width="14" height="1" fill="#12A3B0" fill-opacity=".45"/></g>
+    <g id="glyph-22" transform="scale(5.818)"><rect x="6" y="3" width="8" height="1" fill="#FFFFFF"/><rect x="5" y="4" width="10" height="1" fill="#FFFFFF"/><rect x="4" y="5" width="12" height="2" fill="#FFFFFF"/><rect x="5" y="7" width="10" height="1" fill="#FFFFFF"/><rect x="4" y="8" width="12" height="6" fill="#FFFFFF" fill-opacity=".78"/><rect x="5" y="14" width="10" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="6" y="15" width="8" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="4" y="11" width="12" height="1" fill="#12A3B0" fill-opacity=".45"/></g>
     <g id="glyph-24" transform="scale(5.333)"><rect x="7" y="4" width="8" height="1" fill="#FFFFFF"/><rect x="5" y="5" width="12" height="1" fill="#FFFFFF"/><rect x="4" y="6" width="14" height="2" fill="#FFFFFF"/><rect x="5" y="8" width="12" height="1" fill="#FFFFFF"/><rect x="4" y="9" width="14" height="7" fill="#FFFFFF" fill-opacity=".78"/><rect x="5" y="16" width="12" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="17" width="8" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="4" y="12" width="14" height="1" fill="#12A3B0" fill-opacity=".45"/></g>
     <path id="plate-shape-16" d="M36 8 H80 L104 32 V108 a12 12 0 0 1 -12 12 H36 a12 12 0 0 1 -12 -12 V20 a12 12 0 0 1 12 -12 Z"/>
     <path id="plate-shape-22" d="M26.182 5.818 H75.636 L98.909 29.091 V96 a8.727 8.727 0 0 1 -8.727 8.727 H26.182 a8.727 8.727 0 0 1 -8.727 -8.727 V14.545 a8.727 8.727 0 0 1 8.727 -8.727 Z"/>
@@ -43,6 +43,7 @@
     <path id="back-shape-48" d="M50.667 21.333 H104 a13.333 13.333 0 0 1 13.333 13.333 V106.667 a13.333 13.333 0 0 1 -13.333 13.333 H50.667 a13.333 13.333 0 0 1 -13.333 -13.333 V34.667 a13.333 13.333 0 0 1 13.333 -13.333 Z"/>
     <g id="label-48" transform="scale(2.667)"><rect x="17" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="18" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="16" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="18" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="16" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="17" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="21" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="20" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="22" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="20" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="22" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="20" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="22" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="21" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="22" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="31" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="32" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="33" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="34" width="1" height="1" fill="#FFFFFF"/><rect x="24" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="25" y="35" width="1" height="1" fill="#FFFFFF"/><rect x="26" y="35" width="1" height="1" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <mask id="outside-plate"><rect width="128" height="128" fill="#FFFFFF"/><use xlink:href="#plate-shape" fill="#000000"/></mask>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
     <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
@@ -50,11 +51,11 @@
 
   <ellipse id="shadow" cx="66" cy="117" rx="42" ry="4" fill="#000000" opacity=".16" filter="url(#blur-shadow)"/>
   <use id="glow" xlink:href="#back-shape" fill="#12A3B0" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
-  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)"/>
+  <use id="back" xlink:href="#back-shape" fill="url(#deep-fill)" mask="url(#outside-plate)"/>
   <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" fill="#12A3B0" filter="url(#blur-frost)"/></g>
   <use id="plate" xlink:href="#plate-shape" fill="url(#glass-fill)"/>
   <g id="depth"><use xlink:href="#plate-shape" fill="url(#depth-fill)"/><use xlink:href="#plate-shape" fill="url(#sheen-fill)"/></g>
   <g id="rim" clip-path="url(#plate-clip)"><use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/></g>
   <g id="glyph" transform="translate(57 50)"><path d="M-17 -12 V12 A17 6.5 0 0 0 17 12 V-12 Z" fill="#FFFFFF" fill-opacity=".78"/><ellipse cx="0" cy="-12" rx="17" ry="6.5" fill="#FFFFFF"/><path d="M-17 0 A17 6.5 0 0 0 17 0" fill="none" stroke="#12A3B0" stroke-opacity=".45" stroke-width="3"/></g>
-  <g id="label"><path d="M8.2 3.6 C7.5 2.5 6.4 2 5 2 C3.3 2 2 3.2 2 4.9 C2 8.5 8 7.4 8 11 C8 12.8 6.7 14 5 14 C3.5 14 2.4 13.4 1.8 12.3" transform="translate(42.037 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 2 A3 3 0 0 1 8 5 V11 A3 3 0 0 1 2 11 V5 A3 3 0 0 1 5 2 Z M6 11 L8.5 14.5" transform="translate(53.062 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 2 V14 H7.5" transform="translate(64.087 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="label"><path d="M8.2 3.6 C7.5 2.5 6.4 2 5 2 C3.3 2 2 3.2 2 4.9 C2 8.5 8 7.4 8 11 C8 12.8 6.7 14 5 14 C3.5 14 2.4 13.4 1.8 12.3" transform="translate(41.338 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 2 A3 3 0 0 1 8 5 V11 A3 3 0 0 1 2 11 V5 A3 3 0 0 1 5 2 Z M6 11 L8.5 14.5" transform="translate(53.063 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 2 V14 H7.5" transform="translate(64.788 82) scale(0.875)" fill="none" stroke="#FFFFFF" stroke-width="4.343" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>
