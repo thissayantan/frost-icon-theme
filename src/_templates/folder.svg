@@ -23,7 +23,7 @@
     <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
   </defs>
 
-  <ellipse id="shadow" cx="64" cy="119" rx="46" ry="5" fill="#000000" opacity=".12" filter="url(#blur-shadow)"/>
+  <ellipse id="shadow" cx="64" cy="114" rx="44" ry="4" fill="#000000" opacity=".12" filter="url(#blur-shadow)"/>
   <use id="glow" xlink:href="#back-shape" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
   <use id="back" xlink:href="#back-shape"/>
   <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" filter="url(#blur-frost)"/></g>

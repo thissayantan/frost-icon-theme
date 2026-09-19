@@ -12,13 +12,20 @@ the build derives small-size variants by dropping layers by id.
 
 | # | `id`      | What it is | Recipe |
 |---|-----------|------------|--------|
-| 1 | `shadow`  | Soft contact shadow | Ellipse under the icon, `#000` 10–14 %, blur σ 5 (source only) |
+| 1 | `shadow`  | Soft contact shadow | Ellipse under the icon, `#000` 10–14 %, blur σ 5, ry 4, centre ≤ y 117 so the blur never hits the canvas edge |
 | 2 | `glow`    | Coloured bloom of the back shape | Copy of `back`, blur σ 6, 35 % opacity, offset y +4 |
 | 3 | `back`    | The vivid shape — identity & colour | Linear gradient 135°, palette `light → deep` |
 | 4 | `frost`   | Fake backdrop blur | Copy of `back` blurred σ 8, **clipped to `plate`** |
+| 4b | `lift`   | Plate contact shadow (only when the plate leaves the back shape) | Copy of `plate`, `#000` 8 %, blur σ 3, offset y +2, **masked to outside the plate** |
 | 5 | `plate`   | The frosted glass pane | Fill `#FFF`, vertical gradient 55 % → 28 % opacity |
 | 6 | `rim`     | Light catching the glass edge | 1.5 px inner stroke, `#FFF` 70 % top → 12 % bottom |
 | 7 | `glyph`   | The meaning | Solid `#FFF`, geometric, no outlines of outlines |
+
+Why `lift` exists: on a light background the part of a white plate that hangs outside the back shape
+is white-on-white and vanishes. A faint contact shadow outside the plate's edge gives it a body without
+an outline and without greying the glass itself (the mask keeps it off the plate). Folder and page
+families don't need it — their plate sits entirely inside the back shape. Chosen over a cooler plate
+tint because the tint muddied the plate on dark backgrounds.
 
 Why `frost` exists: real backdrop blur is impossible in an icon file, but in this style the only
 thing behind the plate is the icon's own back shape. Blurring a clipped copy of `back` inside the
@@ -61,8 +68,13 @@ Glass: plate `#FFFFFF` (opacity per table above). Glyph: `#FFFFFF`. Shadow: `#00
 |------|-------------|-------|
 | 128, 96, 64, 256 | all | full glass |
 | 48, 32 | `glow`(reduced) `back` `frost` `plate` `rim` `glyph` | shadow dropped; blur radii scaled with size |
-| 24, 22 | `back` `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size |
+| 24, 22 | `back` (`lift`) `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size |
 | 16 | `back` `glyph` | silhouette + white glyph only |
+
+**Generic layout at ≤ 24 px** (rect back + a plate that leaves it): the plate is dropped too, the back
+grows to the live area (112 × 112, rx 28) and the glyph moves to its centre at 1.3×. A half-visible plate
+at 24 px is mud; a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
+table above.
 
 If an auto-derived size looks wrong, add a hand-drawn `src/<ctx>/<name>.<size>.svg`; the build prefers it.
 
