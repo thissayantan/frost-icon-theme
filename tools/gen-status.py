@@ -122,17 +122,19 @@ def badge_bang(cls):
 
 
 def badge_x():
-    return f'<path fill-rule="evenodd" {FG} d="{circle(12, 12, 4)}{cross(12, 12, 0.8, 2.3)}"/>'
+    """A solid 2-px-armed × across 5 px (no disc) — reads as × at 16 px."""
+    return f'<path {FG} d="{cross(12.5, 12.5, 1.0, 3.0)}"/>'
 
 
 def with_badge(glyph_svg_part, badge, shrink=False):
-    """glyph (already-built markup) cut around the badge; optionally scaled to 13 px so the badge eats less."""
-    inner = f'<g transform="scale(.8125)">{glyph_svg_part}</g>' if shrink else glyph_svg_part
-    return svg(f'<g clip-path="url(#cutb)">{inner}</g>' + badge, cut_badge())
+    """glyph (already-built markup) cut around the badge (+1-px gap). `shrink` is unused: families that
+    need room pass a hand-drawn 13-px glyph instead of scaling (scaling leaves half-pixel edges)."""
+    return svg(f'<g clip-path="url(#cutb)">{glyph_svg_part}</g>' + badge, cut_badge())
 
 
 def acquiring(glyph_svg_part):
-    return svg(f'<g opacity="{DIM}" clip-path="url(#above)">{glyph_svg_part}</g>' + g(DOTS), ABOVE_DOTS)
+    """Connecting: a glyph drawn to fit rows 0–11 (whole pixels), dimmed, over the shared dot row 13–15."""
+    return svg(f'<g opacity="{DIM}">{glyph_svg_part}</g>' + g(DOTS))
 
 
 ICONS = {}
@@ -165,12 +167,18 @@ ICONS["network-wireless-hotspot-symbolic"] = svg(g(
     sector(8, 8, 7, 8.5, 235, 305) + sector(8, 8, 7, 8.5, 55, 125)))
 
 # ── Wired: an ethernet port on whole pixels ───────────────────────────────────
-PORT_D = rect(1, 2, 14, 12, 2.5) + poly((4, 11), (4, 7), (6, 7), (6, 5), (10, 5), (10, 7), (12, 7), (12, 11))
-PORT = f'<path fill-rule="evenodd" {FG} d="{PORT_D}"/>'
+def port(x0, y0, w, h, ox, oy):
+    """Ethernet port: frame + opening (tab step) with every edge on whole pixels."""
+    return rect(x0, y0, w, h, 2.5) + poly((ox, oy + 4), (ox, oy + 1), (ox + 2, oy + 1), (ox + 2, oy - 1), (ox + 6, oy - 1),
+                                         (ox + 6, oy + 1), (ox + 8, oy + 1), (ox + 8, oy + 4))
+PORT = f'<path fill-rule="evenodd" {FG} d="{port(1, 2, 14, 12, 4, 6)}"/>'
+PORT13 = f'<path fill-rule="evenodd" {FG} d="{port(0, 1, 13, 11, 2.5, 5)}"/>'.replace("2.5,", "2.5,")
+PORT13 = f'<path fill-rule="evenodd" {FG} d="{port(0, 1, 13, 11, 3, 5)}"/>'
+PORTLOW = f'<path fill-rule="evenodd" {FG} d="{port(1, 1, 14, 10, 4, 5)}"/>'
 ICONS["network-wired-symbolic"] = svg(PORT)
-ICONS["network-wired-acquiring-symbolic"] = acquiring(PORT)
-ICONS["network-wired-no-route-symbolic"] = with_badge(PORT, badge_bang("warning"), shrink=True)
-ICONS["network-wired-disconnected-symbolic"] = with_badge(f'<g opacity="{DIM}">{PORT}</g>', badge_x(), shrink=True)
+ICONS["network-wired-acquiring-symbolic"] = acquiring(PORTLOW)
+ICONS["network-wired-no-route-symbolic"] = with_badge(PORT13, badge_bang("warning"))
+ICONS["network-wired-disconnected-symbolic"] = with_badge(f'<g opacity="{DIM}">{PORT13}</g>', badge_x())
 ICONS["network-wired-offline-symbolic"] = ICONS["network-wired-disconnected-symbolic"]
 
 # ── VPN: a shield; keyhole is ONE sub-path (circle + slot merged, no evenodd bridge) ─
@@ -183,18 +191,20 @@ def keyhole(cx, cy, r, w, bottom):
 SHIELD_D = "M8 1L14 3v5c0 3.4-2.5 6-6 7C4.5 14 2 11.4 2 8V3z" + keyhole(8, 6.5, 1.8, 1.6, 11)
 SHIELD = f'<path fill-rule="evenodd" {FG} d="{SHIELD_D}"/>'
 ICONS["network-vpn-symbolic"] = svg(SHIELD)
-ICONS["network-vpn-acquiring-symbolic"] = acquiring(SHIELD)
+SHIELD13 = f'<path fill-rule="evenodd" {FG} d="M7 1L12 3v4c0 3-2 5-5 6C4 12 2 10 2 7V3z{keyhole(7, 6, 1.6, 1.4, 9.5)}"/>'
+SHIELD_LOW = f'<path fill-rule="evenodd" {FG} d="M8 0.5L13 2.5v3.5c0 2.6-2 4.4-5 5.3C5 10.4 3 8.6 3 6V2.5z{keyhole(8, 5, 1.4, 1.2, 8.5)}"/>'
+ICONS["network-vpn-acquiring-symbolic"] = acquiring(SHIELD_LOW)
 ICONS["network-vpn-disabled-symbolic"] = svg(
     f'<g opacity="{DIM}" clip-path="url(#cut)">{SHIELD}</g>' + g(thick(SLASH, 2)), cut_slash())
-ICONS["network-vpn-no-route-symbolic"] = with_badge(SHIELD, badge_bang("warning"), shrink=True)
+ICONS["network-vpn-no-route-symbolic"] = with_badge(SHIELD13, badge_bang("warning"))
 
 # ── Bluetooth: the rune, 2-px ─────────────────────────────────────────────────
 RUNE = thick([(4, 5), (11.5, 10.5), (8, 14), (8, 2), (11.5, 5.5), (4, 11)], 2)
 ICONS["bluetooth-active-symbolic"] = svg(g(RUNE))
 ICONS["bluetooth-symbolic"] = ICONS["bluetooth-active-symbolic"]
 ICONS["bluetooth-disabled-symbolic"] = svg(g(RUNE, dim=True, clip="cut") + g(thick(SLASH, 2)), cut_slash())
-ICONS["bluetooth-acquiring-symbolic"] = svg(
-    f'<g transform="translate(1.6 0) scale(.8)"><g opacity="{DIM}"><path d="{RUNE}" {FG}/></g></g>' + g(DOTS))
+RUNE_LOW = thick([(4, 4), (11, 8.5), (8, 11), (8, 1), (11, 3.5), (4, 8)], 2)
+ICONS["bluetooth-acquiring-symbolic"] = acquiring(f'<path d="{RUNE_LOW}" {FG}/>')
 
 # ── Volume: speaker + three 2-px waves centred at (5, 8) ─────────────────────
 SPEAKER = poly((1, 6), (3, 6), (6, 3), (6, 13), (3, 10), (1, 10))
@@ -210,8 +220,7 @@ ICONS["audio-volume-low-symbolic"] = volume(1)
 ICONS["audio-volume-medium-symbolic"] = volume(2)
 ICONS["audio-volume-high-symbolic"] = volume(3)
 # over-amplified changes SHAPE too: the outer wave spills past the speaker (35–145°) — and turns warning
-ICONS["audio-volume-overamplified-symbolic"] = svg(
-    g(SPEAKER) + g("".join(WAVES[:2])) + g(sector(5, 8, 8, 10, 35, 145), cls="warning"))
+ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER + "".join(WAVES)), badge_bang("warning"))
 ICONS["audio-volume-muted-symbolic"] = off(SPEAKER + "".join(WAVES))
 
 # ── Microphone: SOLID capsule, level = lit rows from the bottom, rest at 35 % (same language as volume) ─
@@ -239,8 +248,11 @@ ICONS["audio-input-microphone-symbolic"] = mic(3)
 B_FRAME = rect(1, 3, 11, 10, 2) + rect(2, 4, 9, 8, 1)  # body x 1–12, inner x 2–11
 B_CAP = rect(12, 6, 2, 4, 1)
 FILL_X, FILL_Y, FILL_W, FILL_H = 3, 5, 7, 6  # 7-px fill track
-BOLT = poly((14.2, 2.5), (11.6, 8.6), (13.4, 8.6), (12.6, 13.5), (15.6, 7.2), (13.8, 7.2))
-PLUG = rect(12.5, 6, 3, 4, 1) + rect(13, 3.5, 0.8, 2.8) + rect(14.4, 3.5, 0.8, 2.8) + rect(13.6, 9.6, 0.9, 2.6)
+# Power marks: a HOLE in the fill where the fill reaches, drawn solid only over the empty part — so the fill's
+# right edge (the level) is always visible, at every percentage. Frame and terminal never change.
+BOLT = poly((8, 3.5), (4.5, 8.5), (7, 8.5), (6, 12.5), (9.8, 7), (7.4, 7))
+PLUG = rect(4, 4, 2, 2) + rect(8, 4, 2, 2) + rect(4, 6, 6, 3, 1) + rect(6, 9, 2, 3)  # 2-px prongs, 2-px gap
+CHECK = "M3.4 8.1L4.6 6.9L6.5 8.8L9.4 5.9L10.6 7.1L6.5 11.2z"
 BANG = rect(6, 5, 2, 3.5) + rect(6, 9.5, 2, 1.8)
 
 
@@ -248,20 +260,26 @@ def battery(level, state=""):
     """level 0..100 (step 10); state '' | 'charging' | 'plugged-in' | 'charged'."""
     critical = level <= 10 and not state
     klass = lambda c: f' class="{c}"' if c else ""
-    parts = [f'<path fill-rule="evenodd" {FG} d="{B_FRAME}{"" if state else B_CAP}"/>']
-    w = round(FILL_W * level / 100)
+    parts = [f'<path fill-rule="evenodd" {FG} d="{B_FRAME}{B_CAP}"/>']
+    w = FILL_W if state == "charged" else round(FILL_W * level / 100)
     if level > 0 and w == 0:
         w = 1
-    fill_cls = "warning" if level == 20 and not state else ("success" if state == "charged" else None)
+    mark = {"charging": BOLT, "plugged-in": PLUG, "charged": CHECK}.get(state, "")
+    defs = ""
     if critical:
-        parts.append(f'<path class="error" {FG} d="{BANG}"/>')  # '!' in error; frame stays neutral
-    elif w:
-        parts.append(f'<path {FG}{klass(fill_cls)} d="{rect(FILL_X, FILL_Y, w, FILL_H, 0.5)}"/>')
-    if state == "charging":
-        parts.append(f'<path class="success" {FG} d="{BOLT}"/>')
-    elif state in ("plugged-in", "charged"):
-        parts.append(f'<path{klass("success" if state == "charged" else None)} {FG} d="{PLUG}"/>')
-    return svg("".join(parts))
+        parts.append(f'<path class="error" {FG} d="{BANG}"/>')
+    else:
+        cls = "warning" if level == 20 and not state else ("success" if state == "charged" else None)
+        if w:
+            fill = f'<path {FG}{klass(cls)} d="{rect(FILL_X, FILL_Y, w, FILL_H, 0.5)}"/>'
+            if mark:
+                defs += f'<clipPath id="hole"><path clip-rule="evenodd" fill-rule="evenodd" d="M0 0H16V16H0z{mark}"/></clipPath>'
+                fill = f'<g clip-path="url(#hole)">{fill}</g>'
+            parts.append(fill)
+        if mark and state != "charged":  # the mark itself, only where there is no fill
+            defs += f'<clipPath id="empty"><path d="{rect(FILL_X + w, 0, 16, 16)}"/></clipPath>'
+            parts.append(f'<g clip-path="url(#empty)"><path {FG}{klass("success" if state == "charging" else None)} d="{mark}"/></g>')
+    return svg("".join(parts), defs)
 
 
 for lv in range(0, 101, 10):
@@ -283,12 +301,8 @@ ICONS["screen-shared-symbolic"] = svg(
     g(poly((8, 4.5), (11, 7.5), (9, 7.5), (9, 9.5), (7, 9.5), (7, 7.5), (5, 7.5))))
 
 # ── Quick-settings / indicators ───────────────────────────────────────────────
-SUN = circle(8, 8, 3) + "".join(
-    rect(7.25, 0.8, 1.5, 2.6, 0.75).replace("M", "M", 1) if False else "" for _ in range(0))
-RAYS = "".join(thick([(8 + 5.2 * math.cos(math.radians(a)), 8 + 5.2 * math.sin(math.radians(a))),
-                      (8 + 6.8 * math.cos(math.radians(a)), 8 + 6.8 * math.sin(math.radians(a)))], 1.6)
-               for a in range(0, 360, 45))
-ICONS["display-brightness-symbolic"] = svg(g(circle(8, 8, 3.2)) + g(RAYS))
+RAYS = "".join(rect(x, y, 2, 2, 0.4) for x, y in [(1, 7), (13, 7), (7, 1), (7, 13), (3, 3), (11, 3), (3, 11), (11, 11)])
+ICONS["display-brightness-symbolic"] = svg(g(circle(8, 8, 3) + RAYS))
 MOON = f'<path fill-rule="evenodd" {FG} d="{circle(8, 8, 6.5)}{circle(11.2, 5.2, 5.6)}"/>'
 ICONS["night-light-symbolic"] = svg(f'<defs><clipPath id="c"><path d="{circle(8, 8, 6.5)}"/></clipPath></defs>'
                                     f'<g clip-path="url(#c)">{MOON}</g>')

@@ -153,13 +153,13 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Off (user turned it off) | glyph at 35 % with a 1-px gap + a 2-px `\` slash | none |
 | Connecting | glyph at 35 % + three dots | none |
 | Connected, no internet | full glyph + "!" disc bottom-right | `warning` |
-| Unavailable / no network | glyph at 35 % + "×" disc | none |
+| Unavailable / no network | glyph at 35 % + a solid 2-px "×" | none |
 | Battery 20 % | fill | `warning` |
 | Battery 10 / 0 % | frame + "!" instead of fill | `error` |
-| Charging | fill + bolt inside the body (fill cut around it) | bolt `success` |
-| Plugged in, not charging | fill + plug inside the body | none |
-| Charged (100, on AC) | full fill | `success` |
-| Over-amplified volume | outer wave | `warning` |
+| Charging | bolt inside the body: a hole in the fill where filled, solid over the empty part | bolt `success` |
+| Plugged in, not charging | plug inside the body, same hole/solid rule — the fill edge always shows the level | none |
+| Charged (100, on AC) | full fill with a check knocked out | `success` |
+| Over-amplified volume | full waves + "!" disc | `warning` |
 
 Every coloured state also changes *shape* ("!", ×, bolt, slash) — never colour alone (WCAG 1.4.1). Privacy
 indicators (camera, mic in use, screen share) stay one colour: the Shell already paints them.
