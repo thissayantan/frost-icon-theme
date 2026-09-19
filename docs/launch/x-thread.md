@@ -1,49 +1,42 @@
-# X / Twitter thread (attach images as noted)
+# X thread — image on 1, 2, 3, 5; repo link in the last post
 
-**1/7** — attach `docs/before-after.png`
-I got tired of every JSON file in my file manager looking like a terminal, so I drew a whole icon theme.
+**1/6** — image: docs/dev-hero.png
+Linux desktop icons are dull. The Home folder, the file manager, every folder in Documents — flat and sad.
 
-Frost: frosted glass, 134 file types that actually say what they are, MIT.
+So I drew a whole icon theme. Frosted glass, free, MIT.
 
-github.com/thissayantan/frost-icon-theme
+**2/6** — image: docs/project-folders.png
+The bit I use every day: project folders show their stack.
 
-**2/7** — attach `docs/preview-filetypes.png`
-Colour tells you the kind of file. The symbol tells you the family: `{ }` data, `M↓` markdown, a padlock for
-lock files, a rosette for certificates, crates for Dockerfiles.
+Next + Bun + TypeScript. Docker + Go. Flutter. It reads the project and marks the folder, so you can see what
+something is without opening it.
 
-From 48 px up, a small label spells out the exact type: JSON, MD, PEM, GO.
+**3/6** — image: docs/preview-filetypes.png
+134 file types that say what they are.
 
-**3/7** — attach a 16 px zoom (`dist/preview/mtz.png`)
-Small sizes aren't scaled down, they're drawn.
+Colour = the kind. Symbol = the family ({ } JSON, M↓ markdown, padlock for lock files, rosette for certs).
+From 48 px, a small label spells out the exact type.
 
-Every icon has a hand-made 16, 22 and 24 px version on the pixel grid. Scaling a 128 px icon down to 16 gives
-you grey mush; a 16 px icon drawn as 16 pixels stays sharp.
+**4/6**
+While mapping types I found what Linux actually thinks your files are:
 
-**4/7**
-Then the fun part. While mapping file types I found what Linux actually thinks your files are:
+· .ts → a Qt translation file
+· .tsx → a game tileset
+· go.mod → tracker music
+· .key → Keynote, even when it starts with BEGIN PRIVATE KEY
 
-· `.ts` → a Qt translation file
-· `.tsx` → a Tiled tileset
-· `go.mod` → tracker music (audio/x-mod)
-· `.tf` → a to-do list
-· `.key` → Keynote, even when it starts with BEGIN PRIVATE KEY
+Frost ships an optional one-file fix.
 
-**5/7**
-So Frost ships an optional per-user MIME add-on. One file, reversible, no root:
+**5/6** — image: docs/drawn-vs-scaled.png
+Left: a 128 px icon scaled down to 16. Right: drawn at 16.
 
-lock files, .env, Dockerfile, .gitignore, TypeScript, PEM keys and go.mod all get real types — and therefore
-real icons.
+Every icon has its own 16, 22 and 24 px drawing on the pixel grid. It's why it still looks good in a file
+list.
 
-**6/7** — attach `docs/hero.png`
-The glass is baked, not live. GTK can't be trusted to render SVG filters, so a small Bun + resvg pipeline
-renders every icon to PNG at 9 sizes × @1x/@2x, and `verify` runs a real GTK lookup so every shipped name is
-proven to resolve.
-
-**7/7**
-Install in one line:
+**6/6**
+One line to install, one line to remove, never switches your theme for you:
 
 curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh
 
-MIT. Icon requests welcome.
-gnome-look.org/p/2372226
-#Linux #GNOME #OpenSource
+MIT, artwork included → github.com/thissayantan/frost-icon-theme
+#Linux #OpenSource
