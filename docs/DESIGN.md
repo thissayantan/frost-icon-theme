@@ -150,12 +150,12 @@ opacity top stop, never add an outline.
   Template: `src/_templates/app.svg`.
 
 ## 7b. Project folders (personal overlay — never committed)
-A project folder shows **what it contains**, not one language: up to three round brand badges in a row on the
-flap, most telling first — [UI framework/platform, backend or runtime, deploy target] (e.g. React · Hono ·
-Cloudflare). The language is last because it is nearly universal. Badge = brand colour softened toward pastel
-(light brands deepened, black brands → graphite) with the white mark, separated by a white ring. ≤ 24 px: one
-2×2 brand-coloured dot per technology on whole pixels. Detection and tagging: `tools/tag-folders.ts`; rendering:
-`tools/local.ts` (`folder-stack-<slugs>`). Non-projects stay plain; tool dirs without a stack keep their language mark.
+A project folder shows **what it contains**: a loose cluster of up to three **white** brand marks on the flap
+(owner's mock), the most telling largest — [UI framework/platform, backend, deploy target, else runtime]
+(e.g. React · Hono · Cloudflare). Marks are slightly tilted and never overlap (white on white would merge);
+the language is left out because it is nearly universal. Three marks read at 64 px; four don't. ≤ 24 px: only
+the first mark. Detection and tagging: `tools/tag-folders.ts`; rendering: `tools/local.ts` (`folder-stack-<slugs>`).
+Non-projects stay plain; tool dirs without a stack keep their language mark.
 
 ## 8. Status icons (symbolic, ADR-005)
 Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The state language:**

@@ -112,8 +112,9 @@ function stack(dir: string): string[] {
   const platform = deep("wrangler.toml", "wrangler.jsonc", "wrangler.json") || any("wrangler") ? "cloudflare"
     : has(dir, "Dockerfile", "docker-compose.yml", "compose.yaml") ? "docker" : has(dir, "vercel.json") ? "vercel"
     : any("@supabase/supabase-js") ? "supabase" : any("firebase") ? "firebase" : null;
-  const picks = [ui, backend ?? runtime, platform ?? (backend ? runtime : null)].filter((x): x is string => !!x && x in STACK_BRANDS);
-  return [...new Set(picks)].slice(0, 3);
+  const lang = any("typescript") || deep("tsconfig.json") ? "typescript" : null;
+  const picks = [ui, backend, platform, runtime, lang].filter((x): x is string => !!x && x in STACK_BRANDS);
+  return [...new Set(picks)].slice(0, 3);  // framework, backend, runtime/platform — three read at 64 px, four don't
 }
 function readdirSafe(dir: string): string[] { try { return readdirSync(dir).filter((e) => !e.startsWith(".") && !SKIP.has(e)); } catch { return []; } }
 

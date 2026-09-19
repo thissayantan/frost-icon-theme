@@ -110,6 +110,7 @@ export const stackIcon = (slugs: string[]) => `folder-stack-${slugs.join("-")}`;
 export function readStacks(): string[][] { try { return JSON.parse(readFileSync(stackPath, "utf8")); } catch { return []; } }
 export function writeStacks(stacks: string[][]) { mkdirSync(LOCAL, { recursive: true }); writeFileSync(stackPath, JSON.stringify(stacks, null, 2)); }
 
+/** (kept for reference; the white-mark cluster no longer uses brand colour) */
 function soft(hex: string): string {
   let [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
   const L = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
@@ -119,24 +120,26 @@ function soft(hex: string): string {
   return "#" + [r, g, b].map((c) => Math.round(c).toString(16).padStart(2, "0")).join("").toUpperCase();
 }
 
+/** A loose cluster of WHITE marks on the flap (owner's mock, 2026-09-19): the first (the framework) largest,
+ *  the rest smaller and slightly tilted around it, never overlapping (white on white would merge). */
+const SLOTS: [number, number, number, number][][] = [  // [cx, cy, size, rotate°] per count (max 3)
+  [[64, 84, 40, 0]],
+  [[48, 86, 36, -8], [86, 80, 30, 8]],
+  [[42, 86, 36, -8], [78, 70, 27, 8], [96, 97, 25, -6]],
+];
+
 async function stackSvg(slugs: string[]): Promise<string | null> {
   const marks: string[] = [];
   for (const sl of slugs) { const d = await logo(sl); if (!d) return null; marks.push(d); }
-  const n = slugs.length, r = [21, 18.5, 16.5][n - 1], step = [0, 29, 27][n - 1];
-  let g = "";
-  slugs.forEach((sl, i) => {
-    const cx = 64 + (i - (n - 1) / 2) * step, cy = 85, k = (r * 1.15) / 24;
-    g += `<circle cx="${cx}" cy="${cy}" r="${r + 2.5}" fill="#FFFFFF" fill-opacity=".9"/>` +
-      `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${soft(STACK_BRANDS[sl] ?? "7A8394")}"/>` +
-      `<path d="${marks[i]}" fill="#FFFFFF" transform="translate(${cx - 12 * k} ${cy - 12 * k}) scale(${k})"/>`;
-  });
-  // ≤ 24 px: logos are mush — one 2×2 brand-coloured dot per technology, on whole pixels
-  const dots = (size: number, row: number, x0: number, gap: number) =>
-    `<g id="glyph-${size}" transform="scale(${(128 / size).toFixed(4)})">` +
-    slugs.map((sl, i) => `<rect x="${x0 + i * gap - ((n - 1) * gap) / 2}" y="${row}" width="2" height="2" rx=".5" fill="${soft(STACK_BRANDS[sl] ?? "7A8394")}"/>`).join("") + "</g>";
+  const place = (d: string, cx: number, cy: number, size: number, rot: number) =>
+    `<path d="${d}" fill="#FFFFFF" transform="translate(${cx} ${cy}) rotate(${rot}) scale(${size / 24}) translate(-12 -12)"/>`;
+  const g = slugs.map((_, i) => place(marks[i], ...SLOTS[slugs.length - 1][i])).join("");
+  // ≤ 24 px: only the first (most telling) mark, upright, centred on the flap — in target-pixel units
+  const small = (size: number, cx: number, cy: number, px: number) =>
+    `<g id="glyph-${size}" transform="scale(${(128 / size).toFixed(4)})">${place(marks[0], cx, cy, px, 0)}</g>`;
   const folder = readFileSync(join(ROOT, "src/places/folder.svg"), "utf8");
   return folder.replace('<g id="glyph"/>', `<g id="glyph">${g}</g>`)
-    .replace('    <clipPath id="plate-clip">', dots(16, 8, 7, 3) + "\n" + dots(22, 14, 10, 3) + "\n" + dots(24, 15, 11, 3) + "\n    <clipPath id=\"plate-clip\">");
+    .replace('    <clipPath id="plate-clip">', small(16, 8, 9.5, 7) + "\n" + small(22, 11, 14.5, 7) + "\n" + small(24, 12, 16, 8) + "\n    <clipPath id=\"plate-clip\">");
 }
 
 /** Render every stack combination in local/stacks.json into target/…/places. */
