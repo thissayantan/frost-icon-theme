@@ -81,7 +81,7 @@ Glass: plate `#FFFFFF` (opacity per table above). Glyph: `#FFFFFF`. Shadow: `#00
 | 128, 96, 64, 256 | all | full glass |
 | 48 | `glow`(σ 4, 15 %) `back` `frost` `lift` `plate` `rim` `glyph` | shadow dropped |
 | 32 | `back` `frost` `lift` `plate` `rim` `glyph` | glow dropped too: its blur is wider than a hinted pixel edge and re-softens the silhouette on light |
-| 24, 22 | `back` (`lift`) `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size |
+| 24, 22 | `back` (`lift`) `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size (app family: knockout instead) |
 | 16 | `back` `glyph` | silhouette + white glyph only |
 
 **Generic layout at ≤ 48 px** (rect back + a plate that leaves it): the plate is dropped too, the back
@@ -132,10 +132,14 @@ opacity top stop, never add an outline.
   plate has too little contrast on light backgrounds.
 - **Core apps (app family)** — only generic GNOME/Ubuntu apps; no brand logos (brand apps inherit; the owner's
   official Chrome lives in the local overlay). Anatomy: **back** = colour squircle (12,12 → 116,116, r28);
-  **plate** = the app's *object* in frosted glass, inside the back (a glass gear, window, ghost, page, card, disc);
-  **glyph** = one white detail on the plate. Not macOS: no 3D, no realism, no material rendering — flat colour,
-  one glass pane, one symbol. Colour follows §3 meanings (Settings/Resources green, Terminal/Disks/Logs graphite,
-  Files blue…). On yellow backs every glyph part is full white. 16 px uses the knockout (§4).
+  **plate** = the app's own *object* in frosted glass, inside the back — never a generic square or disc unless the
+  object is round (dial, globe, face, lifebuoy, ring chart); **glyph** = one white detail on the plate.
+  A plate is **one outline** (overlapping sub-paths make the rim draw seams). Strokes 8 main / 6 secondary.
+  Not macOS: no 3D, no realism, no inset-screen-with-bezel, no iOS switch — flat colour, one glass object, one symbol.
+  Colours (≤ 3 each): blue Files/Clocks/Disk Usage · green Settings/Tweaks/Updater (system) · graphite
+  Terminal/Disks/Logs · violet Ghostty/Fonts/Extensions · orange Calculator/Software · pink Image Viewer/Characters
+  (messaging, emoji) · red Document Viewer/Help/Screenshot · yellow Text Editor/Passwords · teal Resources/Language/
+  Network. On yellow and graphite backs every glyph part is full white. ≤ 24 px uses the knockout (§4).
   Template: `src/_templates/app.svg`.
 
 ## 8. Status icons (symbolic, ADR-005)

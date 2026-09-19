@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Ptyxis — app family. Terminal — a tabbed glass window with a prompt and block cursor. -->
+  <!-- Hyaline org.gnome.Ptyxis — app family. Terminal — a glass window with a prompt and a block cursor. -->
   <defs>
     <!-- palette token: graphite (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M34 40h60a12 12 0 0 1 12 12v38a12 12 0 0 1 -12 12h-60a12 12 0 0 1 -12 -12v-38a12 12 0 0 1 12 -12zM34 28h20a8 8 0 0 1 8 8v4a8 8 0 0 1 -8 8h-20a8 8 0 0 1 -8 -8v-4a8 8 0 0 1 8 -8zM73 32h16a7 7 0 0 1 7 7v2a7 7 0 0 1 -7 7h-16a7 7 0 0 1 -7 -7v-2a7 7 0 0 1 7 -7z"/>
+    <path id="plate-shape" d="M36 30h56a14 14 0 0 1 14 14v40a14 14 0 0 1 -14 14h-56a14 14 0 0 1 -14 -14v-40a14 14 0 0 1 14 -14z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M40 62 L52 72 L40 82" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="60" y="64" width="10" height="18" rx="2" fill="#FFFFFF"/></g>
+  <g id="glyph"><path d="M40 52 L54 64 L40 76" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="62" y="56" width="16" height="20" rx="3" fill="#FFFFFF"/></g>
 </svg>

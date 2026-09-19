@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.seahorse.Application — app family. Passwords and Keys — a glass key with a white dot in its bow. -->
+  <!-- Hyaline org.gnome.seahorse.Application — app family. Passwords and Keys — a glass key (one outline) with a white bow dot. -->
   <defs>
     <!-- palette token: yellow (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M24 50a22 22 0 1 0 44 0a22 22 0 1 0 -44 0zM59.708 60.467Q58 58 60.121 55.879L63.879 52.121Q66 50 68.121 52.121L101.879 85.879Q104 88 104 91L104 97Q104 100 101 100L95 100Q92 100 90 98L90 98Q88 96 85 96L85 96Q82 96 82 93L82 93Q82 90 79 90L79 90Q76 90 76 87L76 87Q76 84 74.292 81.533z"/>
+    <path id="plate-shape" d="M56.778 65.971L54.175 67.023L51.449 67.7L48.656 67.989L45.85 67.884L43.086 67.387L40.419 66.507L37.901 65.263L35.583 63.678L33.509 61.785L31.721 59.619L30.254 57.224L29.137 54.648L28.392 51.94L28.033 49.155L28.068 46.347L28.496 43.571L29.309 40.883L30.49 38.335L32.016 35.978L33.858 33.858L35.978 32.016L38.335 30.49L40.883 29.309L43.571 28.496L46.347 28.068L49.155 28.033L51.94 28.392L54.648 29.137L57.224 30.254L59.619 31.721L61.785 33.509L63.678 35.583L65.263 37.901L66.507 40.419L67.387 43.086L67.884 45.85L67.989 48.656L67.7 51.449L67.023 54.175L65.971 56.778L95.669 86.477L86.477 95.669L85.062 94.255L78.699 100.619L73.042 94.962L79.406 88.598L75.87 85.062L70.92 90.012L66.678 85.77L71.627 80.82z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><circle cx="42" cy="46" r="7" fill="#FFFFFF"/></g>
+  <g id="glyph"><circle cx="44" cy="44" r="7" fill="#FFFFFF"/></g>
 </svg>

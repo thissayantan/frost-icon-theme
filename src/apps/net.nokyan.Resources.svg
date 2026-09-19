@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline net.nokyan.Resources — app family. Resources — four glass meter bars, the used part white. -->
+  <!-- Hyaline net.nokyan.Resources — app family. Resources — four equal glass meter tracks, the used part white. -->
   <defs>
     <!-- palette token: teal (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M32 64h2a6 6 0 0 1 6 6v26a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-26a6 6 0 0 1 6 -6zM51 50h2a6 6 0 0 1 6 6v40a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-40a6 6 0 0 1 6 -6zM70 36h2a6 6 0 0 1 6 6v54a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-54a6 6 0 0 1 6 -6zM89 24h2a6 6 0 0 1 6 6v66a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-66a6 6 0 0 1 6 -6z"/>
+    <path id="plate-shape" d="M32 26h2a6 6 0 0 1 6 6v64a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-64a6 6 0 0 1 6 -6zM51 26h2a6 6 0 0 1 6 6v64a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-64a6 6 0 0 1 6 -6zM70 26h2a6 6 0 0 1 6 6v64a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-64a6 6 0 0 1 6 -6zM89 26h2a6 6 0 0 1 6 6v64a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-64a6 6 0 0 1 6 -6z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><rect x="26" y="82" width="14" height="20" rx="6" fill="#FFFFFF"/><rect x="45" y="72" width="14" height="30" rx="6" fill="#FFFFFF"/><rect x="64" y="78" width="14" height="24" rx="6" fill="#FFFFFF"/><rect x="83" y="58" width="14" height="44" rx="6" fill="#FFFFFF"/></g>
+  <g id="glyph"><rect x="26" y="70" width="14" height="32" rx="6" fill="#FFFFFF"/><rect x="45" y="50" width="14" height="52" rx="6" fill="#FFFFFF"/><rect x="64" y="80" width="14" height="22" rx="6" fill="#FFFFFF"/><rect x="83" y="60" width="14" height="42" rx="6" fill="#FFFFFF"/></g>
 </svg>

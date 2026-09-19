@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.tweaks — app family. Tweaks — a glass switch track with a white knob. -->
+  <!-- Hyaline org.gnome.tweaks — app family. Tweaks — two glass fader tracks with white knobs at different heights. -->
   <defs>
     <!-- palette token: green (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M40 44h48a20 20 0 0 1 20 20v0a20 20 0 0 1 -20 20h-48a20 20 0 0 1 -20 -20v0a20 20 0 0 1 20 -20z"/>
+    <path id="plate-shape" d="M47 24h0a9 9 0 0 1 9 9v62a9 9 0 0 1 -9 9h0a9 9 0 0 1 -9 -9v-62a9 9 0 0 1 9 -9zM81 24h0a9 9 0 0 1 9 9v62a9 9 0 0 1 -9 9h0a9 9 0 0 1 -9 -9v-62a9 9 0 0 1 9 -9z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><circle cx="86" cy="64" r="14" fill="#FFFFFF"/><rect x="36" y="61" width="20" height="6" rx="3" fill="#FFFFFF"/></g>
+  <g id="glyph"><circle cx="47" cy="76" r="12" fill="#FFFFFF"/><circle cx="81" cy="48" r="12" fill="#FFFFFF"/></g>
 </svg>

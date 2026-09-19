@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Nautilus — app family. Files — a glass folder holding a white sheet. -->
+  <!-- Hyaline org.gnome.Nautilus — app family. Files — a glass folder, a white sheet standing behind its front. -->
   <defs>
     <!-- palette token: blue (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><defs><clipPath id="paper"><rect x="0" y="0" width="128" height="58"/></clipPath></defs><path clip-path="url(#paper)" d="M52 30h24a4 4 0 0 1 4 4v28a4 4 0 0 1 -4 4h-24a4 4 0 0 1 -4 -4v-28a4 4 0 0 1 4 -4z" fill="#FFFFFF"/></g>
+  <g id="glyph"><defs><clipPath id="paper"><rect x="0" y="0" width="128" height="50"/></clipPath></defs><path clip-path="url(#paper)" d="M68 30h20a4 4 0 0 1 4 4v28a4 4 0 0 1 -4 4h-20a4 4 0 0 1 -4 -4v-28a4 4 0 0 1 4 -4z" fill="#FFFFFF"/></g>
 </svg>

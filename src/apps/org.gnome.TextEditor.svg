@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><rect x="46" y="48" width="32" height="6" rx="3" fill="#FFFFFF"/><rect x="46" y="62" width="20" height="6" rx="3" fill="#FFFFFF"/><path d="M74 62 V88 M69 62 H79 M69 88 H79" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="glyph"><rect x="46" y="48" width="26" height="6" rx="3" fill="#FFFFFF"/><rect x="46" y="62" width="16" height="6" rx="3" fill="#FFFFFF"/><path d="M78 58 V88 M72 58 H84 M72 88 H84" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>
