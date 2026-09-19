@@ -7,7 +7,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] `package.json`, `tsconfig.json`, Bun scripts listed in CLAUDE.md
 - [x] `tools/lint.ts` — layer ids present, palette-only colours, `viewBox 0 0 128 128`, no raster embeds
 - [x] `tools/build.ts` — derive sizes (DESIGN §4), render @1x/@2x with resvg-js, optimise, aliases, index.theme, cache
-- [ ] `tools/preview.ts` — contact sheet: rows = icons, columns = 16/24/48/128 on light, dark and wallpaper backgrounds
+- [x] `tools/preview.ts` — contact sheet: rows = icons, columns = 16/24/48/128 on light, dark and wallpaper backgrounds
 - [ ] `tools/verify.ts` — runs lint, validates index.theme against the spec, runs `tools/lookup.py` for every shipped name
 - [ ] `bun run install:local` works; theme selectable in GNOME Tweaks (do **not** activate it)
 - [ ] Template `src/_templates/glass.svg` renders correctly through the pipeline
