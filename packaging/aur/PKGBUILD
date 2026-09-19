@@ -1,0 +1,22 @@
+# Maintainer: Sayantan <2451056+thissayantan@users.noreply.github.com>
+pkgname=frost-icon-theme
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="Frosted-glass icon theme: folders, apps, 134 file types and top-bar status icons"
+arch=('any')
+url="https://github.com/thissayantan/frost-icon-theme"
+license=('MIT')
+optdepends=('papirus-icon-theme: fallback for the icons Frost does not draw')
+options=('!strip')
+source=("Frost-v$pkgver.tar.xz::$url/releases/download/v$pkgver/Frost-v$pkgver.tar.xz"
+        "LICENSE-$pkgver::https://raw.githubusercontent.com/thissayantan/frost-icon-theme/v$pkgver/LICENSE")
+sha256sums=('SKIP-FILL-AFTER-RELEASE'
+            'SKIP-FILL-AFTER-RELEASE')
+
+package() {
+  install -d "$pkgdir/usr/share/icons"
+  cp -a --no-preserve=ownership "$srcdir/Frost" "$pkgdir/usr/share/icons/"
+  rm -f "$pkgdir/usr/share/icons/Frost/icon-theme.cache"   # pacman's gtk-update-icon-cache hook rebuilds it
+  install -Dm644 "$srcdir/frost-mime.xml" "$pkgdir/usr/share/doc/$pkgname/frost-mime.xml"
+  install -Dm644 "$srcdir/LICENSE-$pkgver" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

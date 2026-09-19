@@ -1,0 +1,15 @@
+pkgbase = frost-icon-theme
+	pkgdesc = Frosted-glass icon theme: folders, apps, 134 file types and top-bar status icons
+	pkgver = 0.2.0
+	pkgrel = 1
+	url = https://github.com/thissayantan/frost-icon-theme
+	arch = any
+	license = MIT
+	optdepends = papirus-icon-theme: fallback for the icons Frost does not draw
+	options = !strip
+	source = Frost-v0.2.0.tar.xz::https://github.com/thissayantan/frost-icon-theme/releases/download/v0.2.0/Frost-v0.2.0.tar.xz
+	source = LICENSE-0.2.0::https://raw.githubusercontent.com/thissayantan/frost-icon-theme/v0.2.0/LICENSE
+	sha256sums = SKIP-FILL-AFTER-RELEASE
+	sha256sums = SKIP-FILL-AFTER-RELEASE
+
+pkgname = frost-icon-theme
