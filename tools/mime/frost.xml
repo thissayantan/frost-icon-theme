@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Frost MIME add-on (ADR-006): per-user types for developer files that stock shared-mime-info types only as
+  text/plain, as nothing, or as the wrong thing. Installed to ~/.local/share/mime/packages/frost.xml by
+  `bun run install:local`, removed by `bun run install:local` with the undo-mime flag. Every new type is a sub-class of
+  text/plain, so text editors still open them.
+
+  Weights: default 50. Where a stock type claims the same extension (.key → Keynote at 80, .pub → Publisher,
+  .ts → Qt Linguist / MPEG-TS) the weights tie on purpose where content can decide (magic sniffing picks),
+  and win (60+) only where the stock guess is wrong for a developer machine.
+-->
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+
+  <mime-type type="text/x-lockfile">
+    <comment>Dependency lock file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.lock" weight="60"/>
+    <glob pattern="package-lock.json" weight="60"/>
+    <glob pattern="pnpm-lock.yaml" weight="60"/>
+    <glob pattern="bun.lockb" weight="60"/>
+  </mime-type>
+
+  <mime-type type="text/x-gosum">
+    <comment>Go module checksums</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="go.sum"/>
+    <glob pattern="go.work.sum"/>
+  </mime-type>
+
+  <mime-type type="text/x-gomod">
+    <comment>Go module file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="go.mod"/>
+    <glob pattern="go.work"/>
+  </mime-type>
+
+  <mime-type type="text/x-dotenv">
+    <comment>Environment variables</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern=".env"/>
+    <glob pattern=".env.*"/>
+    <glob pattern="*.env"/>
+  </mime-type>
+
+  <mime-type type="text/x-iniconf">
+    <comment>Configuration file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.ini"/>
+    <glob pattern="*.conf"/>
+    <glob pattern="*.cfg"/>
+    <glob pattern=".editorconfig"/>
+    <glob pattern="*.properties"/>
+  </mime-type>
+
+  <mime-type type="text/x-dockerfile">
+    <comment>Container build recipe</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="Dockerfile"/>
+    <glob pattern="Dockerfile.*"/>
+    <glob pattern="*.dockerfile"/>
+    <glob pattern="Containerfile"/>
+    <glob pattern=".dockerignore"/>
+  </mime-type>
+
+  <mime-type type="text/x-gitconfig">
+    <comment>Git configuration</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern=".gitignore"/>
+    <glob pattern=".gitattributes"/>
+    <glob pattern=".gitmodules"/>
+    <glob pattern=".gitconfig"/>
+    <glob pattern=".gitkeep"/>
+  </mime-type>
+
+  <mime-type type="text/x-typescript">
+    <comment>TypeScript source</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.ts" weight="60"/>
+    <glob pattern="*.mts"/>
+    <glob pattern="*.cts"/>
+  </mime-type>
+
+  <mime-type type="text/x-tsx">
+    <comment>TypeScript / JavaScript JSX source</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.tsx" weight="60"/>
+    <glob pattern="*.jsx" weight="60"/>
+  </mime-type>
+
+  <mime-type type="text/x-protobuf">
+    <comment>Protocol Buffers definition</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.proto"/>
+  </mime-type>
+
+  <mime-type type="text/x-hcl">
+    <comment>HCL / Terraform configuration</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.hcl"/>
+    <glob pattern="*.tf"/>
+    <glob pattern="*.tfvars"/>
+  </mime-type>
+
+  <mime-type type="text/x-swift">
+    <comment>Swift source</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.swift"/>
+  </mime-type>
+
+  <mime-type type="text/x-vim">
+    <comment>Vim script</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.vim"/>
+    <glob pattern=".vimrc"/>
+  </mime-type>
+
+  <!-- PEM private keys: ties Keynote's *.key weight, so content decides -->
+  <mime-type type="application/x-pem-key">
+    <comment>Private key (PEM)</comment>
+    <sub-class-of type="text/plain"/>
+    <magic priority="60">
+      <match type="string" offset="0" value="-----BEGIN"/>
+    </magic>
+    <glob pattern="*.key" weight="80"/>
+    <glob pattern="id_rsa"/>
+    <glob pattern="id_ed25519"/>
+    <glob pattern="id_ecdsa"/>
+  </mime-type>
+
+  <!-- SSH public keys: ties Publisher's *.pub, so content decides -->
+  <mime-type type="text/x-ssh-public-key">
+    <comment>SSH public key</comment>
+    <sub-class-of type="text/plain"/>
+    <magic priority="60">
+      <match type="string" offset="0" value="ssh-"/>
+      <match type="string" offset="0" value="ecdsa-"/>
+    </magic>
+    <glob pattern="*.pub"/>
+  </mime-type>
+
+  <!-- extra globs for stock types -->
+  <mime-type type="application/json">
+    <glob pattern="*.jsonc"/>
+    <glob pattern="*.jsonl"/>
+    <glob pattern="*.json5"/>
+  </mime-type>
+  <mime-type type="application/x-shellscript">
+    <glob pattern="*.zsh"/>
+    <glob pattern="*.bash"/>
+    <glob pattern=".zshrc"/>
+    <glob pattern=".zprofile"/>
+  </mime-type>
+  <mime-type type="application/vnd.sqlite3">
+    <glob pattern="*.sqlite"/>
+    <glob pattern="*.sqlite3"/>
+    <glob pattern="*.db" weight="40"/>
+  </mime-type>
+  <mime-type type="font/otf">
+    <glob pattern="*.otf" weight="60"/>
+  </mime-type>
+</mime-info>

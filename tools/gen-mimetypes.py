@@ -174,7 +174,7 @@ cat("key", "yellow", "key: ring, shaft and two teeth",
     [f'<circle cx="-10" cy="0" r="8" fill="none" stroke="#FFFFFF" stroke-width="6"/>', st("M-2 0 H18") + st("M11 0 V7") + st("M17 0 V9")],
     px((4, 7, 2, 1), (3, 8, 1, 2), (6, 8, 1, 2), (4, 10, 2, 1), (7, 8, 6, 1), (10, 9, 1, 2), (12, 9, 1, 2)),
     '<path d="M5 8h5v1h1v5h-1v1h-5v-1h-1v-5h1z M6 10v3h3v-3z" fill-rule="evenodd" fill="#FFFFFF"/>' + px((11, 10, 7, 2), (15, 12, 1, 2), (17, 12, 1, 3)))
-cat("lock", "yellow", "padlock",
+cat("lock", "graphite", "padlock: a dependency lock file",
     [st("M-9 -4 V-9 A9 9 0 0 1 9 -9 V-4"), r(-16, -5, 32, 24, F, 5), c(0, 5, 3.6, DEEP()), r(-1.5, 6, 3, 6, DEEP())],
     px((6, 5, 4, 1), (5, 6, 1, 2), (10, 6, 1, 2), (4, 8, 8, 5)) + r(7, 9, 2, 2, DEEP()),
     px((8, 4, 6, 2), (7, 5, 2, 5), (13, 5, 2, 5), (5, 10, 12, 8)) + r(10, 12, 2, 3, DEEP()))
@@ -338,7 +338,7 @@ t("application-x-pkcs12", "certificate", "P12", "application-pkcs12")
 t("application-x-pem-key", "key", "KEY")
 t("text-x-ssh-public-key", "key", "PUB")
 t("application-pgp-keys", "key", "PGP")
-t("application-pgp-encrypted", "lock", "GPG")
+t("application-pgp-encrypted", "key", "GPG")
 t("application-pgp-signature", "certificate", "SIG")
 # office
 t("application-vnd.openxmlformats-officedocument.wordprocessingml.document", "document", "DOCX")

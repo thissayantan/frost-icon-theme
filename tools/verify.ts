@@ -119,6 +119,11 @@ if (names.length) {
   }
 }
 
+// 6. ADR-006: with the MIME add-on applied, real developer files resolve to Frost file-type icons
+const probe = Bun.spawnSync(["python3", join(ROOT, "tools/mime-probe.py")]);
+process.stdout.write(probe.stdout.toString());
+if (probe.exitCode !== 0) fail(`mime-probe failed ${probe.stderr.toString().trim()}`);
+
 for (const e of errors) console.error(`✗ ${e}`);
 console.log(`verify: ${list.length} icons, ${(bytes / 1048576).toFixed(1)} MB — ${errors.length ? `${errors.length} problem(s)` : "ok"}`);
 process.exit(errors.length ? 1 : 0);
