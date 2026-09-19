@@ -176,9 +176,12 @@ export function derive(src: Source, size: number): string {
   if (size >= 64) {
     // full glass
   } else if (size >= 32) {
-    remove(doc, "shadow");
+    // A blurred glow wider than the pixel-hinted edge re-softens the silhouette on light backgrounds:
+    // gone at 32, faint at 48.
+    if (size < 48) remove(doc, "shadow", "glow");
+    else remove(doc, "shadow");
     setBlur(doc, "blur-glow", 4);
-    byId(doc, "glow")?.setAttribute("opacity", ".25");
+    byId(doc, "glow")?.setAttribute("opacity", ".15");
   } else if (size >= 22 && isGeneric(doc)) {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
     recentreOnBack(doc);

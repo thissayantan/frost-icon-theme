@@ -27,6 +27,10 @@ an outline and without greying the glass itself (the mask keeps it off the plate
 families don't need it — their plate sits entirely inside the back shape. Chosen over a cooler plate
 tint because the tint muddied the plate on dark backgrounds.
 
+In the folder and page families the plate sits entirely inside a one-colour back, so `frost` is
+visually inert there; it stays in the source (harmless, and consistent anatomy) and the glass reads through
+the plate gradient and rim instead.
+
 Why `frost` exists: real backdrop blur is impossible in an icon file, but in this style the only
 thing behind the plate is the icon's own back shape. Blurring a clipped copy of `back` inside the
 plate reproduces the effect exactly and statically.
@@ -40,7 +44,9 @@ whole icon, drop shadows on the glyph larger than σ 1, noise/grain, 3D perspect
 - **Back shape** sits upper-right: its bounding box ≈ 84 × 84, anchored at (36, 12).
 - **Plate** sits lower-left, overlapping the back shape by 45–60 % of its area: ≈ 80 × 72, anchored at (12, 44).
 - Folder family is the exception: back = folder silhouette full width (12 → 116), plate = lower
-  62 % of the folder, full width, so it reads as the folder's front flap.
+  62 % of the folder, full width, so it reads as the folder's front flap. Radii: back r12, flap top r10,
+  flap bottom r12 (shared exactly with the back, so no back colour peeks round the corner). The tab rises
+  with a smooth S-curve (`c6 0 7.5 10 15 10`) — no hard corner where it meets the body.
 - Corner radii: plate 18, back shape 20 (squircle-ish, `rx` not superellipse), glyph strokes 8 px with round caps.
 - Glyph lives centred on the **plate**, max 40 × 40, optical centre nudged 1 px up.
 
@@ -67,7 +73,8 @@ Glass: plate `#FFFFFF` (opacity per table above). Glyph: `#FFFFFF`. Shadow: `#00
 | Size | Layers kept | Notes |
 |------|-------------|-------|
 | 128, 96, 64, 256 | all | full glass |
-| 48, 32 | `glow`(reduced) `back` `frost` `plate` `rim` `glyph` | shadow dropped; blur radii scaled with size |
+| 48 | `glow`(σ 4, 15 %) `back` `frost` `lift` `plate` `rim` `glyph` | shadow dropped |
+| 32 | `back` `frost` `lift` `plate` `rim` `glyph` | glow dropped too: its blur is wider than a hinted pixel edge and re-softens the silhouette on light |
 | 24, 22 | `back` (`lift`) `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size |
 | 16 | `back` `glyph` | silhouette + white glyph only |
 
