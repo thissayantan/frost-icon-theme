@@ -95,6 +95,70 @@ export function applyLauncherOverrides(undo = false): string[] {
   return done;
 }
 
+// ── Project stacks: "this folder contains React · Hono · Cloudflare" ──────────────────────────────
+/** Brand colours (Simple Icons hex). Pastel-softened at render time; black brands use Frost graphite. */
+export const STACK_BRANDS: Record<string, string> = {
+  nextdotjs: "000000", react: "61DAFB", vuedotjs: "4FC08D", svelte: "FF3E00", astro: "BC52EE", angular: "0F0F11",
+  expo: "000020", android: "3DDC84", flutter: "02569B", electron: "47848F", tauri: "24C8D8",
+  hono: "E36002", express: "000000", fastify: "000000", nestjs: "E0234E", django: "092E20", fastapi: "009688",
+  flask: "3BABC3", bun: "000000", deno: "70FFAF", nodedotjs: "5FA04E", go: "00ADD8", rust: "000000",
+  python: "3776AB", kotlin: "7F52FF", typescript: "3178C6", cloudflare: "F38020", docker: "2496ED",
+  vercel: "000000", supabase: "3FCF8E", firebase: "DD2C00", vite: "9135FF", gnubash: "4EAA25",
+};
+const stackPath = join(LOCAL, "stacks.json");
+export const stackIcon = (slugs: string[]) => `folder-stack-${slugs.join("-")}`;
+export function readStacks(): string[][] { try { return JSON.parse(readFileSync(stackPath, "utf8")); } catch { return []; } }
+export function writeStacks(stacks: string[][]) { mkdirSync(LOCAL, { recursive: true }); writeFileSync(stackPath, JSON.stringify(stacks, null, 2)); }
+
+function soft(hex: string): string {
+  let [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  const L = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  if (L < 0.15) return "#7A8394"; // black-ish brands (Bun, Next, Rust…) → Frost graphite
+  if (L > 0.6) [r, g, b] = [r, g, b].map((c) => c * 0.72); // too light for a white mark → deepen
+  else [r, g, b] = [r, g, b].map((c) => c * 0.82 + 255 * 0.18); // otherwise soften toward pastel
+  return "#" + [r, g, b].map((c) => Math.round(c).toString(16).padStart(2, "0")).join("").toUpperCase();
+}
+
+async function stackSvg(slugs: string[]): Promise<string | null> {
+  const marks: string[] = [];
+  for (const sl of slugs) { const d = await logo(sl); if (!d) return null; marks.push(d); }
+  const n = slugs.length, r = [21, 18.5, 16.5][n - 1], step = [0, 29, 27][n - 1];
+  let g = "";
+  slugs.forEach((sl, i) => {
+    const cx = 64 + (i - (n - 1) / 2) * step, cy = 85, k = (r * 1.15) / 24;
+    g += `<circle cx="${cx}" cy="${cy}" r="${r + 2.5}" fill="#FFFFFF" fill-opacity=".9"/>` +
+      `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${soft(STACK_BRANDS[sl] ?? "7A8394")}"/>` +
+      `<path d="${marks[i]}" fill="#FFFFFF" transform="translate(${cx - 12 * k} ${cy - 12 * k}) scale(${k})"/>`;
+  });
+  // ≤ 24 px: logos are mush — one 2×2 brand-coloured dot per technology, on whole pixels
+  const dots = (size: number, row: number, x0: number, gap: number) =>
+    `<g id="glyph-${size}" transform="scale(${(128 / size).toFixed(4)})">` +
+    slugs.map((sl, i) => `<rect x="${x0 + i * gap - ((n - 1) * gap) / 2}" y="${row}" width="2" height="2" rx=".5" fill="${soft(STACK_BRANDS[sl] ?? "7A8394")}"/>`).join("") + "</g>";
+  const folder = readFileSync(join(ROOT, "src/places/folder.svg"), "utf8");
+  return folder.replace('<g id="glyph"/>', `<g id="glyph">${g}</g>`)
+    .replace('    <clipPath id="plate-clip">', dots(16, 8, 7, 3) + "\n" + dots(22, 14, 10, 3) + "\n" + dots(24, 15, 11, 3) + "\n    <clipPath id=\"plate-clip\">");
+}
+
+/** Render every stack combination in local/stacks.json into target/…/places. */
+export async function renderStacks(target: string): Promise<string[]> {
+  const done: string[] = [];
+  mkdirSync(join(LOCAL, "src"), { recursive: true });
+  for (const slugs of readStacks()) {
+    const svg = await stackSvg(slugs);
+    if (!svg) continue;
+    const name = stackIcon(slugs), file = join(LOCAL, "src", `${name}.svg`);
+    writeFileSync(file, svg);
+    const src: Source = { context: "places", name, file, overrides: new Map() };
+    for (const size of SIZES) for (const scale of SCALES) {
+      const dir = join(target, dirName(size, scale, "places"));
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(join(dir, `${name}.png`), await renderPng(src, size, scale));
+    }
+    done.push(name);
+  }
+  return done;
+}
+
 export async function applyLocalOverlay(target: string): Promise<string[]> {
   const done: string[] = [];
   const contexts = new Set(Object.keys(CONTEXTS).filter((c) => existsSync(join(target, dirName(16, 1, c)))));
@@ -131,6 +195,7 @@ export async function applyLocalOverlay(target: string): Promise<string[]> {
     done.push(c.name);
   }
 
+  done.push(...(await renderStacks(target)));
   const ordered = Object.keys(CONTEXTS).filter((c) => contexts.has(c));
   writeFileSync(join(target, "index.theme"), indexTheme(ordered));
   return done;

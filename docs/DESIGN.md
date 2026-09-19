@@ -149,6 +149,14 @@ opacity top stop, never add an outline.
   marked per-user launcher copies (owner request). On yellow and graphite backs every glyph part is full white. ≤ 24 px uses the knockout (§4).
   Template: `src/_templates/app.svg`.
 
+## 7b. Project folders (personal overlay — never committed)
+A project folder shows **what it contains**, not one language: up to three round brand badges in a row on the
+flap, most telling first — [UI framework/platform, backend or runtime, deploy target] (e.g. React · Hono ·
+Cloudflare). The language is last because it is nearly universal. Badge = brand colour softened toward pastel
+(light brands deepened, black brands → graphite) with the white mark, separated by a white ring. ≤ 24 px: one
+2×2 brand-coloured dot per technology on whole pixels. Detection and tagging: `tools/tag-folders.ts`; rendering:
+`tools/local.ts` (`folder-stack-<slugs>`). Non-projects stay plain; tool dirs without a stack keep their language mark.
+
 ## 8. Status icons (symbolic, ADR-005)
 Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The state language:**
 

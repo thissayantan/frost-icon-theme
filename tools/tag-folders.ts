@@ -8,10 +8,11 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { LANG_FOLDERS } from "./local";
+import { LANG_FOLDERS, STACK_BRANDS, renderStacks, stackIcon, writeStacks } from "./local";
 
 const HOME = homedir();
 const OURS = new Set(Object.keys(LANG_FOLDERS));
+const isOurs = (name: string) => OURS.has(name) || name.startsWith("folder-stack-");
 const SKIP = new Set(["node_modules", ".git", "dist", "build", "target", ".venv", "venv", "vendor", ".next"]);
 const MAX_DEPTH = 3;
 
@@ -79,6 +80,43 @@ function current(dir: string): { name: string; file: string } {
   };
 }
 
+/** What a project *contains*, most telling first: [UI framework/platform, backend or runtime, deploy target]. */
+function deps(dir: string, depth = 0, acc = new Set<string>()): Set<string> {
+  if (depth > 3) return acc;
+  let entries: string[] = [];
+  try { entries = readdirSync(dir); } catch { return acc; }
+  if (entries.includes("package.json")) {
+    try {
+      const pj = JSON.parse(readFileSync(join(dir, "package.json"), "utf8"));
+      for (const k of Object.keys({ ...pj.dependencies, ...pj.devDependencies })) acc.add(k);
+    } catch {}
+  }
+  for (const e of entries) {
+    if (e.startsWith(".") || SKIP.has(e)) continue;
+    try { if (statSync(join(dir, e)).isDirectory()) deps(join(dir, e), depth + 1, acc); } catch {}
+  }
+  return acc;
+}
+function stack(dir: string): string[] {
+  const d = deps(dir), any = (...n: string[]) => n.some((x) => d.has(x));
+  const deep = (...files: string[]) => files.some((f) => has(dir, f)) || [...readdirSafe(dir)].some((sub) => files.some((f) => has(join(dir, sub), f)));
+  const ui = has(dir, "app/src/main/AndroidManifest.xml", "src/main/AndroidManifest.xml") ? "android"
+    : has(dir, "pubspec.yaml") ? "flutter"
+    : any("next") ? "nextdotjs" : any("expo") ? "expo" : any("astro") ? "astro" : any("svelte", "@sveltejs/kit") ? "svelte"
+    : any("vue", "nuxt") ? "vuedotjs" : any("@angular/core") ? "angular" : any("electron") ? "electron"
+    : any("@tauri-apps/api") ? "tauri" : any("react") ? "react" : null;
+  const backend = any("hono") ? "hono" : any("@nestjs/core") ? "nestjs" : any("fastify") ? "fastify" : any("express") ? "express" : null;
+  const runtime = deep("bun.lock", "bun.lockb") ? "bun" : has(dir, "deno.json", "deno.jsonc") ? "deno"
+    : has(dir, "go.mod") ? "go" : has(dir, "Cargo.toml") ? "rust" : has(dir, "pyproject.toml", "requirements.txt") ? "python"
+    : has(dir, "build.gradle.kts") && !ui ? "kotlin" : has(dir, "package.json") ? "nodedotjs" : null;
+  const platform = deep("wrangler.toml", "wrangler.jsonc", "wrangler.json") || any("wrangler") ? "cloudflare"
+    : has(dir, "Dockerfile", "docker-compose.yml", "compose.yaml") ? "docker" : has(dir, "vercel.json") ? "vercel"
+    : any("@supabase/supabase-js") ? "supabase" : any("firebase") ? "firebase" : null;
+  const picks = [ui, backend ?? runtime, platform ?? (backend ? runtime : null)].filter((x): x is string => !!x && x in STACK_BRANDS);
+  return [...new Set(picks)].slice(0, 3);
+}
+function readdirSafe(dir: string): string[] { try { return readdirSync(dir).filter((e) => !e.startsWith(".") && !SKIP.has(e)); } catch { return []; } }
+
 function detect(dir: string, leaf = false): string | null {
   for (const [icon, test] of RULES) if (test(dir)) return icon;
   if (!leaf) return null;
@@ -110,11 +148,28 @@ const targets: [string, string][] = [
   ...(roots.length ? roots : [join(HOME, "everything/code")]).flatMap((r) => [...projects(r)]),
 ];
 
+// Projects show their stack (up to 3 badges); folders without a detectable stack keep the language mark.
+const combos = new Map<string, string[]>();
+for (const t of targets) {
+  if (t[0].startsWith(join(HOME, "everything")) || !Object.keys(HOME_NAMES).some((n) => t[0] === join(HOME, n))) {
+    const st = stack(t[0]);
+    if (st.length) { t[1] = stackIcon(st); combos.set(t[1], st); }
+  }
+}
+if (!undo && !dry) {
+  writeStacks([...combos.values()]);
+  const target = join(HOME, ".local/share/icons/Frost");
+  if (existsSync(join(target, "index.theme"))) {
+    await renderStacks(target);
+    Bun.spawnSync(["gtk-update-icon-cache", "-f", "-t", "-q", target]);
+  }
+}
+
 let changed = 0;
 for (const [dir, icon] of targets) {
   const cur = current(dir);
   const pretty = dir.replace(HOME, "~");
-  if (cur.file || (cur.name && !OURS.has(cur.name))) { console.log(`  skip  ${pretty} (has its own custom icon)`); continue; }
+  if (cur.file || (cur.name && !isOurs(cur.name))) { console.log(`  skip  ${pretty} (has its own custom icon)`); continue; }
   if (undo) {
     if (!cur.name) continue;
     if (!dry) Bun.spawnSync(["gio", "set", "-t", "unset", dir, "metadata::custom-icon-name"]);
