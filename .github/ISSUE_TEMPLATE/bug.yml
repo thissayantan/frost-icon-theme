@@ -1,0 +1,21 @@
+name: Bug report
+description: An icon looks wrong, is missing after install, or the installer fails
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong?
+      description: Which icon, at which size, where (Files, dock, top bar…). Screenshots help a lot.
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes:
+      label: Distro, desktop and version
+      placeholder: Ubuntu 26.04, GNOME 50, Wayland
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes:
+      label: Frost version
+      placeholder: "grep Comment ~/.local/share/icons/Frost/index.theme"

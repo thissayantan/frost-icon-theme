@@ -1,0 +1,24 @@
+name: Icon request
+description: Ask for an app or file type to be drawn in Frost
+labels: ["icon request"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Icon name
+      description: The app's Icon= value (from its .desktop file) or the file type's icon name (gio info -a standard::icon FILE)
+      placeholder: org.gnome.Weather  /  application-x-sqlite3
+    validations: { required: true }
+  - type: input
+    id: what
+    attributes:
+      label: What is it?
+      placeholder: GNOME Weather app / SQLite database files
+    validations: { required: true }
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else? (screenshot of where it shows up, distro, desktop)
+  - type: markdown
+    attributes:
+      value: "Brand logos (Firefox, Chrome, VS Code…) are never redrawn — those apps keep their own icons."
