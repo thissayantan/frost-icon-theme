@@ -66,7 +66,7 @@ glass sheet (DESIGN §6, §6b; ADR-006).
 - [x] `tools/gen-mimetypes.py`: 31 categories × 134 types, drawn letterforms, 16/22/24 hints; `derive()` sheet branch
 - [x] Per-user MIME add-on + `mime-probe` in `verify`; `install:local --undo-mime`
 - [x] Scenes: the owner's my-app project and Home (dark + light)
-- [ ] icon-critic SHIP on the file-type set
+- [x] icon-critic SHIP on the file-type set (after two fix rounds, 2026-09-20)
 - [ ] Owner's Files screenshot after `nautilus -q`
 
 ## M5 — Release (v1.0)
