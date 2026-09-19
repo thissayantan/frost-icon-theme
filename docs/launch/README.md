@@ -9,4 +9,5 @@ https://discourse.gnome.org/t/frost-a-frosted-glass-icon-theme-and-some-shared-m
 Press: OMG! Ubuntu and Linux Uprising emailed 2026-09-20.
 Show HN: https://news.ycombinator.com/item?id=49770157 (with the pipeline comment).
 AUR: blocked — Arch has closed new-account registration (503). Retry when it reopens.
-Still to do: It's FOSS + 9to5Linux contact forms, Mastodon.
+It's FOSS and 9to5Linux forms submitted 2026-09-20.
+Still to do: Mastodon (no account seen), AUR when registration reopens.

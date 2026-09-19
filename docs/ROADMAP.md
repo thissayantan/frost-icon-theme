@@ -73,4 +73,5 @@ glass sheet (DESIGN §6, §6b; ADR-006).
 - [x] GitHub release v0.2.0 (tarball; install.sh one-liner tested against the live release), MIT, launch kit in docs/launch/
 - [x] gnome-look.org listing live (p/2372226); GNOME Discourse post; press pitches sent
 - [x] Show HN posted (item 49770157); Reddit posts by the owner
-- [ ] AUR package (blocked: Arch registration closed) · It's FOSS / 9to5Linux forms
+- [x] Press: OMG! Ubuntu + Linux Uprising emailed; It's FOSS + 9to5Linux forms submitted
+- [ ] AUR package (blocked: Arch registration closed)
