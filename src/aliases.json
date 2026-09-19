@@ -1,6 +1,15 @@
 {
   "$comment": "target icon (shipped) → extra names that should resolve to the same art. Become relative symlinks at build time.",
   "folder": ["inode-directory", "folder-closed"],
+  "folder-open": ["folder-visiting", "folder-opened"],
+  "folder-download": ["folder-downloads"],
+  "folder-music": ["folder-sound"],
+  "folder-pictures": ["folder-images"],
+  "folder-videos": ["folder-video"],
+  "folder-publicshare": ["folder-public"],
+  "folder-remote": ["folder-network"],
+  "user-desktop": ["folder-desktop"],
+  "user-home": ["folder-home"],
   "user-trash": ["trash-empty"],
   "user-trash-full": ["trash-full"]
 }
