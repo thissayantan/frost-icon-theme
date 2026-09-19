@@ -19,3 +19,12 @@ coverage.
 Happy to answer anything or provide more screenshots.
 Thanks,
 Sayantan
+
+## Channels (checked on each outlet's own site, 2026-09-20)
+| Outlet | Channel | Status |
+|---|---|---|
+| OMG! Ubuntu | contact@omgubuntu.co.uk (developers/PR) · form omgubuntu.co.uk/tip | Gmail draft ready |
+| Linux Uprising | contact@linuxuprising.com · or r/LinuxUprising | Gmail draft ready |
+| It's FOSS | form only: itsfoss.com/contact-us | submit by hand |
+| 9to5Linux | form only (bot check): 9to5linux.com/contact-us | submit by hand |
+| Linuxiac | linuxiac.com/contact (address unverified, site blocked) | verify, then send |
