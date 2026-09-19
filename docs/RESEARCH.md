@@ -68,3 +68,12 @@
 - Rejected before (too busy / inconsistent): Infinity Glass, Papirus folders, Pure, Reversal,
   Cool-Dark, Haptic, Paper, the aura-glass theme suite. Wants **clean, minimal, sleek**.
 - Uses dark mode, blue accent, Dash to Panel, Blur My Shell.
+
+## Mimetype lookup order (verified M3, GTK 4.22)
+- A file's `GThemedIcon` carries names like `[image-png, image-x-generic, image-png-symbolic]`.
+  `Gtk.IconTheme.lookup_by_gicon` tries **every name inside Hyaline first**, then the inherited themes —
+  so `image-x-generic` from Hyaline beats Papirus's specific `image-png`. Verified for image/png,
+  text/plain, application/zip, application/pdf, inode/directory against `dist/`.
+- application/pdf's generic fallback is `x-office-document`, not `application-x-generic`.
+- Not verified for Qt/KDE or GTK 3, whose loops may run name-by-name through the whole chain. Symlink
+  aliases for the most common specific types (`src/aliases.json`) are cheap insurance either way.

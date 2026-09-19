@@ -1,15 +1,131 @@
 {
   "$comment": "target icon (shipped) → extra names that should resolve to the same art. Become relative symlinks at build time.",
-  "folder": ["inode-directory", "folder-closed"],
-  "folder-open": ["folder-visiting", "folder-opened"],
-  "folder-download": ["folder-downloads"],
-  "folder-music": ["folder-sound"],
-  "folder-pictures": ["folder-images"],
-  "folder-videos": ["folder-video"],
-  "folder-publicshare": ["folder-public"],
-  "folder-remote": ["folder-network"],
-  "user-desktop": ["folder-desktop"],
-  "user-home": ["folder-home"],
-  "user-trash": ["trash-empty"],
-  "user-trash-full": ["trash-full"]
+  "folder": [
+    "inode-directory",
+    "folder-closed"
+  ],
+  "folder-open": [
+    "folder-visiting",
+    "folder-opened"
+  ],
+  "folder-download": [
+    "folder-downloads"
+  ],
+  "folder-music": [
+    "folder-sound"
+  ],
+  "folder-pictures": [
+    "folder-images"
+  ],
+  "folder-videos": [
+    "folder-video"
+  ],
+  "folder-publicshare": [
+    "folder-public"
+  ],
+  "folder-remote": [
+    "folder-network"
+  ],
+  "user-desktop": [
+    "folder-desktop"
+  ],
+  "user-home": [
+    "folder-home"
+  ],
+  "user-trash": [
+    "trash-empty"
+  ],
+  "user-trash-full": [
+    "trash-full"
+  ],
+  "text-x-generic": [
+    "text-plain",
+    "text-markdown",
+    "text-x-log"
+  ],
+  "application-x-generic": [
+    "application-octet-stream"
+  ],
+  "image-x-generic": [
+    "image-png",
+    "image-jpeg",
+    "image-gif",
+    "image-webp",
+    "image-svg+xml",
+    "image-bmp",
+    "image-tiff",
+    "image-heif",
+    "image-avif"
+  ],
+  "audio-x-generic": [
+    "audio-mpeg",
+    "audio-flac",
+    "audio-x-wav",
+    "audio-ogg",
+    "audio-x-vorbis+ogg",
+    "audio-mp4",
+    "audio-aac"
+  ],
+  "video-x-generic": [
+    "video-mp4",
+    "video-x-matroska",
+    "video-webm",
+    "video-quicktime",
+    "video-x-msvideo",
+    "video-mpeg"
+  ],
+  "package-x-generic": [
+    "application-zip",
+    "application-x-tar",
+    "application-x-compressed-tar",
+    "application-x-7z-compressed",
+    "application-x-rar",
+    "application-vnd.rar",
+    "application-gzip",
+    "application-x-bzip",
+    "application-x-xz",
+    "application-x-xz-compressed-tar",
+    "application-x-zstd-compressed-tar",
+    "application-zstd",
+    "application-x-archive"
+  ],
+  "text-x-script": [
+    "application-x-shellscript",
+    "text-x-python",
+    "text-x-python3",
+    "text-x-perl",
+    "application-x-perl",
+    "text-x-ruby",
+    "application-x-ruby",
+    "text-javascript",
+    "application-javascript",
+    "application-x-php"
+  ],
+  "text-html": [
+    "application-xhtml+xml"
+  ],
+  "x-office-document": [
+    "application-vnd.oasis.opendocument.text",
+    "application-msword",
+    "application-vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application-rtf"
+  ],
+  "x-office-spreadsheet": [
+    "application-vnd.oasis.opendocument.spreadsheet",
+    "application-vnd.ms-excel",
+    "application-vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "text-csv"
+  ],
+  "x-office-presentation": [
+    "application-vnd.oasis.opendocument.presentation",
+    "application-vnd.ms-powerpoint",
+    "application-vnd.openxmlformats-officedocument.presentationml.presentation"
+  ],
+  "font-x-generic": [
+    "font-ttf",
+    "font-otf",
+    "font-woff",
+    "font-woff2",
+    "application-x-font-ttf"
+  ]
 }

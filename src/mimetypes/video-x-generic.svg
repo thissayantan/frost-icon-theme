@@ -45,6 +45,6 @@
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
   <g id="glyph">
-    <path d="M58 79 L58 103 L78 91 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M57 77 L57 105 L80 91 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
   </g>
 </svg>

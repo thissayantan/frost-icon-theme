@@ -1,5 +1,5 @@
 // Contact sheet of the *built* PNGs: rows = icons, column groups = light / dark / wallpaper backgrounds.
-//   bun run preview [--only a,b] [--size 256 | --sizes 16,24] [--scale 2] [--zoom 3] [--templates]
+//   bun run preview [--only a,b] [--size 256 | --sizes 16,24] [--scale 2] [--zoom 3] [--templates | --from-src]
 //                   [--grid] [--wallpaper file.jpg] [--out path.png]
 import { Resvg } from "@resvg/resvg-js";
 import sharp, { type OverlayOptions } from "sharp";
@@ -23,6 +23,10 @@ function entries(): Entry[] {
       const src: Source = { context: "_templates", name: t, file: join(SRC, "_templates", `${t}.svg`), overrides: new Map() };
       return { label: `template: ${t}`, png: (size, scale) => renderPng(src, size, scale) };
     });
+  }
+  if (process.argv.includes("--from-src")) {
+    // Same derive + render path as the build, in memory — for iterating without touching dist/.
+    return sources(only).map((s) => ({ label: s.name, png: (size, scale) => renderPng(s, size, scale) }));
   }
   if (!existsSync(join(THEME_DIR, "index.theme"))) throw new Error("dist/Hyaline missing — run `bun run build` first");
   return sources(only).map((s) => ({
