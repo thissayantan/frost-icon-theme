@@ -126,7 +126,7 @@ opacity top stop, never add an outline.
   (14,8 → 100,112, r12, dog-ear cut 22) and a **deeper sheet of the same colour** peeking out lower-right
   (38,22 → 116,120, r14): Frost's back-upper-right / plate-lower-left idea on a page, after the owner's
   glassmorphism references (Moranart "3D Frosted Glass"). Layers: `back` (deep sheet), `frost` (the sheet
-  blurred through the glass), `plate` (glass: token *light* at .92 → .62), `depth` (deep 0 → .30 toward the
+  blurred through the glass), `plate` (glass: token *light* at .92 → .78), `depth` (deep 0 → .30 toward the
   lower-right + a white sheen), `rim`, `glyph`, optional `label`. Root carries `data-family="sheet"`.
   Glyph ≤ 40 × 40 centred at (57, 50) with a label, (57, 62) and 1.3× without. Generated — never hand-edit:
   `tools/gen-mimetypes.py` (categories × types). Template: `src/_templates/page.svg`.
