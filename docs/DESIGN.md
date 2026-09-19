@@ -103,7 +103,9 @@ opacity top stop, never add an outline.
 - **`user-home` glyph (owner-specified)** — the house from `docs/references/user-home-glyph.png`,
   translated to glass: rounded **trapezoid roof** (narrow top, wide eaves) in solid white, **box body**
   below it in white 78 %, and a small **door** tucked directly under the roof line in the `deep` tint at
-  55 %. No chimney, no windows, no outline. Seed art: `src/places/user-home.svg` — refine, don't replace.
+  55 %. No chimney, no windows, no outline. Roof about as tall as the body (the reference's proportion), eaves
+  = glyph width 40, body 32 wide, door 10 × 11. Hand-hinted at 16/22/24/32 (`glyph-<size>`) so roof, body and
+  door stay separate pixels. Seed art: `src/places/user-home.svg` — refine, don't replace.
   The same house (roof + body + door, same proportions) is the glyph wherever "home" appears (e.g. `go-home` apps icon).
 - **Places** — `user-trash`(+`-full`), `network-workgroup`, `user-bookmarks`.
 - **Mimetypes** — page silhouette back (graphite unless family colour applies), plate over lower half, type glyph.

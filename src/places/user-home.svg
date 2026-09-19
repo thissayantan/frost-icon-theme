@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
   <!-- Hyaline user-home — folder family with the house glyph.
-       Glyph box 44–84 × 66–103, centred on the flap. -->
+       Glyph box 44–84 × 64–104 (roof ≈ body height, as in the reference), centred on the flap (64, 84). -->
   <defs>
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#8CB8FF"/>
@@ -27,6 +27,27 @@
     <path id="plate-shape-32" d="M12 66 a10 10 0 0 1 10 -10 H106 a10 10 0 0 1 10 10 V100 a12 12 0 0 1 -12 12 H24 a12 12 0 0 1 -12 -12 Z"/>
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
+    <!-- glyph hints: roof / body / door on whole pixels -->
+    <g id="glyph-32">
+      <path d="M52 64 H76 L84 84 H44 Z" fill="#FFFFFF"/>
+      <rect x="48" y="84" width="32" height="20" rx="4" fill="#FFFFFF" fill-opacity=".78"/>
+      <rect x="60" y="84" width="8" height="12" fill="#3F6DF5" fill-opacity=".55"/>
+    </g>
+    <g id="glyph-22">
+      <path d="M52.364 64 H75.636 L87.273 81.455 H40.727 Z" fill="#FFFFFF"/>
+      <rect x="46.545" y="81.455" width="34.909" height="23.273" rx="2.909" fill="#FFFFFF" fill-opacity=".8"/>
+      <rect x="58.182" y="81.455" width="11.636" height="17.455" fill="#3F6DF5" fill-opacity=".6"/>
+    </g>
+    <g id="glyph-24">
+      <path d="M53.333 64 H74.667 L85.333 80 H42.667 Z" fill="#FFFFFF"/>
+      <rect x="48" y="80" width="32" height="26.667" rx="2.667" fill="#FFFFFF" fill-opacity=".8"/>
+      <rect x="58.667" y="80" width="10.667" height="16" fill="#3F6DF5" fill-opacity=".6"/>
+    </g>
+    <g id="glyph-16">
+      <path d="M48 48 H80 L96 64 H32 Z" fill="#FFFFFF"/>
+      <rect x="40" y="64" width="48" height="32" rx="4" fill="#FFFFFF" fill-opacity=".85"/>
+      <rect x="56" y="64" width="16" height="24" fill="#3F6DF5" fill-opacity=".6"/>
+    </g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -43,8 +64,8 @@
   </g>
   <!-- user-home glyph: owner reference docs/references/user-home-glyph.png — trapezoid roof, box body, door tucked under the roof line -->
   <g id="glyph">
-    <path d="M52 66 H76 a3 3 0 0 1 2.9 2.2 L83 79 a2.4 2.4 0 0 1 -2.3 3 H47.3 a2.4 2.4 0 0 1 -2.3 -3 L49.1 68.2 A3 3 0 0 1 52 66 Z" fill="#FFFFFF"/>
-    <path d="M49 82 H79 V99 a4 4 0 0 1 -4 4 H53 a4 4 0 0 1 -4 -4 Z" fill="#FFFFFF" fill-opacity=".78"/>
-    <rect x="59.5" y="82" width="9" height="12" rx="1.5" fill="#3F6DF5" fill-opacity=".55"/>
+    <path d="M54 64 H74 a3 3 0 0 1 2.9 2.2 L83.3 80.9 a2.4 2.4 0 0 1 -2.3 3.1 H47 a2.4 2.4 0 0 1 -2.3 -3.1 L51.1 66.2 A3 3 0 0 1 54 64 Z" fill="#FFFFFF"/>
+    <path d="M48 84 H80 V100 a4 4 0 0 1 -4 4 H52 a4 4 0 0 1 -4 -4 Z" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="59" y="84" width="10" height="11" rx="1.5" fill="#3F6DF5" fill-opacity=".55"/>
   </g>
 </svg>
