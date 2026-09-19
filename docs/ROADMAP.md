@@ -21,7 +21,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] `user-home` refined from the seed `src/places/user-home.svg` (owner's house glyph — DESIGN §6); keep the roof/body/door read at 24 px
 - [x] Special folders: documents, download, music, pictures, videos, templates, publicshare, desktop, user-home, remote, drag-accept
 - [x] `folder-open`, aliases (`inode-directory`, `folder-*` legacy names) in `aliases.json`
-- [ ] `icon-critic` agent review passed; findings fixed
+- [x] `icon-critic` agent review passed; findings fixed
 
 ## M3 — Places + mimetypes (v0.1)
 - [ ] `user-trash`, `user-trash-full`, `user-bookmarks`, `network-workgroup`, `network-server`

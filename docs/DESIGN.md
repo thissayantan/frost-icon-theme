@@ -90,6 +90,9 @@ in `<defs>`; at that size `derive()` swaps the hint's geometry into `#back-shape
 land on whole pixels (the 128 master's x = 12 is 1.5 px at 16 and 2.25 px at 24 — visibly soft). The folder
 template carries hints for 16/22/24/32/48; every folder copied from it inherits them.
 
+Exception, noted deliberately: at 16 px a secondary part may go to full white when 78 % would dissolve
+into the back (e.g. `folder-publicshare`'s 1 px connectors).
+
 If an auto-derived size looks wrong, add a hand-drawn `src/<ctx>/<name>.<size>.svg`; the build prefers it.
 
 ## 5. Backgrounds
