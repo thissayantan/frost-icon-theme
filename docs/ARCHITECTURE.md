@@ -9,7 +9,7 @@ docs/DESIGN.md tokens ─────┘   ┌───────────�
                                │ 2. derive size variant (drop layers,│
                                │    scale blur σ)                    │
                                │ 3. render with resvg @1x and @2x    │
-                               │ 4. optimise PNG (oxipng/sharp)      │
+                               │ 4. optimise PNG (sharp, zlib 9)     │
                                │ 5. symlink aliases                  │
                                │ 6. write index.theme                │
                                │ 7. gtk-update-icon-cache            │
@@ -43,7 +43,9 @@ Keeps scope honest and matches the owner's setup. README states Papirus is recom
 
 ### ADR-003 — Layer ids drive size variants
 One source per icon; small sizes are derived by removing layers (`DESIGN.md §4`). Hand-tuned
-`<name>.<size>.svg` overrides exist for the cases derivation can't fix.
+`<name>.<size>.svg` overrides exist for the cases derivation can't fix. Pixel-grid hint geometry
+(`#back-shape-<size>`, `#plate-shape-<size>` in `<defs>`) is swapped in per size so small sizes stay crisp
+without a second file per icon.
 
 ### ADR-004 — Aliases are data
 Freedesktop names, legacy names and app ids that should share art live in `src/aliases.json`
@@ -56,8 +58,8 @@ Name=Hyaline
 Comment=Frosted-glass icons — clean, minimal
 Inherits=Papirus,Adwaita,hicolor
 Example=folder
-Directories=16x16/places,16x16@2x/places,…
-ScaledDirectories=16x16@2x/places,…
+Directories=16x16/places,22x22/places,…          # @1x only
+ScaledDirectories=16x16@2x/places,22x22@2x/places,…  # @2x only (spec; Papirus does the same)
 
 [16x16/places]
 Size=16
