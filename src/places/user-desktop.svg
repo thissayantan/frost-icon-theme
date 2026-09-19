@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Hyaline user-desktop — folder family, glyph: monitor on a stand. Centred on the flap (64, 84). -->
+  <defs>
+    <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8CB8FF"/>
+      <stop offset="1" stop-color="#3F6DF5"/>
+    </linearGradient>
+    <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".28"/>
+    </linearGradient>
+    <linearGradient id="rim-stroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".70"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
+    </linearGradient>
+    <path id="back-shape" fill="url(#tint)"
+          d="M12 32 a12 12 0 0 1 12 -12 h22 c6 0 7.5 10 15 10 h43 a12 12 0 0 1 12 12 v58 a12 12 0 0 1 -12 12 h-80 a12 12 0 0 1 -12 -12 z"/>
+    <path id="plate-shape" d="M12 66 a10 10 0 0 1 10 -10 h84 a10 10 0 0 1 10 10 v34 a12 12 0 0 1 -12 12 h-80 a12 12 0 0 1 -12 -12 z"/>
+    <!-- pixel-grid hints: derive() swaps these in at 16/22/24/32/48 px (DESIGN §4) -->
+    <path id="back-shape-16" d="M8 28 a12 12 0 0 1 12 -12 H56 V32 H108 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H20 a12 12 0 0 1 -12 -12 Z"/>
+    <path id="back-shape-22" d="M11.636 29.091 a11.636 11.636 0 0 1 11.636 -11.636 H46.545 c6.051 0 7.564 11.636 15.127 11.636 H104.727 a11.636 11.636 0 0 1 11.636 11.636 V98.909 a11.636 11.636 0 0 1 -11.636 11.636 H23.273 a11.636 11.636 0 0 1 -11.636 -11.636 Z"/>
+    <path id="plate-shape-22" d="M11.636 64 a5.818 5.818 0 0 1 5.818 -5.818 H110.546 a5.818 5.818 0 0 1 5.818 5.818 V98.909 a11.636 11.636 0 0 1 -11.636 11.636 H23.273 a11.636 11.636 0 0 1 -11.636 -11.636 Z"/>
+    <path id="back-shape-24" d="M10.667 26.667 a10.667 10.667 0 0 1 10.667 -10.667 H45.333 c5.973 0 7.467 10.667 14.933 10.667 H106.667 a10.667 10.667 0 0 1 10.667 10.667 V101.333 a10.667 10.667 0 0 1 -10.667 10.667 H21.333 a10.667 10.667 0 0 1 -10.667 -10.667 Z"/>
+    <path id="plate-shape-24" d="M10.667 64 a5.333 5.333 0 0 1 5.333 -5.333 H112 a5.333 5.333 0 0 1 5.333 5.333 V101.333 a10.667 10.667 0 0 1 -10.667 10.667 H21.333 a10.667 10.667 0 0 1 -10.667 -10.667 Z"/>
+    <path id="back-shape-32" d="M12 32 a12 12 0 0 1 12 -12 H46 c6.4 0 8 12 16 12 H104 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H24 a12 12 0 0 1 -12 -12 Z"/>
+    <path id="plate-shape-32" d="M12 66 a10 10 0 0 1 10 -10 H106 a10 10 0 0 1 10 10 V100 a12 12 0 0 1 -12 12 H24 a12 12 0 0 1 -12 -12 Z"/>
+    <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
+    <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
+    <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
+    <g id="glyph-16" transform="scale(8.0000)"><rect x="4" y="6" width="8" height="5" fill="#FFFFFF"/><rect x="7" y="11" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="5" y="12" width="6" height="1" fill="#FFFFFF" fill-opacity=".78"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><rect x="7" y="11" width="8" height="5" fill="#FFFFFF"/><rect x="10" y="16" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="8" y="17" width="6" height="1" fill="#FFFFFF" fill-opacity=".78"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><rect x="8" y="12" width="8" height="6" rx="0.5" fill="#FFFFFF"/><rect x="11" y="18" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="9" y="19" width="6" height="1" fill="#FFFFFF" fill-opacity=".78"/></g>
+    <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+
+  <ellipse id="shadow" cx="64" cy="114" rx="44" ry="4" fill="#000000" opacity=".12" filter="url(#blur-shadow)"/>
+  <use id="glow" xlink:href="#back-shape" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
+  <use id="back" xlink:href="#back-shape"/>
+  <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" filter="url(#blur-frost)"/></g>
+  <use id="plate" xlink:href="#plate-shape" fill="url(#plate-fill)"/>
+  <g id="rim" clip-path="url(#plate-clip)">
+    <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
+  </g>
+  <g id="glyph">
+    <rect x="44" y="66" width="40" height="28" rx="4" fill="#FFFFFF"/>
+    <rect x="60" y="94" width="8" height="5" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="52" y="98" width="24" height="5" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
+  </g>
+</svg>
