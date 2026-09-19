@@ -163,7 +163,7 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | State | How it looks | Colour |
 |---|---|---|
 | Normal / on | full glyph | none — the bar stays calm |
-| Level (signal, volume, mic, battery) | lit part full, remaining part at 35 % (mic: the mic itself is always solid — the level is 3 bars beside it) | none |
+| Level (signal, volume, mic, battery) | lit part full, remaining part at 35 % (mic: solid mic, level = lit sound arcs) | none |
 | Off (user turned it off) | glyph at 35 % with a 1-px gap + a 2-px `\` slash | none |
 | Connecting | glyph at 35 % + three dots | none |
 | Connected, no internet | full glyph + "!" disc bottom-right | `warning` |
@@ -173,6 +173,7 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Charging | level fill untouched + a pixel bolt badge on the bottom-right corner (1-px moat) | bolt `success` |
 | Plugged in, not charging | level fill + a pixel plug badge on the corner | none |
 | Charged (100, on AC) | full fill (`success`) + a 2-px pixel check badge on the corner | fill + check `success` |
+| Mic in use (the top-bar indicator exists only while recording) | solid mic + two sound arcs lit by input level | whole icon `warning` (in-use colour) |
 | Over-amplified volume | full waves + "!" disc | `warning` |
 
 Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!". `network-wired-offline` and

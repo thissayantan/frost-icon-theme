@@ -249,23 +249,25 @@ ICONS["audio-volume-high-symbolic"] = volume(3)
 ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER + "".join(WAVES)), badge_bang("warning"))
 ICONS["audio-volume-muted-symbolic"] = off(SPEAKER + "".join(WAVES))
 
-# ── Microphone: ALWAYS a solid mic (it is in use whenever the Shell shows it); the input-volume level is three
-#    signal bars beside it — lit full, the rest at 35 % (the same level language as the volume waves).
-#    (A capsule "filled from the bottom" read as "the mic is only half working" — owner feedback 2026-09-19.)
+# ── Microphone (owner decision 2026-09-19): the Shell shows this indicator ONLY while an app is recording, so the
+#    whole icon is drawn in the in-use colour (`warning` = orange, GNOME's privacy colour) — clear under Dash to
+#    Panel too, whose panel does not get Yaru's `.privacy-indicator` CSS colour. Shape: a solid mic + two sound arcs
+#    (as Yaru), the input level lit arc by arc (low: both dim, medium: one, high: both). Muted = neutral + slash.
 MIC = rect(1, 1, 6, 9, 3) + sector(4, 6, 4.5, 6, 100, 260) + rect(3, 12, 2, 2) + rect(1, 14, 6, 2, 1)
-MIC_BARS = [rect(11, 10, 1, 3), rect(13, 7, 1, 6), rect(15, 4, 1, 9)]  # 1-px bars, 1-px gaps, clear of the stand
+MIC_ARCS = [sector(4, 5.5, 7.5, 9.2, 55, 125), sector(4, 5.5, 10.5, 12, 58, 122)]  # 1-px gaps from the stand
 
 
-def mic(level):
-    lit, dim = "".join(MIC_BARS[:level]), "".join(MIC_BARS[level:])
-    return svg(g(MIC) + (g(lit) if lit else "") + (g(dim, dim=True) if dim else ""))
+def mic(level, live=True):
+    lit, dim = "".join(MIC_ARCS[:level]), "".join(MIC_ARCS[level:])
+    cls = "warning" if live else None
+    return svg(g(MIC, cls=cls) + (g(lit, cls=cls) if lit else "") + (g(dim, dim=True, cls=cls) if dim else ""))
 
 
-ICONS["microphone-sensitivity-low-symbolic"] = mic(1)
-ICONS["microphone-sensitivity-medium-symbolic"] = mic(2)
-ICONS["microphone-sensitivity-high-symbolic"] = mic(3)
-ICONS["microphone-sensitivity-muted-symbolic"] = off(MIC + "".join(MIC_BARS))
-ICONS["audio-input-microphone-symbolic"] = svg(g(MIC + "".join(MIC_BARS)))
+ICONS["microphone-sensitivity-low-symbolic"] = mic(0)
+ICONS["microphone-sensitivity-medium-symbolic"] = mic(1)
+ICONS["microphone-sensitivity-high-symbolic"] = mic(2)
+ICONS["microphone-sensitivity-muted-symbolic"] = off(MIC + "".join(MIC_ARCS))
+ICONS["audio-input-microphone-symbolic"] = mic(2, live=False)  # device icon (Settings, lists): not "in use"
 
 # ── Battery: 1-px frame on whole pixels; the level is NEVER covered. Charging/plug marks
 #    replace the terminal cap to the right of the body instead of cutting the fill. ─────────────
