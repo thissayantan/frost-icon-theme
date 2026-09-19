@@ -141,10 +141,11 @@ opacity top stop, never add an outline.
   A plate is **one outline** (overlapping sub-paths make the rim draw seams). The white detail may also stand
   *behind* the plate's front edge (Files' sheet), clipped so only the part above the object shows. Strokes 8 main / 6 secondary.
   Not macOS: no 3D, no realism, no inset-screen-with-bezel, no iOS switch — flat colour, one glass object, one symbol.
-  Colours (≤ 3 each): blue Files/Clocks/Disk Usage · green Settings/Tweaks/Updater (system) · graphite
-  Terminal/Disks/Logs · violet Ghostty/Fonts/Extensions · orange Calculator/Software · pink Image Viewer/Characters
-  (messaging, emoji) · red Document Viewer/Help/Screenshot · yellow Text Editor/Passwords · teal Resources/Language/
-  Network. CLI tools share a glass *window* plate (title bar + body): Terminal, btop++, Htop, Sysprof.
+  Colours (≤ 4 each): blue Clocks/Disk Usage/Software/Security Center (Files is folder-family blue) · green
+  Settings/Tweaks/Updater/Firmware (system) · graphite Terminal/Disks/Logs/Htop · violet Ghostty/Fonts/Extensions ·
+  orange Calculator/Sysprof/App Center · pink Image Viewer/Characters
+  (messaging, emoji) · red Document Viewer/Help/Screenshot · yellow Text Editor/Passwords · teal Resources/btop++/
+  Language/Network. CLI tools share a glass *window* plate (title bar + body): Terminal, btop++, Htop, Sysprof.
   Snap apps with hard-coded icon paths (App Center, Firmware Updater, Security Center) get Frost icons via
   marked per-user launcher copies (owner request). On yellow and graphite backs every glyph part is full white. ≤ 24 px uses the knockout (§4).
   Template: `src/_templates/app.svg`.
