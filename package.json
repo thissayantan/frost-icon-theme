@@ -13,7 +13,8 @@
     "coverage": "bun tools/coverage.ts",
     "install:local": "bun tools/install.ts",
     "typecheck": "tsc -p .",
-    "tag-folders": "bun tools/tag-folders.ts"
+    "tag-folders": "bun tools/tag-folders.ts",
+    "inventory": "bun tools/inventory.ts"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",

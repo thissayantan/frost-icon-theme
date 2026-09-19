@@ -42,7 +42,7 @@ official logo; language folders (Android, Go, Node, Python…) should show their
       on the Hyaline folder — kept in git-ignored `local/`
 - [ ] `tools/tag-folders.ts` — tag `~/Android`, `~/go` and project folders by marker file
       (`gio set … metadata::custom-icon-name`); `--dry-run`, `--undo`
-- [ ] `tools/inventory.ts` — every installed app's `Icon=` (system, local, snap, flatpak) → decide the redraw list
+- [x] `tools/inventory.ts` — every installed app's `Icon=` (system, local, snap, flatpak) → decide the redraw list
 - [ ] Core apps, original art in the Hyaline anatomy: Files, Settings, Terminal, Ghostty (original ghost, not its
       logo), Text Editor, Calculator, System Monitor/Resources, App Center, Tweaks, Disks, Extensions + what the
       inventory shows the owner actually uses
