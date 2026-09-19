@@ -12,8 +12,7 @@
     ],
     "deny": [
       "Bash(sudo:*)",
-      "Bash(rm -rf /usr/share/icons*)",
-      "Bash(git push:*)"
+      "Bash(rm -rf /usr/share/icons*)"
     ]
   }
 }
