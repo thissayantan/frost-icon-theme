@@ -4,7 +4,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 `bun run verify` exits 0.
 
 ## M1 — Pipeline (no art yet beyond the template)
-- [ ] `package.json`, `tsconfig.json`, Bun scripts listed in CLAUDE.md
+- [x] `package.json`, `tsconfig.json`, Bun scripts listed in CLAUDE.md
 - [ ] `tools/lint.ts` — layer ids present, palette-only colours, `viewBox 0 0 128 128`, no raster embeds
 - [ ] `tools/build.ts` — derive sizes (DESIGN §4), render @1x/@2x with resvg-js, optimise, aliases, index.theme, cache
 - [ ] `tools/preview.ts` — contact sheet: rows = icons, columns = 16/24/48/128 on light, dark and wallpaper backgrounds

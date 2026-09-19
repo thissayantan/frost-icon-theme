@@ -1,0 +1,24 @@
+{
+  "name": "hyaline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hyaline \u2014 frosted-glass icon theme for Linux",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "bun tools/build.ts",
+    "preview": "bun tools/preview.ts",
+    "lint": "bun tools/lint.ts",
+    "verify": "bun tools/verify.ts",
+    "coverage": "bun tools/coverage.ts",
+    "install:local": "bun tools/install.ts",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/bun": "^1.4.2",
+    "@xmldom/xmldom": "^0.9.12",
+    "sharp": "^0.35.4",
+    "typescript": "^7.0.2"
+  }
+}
