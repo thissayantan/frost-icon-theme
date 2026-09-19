@@ -30,7 +30,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
       x-office-document, x-office-spreadsheet, x-office-presentation, application-x-executable, font-x-generic
 - [x] `docs/COVERAGE.md` generated (shipped vs inherited), preview sheet committed as `docs/preview.png`
 - [x] README with screenshots, credits, install/uninstall
-- [ ] Tag `v0.1.0`
+- [x] Tag `v0.1.0`
 
 ## M4 — Core apps (v0.2)
 - [ ] Generic GNOME apps listed in DESIGN §6, names taken from installed `.desktop` files (`tools/inventory.ts`)
