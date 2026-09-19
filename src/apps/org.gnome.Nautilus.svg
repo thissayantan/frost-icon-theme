@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Frost org.gnome.Nautilus (Files) — folder family, not a squircle. A fan of three files stands in the folder:
-       back (teal, faint) → middle (violet) → front (white, solid); where they pass behind the frosted front flap
-       a blurred ghost of them shows through the glass. Owner feedback 2026-09-19. -->
+  <!-- Frost org.gnome.Nautilus (Files) — folder family, not a squircle. Three pastel files fan out of the folder from a
+       pivot at its front-left edge, rising to the right (owner sketch 2026-09-19): coral (back) → peach → mint (front),
+       the light tones of the red/orange/green tokens — warm pastels against the cool blue. Clipped at the flap line;
+       a blurred ghost of them shows through the frosted front. -->
   <defs>
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#8CB8FF"/>
@@ -29,9 +30,9 @@
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <!-- glyph hints: the sheet above the flap, whole pixels (units = pixels) -->
-    <g id="glyph-16" transform="scale(8)"><rect x="9" y="1" width="4" height="3" fill="#FFFFFF"/></g>
-    <g id="glyph-22" transform="scale(5.8182)"><rect x="11" y="3" width="5" height="7" fill="#FFFFFF"/></g>
-    <g id="glyph-24" transform="scale(5.3333)"><rect x="12" y="3" width="5" height="8" fill="#FFFFFF"/></g>
+    <g id="glyph-16" transform="scale(8)"><rect x="8" y="5" width="5" height="1" fill="#FF8E80"/><rect x="6" y="6" width="7" height="1" fill="#FFC27E"/><rect x="4" y="7" width="9" height="1" fill="#93E4AE"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><rect x="10" y="6" width="8" height="1" fill="#FF8E80"/><rect x="8" y="7" width="10" height="1" fill="#FFC27E"/><rect x="6" y="8" width="12" height="1" fill="#93E4AE"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><rect x="11" y="7" width="9" height="1" fill="#FF8E80"/><rect x="8" y="8" width="12" height="1" fill="#FFC27E"/><rect x="5" y="9" width="15" height="1" fill="#93E4AE"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -46,5 +47,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><defs><clipPath id="behind"><rect x="0" y="0" width="128" height="56"/></clipPath><clipPath id="through"><use xlink:href="#plate-shape"/></clipPath><filter id="blur-through" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter></defs><g clip-path="url(#behind)"><rect x="36" y="30" width="34" height="44" rx="4" fill="#86E3DC" fill-opacity=".55" transform="rotate(-10 53.0 74)"/><rect x="48" y="24" width="34" height="44" rx="4" fill="#D69BFF" fill-opacity=".8" transform="rotate(0 65.0 68)"/><rect x="62" y="32" width="34" height="44" rx="4" fill="#FFFFFF" fill-opacity="1" transform="rotate(10 79.0 76)"/></g><g clip-path="url(#through)" opacity=".35" filter="url(#blur-through)"><rect x="36" y="30" width="34" height="44" rx="4" fill="#86E3DC" fill-opacity=".55" transform="rotate(-10 53.0 74)"/><rect x="48" y="24" width="34" height="44" rx="4" fill="#D69BFF" fill-opacity=".8" transform="rotate(0 65.0 68)"/><rect x="62" y="32" width="34" height="44" rx="4" fill="#FFFFFF" fill-opacity="1" transform="rotate(10 79.0 76)"/></g></g>
+  <g id="glyph"><defs><clipPath id="behind"><rect x="0" y="0" width="128" height="56"/></clipPath><clipPath id="through"><use xlink:href="#plate-shape"/></clipPath><filter id="blur-through" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter></defs><g clip-path="url(#behind)"><rect x="18" y="47" width="94" height="13" rx="4" fill="#FF8E80" fill-opacity=".92" transform="rotate(-22 18 60)"/><rect x="18" y="47" width="94" height="13" rx="4" fill="#FFC27E" fill-opacity=".96" transform="rotate(-13 18 60)"/><rect x="18" y="47" width="94" height="13" rx="4" fill="#93E4AE" fill-opacity="1" transform="rotate(-4 18 60)"/></g><g clip-path="url(#through)" opacity=".3" filter="url(#blur-through)"><rect x="18" y="47" width="94" height="13" rx="4" fill="#FF8E80" fill-opacity=".92" transform="rotate(-22 18 60)"/><rect x="18" y="47" width="94" height="13" rx="4" fill="#FFC27E" fill-opacity=".96" transform="rotate(-13 18 60)"/><rect x="18" y="47" width="94" height="13" rx="4" fill="#93E4AE" fill-opacity="1" transform="rotate(-4 18 60)"/></g></g>
 </svg>

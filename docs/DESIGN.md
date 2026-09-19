@@ -135,8 +135,9 @@ opacity top stop, never add an outline.
   **plate** = the app's own *object* in frosted glass, inside the back — never a generic square or disc unless the
   object is round (dial, globe, face, lifebuoy, ring chart); **glyph** = one white detail on the plate.
   **Exception — Files (`org.gnome.Nautilus`):** owner-requested (2026-09-19) — it uses the *folder* family (no
-  squircle) with a fan of three files (teal → violet → white, faint to solid) standing behind the frosted flap,
-  blurred through it. More than "one glyph" by design; at ≤ 24 px it drops to one white sheet (hints).
+  squircle) with three pastel files (coral → peach → mint = light tones of red/orange/green) fanning out from the
+  flap's front-left corner, rising right (owner's sketch), blurred through the frosted flap. At ≤ 24 px: three
+  1-px pastel bands on whole pixels (hints).
   A plate is **one outline** (overlapping sub-paths make the rim draw seams). The white detail may also stand
   *behind* the plate's front edge (Files' sheet), clipped so only the part above the object shows. Strokes 8 main / 6 secondary.
   Not macOS: no 3D, no realism, no inset-screen-with-bezel, no iOS switch — flat colour, one glass object, one symbol.
