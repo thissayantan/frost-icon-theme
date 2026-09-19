@@ -168,6 +168,11 @@ export function derive(src: Source, size: number): string {
   const override = src.overrides.get(size);
   if (override) return readFileSync(override, "utf8");
   const doc = parser.parseFromString(readFileSync(src.file, "utf8"), "image/svg+xml") as unknown as Document;
+  // Pixel-grid hints: <path id="back-shape-24"> replaces #back-shape's geometry at 24 px (and 24@2x).
+  for (const id of ["back-shape", "plate-shape"]) {
+    const hint = byId(doc, `${id}-${size}`), base = byId(doc, id);
+    if (hint && base) base.setAttribute("d", hint.getAttribute("d")!);
+  }
   if (size >= 64) {
     // full glass
   } else if (size >= 32) {

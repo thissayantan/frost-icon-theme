@@ -76,6 +76,11 @@ grows to the live area (112 × 112, rx 28) and the glyph moves to its centre at 
 at 24 px is mud; a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
 table above.
 
+**Pixel-grid hints.** A source may carry `<path id="back-shape-<size>">` / `<path id="plate-shape-<size>">`
+in `<defs>`; at that size `derive()` swaps the hint's geometry into `#back-shape` / `#plate-shape`, so edges
+land on whole pixels (the 128 master's x = 12 is 1.5 px at 16 and 2.25 px at 24 — visibly soft). The folder
+template carries hints for 16/22/24/32/48; every folder copied from it inherits them.
+
 If an auto-derived size looks wrong, add a hand-drawn `src/<ctx>/<name>.<size>.svg`; the build prefers it.
 
 ## 5. Backgrounds
