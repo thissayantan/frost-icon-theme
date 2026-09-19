@@ -147,13 +147,15 @@ function isGeneric(doc: Document): boolean {
   return !(p[0] >= b[0] && p[1] >= b[1] && p[0] + p[2] <= b[0] + b[2] && p[1] + p[3] <= b[1] + b[3]);
 }
 
-function recentreOnBack(doc: Document) {
+/** A hinted glyph is already drawn for the re-laid-out back, so only the back moves. */
+function recentreOnBack(doc: Document, moveGlyph = true) {
   if (!isGeneric(doc)) return;
   const back = byId(doc, "back-shape"), plate = rectBox(byId(doc, "plate-shape"))!;
   const glyph = byId(doc, "glyph");
   if (!glyph) return;
   back!.setAttribute("x", "8"); back!.setAttribute("y", "8");
   back!.setAttribute("width", "112"); back!.setAttribute("height", "112"); back!.setAttribute("rx", "28");
+  if (!moveGlyph) return;
   const [cx, cy] = [plate[0] + plate[2] / 2, plate[1] + plate[3] / 2];
   const k = 1.3;
   const prev = glyph.getAttribute("transform") ?? "";
@@ -173,6 +175,14 @@ export function derive(src: Source, size: number): string {
     const hint = byId(doc, `${id}-${size}`), base = byId(doc, id);
     if (hint && base) base.setAttribute("d", hint.getAttribute("d")!);
   }
+  // Glyph hints: <g id="glyph-24"> in <defs> replaces the contents of #glyph at 24 px.
+  const glyphHint = byId(doc, `glyph-${size}`), glyph = byId(doc, "glyph");
+  const hinted = !!(glyphHint && glyph);
+  if (glyphHint && glyph) {
+    while (glyph.firstChild) glyph.removeChild(glyph.firstChild);
+    for (const attr of Array.from(glyphHint.attributes)) if (attr.name !== "id") glyph.setAttribute(attr.name, attr.value);
+    while (glyphHint.firstChild) glyph.appendChild(glyphHint.firstChild);
+  }
   if (size >= 64) {
     // full glass
   } else if (size >= 32) {
@@ -184,18 +194,18 @@ export function derive(src: Source, size: number): string {
     byId(doc, "glow")?.setAttribute("opacity", ".15");
   } else if (size >= 22 && isGeneric(doc)) {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
-    recentreOnBack(doc);
-    thickenGlyph(doc, size);
+    recentreOnBack(doc, !hinted);
+    if (!hinted) thickenGlyph(doc, size);
   } else if (size >= 22) {
     remove(doc, "shadow", "glow", "frost", "rim");
     const plate = byId(doc, "plate");
     plate?.setAttribute("fill", "#FFFFFF");
     plate?.setAttribute("fill-opacity", ".40");
-    thickenGlyph(doc, size);
+    if (!hinted) thickenGlyph(doc, size);
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
-    recentreOnBack(doc);
-    thickenGlyph(doc, size);
+    recentreOnBack(doc, !hinted);
+    if (!hinted) thickenGlyph(doc, size);
   }
   return serializer.serializeToString(doc as any);
 }
