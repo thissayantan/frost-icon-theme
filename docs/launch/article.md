@@ -6,16 +6,13 @@ tags: linux, opensource, design, productivity
 cover_image: https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/docs/dev-hero.png
 ---
 
-*(dev.to reads the front matter above. On Medium, import this page by URL — the images and headings come
-across and the canonical link points back here.)*
-
 ![Frost: project folders showing their stack, and file icons that say what they are](https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/docs/dev-hero.png)
 
 Look at your Linux desktop for a second. The Home folder icon. The file manager in your dock. The row of
 folders in your Documents.
 
-They're fine. They're also dull: flat, muddy, a bit sad, clearly not something anyone enjoyed making. And
-once you notice it, you can't stop noticing it, because these are the icons you look at more than any others,
+They're fine. They're also dull. Flat, muddy, a bit sad, clearly not something anyone enjoyed making. And
+once you notice it you can't stop noticing it, because these are the icons you look at more than any others,
 all day.
 
 I went looking for a replacement on gnome-look.org and came away frustrated. Lots of packs cover a handful of
@@ -42,8 +39,8 @@ Left is the stock set. Right is Frost. Same folder, same files.
 
 ## Your project folders show what's in them
 
-This is the part I use most. Frost can tag your project folders with the stack they actually contain — the
-framework, the runtime, the platform — so you can see what a project is without opening it.
+This is the part I use most. Frost can tag your project folders with the stack they actually
+contain, the framework, the runtime, the platform, so you can see what a project is without opening it.
 
 ![Project folders showing Next + Bun + TypeScript, Docker + Go, Docker + Python and Flutter](https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/docs/project-folders.png)
 
@@ -64,7 +61,7 @@ theme itself ships no trademarked logos.
 Out of the box, every JSON file in your project looks like a terminal. Your lock file, your Markdown notes
 and your TLS certificate all look like the same grey page.
 
-Frost draws 134 file types. Colour tells you the kind — yellow for data and keys, teal for code, blue for
+Frost draws 134 file types. Colour tells you the kind: yellow for data and keys, teal for code, blue for
 documents, orange for archives. The symbol tells you the family: `{ }` for JSON, `M↓` for Markdown, a padlock
 for lock files, a rosette for certificates, stacked crates for a Dockerfile. And from 48 px up, a small label
 spells out the exact type.
@@ -81,8 +78,8 @@ from file types, and Linux's file types are, in places, wrong:
 - `.key` is **Keynote**, even when the file begins `-----BEGIN PRIVATE KEY-----`
 - `bun.lock`, `.env`, `Dockerfile` and `.gitignore` are just **plain text**
 
-Nobody's to blame: `.ts` meant Qt translations long before TypeScript existed. But no icon theme can fix it
-alone — if your system says `go.mod` is music, a prettier theme just gives you a prettier music note. So
+Nobody's to blame here. `.ts` meant Qt translations long before TypeScript existed. But no icon theme can fix
+it alone. If your system says `go.mod` is music, a prettier theme just gives you a prettier music note. So
 Frost ships an optional one-file fix for your user account only (add `--mime` to the install command), and
 then the icons follow.
 
@@ -91,7 +88,7 @@ then the icons follow.
 Most themes look great at 256 pixels and turn to mush in a file list. That's because shrinking a big icon is
 not the same as drawing a small one.
 
-![The same icons: scaled down from 128 px, versus drawn at 16 px](https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/docs/drawn-vs-scaled.png)
+![The same icons: scaled down from 128 px, next to drawn at 16 px](https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/docs/drawn-vs-scaled.png)
 
 Left is a 128 px icon scaled down to 16. Right is Frost's hand-drawn 16 px version. Every Frost icon has its
 own 16, 22 and 24 px drawing, with every edge on a whole pixel. That's where most of the work went, and it's
@@ -112,7 +109,7 @@ sh install.sh --uninstall
 
 Then pick **Frost** in GNOME Tweaks → Appearance → Icons. It never switches your theme for you.
 
-Frost keeps brand icons alone — Firefox, Chrome and VS Code keep their own — and anything it hasn't drawn
+Frost leaves brand icons alone. Firefox, Chrome and VS Code keep their own, and anything Frost hasn't drawn
 falls back to [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), so nothing ends up
 blank.
 
@@ -120,5 +117,5 @@ blank.
 - **Store page:** [gnome-look.org/p/2372226](https://www.gnome-look.org/p/2372226/)
 
 It's MIT, artwork included. Use it, fork it, repaint it, ship it in your distro. If it makes your desktop
-nicer to look at, a star on the repo is the only thanks I'm after — and if an icon you use is missing, open
-an issue and I'll draw it.
+nicer to look at, a star on the repo is the only thanks I'm after. If an icon you use is missing, open an
+issue and I'll draw it.

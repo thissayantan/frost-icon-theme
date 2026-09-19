@@ -1,7 +1,7 @@
-# X thread — image on 1, 2, 3, 5; repo link in the last post
+# X thread. Image on 1, 2, 3, 5; repo link in the last post
 
 **1/6** — image: docs/dev-hero.png
-Linux desktop icons are dull. The Home folder, the file manager, every folder in Documents — flat and sad.
+Linux desktop icons are dull. The Home folder, the file manager, every folder in Documents. Flat and sad.
 
 So I drew a whole icon theme. Frosted glass, free, MIT.
 
@@ -38,5 +38,5 @@ One line to install, one line to remove, never switches your theme for you:
 
 curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh
 
-MIT, artwork included → github.com/thissayantan/frost-icon-theme
+MIT, artwork included: github.com/thissayantan/frost-icon-theme
 #Linux #OpenSource

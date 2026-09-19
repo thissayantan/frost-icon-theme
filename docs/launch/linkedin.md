@@ -7,8 +7,8 @@ Linux deserves nicer icons, so I made some
 [IMAGE: docs/dev-hero.png]
 
 Look at a Linux desktop for a second. The Home folder. The file manager in the dock. A row of folders in
-Documents. They're fine — and they're dull. Flat, muddy, clearly nobody's favourite piece of work. These are
-the icons you look at more than any others, all day.
+Documents. They're fine, and they're dull. Flat, muddy, clearly nobody's favourite piece of work. These are the
+icons you look at more than any others, all day.
 
 I went looking for a replacement and came away frustrated: packs that cover a handful of icons and leave the
 rest mismatched, packs that look great in a showcase screenshot and fall apart in an actual file list.
@@ -23,7 +23,7 @@ soft pane of frosted glass, with one crisp white symbol on top.
 Two things make it more than a paint job, both aimed at people who work in folders all day:
 
 **Your project folders show their stack.** Frost reads each project and marks the folder with what's actually
-inside — Next + Bun + TypeScript, Docker + Go, Flutter — so you can see what a project is without opening it.
+inside (Next + Bun + TypeScript, Docker + Go, Flutter), so you can see what a project is without opening it.
 
 [IMAGE: docs/project-folders.png]
 
