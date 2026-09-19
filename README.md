@@ -57,6 +57,14 @@ so the shell can recolour them.
 ![The whole set on light, dark and wallpaper backgrounds](docs/preview.png)
 </details>
 
+## The story behind it
+Why the default icons bothered me, how the project-stack folder marks work, and what Linux actually thinks
+your files are (`.ts` is a Qt translation file, `go.mod` is tracker music):
+[dev.to](https://dev.to/thissayantan/linux-desktop-icons-are-dull-so-i-drew-a-better-set-and-made-it-free-5af0)
+· [Medium](https://medium.com/p/264f1286361b)
+· [LinkedIn](https://www.linkedin.com/pulse/linux-desktop-icons-dull-so-i-drew-better-set-made-free-sayantan-das-jlkef/)
+· [Show HN](https://news.ycombinator.com/item?id=49770157)
+
 ## FAQ
 **Why isn't Firefox / Chrome / VS Code themed?** Frost never redraws trademarked logos. Brand apps keep their
 own icon (via Papirus), which is also what their makers ask for.
