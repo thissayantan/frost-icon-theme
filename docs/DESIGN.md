@@ -164,8 +164,11 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Battery 10 / 0 % | frame + "!" instead of fill | `error` |
 | Charging | level fill untouched + a pixel bolt badge on the bottom-right corner (1-px moat) | bolt `success` |
 | Plugged in, not charging | level fill + a pixel plug badge on the corner | none |
-| Charged (100, on AC) | full fill + a pixel check badge on the corner | `success` |
+| Charged (100, on AC) | full fill (`success`) + a 2-px pixel check badge on the corner | fill + check `success` |
 | Over-amplified volume | full waves + "!" disc | `warning` |
+
+Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!". `network-wired-offline` and
+`-disconnected` are identical on purpose (both mean "no cable/link").
 
 Every coloured state also changes *shape* ("!", ×, bolt, slash) — never colour alone (WCAG 1.4.1). Privacy
 indicators (camera, mic in use, screen share) stay one colour: the Shell already paints them.

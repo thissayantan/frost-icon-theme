@@ -176,6 +176,7 @@ function knockout(doc: Document) {
   const glyph = byId(doc, "glyph");
   if (!glyph) return;
   for (const n of [glyph, ...Array.from(glyph.getElementsByTagName("*"))]) {
+    if (n.getAttribute("data-keep-white")) continue; // hand-drawn small glyph meant to stay white on the tint
     for (const a of ["fill", "stroke"]) if (n.getAttribute(a)?.toUpperCase() === "#FFFFFF") n.setAttribute(a, deep);
   }
 }

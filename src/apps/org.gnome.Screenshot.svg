@@ -16,6 +16,13 @@
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
     <path id="plate-shape" d="M42 38h44a8 8 0 0 1 8 8v36a8 8 0 0 1 -8 8h-44a8 8 0 0 1 -8 -8v-36a8 8 0 0 1 8 -8z"/>
+    <!-- size hints -->
+    <path id="plate-shape-16" d="M0 0z"/>
+    <path id="plate-shape-22" d="M0 0z"/>
+    <path id="plate-shape-24" d="M0 0z"/>
+    <g id="glyph-16" transform="scale(8.0000)"><path data-keep-white="1" d="M2 2h4v2H4v2H2zM10 2h4v4h-2V4h-2zM14 10v4h-4v-2h2v-2zM2 14v-4h2v2h2v2zM7 7h2v2H7z" fill="#FFFFFF"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><path data-keep-white="1" d="M3 3h5v2H5v3H3zM14 3h5v5h-2V5h-3zM19 14v5h-5v-2h3v-3zM3 19v-5h2v3h3v2zM10 10h2v2h-2z" fill="#FFFFFF"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><path data-keep-white="1" d="M3 3h6v2H5v4H3zM15 3h6v6h-2V5h-4zM21 15v6h-6v-2h4v-4zM3 21v-6h2v4h4v2zM11 11h2v2h-2z" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>

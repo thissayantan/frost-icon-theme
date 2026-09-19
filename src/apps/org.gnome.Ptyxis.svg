@@ -15,7 +15,9 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M34 26 h60 a14 14 0 0 1 14 14 v4 h-88 v-4 a14 14 0 0 1 14 -14 zM20 50 h88 v38 a14 14 0 0 1 -14 14 h-60 a14 14 0 0 1 -14 -14 z"/>
+    <path id="plate-shape" d="M38 30 h52 a12 12 0 0 1 12 12 v2 h-76 v-2 a12 12 0 0 1 12 -12 zM26 50 h76 v34 a12 12 0 0 1 -12 12 h-52 a12 12 0 0 1 -12 -12 z"/>
+    <!-- size hints -->
+    <g id="glyph-16" transform="scale(8.0000)"><path d="M4.5 7.5 L7 9.5 L4.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="8.5" y="10" width="3.5" height="2" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +32,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M36 64 L50 76 L36 88" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="58" y="72" width="22" height="16" rx="3" fill="#FFFFFF"/></g>
+  <g id="glyph"><path d="M40 60 L52 70 L40 80" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="58" y="68" width="20" height="14" rx="3" fill="#FFFFFF"/></g>
 </svg>

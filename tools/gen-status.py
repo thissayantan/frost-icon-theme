@@ -197,11 +197,10 @@ ICONS["network-wireless-hotspot-symbolic"] = svg(g(
     sector(8, 8, 7, 8.5, 235, 305) + sector(8, 8, 7, 8.5, 55, 125)))
 
 # ── Wired: an ethernet port on whole pixels ───────────────────────────────────
-# Wired: an ethernet socket — 2-px frame + latch, whole pixels. Badged states keep it in place (only cut).
-PORT_D = rect(2, 3, 12, 10, 2) + rect(4, 5, 8, 6) + rect(6, 9, 4, 2)
-PORT = f'<path fill-rule="nonzero" {FG} d="{rect(2, 3, 12, 10, 2)}"/>'
-PORT = f'<path fill-rule="evenodd" {FG} d="{rect(2, 3, 12, 10, 2)}{rect(4, 5, 8, 6)}"/><path {FG} d="{rect(6, 9, 4, 2)}"/>'
-PORT_LOW = f'<path fill-rule="evenodd" {FG} d="{rect(2, 1, 12, 10, 2)}{rect(4, 3, 8, 6)}"/><path {FG} d="{rect(6, 7, 4, 2)}"/>'
+# Wired: an RJ45 socket profile — 2-px wall, the clip notch stepped into the outline (never touched by a badge).
+RJ45 = "M2 2H14V11H11V13H5V11H2Z" + "M4 4V9H7V11H9V9H12V4Z"
+PORT = f'<path fill-rule="evenodd" {FG} d="{RJ45}"/>'
+PORT_LOW = PORT  # fits rows 2–12 already
 ICONS["network-wired-symbolic"] = svg(PORT)
 ICONS["network-wired-acquiring-symbolic"] = acquiring(PORT_LOW)
 ICONS["network-wired-no-route-symbolic"] = with_badge(PORT, badge_bang("warning"))
@@ -215,13 +214,10 @@ def keyhole(cx, cy, r, w, bottom):
             f"L{f(cx + w / 2)} {f(bottom)}L{f(cx - w / 2)} {f(bottom)}z")
 
 
-SHIELD_OUT = "M8 1L14 3v5c0 3.4-2.5 6-6 7C4.5 14 2 11.4 2 8V3z"
-SHIELD_IN = "M8 3.1L12 4.4v3.6c0 2.4-1.6 4.2-4 5C5.6 12.2 4 10.4 4 8V4.4z"
-KEYHOLE = cells([".##.", ".##.", "..", ], 0, 0)  # placeholder, replaced below
-KEYHOLE = rect(7, 5, 2, 2) + rect(7, 7, 2, 3)
-SHIELD = f'<path fill-rule="evenodd" {FG} d="{SHIELD_OUT}{SHIELD_IN}"/><path {FG} d="{rect(6, 5, 4, 3, 1.5)}{rect(7, 7, 2, 3)}"/>'
-SHIELD_LOW = (f'<path fill-rule="evenodd" {FG} d="M8 0.5L13 2.2v3.8c0 2.6-2 4.4-5 5.3C5 10.4 3 8.6 3 6V2.2z'
-              f'M8 2.5L11 3.6v2.4c0 1.7-1.2 3-3 3.6C6.2 9 5 7.7 5 6V3.6z"/>')
+SHIELD_D = ("M8 1L13 2.7v4c0 2.7-2 4.6-5 5.3C5 11.3 3 9.4 3 6.7V2.7z"
+            "M8 3.1L11 4.1v2.6c0 1.7-1.2 2.9-3 3.4C6.2 9.6 5 8.4 5 6.7V4.1z")
+SHIELD = f'<path fill-rule="evenodd" {FG} d="{SHIELD_D}"/><path {FG} d="{rect(6, 4, 4, 3, 1.5)}{rect(7, 6, 2, 3)}"/>'
+SHIELD_LOW = SHIELD  # one shield, every state
 ICONS["network-vpn-symbolic"] = svg(SHIELD)
 ICONS["network-vpn-acquiring-symbolic"] = acquiring(SHIELD_LOW)
 ICONS["network-vpn-disabled-symbolic"] = svg(
@@ -275,26 +271,24 @@ ICONS["audio-input-microphone-symbolic"] = mic(3)
 
 # ── Battery: 1-px frame on whole pixels; the level is NEVER covered. Charging/plug marks
 #    replace the terminal cap to the right of the body instead of cutting the fill. ─────────────
-B_FRAME = rect(1, 3, 11, 10, 2) + rect(2, 4, 9, 8, 1)  # body x 1–12, inner x 2–11
-B_CAP = rect(12, 6, 2, 4, 1)
-FILL_X, FILL_Y, FILL_W, FILL_H = 3, 5, 7, 6  # 7-px fill track
+B_FRAME = rect(0, 3, 13, 10, 2) + rect(1, 4, 11, 8, 1)  # body x 0–13, inner x 1–12
+B_CAP = rect(13, 6, 2, 4, 1)
+FILL_X, FILL_Y, FILL_W, FILL_H = 2, 5, 9, 6  # 9-px fill track: 20 % → 1 col … 100 % → 9 cols
 # Power marks are pixel BADGES on the body's bottom-right corner (like the "!"/× badges, and like Adwaita):
 # the frame and fill are cut by a 1-px moat around the mark, the fill itself is untouched — so the level reads
 # at every percentage and the mark keeps its shape.
-BOLT_M = ["...##", "..##.", ".##..", "#####", "..##.", ".##..", "##..."]   # x 11–16, y 9–16
-PLUG_M = ["#..#", "#..#", "####", "####", ".##.", ".##."]                # x 12–16, y 10–16
-CHECK_M = ["....##", "...##.", "#.##..", "###...", ".#...."]              # x 10–16, y 11–16
-BADGE_AT = {"charging": (BOLT_M, 11, 9), "plugged-in": (PLUG_M, 12, 10), "charged": (CHECK_M, 10, 11)}
-BANG = rect(6, 5, 2, 3) + rect(6, 9, 2, 2)
+BOLT_M = ["...##", "..##.", ".##..", "#####", "..##.", ".##.."]   # x 11–16, y 10–16 (bar on row 13, below the frame)
+PLUG_M = ["#.#", "#.#", "###", "###", ".#.", ".#."]                # x 13–16, y 10–16 (clear of the frame edge)
+CHECK_M = [".....##", "....##.", "##.##..", ".###...", "..#...."]  # 2-px strokes, x 9–16, y 11–16
+BADGE_AT = {"charging": (BOLT_M, 11, 10), "plugged-in": (PLUG_M, 13, 10), "charged": (CHECK_M, 9, 11)}
+BANG = rect(5, 5, 2, 3) + rect(5, 9, 2, 2)  # centred in the 11-px interior
 
 
 def battery(level, state=""):
     """level 0..100 (step 10); state '' | 'charging' | 'plugged-in' | 'charged'."""
     critical = level <= 10 and not state
     klass = lambda c: f' class="{c}"' if c else ""
-    w = FILL_W if state == "charged" else round(FILL_W * level / 100)
-    if level > 0 and w == 0:
-        w = 1
+    w = FILL_W if state == "charged" else max(0, min(FILL_W, level // 10 - 1)) if level >= 20 else (1 if level > 0 else 0)
     body = [f'<path fill-rule="evenodd" {FG} d="{B_FRAME}{B_CAP}"/>']
     if critical:
         body.append(f'<path class="error" {FG} d="{BANG}"/>')

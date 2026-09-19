@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
   <!-- Frost org.gnome.Software — app family. Software — a glass shopping bag with an arrow going in. -->
   <defs>
-    <!-- palette token: orange (light → deep) -->
+    <!-- palette token: blue (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFC27E"/>
-      <stop offset="1" stop-color="#FF7430"/>
+      <stop offset="0" stop-color="#8CB8FF"/>
+      <stop offset="1" stop-color="#3F6DF5"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>

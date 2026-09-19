@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
   <!-- Frost firmware-updater — app family. Firmware Updater — a glass chip with a white up-arrow. -->
   <defs>
-    <!-- palette token: teal (light → deep) -->
+    <!-- palette token: green (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#86E3DC"/>
-      <stop offset="1" stop-color="#12A3B0"/>
+      <stop offset="0" stop-color="#93E4AE"/>
+      <stop offset="1" stop-color="#1FAE63"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M64 84 V46 M50 60 L64 46 L78 60" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="20" y="44" width="8" height="5" rx="2.5" fill="#FFFFFF"/><rect x="20" y="62" width="8" height="5" rx="2.5" fill="#FFFFFF"/><rect x="20" y="80" width="8" height="5" rx="2.5" fill="#FFFFFF"/><rect x="100" y="44" width="8" height="5" rx="2.5" fill="#FFFFFF"/><rect x="100" y="62" width="8" height="5" rx="2.5" fill="#FFFFFF"/><rect x="100" y="80" width="8" height="5" rx="2.5" fill="#FFFFFF"/></g>
+  <g id="glyph"><path d="M64 84 V46 M50 60 L64 46 L78 60" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Frost win11-clipboard-history — app family. Clipboard History — a glass clipboard with a white clip and lines. -->
+  <!-- Frost win11-clipboard-history — app family. Clipboard History — stacked glass sheets on a clipboard, a solid white clip. -->
   <defs>
-    <!-- palette token: yellow (light → deep) -->
+    <!-- palette token: pink (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFE17D"/>
-      <stop offset="1" stop-color="#FFAA1F"/>
+      <stop offset="0" stop-color="#FF93BC"/>
+      <stop offset="1" stop-color="#EE3A70"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M40 28h48a12 12 0 0 1 12 12v54a12 12 0 0 1 -12 12h-48a12 12 0 0 1 -12 -12v-54a12 12 0 0 1 12 -12z"/>
+    <path id="plate-shape" d="M36 30h44a10 10 0 0 1 10 10v56a10 10 0 0 1 -10 10h-44a10 10 0 0 1 -10 -10v-56a10 10 0 0 1 10 -10zM50 22h42a10 10 0 0 1 10 10v56a10 10 0 0 1 -10 10h-42a10 10 0 0 1 -10 -10v-56a10 10 0 0 1 10 -10z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><rect x="46" y="18" width="36" height="18" rx="6" fill="#FFFFFF"/><rect x="42" y="52" width="44" height="7" rx="3.5" fill="#FFFFFF"/><rect x="42" y="68" width="44" height="7" rx="3.5" fill="#FFFFFF"/><rect x="42" y="84" width="28" height="7" rx="3.5" fill="#FFFFFF"/></g>
+  <g id="glyph"><rect x="46" y="14" width="42" height="18" rx="7" fill="#FFFFFF"/><rect x="52" y="50" width="38" height="7" rx="3.5" fill="#FFFFFF"/><rect x="52" y="66" width="26" height="7" rx="3.5" fill="#FFFFFF"/></g>
 </svg>
