@@ -18,7 +18,8 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
 2. **Never copy the reference art.** The uibits / Kristaps Elsiņš Figma set (CC BY 4.0) is
    *inspiration only*. Draw original geometry. Credit it in README regardless.
 3. **No trademarked logos redrawn or redistributed** (Chrome, Firefox, VS Code, Spotify…).
-   Brand apps are left to inherit, or to the owner's personal `Folio` overlay.
+   Brand apps are left to inherit. The owner's *personal* brand icons (official Chrome/Chrome Dev, language-folder
+   logos) live only in the git-ignored `local/` overlay applied by `install:local` — never committed (owner, 2026-09-19).
 4. **Symbolic icons (`*-symbolic`) are out of scope** — they inherit from Adwaita so GTK can recolour them.
 5. **Glass is baked, not live.** Shipped files must not depend on SVG filters rendering at runtime
    (see ADR-001). Filters live in `src/`; `dist/` gets PNGs.

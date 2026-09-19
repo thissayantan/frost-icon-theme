@@ -32,9 +32,22 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] README with screenshots, credits, install/uninstall
 - [x] Tag `v0.1.0`
 
-## M4 — Core apps (v0.2)
-- [ ] Generic GNOME apps listed in DESIGN §6, names taken from installed `.desktop` files (`tools/inventory.ts`)
+## M4 — Real-world pass: apps + language folders (v0.2)
+Owner feedback 2026-09-19: judge icons in real scenes; Files and Settings must be excellent; Chrome keeps its
+official logo; language folders (Android, Go, Node, Python…) should show their logos; nothing macOS-like.
+- [ ] `tools/scene.ts` — real scenes through real GTK lookup: a directory as the Files grid (XDG special dirs,
+      folder tags), the dock and the app grid, on the owner's dark setup and light
+- [ ] Local overlay (`install:local`, never committed): official Chrome / Chrome Dev icons linked from
+      `/opt/google/*/product_logo_*`; language folders with the real brand marks (Simple Icons, CC0 paths)
+      on the Hyaline folder — kept in git-ignored `local/`
+- [ ] `tools/tag-folders.ts` — tag `~/Android`, `~/go` and project folders by marker file
+      (`gio set … metadata::custom-icon-name`); `--dry-run`, `--undo`
+- [ ] `tools/inventory.ts` — every installed app's `Icon=` (system, local, snap, flatpak) → decide the redraw list
+- [ ] Core apps, original art in the Hyaline anatomy: Files, Settings, Terminal, Ghostty (original ghost, not its
+      logo), Text Editor, Calculator, System Monitor/Resources, App Center, Tweaks, Disks, Extensions + what the
+      inventory shows the owner actually uses
 - [ ] Devices: drive-harddisk, drive-removable-media, computer, phone, printer, camera
+- [ ] icon-critic SHIP on every new icon, reviewed in scenes
 
 ## M5 — Release (v1.0)
 - [ ] `release` skill checklist complete: tarball, gnome-look listing text, GitHub release, install.sh

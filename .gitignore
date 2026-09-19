@@ -3,3 +3,4 @@ dist/
 *.tar.xz
 .DS_Store
 .claude/settings.local.json
+local/
