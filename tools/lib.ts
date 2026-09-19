@@ -22,7 +22,7 @@ export const LAYERS = ["shadow", "glow", "back", "frost", "lift", "plate", "rim"
 /** `lift` (plate contact shadow) is optional: only icons whose plate leaves the back shape need it. */
 export const REQUIRED_LAYERS = ["shadow", "glow", "back", "frost", "plate", "rim", "glyph"];
 
-export const NAME_RE = /^[a-z0-9][a-z0-9+_.-]*$/;
+export const NAME_RE = /^[A-Za-z0-9][A-Za-z0-9+_.-]*$/; // app ids are reverse-DNS, mixed case
 
 // ── palette ────────────────────────────────────────────────────────────────
 export type Token = { name: string; light: string; deep: string };
@@ -153,6 +153,24 @@ function isGeneric(doc: Document): boolean {
   return !(p[0] >= b[0] && p[1] >= b[1] && p[0] + p[2] <= b[0] + b[2] && p[1] + p[3] <= b[1] + b[3]);
 }
 
+/** App family: squircle back (x 12, width 104) with the object plate drawn inside it. */
+function isApp(doc: Document): boolean {
+  const b = rectBox(byId(doc, "back-shape"));
+  return !!b && b[0] === 12 && b[2] === 104 && byId(doc, "plate-shape")?.tagName === "path";
+}
+
+function knockout(doc: Document) {
+  const deep = byId(doc, "tint")?.getElementsByTagName("stop")[1]?.getAttribute("stop-color") ?? "#000000";
+  const plate = byId(doc, "plate");
+  plate?.setAttribute("fill", "#FFFFFF");
+  plate?.removeAttribute("fill-opacity");
+  const glyph = byId(doc, "glyph");
+  if (!glyph) return;
+  for (const n of [glyph, ...Array.from(glyph.getElementsByTagName("*"))]) {
+    for (const a of ["fill", "stroke"]) if (n.getAttribute(a)?.toUpperCase() === "#FFFFFF") n.setAttribute(a, deep);
+  }
+}
+
 /** A hinted glyph is already drawn for the re-laid-out back, so only the back moves. */
 function recentreOnBack(doc: Document, size: number, moveGlyph = true) {
   if (!isGeneric(doc)) return;
@@ -213,6 +231,10 @@ export function derive(src: Source, size: number): string {
     plate?.setAttribute("fill", "#FFFFFF");
     plate?.setAttribute("fill-opacity", ".40");
     if (!hinted) thickenGlyph(doc, size);
+  } else if (isApp(doc)) {
+    // App family at 16 px: knockout — the object plate goes solid white, the glyph takes the back's deep tint.
+    remove(doc, "shadow", "glow", "frost", "lift", "rim");
+    knockout(doc);
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
     recentreOnBack(doc, size, !hinted);

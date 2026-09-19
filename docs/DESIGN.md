@@ -89,6 +89,9 @@ grows to the live area (112 × 112, rx 28) and the glyph (≤ 32) moves to its c
 at 24–48 px is mud (white-on-white on light, grey on dark); a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
 table above.
 
+**App family at 16 px: knockout.** Dropping the plate leaves an app's white details floating (Ghostty's eyes
+without the ghost), so apps keep the object: plate solid white, glyph recoloured to the back's `deep` tint.
+
 **Pixel-grid hints.** A source may carry `<path id="back-shape-<size>">` / `<path id="plate-shape-<size>">`
 in `<defs>`; at that size `derive()` swaps the hint's geometry into `#back-shape` / `#plate-shape`, so edges
 land on whole pixels (the 128 master's x = 12 is 1.5 px at 16 and 2.25 px at 24 — visibly soft). The folder

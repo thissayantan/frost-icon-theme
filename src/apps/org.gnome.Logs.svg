@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Hyaline org.gnome.Logs — app family. Logs — a glass page with a bulleted list. -->
+  <defs>
+    <!-- palette token: graphite (light → deep) -->
+    <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#CDD2DB"/>
+      <stop offset="1" stop-color="#7A8394"/>
+    </linearGradient>
+    <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".28"/>
+    </linearGradient>
+    <linearGradient id="rim-stroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".70"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
+    </linearGradient>
+    <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
+    <path id="plate-shape" d="M44 22 H76 L92 38 V98 a8 8 0 0 1 -8 8 H44 a8 8 0 0 1 -8 -8 V30 a8 8 0 0 1 8 -8 Z"/>
+    <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+
+  <ellipse id="shadow" cx="64" cy="113" rx="42" ry="4" fill="#000000" opacity=".12" filter="url(#blur-shadow)"/>
+  <use id="glow" xlink:href="#back-shape" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
+  <use id="back" xlink:href="#back-shape"/>
+  <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" filter="url(#blur-frost)"/></g>
+  <use id="plate" xlink:href="#plate-shape" fill="url(#plate-fill)"/>
+  <g id="rim" clip-path="url(#plate-clip)">
+    <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
+  </g>
+  <g id="glyph"><circle cx="50" cy="48" r="4" fill="#FFFFFF"/><circle cx="50" cy="64" r="4" fill="#FFFFFF"/><circle cx="50" cy="80" r="4" fill="#FFFFFF"/><rect x="58" y="45" width="24" height="6" rx="3" fill="#FFFFFF" fill-opacity=".78"/><rect x="58" y="61" width="24" height="6" rx="3" fill="#FFFFFF" fill-opacity=".78"/><rect x="58" y="77" width="16" height="6" rx="3" fill="#FFFFFF" fill-opacity=".78"/></g>
+</svg>

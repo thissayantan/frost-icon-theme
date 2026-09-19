@@ -77,3 +77,43 @@
 - application/pdf's generic fallback is `x-office-document`, not `application-x-generic`.
 - Not verified for Qt/KDE or GTK 3, whose loops may run name-by-name through the whole chain. Symlink
   aliases for the most common specific types (`src/aliases.json`) are cheap insurance either way.
+
+## Real-world pass (M4, 2026-09-19)
+- **Screenshots are blocked on GNOME Wayland** for non-allowlisted callers: `org.gnome.Shell.Screenshot`
+  → `AccessDenied`, `gnome-screenshot` fails. Real scenes are rendered by `tools/scene.py` (real GTK lookup of
+  each file/app, drawn with GdkPixbuf + cairo); the owner provides live screenshots at checkpoints.
+- `python3-gi-cairo` is not installed (no sudo), so GI objects can't be passed to pycairo — scene.py keeps them apart.
+- Rendering GTK paintables via `Gsk.CairoRenderer` from Python crashes on dispose (`!priv->is_realized`) when
+  the GC collects it mid-run; avoid, use the looked-up file path instead.
+- GNOME Files has no name-based folder icons. Per-folder: `gio set DIR metadata::custom-icon-name NAME`
+  (theme icon, follows the theme) — `tools/tag-folders.ts`. Refresh Files (F5) to see it.
+- Snap apps App Center, Firmware Updater, Security Center set `Icon=` to absolute PNG paths — no theme can
+  restyle them.
+- Terminal on Ubuntu 26.04 is Ptyxis (`org.gnome.Ptyxis`).
+- Chrome ships its own official PNGs (`/opt/google/chrome*/product_logo_{16..256}[_dev|_beta].png`); Papirus
+  restyles `google-chrome-unstable` as a red circle. The personal overlay links the official files.
+
+## Status icons (symbolic) — research for M4b
+Verified against the installed GNOME Shell 50.1 JS (extracted from `libshell-18.so`), St C source and local renders.
+- **All top-bar status icons come from the icon theme** (overridable). Shell-bundled icons in
+  `gnome-shell-icons.gresource` (accessibility-*, screencast-*, keyboard-brightness-*, dark-mode, osk-*…) sit in
+  the hicolor fallback, so a theme can override them too (not verified live).
+- Names 50.1 requests: Wi-Fi `network-wireless-{disabled,acquiring,hotspot,no-route,offline}` and
+  `network-wireless-signal-{none,weak,ok,good,excellent}` (<20/<40/<50/<80/≥80 %); wired `network-wired`,
+  `-acquiring`, `-no-route`, `-disconnected`; cellular `network-cellular-signal-*`, `-acquiring`, `-connected`,
+  `-disabled`; VPN `network-vpn`, `-acquiring`, `-disabled`; Bluetooth `bluetooth-{active,disabled,acquiring}`;
+  volume `audio-volume-{muted,low,medium,high,overamplified}`; mic `microphone-sensitivity-{muted,low,medium,high}`;
+  **battery `battery-level-{0,10…100}` + `-charging`, `-plugged-in`, and `battery-level-100-charged`** (no fallback
+  names; legacy `battery-{full,good,low,caution,empty}` still used by apps/UPower); `night-light`,
+  `airplane-mode`, `power-profile-{performance,balanced,power-saver}`, `notifications-disabled`, `camera-web`,
+  `location-services-active`, `media-record`, `screen-shared`, `display-brightness` — all `-symbolic`.
+  Keyboard layout is a text label, not an icon.
+- **St (top bar) recolouring**: wraps the SVG with `rect,path,ellipse,circle,polygon {fill: fg}` plus
+  `.warning/.error/.success`. Colours are St defaults (success #4e9a06, warning #f5793e, error #cc0000) unless a
+  shell theme sets `warning-color` etc. Strokes are *not* recoloured (keep hard-coded colour; GTK 4.22 drops them),
+  `line/polyline` likewise; `warning-fill`/`transparent-fill` are ignored by St; opacity is kept.
+  ⇒ Status icons: plain SVG, 16×16, filled outlines only, classes `success|warning|error` only, dim via opacity.
+- Privacy indicators are coloured by the Shell itself (orange/red pill) — keep them one colour.
+- Error red is 2.82:1 on #1E1E22 — use error as a fill + shape ("!"), never thin strokes; never colour alone.
+- Sources: gnome-shell js/ui/status/{system,network,volume}.js, src/st/st-icon-theme.c, st-theme-node.c;
+  docs.gtk.org/gtk4/icon-format.html; GNOME HIG UI icons; KDE HIG monochrome icons.
