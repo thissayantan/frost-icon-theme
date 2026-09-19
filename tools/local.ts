@@ -68,6 +68,33 @@ function folderWithMark(d: string, slug: string): string {
   return folder.replace('<g id="glyph"/>', glyph);
 }
 
+/** Snap apps whose launchers hard-code a PNG path — no theme can reach them. At the owner's request
+ *  (2026-09-19) install:local writes per-user launcher copies pointing at Frost icon names. Marked, reversible. */
+const SNAP_APPS = "/var/lib/snapd/desktop/applications";
+const LAUNCHERS: Record<string, string> = {
+  "snap-store_snap-store.desktop": "snap-store",
+  "firmware-updater_firmware-updater.desktop": "firmware-updater",
+  "firmware-updater_firmware-updater-app.desktop": "firmware-updater",
+  "desktop-security-center_desktop-security-center.desktop": "desktop-security-center",
+};
+const MARK = "X-Frost-Override=true";
+
+export function applyLauncherOverrides(undo = false): string[] {
+  const dir = join(process.env.HOME ?? "", ".local/share/applications");
+  const done: string[] = [];
+  for (const [file, icon] of Object.entries(LAUNCHERS)) {
+    const src = join(SNAP_APPS, file), dst = join(dir, file);
+    const ours = existsSync(dst) && readFileSync(dst, "utf8").includes(MARK);
+    if (undo) { if (ours) { rmSync(dst); done.push(file); } continue; }
+    if (!existsSync(src) || (existsSync(dst) && !ours)) continue; // never overwrite the owner's own launcher
+    const text = readFileSync(src, "utf8").replace(/^Icon=.*$/m, `Icon=${icon}`).replace(/^\[Desktop Entry\]$/m, `[Desktop Entry]\n${MARK}`);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(dst, text);
+    done.push(file);
+  }
+  return done;
+}
+
 export async function applyLocalOverlay(target: string): Promise<string[]> {
   const done: string[] = [];
   const contexts = new Set(Object.keys(CONTEXTS).filter((c) => existsSync(join(target, dirName(16, 1, c)))));

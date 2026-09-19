@@ -26,7 +26,9 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
    (see ADR-001). Filters live in `src/`; `dist/` gets PNGs.
 6. **Verify visually.** Never call an icon done without looking at the rendered preview sheet on
    both a light and a dark background, at 16, 24, 48 and 128 px.
-7. **Don't touch the owner's system state** beyond `~/.local/share/icons/Frost*` (install target).
+7. **Don't touch the owner's system state** beyond `~/.local/share/icons/Frost*` (install target), the folder
+   tags written by `tag-folders`, and the marked snap launcher copies in `~/.local/share/applications`
+   (`X-Frost-Override`, undo with `bun run install:local --undo-launchers`) — both requested by the owner.
    Never change their active icon theme without being asked. Since 2026-09-19 the owner uses `Frost` itself
    (previous: `Folio`).
 

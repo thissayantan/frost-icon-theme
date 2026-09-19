@@ -4,7 +4,12 @@ import { cpSync, existsSync, rmSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { THEME, THEME_DIR } from "./lib";
-import { applyLocalOverlay } from "./local";
+import { applyLauncherOverrides, applyLocalOverlay } from "./local";
+
+if (process.argv.includes("--undo-launchers")) {
+  console.log(`install: removed launcher overrides → ${applyLauncherOverrides(true).join(", ") || "none"}`);
+  process.exit(0);
+}
 
 const target = join(homedir(), ".local/share/icons", THEME);
 if (!existsSync(join(THEME_DIR, "index.theme"))) {
@@ -18,6 +23,8 @@ cpSync(THEME_DIR, target, { recursive: true, verbatimSymlinks: true });
 if (!process.argv.includes("--no-local")) {
   const extra = await applyLocalOverlay(target);
   if (extra.length) console.log(`install: personal overlay (not in the repo) → ${extra.join(", ")}`);
+  const launchers = applyLauncherOverrides();
+  if (launchers.length) console.log(`install: launcher overrides (undo: bun run install:local --undo-launchers) → ${launchers.join(", ")}`);
 }
 const cache = Bun.spawnSync(["gtk-update-icon-cache", "-f", "-t", "-q", target]);
 if (cache.exitCode !== 0) {

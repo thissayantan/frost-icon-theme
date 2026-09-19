@@ -140,7 +140,9 @@ opacity top stop, never add an outline.
   Colours (≤ 3 each): blue Files/Clocks/Disk Usage · green Settings/Tweaks/Updater (system) · graphite
   Terminal/Disks/Logs · violet Ghostty/Fonts/Extensions · orange Calculator/Software · pink Image Viewer/Characters
   (messaging, emoji) · red Document Viewer/Help/Screenshot · yellow Text Editor/Passwords · teal Resources/Language/
-  Network. On yellow and graphite backs every glyph part is full white. ≤ 24 px uses the knockout (§4).
+  Network. CLI tools share a glass *window* plate (title bar + body): Terminal, btop++, Htop, Sysprof.
+  Snap apps with hard-coded icon paths (App Center, Firmware Updater, Security Center) get Frost icons via
+  marked per-user launcher copies (owner request). On yellow and graphite backs every glyph part is full white. ≤ 24 px uses the knockout (§4).
   Template: `src/_templates/app.svg`.
 
 ## 8. Status icons (symbolic, ADR-005)
