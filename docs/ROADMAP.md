@@ -70,4 +70,5 @@ glass sheet (DESIGN §6, §6b; ADR-006).
 - [ ] Owner's Files screenshot after `nautilus -q`
 
 ## M5 — Release (v1.0)
-- [ ] `release` skill checklist complete: tarball, gnome-look listing text, GitHub release, install.sh
+- [x] GitHub release v0.2.0 (tarball; install.sh one-liner tested against the live release), MIT, launch kit in docs/launch/
+- [ ] gnome-look.org listing · AUR package pushed · launch posts

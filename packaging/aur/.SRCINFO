@@ -9,7 +9,7 @@ pkgbase = frost-icon-theme
 	options = !strip
 	source = Frost-v0.2.0.tar.xz::https://github.com/thissayantan/frost-icon-theme/releases/download/v0.2.0/Frost-v0.2.0.tar.xz
 	source = LICENSE-0.2.0::https://raw.githubusercontent.com/thissayantan/frost-icon-theme/v0.2.0/LICENSE
-	sha256sums = SKIP-FILL-AFTER-RELEASE
-	sha256sums = SKIP-FILL-AFTER-RELEASE
+	sha256sums = 2b6237bb002ee2a785746969dd626f5180a24673172873906dc8cd0780b0e319
+	sha256sums = 77314815e1794e5b9806db8f25bb817b4d0c3736c44426b3c075fbb7f5bf850c
 
 pkgname = frost-icon-theme

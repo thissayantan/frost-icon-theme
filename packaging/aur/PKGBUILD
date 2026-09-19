@@ -10,8 +10,8 @@ optdepends=('papirus-icon-theme: fallback for the icons Frost does not draw')
 options=('!strip')
 source=("Frost-v$pkgver.tar.xz::$url/releases/download/v$pkgver/Frost-v$pkgver.tar.xz"
         "LICENSE-$pkgver::https://raw.githubusercontent.com/thissayantan/frost-icon-theme/v$pkgver/LICENSE")
-sha256sums=('SKIP-FILL-AFTER-RELEASE'
-            'SKIP-FILL-AFTER-RELEASE')
+sha256sums=('2b6237bb002ee2a785746969dd626f5180a24673172873906dc8cd0780b0e319'
+            '77314815e1794e5b9806db8f25bb817b4d0c3736c44426b3c075fbb7f5bf850c')
 
 package() {
   install -d "$pkgdir/usr/share/icons"
