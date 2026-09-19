@@ -128,3 +128,33 @@ Verified against the installed GNOME Shell 50.1 JS (extracted from `libshell-18.
   with `stream-properties` `application.id=org.gnome.VolumeControl` (so the Shell ignores the meter) gave ~20
   peak updates/s at ~4 % CPU for a standalone test process. Hook point: `Main.panel.statusArea.quickSettings
   ._volumeInput._indicator` (St.Icon, visibility bound to "an app is recording").
+
+## File types (M4c, 2026-09-20)
+**What GIO really asks for** (`Gio.content_type_get_icon`, shared-mime-info on Ubuntu 26.04):
+- JSON is `application-json` → **`text-x-script`**; `biome.json` / `turbo.json` are `application-schema+json`
+  → `text-x-script`. That is why every JSON showed a terminal. `.md` → `text-markdown` → `x-office-document`;
+  `.pem` → `application-x-x509-ca-cert` → `text-x-generic`; `.crt` → `application-pkix-cert`.
+- **Wrong types:** `.ts` → Qt Linguist (`text-vnd.trolltech.linguist`), `.tsx` → Tiled tileset, `.key` → Keynote
+  (glob weight 80), `.pub` → MS Publisher, `go.mod` → `audio/x-mod` (a tracker-music module), `.tf` and `go.sum`
+  → todo.txt, `.otf` (name only) → OpenDocument formula template.
+- **No type:** lock files, `.env`, Dockerfile, `.gitignore`, `.editorconfig`, `.ini/.conf/.cfg`, `.jsonc/.jsonl`,
+  `.zsh`, `.proto`, `.hcl`, `.sqlite` — `text/plain` with content, `application/octet-stream` by name.
+  No icon theme can tell these apart; a per-user MIME package can (ADR-006).
+- `.iso`/`.img` are now `application-vnd.efi.iso` / `-img`; `.avi` is `video-vnd.avi`, `.wav` `audio-vnd.wave`.
+- GTK 4 does not strip name parts (`application-json` does not fall back to `application`), so every generic in
+  a chain must exist in the theme.
+**How others show type.** JetBrains New UI (the owner's reference): one small symbol per type, restrained colour
+(`{}` JSON, `M↓` Markdown, padlock lock files, `>_` shell, cylinder DB, gear config). Material Icon Theme: same
+symbols, stronger colours. vscode-icons: page + badge. Papirus: category colours (documents blue, sheets green,
+slides orange, PDF red, certificates green). Adwaita (GNOME 50) ships ~28 mimetype icons only.
+Shared conventions Frost follows: `{}` data, `</>` code/markup, `>_` shell, gear config, padlock lock, key/rosette
+crypto, cylinder database, grid table, `±` diff. The Markdown mark (M↓) is public domain (CC0, dcurtis/markdown-mark).
+**Glass references** (owner, Dribbble): Moranart "3D Frosted Glass Icon Design" and glass icon sets — the glass
+itself is *tinted* in the object's colour and a smaller vivid shape peeks out behind. A clear (white) glass page
+reads grey on dark and vanishes on light — tried as construction B and dropped.
+**Size:** 134 types × 18 renders ≈ 34 MB, mostly 256@2x; types in one category are byte-identical below 48 px
+(labels drop), so those renders are symlinked (≈ 830 files).
+Sources: github.com/PKief/vscode-material-icon-theme, github.com/vscode-icons/vscode-icons,
+marketplace.visualstudio.com/items?itemName=fogio.jetbrains-file-icon-theme,
+github.com/PapirusDevelopmentTeam/papirus-icon-theme, dribbble.com/shots/21062097-3D-Frosted-Glass-Icon-Design,
+freedesktop.org shared-mime-info spec (glob weights, sub-class-of, magic priority).

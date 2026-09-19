@@ -57,5 +57,17 @@ power profile, airplane, DND, privacy indicators…). Exception to rule 4, decid
 - [x] Design the state language in DESIGN.md §8 (levels, off, acquiring, warning, critical; never colour alone)
 - [ ] Draw the status set; test in the real top bar (owner screenshot) on dark and light
 
+## M4c — File types that say what they are (owner request 2026-09-20)
+JSON showed as a terminal, lock files / Markdown / certificates as the same grey page. Symbol + label, tinted
+glass sheet (DESIGN §6, §6b; ADR-006).
+- [x] Research: code-editor packs (JetBrains New UI, Material, vscode-icons), Papirus/Adwaita/Yaru mimetypes,
+      Dribbble glass references, GIO's real icon names on this machine → RESEARCH.md
+- [x] Owner decisions: symbol + label at ≥ 48 px; construction C (tinted glass sheet) over A (flap + band)
+- [x] `tools/gen-mimetypes.py`: 31 categories × 134 types, drawn letterforms, 16/22/24 hints; `derive()` sheet branch
+- [x] Per-user MIME add-on + `mime-probe` in `verify`; `install:local --undo-mime`
+- [x] Scenes: the owner's my-app project and Home (dark + light)
+- [ ] icon-critic SHIP on the file-type set
+- [ ] Owner's Files screenshot after `nautilus -q`
+
 ## M5 — Release (v1.0)
 - [ ] `release` skill checklist complete: tarball, gnome-look listing text, GitHub release, install.sh

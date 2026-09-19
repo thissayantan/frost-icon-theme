@@ -122,14 +122,39 @@ opacity top stop, never add an outline.
   The same house (roof + body + door, same proportions) is the glyph wherever "home" appears (e.g. `go-home` apps icon).
 - **Places** — `user-trash`(+`-full`), `network-workgroup`, `network-server`, `user-bookmarks` (generic glass
   layout; blue trash, yellow bookmarks, teal network).
-- **Mimetypes** — page silhouette back (graphite unless family colour applies), plate over lower half, type glyph.
-  Page: 84 × 112 at (22, 8), r12, top-right corner cut 24; plate = lower 58 px (y 62 → 120), flap radii
-  like the folder; glyph centred on the plate (64, 91). Template: `src/_templates/page.svg`.
-  Colours: graphite text/generic/executable, red PDF/video, pink image, violet audio/font, orange
-  archive/presentation, green script/spreadsheet, teal HTML, blue office document. `font-x-generic`'s
-  open "A" (two legs + crossbar) is a drawn symbol for type, not text. Page-family line weight is 6 units
-  (bars and strokes); on graphite pages every glyph part is full white — 78 % white on the pale graphite
-  plate has too little contrast on light backgrounds.
+- **File types (sheet family, owner-chosen 2026-09-20)** — a **colour-tinted frosted glass page** in front
+  (14,8 → 100,112, r12, dog-ear cut 22) and a **deeper sheet of the same colour** peeking out lower-right
+  (38,22 → 116,120, r14): Frost's back-upper-right / plate-lower-left idea on a page, after the owner's
+  glassmorphism references (Moranart "3D Frosted Glass"). Layers: `back` (deep sheet), `frost` (the sheet
+  blurred through the glass), `plate` (glass: token *light* at .92 → .62), `depth` (deep 0 → .30 toward the
+  lower-right + a white sheen), `rim`, `glyph`, optional `label`. Root carries `data-family="sheet"`.
+  Glyph ≤ 40 × 40 centred at (57, 50) with a label, (57, 62) and 1.3× without. Generated — never hand-edit:
+  `tools/gen-mimetypes.py` (categories × types). Template: `src/_templates/page.svg`.
+  **One symbol per category, colour = category** (the label says the exact type):
+
+  | Token | Categories (symbol) |
+  |---|---|
+  | graphite | text (lines), log (dotted lines), unknown (dots), dependency lock (padlock) |
+  | blue | Markdown (M↓ — the public-domain Markdown mark), document (heading + paragraph), contact (bust) |
+  | green | spreadsheet / CSV (grid), script (`>_`) |
+  | yellow | JSON / data (`{•}`), certificate (rosette), key (key) |
+  | orange | presentation (bars), archive (zipper), package / installer (box + arrow), disc image (disc) |
+  | red | PDF (print layout), video (play), calendar (rings + days), executable / AppImage (bolt) |
+  | pink | image (mountains), mail (envelope), e-book (open book) |
+  | violet | audio (notes), font (open A), config (gear), diff (±) |
+  | teal | source code / markup (`</>`), database (cylinder), container recipe (crates), git (branch) |
+
+  Small sizes (derive, `sheet()`): 48 keeps the glass and swaps in the pixel label; ≤ 32 the glass goes solid
+  (token gradient — translucent pastel is too pale for a white glyph); 22/24 keep the sheet peeking 2–3 px;
+  16 is a single page. Every symbol has hand-drawn 16/22/24 hints. Page-family line weight is 6 units.
+
+### 6b. Type labels
+A short (≤ 4 characters) **type label** — JSON, MD, PEM, LOCK, GO… — in white caps under the glyph, **only
+at ≥ 48 px** and never as the main mark (the one exception to "a drawn symbol, not text"). Letterforms are
+*drawn*, not a font: vector caps (16-unit box, 3.8 stroke, round joins) at ≥ 64; a hand-made **3 × 5 pixel
+font** (1 px strokes, 1 px gaps, M/W 5 wide) at 48. Generic fallbacks (`text-x-generic`, `x-office-*`,
+`package-x-generic` …) carry no label. Lint: every label character must exist in both letter sets.
+
 - **Core apps (app family)** — only generic GNOME/Ubuntu apps; no brand logos (brand apps inherit; the owner's
   official Chrome lives in the local overlay). Anatomy: **back** = colour squircle (12,12 → 116,116, r28);
   **plate** = the app's own *object* in frosted glass, inside the back — never a generic square or disc unless the

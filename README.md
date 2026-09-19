@@ -11,6 +11,10 @@ Every size is checked, not just the big one — small sizes are hand-hinted onto
 
 ![Selected icons at 16, 24, 48 and 128 px](docs/preview-sizes.png)
 
+File types say what they are: one symbol per kind (colour = kind) and, from 48 px, a short type label —
+134 types, with an optional per-user MIME add-on so lock files, `.env`, Dockerfiles and TypeScript get real types
+([all file types](docs/preview-filetypes.png)).
+
 > Status: **v0.1** — folders, places and common file types. See [`docs/ROADMAP.md`](docs/ROADMAP.md)
 > and the honest shipped-vs-inherited list in [`docs/COVERAGE.md`](docs/COVERAGE.md).
 

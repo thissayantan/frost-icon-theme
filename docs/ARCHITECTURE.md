@@ -60,6 +60,27 @@ recoloured and would break light/dark and accent handling.
 classes `success|warning|error` only, dimming via group opacity, gaps via clip geometry. Lint enforces it.
 **Cost.** State colours are the Shell's (St defaults: success #4e9a06, warning #f5793e, error #cc0000), not ours.
 
+### ADR-006 — File types: generated sheet family, drawn labels, per-user MIME add-on
+**Context.** The owner's Files showed every JSON as a terminal (`application-json` → `text-x-script`), lock
+files, Markdown and certificates as the same grey page (2026-09-20). He chose a symbol + type label at ≥ 48 px
+and a tinted-glass-sheet construction (DESIGN §6, §6b).
+**Decision.**
+1. `tools/gen-mimetypes.py` generates `src/mimetypes/` from two tables — ~30 *categories* (token, symbol,
+   pixel hints) × ~130 *types* (GIO icon name → category, label, aliases) — and owns their `aliases.json`
+   entries. Names come from `Gio.content_type_get_icon` on real files, not from memory.
+2. Labels are **drawn paths** (vector caps ≥ 64, 3 × 5 pixel caps at 48), never `<text>`: resvg renders with
+   system fonts off, so output is identical everywhere.
+3. Byte-identical renders in one size directory become relative symlinks at build (types in a category are
+   identical below 48 px, where the label drops). The size budget moves to **40 MB** (most of it is 256@2x art).
+4. A **per-user shared-mime-info package** (`tools/mime/frost.xml` → `~/.local/share/mime/packages/`) gives
+   developer files real types — lock files, `.env`, Dockerfile, git files, TS/TSX, PEM keys, SSH public keys,
+   `go.mod`/`go.sum`, `.proto`, HCL — and extra globs for stock types (`.jsonc`, `.zsh`, `.sqlite`, `.otf`).
+   Weights tie with stock types where content can decide (`.key` vs Keynote, `.pub` vs Publisher) and win only
+   where the stock guess is wrong on a developer machine (`.ts` Qt Linguist, `.tsx` Tiled). Every type is a
+   sub-class of `text/plain`. Installed/removed by `install:local` (`--no-mime`, `--undo-mime`); verified by
+   `tools/mime-probe.py` in a temp `XDG_DATA_HOME`.
+**Cost.** A second system touch point (per-user only, owner-approved), and generated SVGs must not be hand-edited.
+
 ## index.theme shape (generated)
 ```ini
 [Icon Theme]
