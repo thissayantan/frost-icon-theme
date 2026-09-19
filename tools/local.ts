@@ -11,15 +11,28 @@ const LOCAL = join(ROOT, "local");
 
 /** icon name → Simple Icons slug. Order matters only for docs; tag-folders decides which applies. */
 export const LANG_FOLDERS: Record<string, string> = {
-  "folder-android": "android",
+  "folder-typescript": "typescript",
+  "folder-javascript": "javascript",
+  "folder-python": "python",
+  "folder-bash": "gnubash",
   "folder-go": "go",
+  "folder-rust": "rust",
+  "folder-java": "openjdk",
+  "folder-kotlin": "kotlin",
+  "folder-android": "android",
+  "folder-flutter": "flutter",
+  "folder-dart": "dart",
+  "folder-swift": "swift",
+  "folder-csharp": "dotnet",
+  "folder-c": "c",
+  "folder-cpp": "cplusplus",
+  "folder-php": "php",
+  "folder-ruby": "ruby",
+  "folder-lua": "lua",
+  "folder-deno": "deno",
   "folder-bun": "bun",
   "folder-nodejs": "nodedotjs",
-  "folder-typescript": "typescript",
-  "folder-python": "python",
-  "folder-rust": "rust",
-  "folder-flutter": "flutter",
-  "folder-deno": "deno",
+  "folder-docker": "docker",
 };
 
 const CHROME = [
