@@ -24,4 +24,5 @@ if (cache.exitCode !== 0) {
   console.error(`gtk-update-icon-cache failed: ${cache.stderr.toString()}`);
   process.exit(1);
 }
-console.log(`install: ${THEME} → ${target} (not activated; switch in GNOME Tweaks → Appearance → Icons)`);
+const active = Bun.spawnSync(["gsettings", "get", "org.gnome.desktop.interface", "icon-theme"]).stdout.toString().trim();
+console.log(`install: ${THEME} → ${target} (${active === `'${THEME}'` ? "active theme — refreshed" : "not active; pick it in GNOME Tweaks → Appearance → Icons"})`);
