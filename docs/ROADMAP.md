@@ -43,7 +43,7 @@ official logo; language folders (Android, Go, Node, Python…) should show their
 - [ ] `tools/tag-folders.ts` — tag `~/Android`, `~/go` and project folders by marker file
       (`gio set … metadata::custom-icon-name`); `--dry-run`, `--undo`
 - [x] `tools/inventory.ts` — every installed app's `Icon=` (system, local, snap, flatpak) → decide the redraw list
-- [ ] Core apps, original art in the Hyaline anatomy: Files, Settings, Terminal, Ghostty (original ghost, not its
+- [x] Core apps, original art in the Hyaline anatomy: Files, Settings, Terminal, Ghostty (original ghost, not its
       logo), Text Editor, Calculator, System Monitor/Resources, App Center, Tweaks, Disks, Extensions + what the
       inventory shows the owner actually uses
 - [ ] Devices: drive-harddisk, drive-removable-media, computer, phone, printer, camera
