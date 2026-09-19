@@ -1,0 +1,6 @@
+{
+  "$comment": "target icon (shipped) → extra names that should resolve to the same art. Become relative symlinks at build time.",
+  "folder": ["inode-directory", "folder-closed"],
+  "user-trash": ["trash-empty"],
+  "user-trash-full": ["trash-full"]
+}

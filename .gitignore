@@ -1,0 +1,5 @@
+node_modules/
+dist/
+*.tar.xz
+.DS_Store
+.claude/settings.local.json

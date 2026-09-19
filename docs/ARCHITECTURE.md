@@ -1,0 +1,73 @@
+# Architecture
+
+```
+src/<context>/<name>.svg ──┐
+src/<context>/<name>.<size>.svg (optional hand-tuned) ──┤
+src/aliases.json ──────────┤        tools/build.ts
+docs/DESIGN.md tokens ─────┘   ┌─────────────────────────────────────┐
+                               │ 1. lint (layer ids, palette, grid)  │
+                               │ 2. derive size variant (drop layers,│
+                               │    scale blur σ)                    │
+                               │ 3. render with resvg @1x and @2x    │
+                               │ 4. optimise PNG (oxipng/sharp)      │
+                               │ 5. symlink aliases                  │
+                               │ 6. write index.theme                │
+                               │ 7. gtk-update-icon-cache            │
+                               └─────────────────────────────────────┘
+                                            │
+                              dist/Hyaline/{16,22,24,32,48,64,96,128,256}x…/{context}/*.png
+                              dist/Hyaline/…@2x/…
+                              dist/Hyaline/index.theme  (Inherits=Papirus,Adwaita,hicolor)
+                              dist/preview/sheet.png
+```
+
+Toolchain: **Bun + TypeScript** for tools (owner already uses Bun). Rendering with
+`@resvg/resvg-js` (reference-grade renderer, full filter support, no system deps). SVG hygiene with
+`svgo` (source-preserving config: keep ids, keep filters). Python only for `tools/lookup.py`, which
+asks real GTK which file it would load.
+
+## Decisions (ADRs)
+
+### ADR-001 — Ship PNG, author SVG
+**Context.** The glass look needs Gaussian blur (`frost`, `glow`, `shadow`). Renderers differ:
+GTK 4.22 still resolves named theme icons through its older path rather than the new GtkSvg
+engine, GTK3 goes through gdk-pixbuf/librsvg, Qt's QtSvg implements SVG Tiny (no filters at all),
+and GNOME Shell has its own path. A filter-heavy SVG in `dist/` would look different — or broken — per toolkit.
+**Decision.** Sources are SVG with filters; the theme ships pre-rendered PNGs at every size
+(`Type=Fixed`) plus `@2x` (`Scale=2`). Output is identical everywhere.
+**Cost.** Larger install (budget: < 25 MB for v0.1). Re-evaluate when GtkSvg handles theme icons.
+
+### ADR-002 — Overlay theme, not a full theme
+Ship only what Hyaline redraws; everything else inherits `Papirus, Adwaita, hicolor`.
+Keeps scope honest and matches the owner's setup. README states Papirus is recommended.
+
+### ADR-003 — Layer ids drive size variants
+One source per icon; small sizes are derived by removing layers (`DESIGN.md §4`). Hand-tuned
+`<name>.<size>.svg` overrides exist for the cases derivation can't fix.
+
+### ADR-004 — Aliases are data
+Freedesktop names, legacy names and app ids that should share art live in `src/aliases.json`
+(`{"folder": ["inode-directory", "folder-closed"], …}`) and become relative symlinks at build time.
+
+## index.theme shape (generated)
+```ini
+[Icon Theme]
+Name=Hyaline
+Comment=Frosted-glass icons — clean, minimal
+Inherits=Papirus,Adwaita,hicolor
+Example=folder
+Directories=16x16/places,16x16@2x/places,…
+ScaledDirectories=16x16@2x/places,…
+
+[16x16/places]
+Size=16
+Context=Places
+Type=Fixed
+
+[16x16@2x/places]
+Size=16
+Scale=2
+Context=Places
+Type=Fixed
+```
+Contexts used: `places`, `mimetypes`, `apps`, `devices` (lower-case dirs, Title-case `Context=`).

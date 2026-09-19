@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "Bash(bun:*)",
+      "Bash(bunx:*)",
+      "Bash(python3 tools/*)",
+      "Bash(gtk-update-icon-cache:*)",
+      "Bash(git:*)",
+      "Bash(google-chrome-unstable --headless*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(rm -rf /usr/share/icons*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
