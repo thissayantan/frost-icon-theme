@@ -15,8 +15,7 @@ description: Use when preparing a Frost release — versioning, tarball, install
    runs the cache, prints how to activate. `install.sh --uninstall` removes it. No sudo unless `--system`.
 5. Screenshots: `docs/preview.png` + one real Files window on light and dark.
 6. Licences present and correct:
-   - `LICENSE` (CC BY-SA 4.0) covers icon art in `src/` and `dist/`.
-   - `LICENSE-CODE` (MIT) covers `tools/`, `install.sh`.
+   - `LICENSE` (MIT, owner's choice 2026-09-20) covers everything: icon art in `src/` and `dist/`, `tools/`, `install.sh`.
    - README credits: inspired by *Glassmorphism – Glass Icon set* by Kristaps Elsiņš (uibits), CC BY 4.0.
    - No trademarked logos anywhere in `src/`.
 7. Draft (don't post) the gnome-look.org text in `docs/LISTING.md`: category *Full Icon Themes*,

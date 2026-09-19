@@ -46,7 +46,7 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <!-- user-home glyph: owner reference docs/references/user-home-glyph.png — trapezoid roof, box body, door tucked under the roof line -->
+  <!-- user-home glyph (owner-specified) — trapezoid roof, box body, door tucked under the roof line -->
   <g id="glyph">
     <path d="M54 64 H74 a3 3 0 0 1 2.9 2.2 L83.3 80.9 a2.4 2.4 0 0 1 -2.3 3.1 H47 a2.4 2.4 0 0 1 -2.3 -3.1 L51.1 66.2 A3 3 0 0 1 54 64 Z" fill="#FFFFFF"/>
     <path d="M48 84 H80 V100 a4 4 0 0 1 -4 4 H52 a4 4 0 0 1 -4 -4 Z" fill="#FFFFFF" fill-opacity=".78"/>

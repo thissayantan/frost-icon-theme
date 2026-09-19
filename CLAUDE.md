@@ -58,4 +58,6 @@ docs/                           design, architecture, roadmap, research, coverag
 - Icon file names are exact freedesktop / app `Icon=` names. Aliases are symlinks created at build time
   from `src/aliases.json`, never duplicate files.
 - Colours come only from the palette tokens in `docs/DESIGN.md`. No ad-hoc hex values.
-- Commit small and often: one icon family or one pipeline step per commit, imperative subject line.
+- Commit small and often: one icon family or one pipeline step per commit. Subject = gitmoji + Conventional Commits:
+  `<gitmoji> <type>(<scope>): <imperative subject>` — e.g. `✨ feat(mimetypes): …`, `🐛 fix(status): …`,
+  `🎨 style(apps): …` (icon art), `📝 docs: …`, `🔧 chore: …`, `🚀 release: …`. Author = GitHub no-reply address.

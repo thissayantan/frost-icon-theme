@@ -65,7 +65,7 @@ glass sheet (DESIGN §6, §6b; ADR-006).
 - [x] Owner decisions: symbol + label at ≥ 48 px; construction C (tinted glass sheet) over A (flap + band)
 - [x] `tools/gen-mimetypes.py`: 31 categories × 134 types, drawn letterforms, 16/22/24 hints; `derive()` sheet branch
 - [x] Per-user MIME add-on + `mime-probe` in `verify`; `install:local --undo-mime`
-- [x] Scenes: the owner's my-app project and Home (dark + light)
+- [x] Scenes: a real project folder and Home (dark + light)
 - [x] icon-critic SHIP on the file-type set (after two fix rounds, 2026-09-20)
 - [ ] Owner's Files screenshot after `nautilus -q`
 

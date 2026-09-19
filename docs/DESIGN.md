@@ -113,8 +113,7 @@ opacity top stop, never add an outline.
 
 - **Folders** — `folder` + special folders: glyph on the flap (documents, download, music,
   pictures, videos, templates, publicshare, desktop, user-home, remote, drag-accept).
-- **`user-home` glyph (owner-specified)** — the house from `docs/references/user-home-glyph.png`,
-  translated to glass: rounded **trapezoid roof** (narrow top, wide eaves) in solid white, **box body**
+- **`user-home` glyph (owner-specified)** — a simple house translated to glass: rounded **trapezoid roof** (narrow top, wide eaves) in solid white, **box body**
   below it in white 78 %, and a small **door** tucked directly under the roof line in the `deep` tint at
   55 %. No chimney, no windows, no outline. Roof about as tall as the body (the reference's proportion), eaves
   = glyph width 40, body 32 wide, door 10 × 11. Hand-hinted at 16/22/24/32 (`glyph-<size>`) so roof, body and
