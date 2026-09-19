@@ -28,11 +28,14 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
    Never change their active icon theme without being asked; their current theme is `Folio`.
 
 ## Commands (create these in milestone M1; keep this list accurate)
-- `bun install` — toolchain (resvg-js, svgo, sharp or oxipng)
+- `bun install` — toolchain (resvg-js, sharp, @xmldom/xmldom)
 - `bun run build` — `src/**/*.svg` → `dist/Hyaline/` PNGs at every size + `index.theme` + cache
 - `bun run preview` — contact sheet `dist/preview/sheet.png` (light + dark rows, all sizes)
 - `bun run verify` — lint SVG sources, check naming/coverage, validate `index.theme`, run `tools/lookup.py`
 - `bun run install:local` — copy `dist/Hyaline` to `~/.local/share/icons/` and refresh the cache
+- `bun run coverage` — regenerate `docs/COVERAGE.md` (shipped vs inherited, via real GTK lookup)
+- `bun run typecheck` — `tsc` over `tools/`
+- `bun run preview --from-src` renders sources in memory (no dist); `--grid --out docs/preview.png` makes the README shot
 
 ## Layout
 ```

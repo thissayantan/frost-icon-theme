@@ -7,6 +7,10 @@ a vivid gradient shape seen through a soft pane of frosted glass, with a crisp w
 
 ![Hyaline on light, dark and wallpaper backgrounds](docs/preview.png)
 
+Every size is checked, not just the big one — small sizes are hand-hinted onto the pixel grid:
+
+![Selected icons at 16, 24, 48 and 128 px](docs/preview-sizes.png)
+
 > Status: **v0.1** — folders, places and common file types. See [`docs/ROADMAP.md`](docs/ROADMAP.md)
 > and the honest shipped-vs-inherited list in [`docs/COVERAGE.md`](docs/COVERAGE.md).
 
@@ -51,6 +55,7 @@ bun run build     # src/**/*.svg → dist/Hyaline (PNG @1x/@2x, aliases, index.t
 bun run preview   # dist/preview/sheet.png — every icon at 16/24/48/128 on light, dark and wallpaper
 bun run verify    # lint + index.theme checks + real GTK lookup of every shipped name
 bun run coverage  # regenerate docs/COVERAGE.md
+bun run preview --grid --out docs/preview.png   # regenerate the README screenshot
 ```
 Design rules live in [`docs/DESIGN.md`](docs/DESIGN.md); the pipeline and its decisions in
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).

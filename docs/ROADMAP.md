@@ -29,7 +29,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
       audio-x-generic, video-x-generic, package-x-generic / archives, text-x-script, text-html,
       x-office-document, x-office-spreadsheet, x-office-presentation, application-x-executable, font-x-generic
 - [x] `docs/COVERAGE.md` generated (shipped vs inherited), preview sheet committed as `docs/preview.png`
-- [ ] README with screenshots, credits, install/uninstall
+- [x] README with screenshots, credits, install/uninstall
 - [ ] Tag `v0.1.0`
 
 ## M4 — Core apps (v0.2)
