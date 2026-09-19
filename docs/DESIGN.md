@@ -52,8 +52,8 @@ whole icon, drop shadows on the glyph larger than σ 1, noise/grain, 3D perspect
   flap bottom r12 (shared exactly with the back, so no back colour peeks round the corner). The tab rises
   with a smooth S-curve (`c6 0 7.5 10 15 10`) — no hard corner where it meets the body.
 - Corner radii: plate 18, back shape 20 (squircle-ish, `rx` not superellipse), glyph strokes 8 px with round caps.
-- Glyph lives centred on the **plate**, max 40 × 40, optical centre nudged 1 px up (generic layout).
-  Folder and page families centre the glyph on the flap's geometric centre (folder 64, 84; page 64, 91):
+- Folder and page families: glyph max 40 × 40, centred on the flap's geometric centre (folder 64, 84;
+  page 64, 91) — no optical nudge:
   the bright rim along the flap's top edge already lifts it optically, and a further nudge crowds the rim.
 
 ## 3. Palette tokens

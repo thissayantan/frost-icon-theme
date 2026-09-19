@@ -153,8 +153,8 @@ function recentreOnBack(doc: Document, size: number, moveGlyph = true) {
   const back = byId(doc, "back-shape"), plate = rectBox(byId(doc, "plate-shape"))!;
   const glyph = byId(doc, "glyph");
   if (!glyph) return;
-  // Snap the squircle to whole pixels: 1 px padding up to 22 px, then 8/128 of the size rounded.
-  const u = 128 / size, pad = Math.max(1, Math.round((8 * size) / 128)) * u;
+  // Snap the squircle to whole pixels: 1 px padding up to 24 px, then 8/128 of the size (floored).
+  const u = 128 / size, pad = Math.max(1, Math.floor((8 * size) / 128)) * u;
   back!.setAttribute("x", String(pad)); back!.setAttribute("y", String(pad));
   back!.setAttribute("width", String(128 - 2 * pad)); back!.setAttribute("height", String(128 - 2 * pad));
   back!.setAttribute("rx", String(Math.round((28 * size) / 128) * u));
