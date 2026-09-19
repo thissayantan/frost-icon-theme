@@ -35,7 +35,7 @@ engine, GTK3 goes through gdk-pixbuf/librsvg, Qt's QtSvg implements SVG Tiny (no
 and GNOME Shell has its own path. A filter-heavy SVG in `dist/` would look different — or broken — per toolkit.
 **Decision.** Sources are SVG with filters; the theme ships pre-rendered PNGs at every size
 (`Type=Fixed`) plus `@2x` (`Scale=2`). Output is identical everywhere.
-**Cost.** Larger install (budget: < 25 MB for v0.1). Re-evaluate when GtkSvg handles theme icons.
+**Cost.** Larger install (budget: < 25 MB for v0.1; < 40 MB from v0.2, see ADR-006). Re-evaluate when GtkSvg handles theme icons.
 
 ### ADR-002 — Overlay theme, not a full theme
 Ship only what Frost redraws; everything else inherits `Papirus, Adwaita, hicolor`.

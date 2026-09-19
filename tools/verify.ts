@@ -5,7 +5,7 @@ import { join, relative } from "node:path";
 import { CONTEXTS, DIST, NAME_RE, ROOT, SCALES, SIZES, SRC, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, dirName, sources, symbolicSources, walk } from "./lib";
 import { lint } from "./lint";
 
-const BUDGET_MB = 25;
+const BUDGET_MB = 40; // ADR-001 (v0.1: 25 MB) → ADR-006: 134 file types, mostly 256@2x art
 const errors: string[] = [];
 const fail = (m: string) => errors.push(m);
 

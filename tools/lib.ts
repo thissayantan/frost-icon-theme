@@ -221,7 +221,9 @@ export function derive(src: Source, size: number): string {
     for (const attr of Array.from(glyphHint.attributes)) if (attr.name !== "id") glyph.setAttribute(attr.name, attr.value);
     while (glyphHint.firstChild) glyph.appendChild(glyphHint.firstChild);
   }
-  if (size >= 64) {
+  if (doc.documentElement?.getAttribute("data-family") === "sheet") {
+    sheet(doc, size, hinted);
+  } else if (size >= 64) {
     // full glass
   } else if (size <= 48 && isGeneric(doc)) {
     // generic layout ≤ 48 px: a plate hanging off the back is mud at this size — squircle + centred glyph
@@ -252,6 +254,40 @@ export function derive(src: Source, size: number): string {
     if (!hinted) thickenGlyph(doc, size, isGeneric(doc) ? RELAYOUT_SCALE : 1);
   }
   return serializer.serializeToString(doc as any);
+}
+
+/**
+ * Sheet family (file types, DESIGN §6): tinted glass page in front of a deeper sheet. The type label shows
+ * from 48 px (pixel caps at 48); below that the glyph moves down to the glass centre, and at ≤ 24 px the glass
+ * goes solid (token gradient) with the sheet peeking — at 16 px the sheet goes too.
+ */
+function sheet(doc: Document, size: number, hinted: boolean) {
+  const label = byId(doc, "label"), label48 = byId(doc, "label-48");
+  if (size === 48 && label && label48) {
+    while (label.firstChild) label.removeChild(label.firstChild);
+    for (const attr of Array.from(label48.attributes)) if (attr.name !== "id") label.setAttribute(attr.name, attr.value);
+    while (label48.firstChild) label.appendChild(label48.firstChild);
+  } else if (size < 48 && label) {
+    label.parentNode?.removeChild(label);
+  }
+  const glyph = byId(doc, "glyph");
+  if (size < 48 && !hinted && label && glyph) {
+    const shift = Number(doc.documentElement?.getAttribute("data-glyph-shift") ?? 0);
+    // no label: room to grow — the glyph moves to the glass centre and scales up 1.3×
+    glyph.setAttribute("transform", `translate(0 ${shift}) ${glyph.getAttribute("transform") ?? ""} scale(1.3)`.trim());
+  }
+  if (size >= 64) return;
+  if (size >= 48) {
+    remove(doc, "shadow");
+    setBlur(doc, "blur-glow", 4);
+    byId(doc, "glow")?.setAttribute("opacity", ".15");
+  } else {
+    // ≤ 32 px: translucent glass over a pastel is too pale for a white glyph — the glass goes solid tint
+    remove(doc, "shadow", "glow", "frost", "depth", "rim");
+    if (size >= 32 && !hinted) thickenGlyph(doc, size, 1.3);
+    byId(doc, "plate")?.setAttribute("fill", "url(#tint)");
+    if (size <= 16) remove(doc, "back");
+  }
 }
 
 export function dirName(size: number, scale: number, ctx: string) {

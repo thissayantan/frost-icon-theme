@@ -1,7 +1,7 @@
 // src/**/*.svg → dist/Frost: PNG at every size @1x/@2x, alias symlinks, index.theme, icon cache.
 import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
-import { copyFileSync, existsSync, mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { CONTEXTS, SCALES, SIZES, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, derive, dirName, sources, symbolicSources, type Source } from "./lib";
 import { lint } from "./lint";
@@ -38,7 +38,7 @@ export function indexTheme(contexts: string[], symbolic = existsSync(join(THEME_
   return lines.join("\n");
 }
 
-export async function build(): Promise<{ icons: number; files: number }> {
+export async function build(): Promise<{ icons: number; files: number; deduped: number }> {
   const problems = lint();
   if (problems.length) {
     for (const p of problems) console.error(`✗ ${p}`);
@@ -57,6 +57,20 @@ export async function build(): Promise<{ icons: number; files: number }> {
       files++;
     }
   }));
+
+  // Byte-identical renders in one directory become relative symlinks to the first (by name). File types that
+  // share a category are identical below 48 px, where the type label drops out (ADR-006).
+  let deduped = 0;
+  for (const size of SIZES) for (const scale of SCALES) for (const ctx of contexts) {
+    const dir = join(THEME_DIR, dirName(size, scale, ctx));
+    const first = new Map<string, string>();
+    for (const f of readdirSync(dir).sort()) {
+      const key = Bun.hash(readFileSync(join(dir, f))).toString();
+      const keep = first.get(key);
+      if (!keep) { first.set(key, f); continue; }
+      unlinkSync(join(dir, f)); symlinkSync(keep, join(dir, f)); deduped++;
+    }
+  }
 
   // ADR-005: symbolic status icons ship as plain SVG (GTK / GNOME Shell recolour them).
   const symbolic = symbolicSources();
@@ -86,11 +100,11 @@ export async function build(): Promise<{ icons: number; files: number }> {
   if (cache.exitCode !== 0 || !existsSync(join(THEME_DIR, "icon-theme.cache"))) {
     throw new Error(`gtk-update-icon-cache failed: ${cache.stderr.toString()}`);
   }
-  return { icons: list.length + symbolic.length, files };
+  return { icons: list.length + symbolic.length, files, deduped };
 }
 
 if (import.meta.main) {
   const t = performance.now();
-  const { icons, files } = await build();
-  console.log(`build: ${icons} icons → ${files} files in dist/${THEME} (${((performance.now() - t) / 1000).toFixed(1)}s)`);
+  const { icons, files, deduped } = await build();
+  console.log(`build: ${icons} icons → ${files} files in dist/${THEME}, ${deduped} identical linked (${((performance.now() - t) / 1000).toFixed(1)}s)`);
 }

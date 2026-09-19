@@ -1,5 +1,5 @@
 {
-  "$comment": "target icon (shipped) → extra names that should resolve to the same art. Become relative symlinks at build time.",
+  "$comment": "target icon (shipped) \u2192 extra names that should resolve to the same art. Become relative symlinks at build time.",
   "folder": [
     "inode-directory",
     "folder-closed"
@@ -38,96 +38,6 @@
   "user-trash-full": [
     "trash-full"
   ],
-  "text-x-generic": [
-    "text-plain",
-    "text-markdown",
-    "text-x-log"
-  ],
-  "application-x-generic": [
-    "application-octet-stream"
-  ],
-  "image-x-generic": [
-    "image-png",
-    "image-jpeg",
-    "image-gif",
-    "image-webp",
-    "image-svg+xml",
-    "image-bmp",
-    "image-tiff",
-    "image-heif",
-    "image-avif"
-  ],
-  "audio-x-generic": [
-    "audio-mpeg",
-    "audio-flac",
-    "audio-x-wav",
-    "audio-ogg",
-    "audio-x-vorbis+ogg",
-    "audio-mp4",
-    "audio-aac"
-  ],
-  "video-x-generic": [
-    "video-mp4",
-    "video-x-matroska",
-    "video-webm",
-    "video-quicktime",
-    "video-x-msvideo",
-    "video-mpeg"
-  ],
-  "package-x-generic": [
-    "application-zip",
-    "application-x-tar",
-    "application-x-compressed-tar",
-    "application-x-7z-compressed",
-    "application-x-rar",
-    "application-vnd.rar",
-    "application-gzip",
-    "application-x-bzip",
-    "application-x-xz",
-    "application-x-xz-compressed-tar",
-    "application-x-zstd-compressed-tar",
-    "application-zstd",
-    "application-x-archive"
-  ],
-  "text-x-script": [
-    "application-x-shellscript",
-    "text-x-python",
-    "text-x-python3",
-    "text-x-perl",
-    "application-x-perl",
-    "text-x-ruby",
-    "application-x-ruby",
-    "text-javascript",
-    "application-javascript",
-    "application-x-php"
-  ],
-  "text-html": [
-    "application-xhtml+xml"
-  ],
-  "x-office-document": [
-    "application-vnd.oasis.opendocument.text",
-    "application-msword",
-    "application-vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application-rtf"
-  ],
-  "x-office-spreadsheet": [
-    "application-vnd.oasis.opendocument.spreadsheet",
-    "application-vnd.ms-excel",
-    "application-vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "text-csv"
-  ],
-  "x-office-presentation": [
-    "application-vnd.oasis.opendocument.presentation",
-    "application-vnd.ms-powerpoint",
-    "application-vnd.openxmlformats-officedocument.presentationml.presentation"
-  ],
-  "font-x-generic": [
-    "font-ttf",
-    "font-otf",
-    "font-woff",
-    "font-woff2",
-    "application-x-font-ttf"
-  ],
   "battery-level-100-symbolic": [
     "battery-full-symbolic"
   ],
@@ -160,5 +70,169 @@
   ],
   "battery-level-100-charged-symbolic": [
     "battery-full-charged-symbolic"
+  ],
+  "application-x-generic": [
+    "application-octet-stream"
+  ],
+  "package-x-generic": [
+    "application-x-archive"
+  ],
+  "application-x-executable": [
+    "application-x-sharedlib"
+  ],
+  "text-markdown": [
+    "text-x-markdown"
+  ],
+  "application-json": [
+    "application-schema+json",
+    "application-x-json",
+    "text-x-json",
+    "application-geo+json"
+  ],
+  "application-yaml": [
+    "application-x-yaml",
+    "text-yaml",
+    "text-x-yaml"
+  ],
+  "application-toml": [
+    "text-x-toml"
+  ],
+  "text-x-patch": [
+    "text-x-diff"
+  ],
+  "text-csv": [
+    "text-x-csv"
+  ],
+  "application-sql": [
+    "text-x-sql"
+  ],
+  "application-vnd.sqlite3": [
+    "application-x-sqlite3",
+    "application-x-sqlite2"
+  ],
+  "application-x-shellscript": [
+    "text-x-sh",
+    "application-x-sh",
+    "text-x-shellscript"
+  ],
+  "text-x-python": [
+    "text-x-python3",
+    "application-x-python",
+    "application-x-python-code"
+  ],
+  "text-javascript": [
+    "application-javascript",
+    "application-x-javascript",
+    "text-x-javascript"
+  ],
+  "application-x-ruby": [
+    "text-x-ruby"
+  ],
+  "application-x-php": [
+    "text-x-php"
+  ],
+  "application-x-perl": [
+    "text-x-perl"
+  ],
+  "text-x-makefile": [
+    "text-x-cmake"
+  ],
+  "text-rust": [
+    "text-x-rust"
+  ],
+  "text-x-csrc": [
+    "text-x-c"
+  ],
+  "text-x-c++src": [
+    "text-x-c++",
+    "text-x-cpp"
+  ],
+  "text-x-java": [
+    "text-x-java-source"
+  ],
+  "text-x-typescript": [
+    "application-typescript",
+    "application-x-typescript"
+  ],
+  "text-x-scss": [
+    "text-x-sass"
+  ],
+  "text-html": [
+    "application-xhtml+xml"
+  ],
+  "application-xml": [
+    "text-xml",
+    "application-x-xml"
+  ],
+  "application-x-x509-ca-cert": [
+    "application-x-pem-file",
+    "application-pem-certificate-chain",
+    "application-x-x509-user-cert"
+  ],
+  "application-x-pkcs12": [
+    "application-pkcs12"
+  ],
+  "application-rtf": [
+    "text-rtf"
+  ],
+  "text-vcard": [
+    "text-x-vcard",
+    "text-directory"
+  ],
+  "application-gzip": [
+    "application-x-gzip"
+  ],
+  "application-vnd.rar": [
+    "application-x-rar"
+  ],
+  "application-x-bzip2": [
+    "application-x-bzip"
+  ],
+  "application-vnd.debian.binary-package": [
+    "application-x-deb"
+  ],
+  "application-vnd.flatpak.ref": [
+    "application-vnd.flatpak",
+    "application-vnd.flatpak.repo"
+  ],
+  "application-java-archive": [
+    "application-x-java-archive"
+  ],
+  "application-vnd.efi.iso": [
+    "application-x-cd-image",
+    "application-x-iso9660-image"
+  ],
+  "application-vnd.efi.img": [
+    "application-x-raw-disk-image"
+  ],
+  "application-vnd.appimage": [
+    "application-x-appimage",
+    "application-x-iso9660-appimage"
+  ],
+  "application-x-msdownload": [
+    "application-x-ms-dos-executable",
+    "application-x-msdos-program"
+  ],
+  "image-heif": [
+    "image-heic"
+  ],
+  "audio-vnd.wave": [
+    "audio-x-wav"
+  ],
+  "audio-ogg": [
+    "audio-x-vorbis+ogg",
+    "audio-x-opus+ogg"
+  ],
+  "audio-mp4": [
+    "audio-aac"
+  ],
+  "video-vnd.avi": [
+    "video-x-msvideo"
+  ],
+  "font-ttf": [
+    "application-x-font-ttf"
+  ],
+  "font-otf": [
+    "application-x-font-otf"
   ]
 }
