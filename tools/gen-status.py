@@ -232,22 +232,24 @@ ICONS["bluetooth-disabled-symbolic"] = svg(g(RUNE, dim=True, clip="cut") + g(thi
 RUNE_LOW = thick([(4, 4), (11, 8.5), (8, 11), (8, 1), (11, 3.5), (4, 8)], 2)
 ICONS["bluetooth-acquiring-symbolic"] = acquiring(f'<path d="{RUNE_LOW}" {FG}/>')
 
-# ── Volume: speaker + three 2-px waves centred at (5, 8) ─────────────────────
-SPEAKER = poly((1, 6), (3, 6), (6, 3), (6, 13), (3, 10), (1, 10))
-WAVES = [sector(5, 8, 2, 4, 45, 135), sector(5, 8, 5, 7, 45, 135), sector(5, 8, 8, 10, 50, 130)]
+# ── Volume (owner's reference 2026-09-19): a speaker GRILLE — five rounded 2-px slats with 1-px gaps whose lengths
+#    trace a round driver. Level lights the slats from the centre outward (low 1, medium 3, high 5), rest at 35 %.
+GRILLE = [rect(5, 1, 6, 2, 1), rect(2, 4, 12, 2, 1), rect(1, 7, 14, 2, 1), rect(2, 10, 12, 2, 1), rect(5, 13, 6, 2, 1)]
+ORDER = [2, 1, 3, 0, 4]  # centre first, then outward
 
 
-def volume(level):
-    lit, dim = "".join(WAVES[:level]), "".join(WAVES[level:])
-    return svg(g(SPEAKER) + (g(lit) if lit else "") + (g(dim, dim=True) if dim else ""))
+def volume(lit_count):
+    lit = "".join(GRILLE[k] for k in ORDER[:lit_count])
+    dim = "".join(GRILLE[k] for k in ORDER[lit_count:])
+    return svg((g(lit) if lit else "") + (g(dim, dim=True) if dim else ""))
 
 
+SPEAKER_ALL = "".join(GRILLE)
 ICONS["audio-volume-low-symbolic"] = volume(1)
-ICONS["audio-volume-medium-symbolic"] = volume(2)
-ICONS["audio-volume-high-symbolic"] = volume(3)
-# over-amplified changes SHAPE too: the outer wave spills past the speaker (35–145°) — and turns warning
-ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER + "".join(WAVES)), badge_bang("warning"))
-ICONS["audio-volume-muted-symbolic"] = off(SPEAKER + "".join(WAVES))
+ICONS["audio-volume-medium-symbolic"] = volume(3)
+ICONS["audio-volume-high-symbolic"] = volume(5)
+ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER_ALL), badge_bang("warning"))
+ICONS["audio-volume-muted-symbolic"] = off(SPEAKER_ALL)
 
 # ── Microphone (owner decision 2026-09-19): the Shell shows this indicator ONLY while an app is recording, so the
 #    whole icon is drawn in the in-use colour (`warning` = orange, GNOME's privacy colour) — clear under Dash to
