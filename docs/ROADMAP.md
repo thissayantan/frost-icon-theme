@@ -40,7 +40,7 @@ official logo; language folders (Android, Go, Node, Python…) should show their
 - [x] Local overlay (`install:local`, never committed): official Chrome / Chrome Dev icons linked from
       `/opt/google/*/product_logo_*`; language folders with the real brand marks (Simple Icons, CC0 paths)
       on the Hyaline folder — kept in git-ignored `local/`
-- [ ] `tools/tag-folders.ts` — tag `~/Android`, `~/go` and project folders by marker file
+- [x] `tools/tag-folders.ts` — tag `~/Android`, `~/go` and project folders by marker file
       (`gio set … metadata::custom-icon-name`); `--dry-run`, `--undo`
 - [x] `tools/inventory.ts` — every installed app's `Icon=` (system, local, snap, flatpak) → decide the redraw list
 - [x] Core apps, original art in the Hyaline anatomy: Files, Settings, Terminal, Ghostty (original ghost, not its
