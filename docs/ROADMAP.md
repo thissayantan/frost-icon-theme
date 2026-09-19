@@ -72,4 +72,5 @@ glass sheet (DESIGN §6, §6b; ADR-006).
 ## M5 — Release (v1.0)
 - [x] GitHub release v0.2.0 (tarball; install.sh one-liner tested against the live release), MIT, launch kit in docs/launch/
 - [x] gnome-look.org listing live (p/2372226); GNOME Discourse post; press pitches sent
-- [ ] AUR package pushed · Reddit + Show HN posts
+- [x] Show HN posted (item 49770157); Reddit posts by the owner
+- [ ] AUR package (blocked: Arch registration closed) · It's FOSS / 9to5Linux forms

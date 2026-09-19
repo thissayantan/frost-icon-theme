@@ -38,6 +38,8 @@ Also on [gnome-look.org](https://www.gnome-look.org/p/2372226/).
 **Manual:** download `Frost-v*.tar.xz` from [Releases](https://github.com/thissayantan/frost-icon-theme/releases),
 extract it, and copy the `Frost` folder to `~/.local/share/icons/`.
 
+**Arch:** the one-liner works there too; an AUR package will follow once AUR registration reopens.
+
 **Recommended:** install [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) too
 (`sudo apt install papirus-icon-theme`). Frost only ships icons it has redrawn well; everything else falls back to
 Papirus, then Adwaita.
