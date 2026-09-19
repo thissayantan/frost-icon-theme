@@ -132,6 +132,34 @@ function thickenGlyph(doc: Document, size: number) {
   }
 }
 
+const rectBox = (el: Element | null) =>
+  el?.tagName === "rect"
+    ? ["x", "y", "width", "height"].map((a) => Number(el.getAttribute(a) ?? 0)) as [number, number, number, number]
+    : null;
+
+/**
+ * ≤24 px, generic layout (rect back + rect plate that leaves the back): with the plate gone the glyph
+ * would hang off the back shape, so the back grows to the live area and the glyph moves to its centre.
+ */
+function isGeneric(doc: Document): boolean {
+  const b = rectBox(byId(doc, "back-shape")), p = rectBox(byId(doc, "plate-shape"));
+  if (!b || !p) return false;
+  return !(p[0] >= b[0] && p[1] >= b[1] && p[0] + p[2] <= b[0] + b[2] && p[1] + p[3] <= b[1] + b[3]);
+}
+
+function recentreOnBack(doc: Document) {
+  if (!isGeneric(doc)) return;
+  const back = byId(doc, "back-shape"), plate = rectBox(byId(doc, "plate-shape"))!;
+  const glyph = byId(doc, "glyph");
+  if (!glyph) return;
+  back!.setAttribute("x", "8"); back!.setAttribute("y", "8");
+  back!.setAttribute("width", "112"); back!.setAttribute("height", "112"); back!.setAttribute("rx", "28");
+  const [cx, cy] = [plate[0] + plate[2] / 2, plate[1] + plate[3] / 2];
+  const k = 1.3;
+  const prev = glyph.getAttribute("transform") ?? "";
+  glyph.setAttribute("transform", `translate(64 64) scale(${k}) translate(${-cx} ${-cy}) ${prev}`.trim());
+}
+
 /**
  * Return the SVG to render for a logical size. @2x renders use the same variant as @1x
  * (48@2x = 96 px with 48 px detail).
@@ -146,14 +174,19 @@ export function derive(src: Source, size: number): string {
     remove(doc, "shadow");
     setBlur(doc, "blur-glow", 4);
     byId(doc, "glow")?.setAttribute("opacity", ".25");
+  } else if (size >= 22 && isGeneric(doc)) {
+    remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
+    recentreOnBack(doc);
+    thickenGlyph(doc, size);
   } else if (size >= 22) {
-    remove(doc, "shadow", "glow", "frost", "lift", "rim");
+    remove(doc, "shadow", "glow", "frost", "rim");
     const plate = byId(doc, "plate");
     plate?.setAttribute("fill", "#FFFFFF");
     plate?.setAttribute("fill-opacity", ".40");
     thickenGlyph(doc, size);
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
+    recentreOnBack(doc);
     thickenGlyph(doc, size);
   }
   return serializer.serializeToString(doc as any);

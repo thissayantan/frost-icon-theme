@@ -10,7 +10,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] `tools/preview.ts` — contact sheet: rows = icons, columns = 16/24/48/128 on light, dark and wallpaper backgrounds
 - [x] `tools/verify.ts` — runs lint, validates index.theme against the spec, runs `tools/lookup.py` for every shipped name
 - [x] `bun run install:local` works; theme selectable in GNOME Tweaks (do **not** activate it)
-- [ ] Template `src/_templates/glass.svg` renders correctly through the pipeline
+- [x] Template `src/_templates/glass.svg` renders correctly through the pipeline
 - [ ] Fix known template issue (see `docs/template-baseline.png`, headless-Chrome render): on the
       **light** background the part of the plate outside the back shape nearly vanishes (white on white).
       Solve within DESIGN rules — e.g. a faint plate-only contact shadow (`#000` 6–8 %, σ 3, y+2) or a
