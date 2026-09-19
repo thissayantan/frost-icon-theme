@@ -44,8 +44,9 @@ whole icon, drop shadows on the glyph larger than σ 1, noise/grain, 3D perspect
 - **Back shape** sits upper-right: its bounding box ≈ 84 × 84, anchored at (36, 12).
 - **Plate** sits lower-left, overlapping the back shape by 45–60 % of its area: 80 × 72, anchored at (16, 40)
   (≈ 58 % overlap). At (12, 44) the plate centre sat so far off the back that a centred glyph hung over
-  bare glass and vanished on light backgrounds; at (16, 40) a ≤ 36 × 36 glyph centred on the plate (56, 76)
-  lies entirely over the back shape.
+  bare glass and vanished on light backgrounds. Generic glyphs are ≤ 32 × 32, centred at (58, 74) — the
+  plate centre (56, 76) nudged 2 up-right — so the whole glyph, including near the back's r20 bottom-left
+  corner, sits over the tinted glass. (This replaces the generic "optical nudge 1 px up".)
 - Folder family is the exception: back = folder silhouette full width (12 → 116), plate = lower
   62 % of the folder, full width, so it reads as the folder's front flap. Radii: back r12, flap top r10,
   flap bottom r12 (shared exactly with the back, so no back colour peeks round the corner). The tab rises
@@ -84,7 +85,7 @@ Glass: plate `#FFFFFF` (opacity per table above). Glyph: `#FFFFFF`. Shadow: `#00
 | 16 | `back` `glyph` | silhouette + white glyph only |
 
 **Generic layout at ≤ 32 px** (rect back + a plate that leaves it): the plate is dropped too, the back
-grows to the live area (112 × 112, rx 28) and the glyph moves to its centre at 1.6×. A half-visible plate
+grows to the live area (112 × 112, rx 28) and the glyph (≤ 32) moves to its centre at 2×. A half-visible plate
 at 24–32 px is mud; a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
 table above.
 
@@ -121,7 +122,9 @@ opacity top stop, never add an outline.
   like the folder; glyph centred on the plate (64, 91). Template: `src/_templates/page.svg`.
   Colours: graphite text/generic/executable, red PDF/video, pink image, violet audio/font, orange
   archive/presentation, green script/spreadsheet, teal HTML, blue office document. `font-x-generic`'s
-  geometric "A" is a drawn symbol for type, not text.
+  open "A" (two legs + crossbar) is a drawn symbol for type, not text. Page-family line weight is 6 units
+  (bars and strokes); on graphite pages every glyph part is full white — 78 % white on the pale graphite
+  plate has too little contrast on light backgrounds.
 - **Core apps** — only generic GNOME apps (Files, Terminal, Settings, Text Editor, Calculator,
   System Monitor/Resources, Software, Tweaks, Disks, Extensions). No brand logos.
 

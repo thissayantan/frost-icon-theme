@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline user-bookmarks — generic glass layout, palette token yellow, glyph: bookmark ribbon. Glyph centred on the plate (56, 76). -->
+  <!-- Hyaline user-bookmarks — generic glass layout, palette token yellow, glyph: bookmark ribbon. Glyph ≤32 centred at (58, 74). -->
   <defs>
     <!-- palette token: yellow (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -40,7 +40,7 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph" transform="translate(4 -4)">
+  <g id="glyph" transform="translate(58 74) scale(0.84) translate(-52 -80)">
     <path d="M41 61 H63 a3 3 0 0 1 3 3 V99 L52 90 L38 99 V64 a3 3 0 0 1 3 -3 Z" fill="#FFFFFF"/>
   </g>
 </svg>

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline user-trash — generic glass layout, palette token blue, glyph: bin with lid. Glyph centred on the plate (56, 76). -->
+  <!-- Hyaline user-trash — generic glass layout, palette token blue, glyph: bin with lid. Glyph ≤32 centred at (58, 74). -->
   <defs>
     <!-- palette token: blue (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -40,7 +40,7 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph" transform="translate(4 -4)">
+  <g id="glyph" transform="translate(58 74) scale(0.78) translate(-52 -80)">
     <rect x="46" y="59" width="12" height="7" rx="3" fill="#FFFFFF"/>
     <rect x="36" y="64" width="32" height="6" rx="3" fill="#FFFFFF"/>
     <path d="M39 73 H65 L62.6 96.6 a4 4 0 0 1 -4 3.4 H45.4 a4 4 0 0 1 -4 -3.4 Z" fill="#FFFFFF" fill-opacity=".78"/>

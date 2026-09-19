@@ -37,8 +37,8 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <!-- glyph: centred on the plate (plate centre = 56,76), ≤36×36 so it stays over the back shape, 8px round strokes -->
+  <!-- glyph: ≤32×32 centred at (58,74) — plate centre nudged up-right so it stays over the back shape and its r20 corner; 8px round strokes -->
   <g id="glyph" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round">
-    <path d="M56 60 V92 M40 76 H72"/>
+    <path d="M58 60 V88 M44 74 H72"/>
   </g>
 </svg>

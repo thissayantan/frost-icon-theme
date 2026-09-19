@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline network-workgroup — generic glass layout, palette token teal, glyph: globe. Glyph centred on the plate (56, 76). -->
+  <!-- Hyaline network-workgroup — generic glass layout, palette token teal, glyph: globe. Glyph ≤32 centred at (58, 74). -->
   <defs>
     <!-- palette token: teal (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -17,7 +17,7 @@
     <rect id="back-shape" x="36" y="12" width="84" height="84" rx="20" fill="url(#tint)"/>
     <rect id="plate-shape" x="16" y="40" width="80" height="72" rx="18"/>
     <!-- glyph hints for the ≤24 px squircle re-layout (units = pixels at that size) -->
-    <g id="glyph-16" transform="scale(8.0000)"><circle cx="8" cy="8" r="4.5" fill="#FFFFFF"/><path d="M8 3.5 V12.5 M3.5 8 H12.5" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1"/></g>
+    <g id="glyph-16" transform="scale(8.0000)"><circle cx="8" cy="8" r="4.5" fill="#FFFFFF"/><ellipse cx="8" cy="8" rx="1.5" ry="4.5" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1"/><path d="M3.5 8 H12.5" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1"/></g>
     <g id="glyph-22" transform="scale(5.8182)"><circle cx="11" cy="11" r="6" fill="#FFFFFF"/><ellipse cx="11" cy="11" rx="2.5" ry="6" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1"/><path d="M5 11 H17" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1"/></g>
     <g id="glyph-24" transform="scale(5.3333)"><circle cx="12" cy="12" r="6.5" fill="#FFFFFF"/><ellipse cx="12" cy="12" rx="2.8" ry="6.5" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1.1"/><path d="M5.5 12 H18.5" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="1.1"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
@@ -40,9 +40,9 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph" transform="translate(4 -4)">
-    <circle cx="52" cy="80" r="19" fill="#FFFFFF"/>
-    <ellipse cx="52" cy="80" rx="8" ry="19" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="3.5"/>
-    <path d="M33 80 H71" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="3.5"/>
+  <g id="glyph" transform="translate(58 74) scale(1) translate(-52 -80)">
+    <circle cx="52" cy="80" r="16" fill="#FFFFFF"/>
+    <ellipse cx="52" cy="80" rx="7" ry="16" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="3.5"/>
+    <path d="M36 80 H68" fill="none" stroke="#12A3B0" stroke-opacity=".6" stroke-width="3.5"/>
   </g>
 </svg>

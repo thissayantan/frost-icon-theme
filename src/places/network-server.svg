@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline network-server — generic glass layout, palette token teal, glyph: two stacked server units. Glyph centred on the plate (56, 76). -->
+  <!-- Hyaline network-server — generic glass layout, palette token teal, glyph: two stacked server units. Glyph ≤32 centred at (58, 74). -->
   <defs>
     <!-- palette token: teal (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -40,7 +40,7 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph" transform="translate(4 -4)">
+  <g id="glyph" transform="translate(58 74) scale(0.86) translate(-52 -80)">
     <rect x="34" y="61" width="36" height="16" rx="4.5" fill="#FFFFFF"/>
     <rect x="34" y="82" width="36" height="16" rx="4.5" fill="#FFFFFF" fill-opacity=".78"/>
     <circle cx="42" cy="69" r="2.8" fill="#12A3B0" fill-opacity=".6"/>

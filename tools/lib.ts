@@ -148,16 +148,20 @@ function isGeneric(doc: Document): boolean {
 }
 
 /** A hinted glyph is already drawn for the re-laid-out back, so only the back moves. */
-function recentreOnBack(doc: Document, moveGlyph = true) {
+function recentreOnBack(doc: Document, size: number, moveGlyph = true) {
   if (!isGeneric(doc)) return;
   const back = byId(doc, "back-shape"), plate = rectBox(byId(doc, "plate-shape"))!;
   const glyph = byId(doc, "glyph");
   if (!glyph) return;
-  back!.setAttribute("x", "8"); back!.setAttribute("y", "8");
-  back!.setAttribute("width", "112"); back!.setAttribute("height", "112"); back!.setAttribute("rx", "28");
+  // Snap the squircle to whole pixels: 1 px padding up to 22 px, then 8/128 of the size rounded.
+  const u = 128 / size, pad = Math.max(1, Math.round((8 * size) / 128)) * u;
+  back!.setAttribute("x", String(pad)); back!.setAttribute("y", String(pad));
+  back!.setAttribute("width", String(128 - 2 * pad)); back!.setAttribute("height", String(128 - 2 * pad));
+  back!.setAttribute("rx", String(Math.round((28 * size) / 128) * u));
   if (!moveGlyph) return;
-  const [cx, cy] = [plate[0] + plate[2] / 2, plate[1] + plate[3] / 2];
-  const k = 1.6;
+  // Generic glyphs are centred at plate centre + (2, −2) = (58, 74) so they clear the back's r20 corner.
+  const [cx, cy] = [plate[0] + plate[2] / 2 + 2, plate[1] + plate[3] / 2 - 2];
+  const k = 2.0;
   const prev = glyph.getAttribute("transform") ?? "";
   glyph.setAttribute("transform", `translate(64 64) scale(${k}) translate(${-cx} ${-cy}) ${prev}`.trim());
 }
@@ -188,7 +192,7 @@ export function derive(src: Source, size: number): string {
   } else if (size < 48 && isGeneric(doc)) {
     // generic layout ≤ 32 px: a plate hanging off the back is mud at this size — squircle + centred glyph
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
-    recentreOnBack(doc, !hinted);
+    recentreOnBack(doc, size, !hinted);
     if (!hinted) thickenGlyph(doc, size);
   } else if (size >= 32) {
     // A blurred glow wider than the pixel-hinted edge re-softens the silhouette on light backgrounds:
@@ -205,7 +209,7 @@ export function derive(src: Source, size: number): string {
     if (!hinted) thickenGlyph(doc, size);
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
-    recentreOnBack(doc, !hinted);
+    recentreOnBack(doc, size, !hinted);
     if (!hinted) thickenGlyph(doc, size);
   }
   return serializer.serializeToString(doc as any);

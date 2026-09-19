@@ -27,9 +27,10 @@
     <path id="back-shape-48" d="M33.333 8 H82.667 L106.667 32 V108 a12 12 0 0 1 -12 12 H33.333 a12 12 0 0 1 -12 -12 V20 a12 12 0 0 1 12 -12 Z"/>
     <path id="plate-shape-48" d="M21.333 71.333 a10 10 0 0 1 10 -10 H96.667 a10 10 0 0 1 10 10 V108 a12 12 0 0 1 -12 12 H33.333 a12 12 0 0 1 -12 -12 Z"/>
     <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
-    <g id="glyph-16" transform="scale(8.0000)"><rect x="4" y="8" width="2" height="1" fill="#FFFFFF"/><rect x="7" y="8" width="2" height="1" fill="#FFFFFF"/><rect x="10" y="8" width="2" height="1" fill="#FFFFFF"/><rect x="4" y="10" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="10" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="10" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="4" y="12" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="12" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="12" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/></g>
+    <g id="glyph-16" transform="scale(8.0000)"><rect x="4" y="6" width="2" height="2" fill="#FFFFFF"/><rect x="7" y="6" width="2" height="2" fill="#FFFFFF"/><rect x="10" y="6" width="2" height="2" fill="#FFFFFF"/><rect x="4" y="9" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="9" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="9" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="4" y="12" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="12" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="12" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/></g>
     <g id="glyph-22" transform="scale(5.8182)"><rect x="7" y="12" width="2" height="1" fill="#FFFFFF"/><rect x="10" y="12" width="2" height="1" fill="#FFFFFF"/><rect x="13" y="12" width="2" height="1" fill="#FFFFFF"/><rect x="7" y="14" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="14" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="13" y="14" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="16" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="16" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="13" y="16" width="2" height="1" fill="#FFFFFF" fill-opacity=".78"/></g>
     <g id="glyph-24" transform="scale(5.3333)"><rect x="8" y="13" width="2" height="2" fill="#FFFFFF"/><rect x="11" y="13" width="2" height="2" fill="#FFFFFF"/><rect x="14" y="13" width="2" height="2" fill="#FFFFFF"/><rect x="8" y="16" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="11" y="16" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="14" y="16" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="8" y="19" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="11" y="19" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="14" y="19" width="2" height="2" fill="#FFFFFF" fill-opacity=".78"/></g>
+    <g id="glyph-32" transform="scale(4.0000)"><rect x="11" y="19" width="3" height="2" fill="#FFFFFF"/><rect x="15" y="19" width="3" height="2" fill="#FFFFFF"/><rect x="19" y="19" width="3" height="2" fill="#FFFFFF"/><rect x="11" y="22" width="3" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="15" y="22" width="3" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="19" y="22" width="3" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="11" y="25" width="3" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="15" y="25" width="3" height="2" fill="#FFFFFF" fill-opacity=".78"/><rect x="19" y="25" width="3" height="2" fill="#FFFFFF" fill-opacity=".78"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -45,14 +46,14 @@
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
   <g id="glyph">
-    <rect x="45" y="75" width="12" height="10" rx="2.5" fill="#FFFFFF"/>
-    <rect x="58" y="75" width="12" height="10" rx="2.5" fill="#FFFFFF"/>
-    <rect x="71" y="75" width="12" height="10" rx="2.5" fill="#FFFFFF"/>
-    <rect x="45" y="86" width="12" height="10" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
-    <rect x="58" y="86" width="12" height="10" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
-    <rect x="71" y="86" width="12" height="10" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
-    <rect x="45" y="97" width="12" height="10" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
-    <rect x="58" y="97" width="12" height="10" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
-    <rect x="71" y="97" width="12" height="10" rx="2.5" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="46" y="76" width="10" height="8" rx="2" fill="#FFFFFF"/>
+    <rect x="59" y="76" width="10" height="8" rx="2" fill="#FFFFFF"/>
+    <rect x="72" y="76" width="10" height="8" rx="2" fill="#FFFFFF"/>
+    <rect x="46" y="87" width="10" height="8" rx="2" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="59" y="87" width="10" height="8" rx="2" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="72" y="87" width="10" height="8" rx="2" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="46" y="98" width="10" height="8" rx="2" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="59" y="98" width="10" height="8" rx="2" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="72" y="98" width="10" height="8" rx="2" fill="#FFFFFF" fill-opacity=".78"/>
   </g>
 </svg>

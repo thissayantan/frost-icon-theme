@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline font-x-generic — page family, palette token violet, glyph: geometric A (a symbol for type, not text). Centred on the plate (64, 91). -->
+  <!-- Hyaline font-x-generic — page family, palette token violet, glyph: open A: two legs and a crossbar (a symbol for type, not text). Centred on the plate (64, 91). -->
   <defs>
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#D69BFF"/>
@@ -26,6 +26,10 @@
     <path id="plate-shape-32" d="M24 74 a10 10 0 0 1 10 -10 H94 a10 10 0 0 1 10 10 V108 a12 12 0 0 1 -12 12 H36 a12 12 0 0 1 -12 -12 Z"/>
     <path id="back-shape-48" d="M33.333 8 H82.667 L106.667 32 V108 a12 12 0 0 1 -12 12 H33.333 a12 12 0 0 1 -12 -12 V20 a12 12 0 0 1 12 -12 Z"/>
     <path id="plate-shape-48" d="M21.333 71.333 a10 10 0 0 1 10 -10 H96.667 a10 10 0 0 1 10 10 V108 a12 12 0 0 1 -12 12 H33.333 a12 12 0 0 1 -12 -12 Z"/>
+    <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
+    <g id="glyph-16" transform="scale(8.0000)"><path d="M5 13.5 L8 7 L11 13.5" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="11" width="4" height="1" fill="#FFFFFF"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><path d="M7.5 18.5 L11 12 L14.5 18.5" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="8.5" y="16" width="5" height="1" fill="#FFFFFF"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><path d="M8.5 20.5 L12 13 L15.5 20.5" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="9.5" y="18" width="5" height="1" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -41,6 +45,7 @@
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
   <g id="glyph">
-    <path d="M64 74 L80 108 H72 L68.6 99 H59.4 L56 108 H48 Z M61 92 H67 L64 84 Z" fill-rule="evenodd" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M49 107 L64 74 L79 107" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M56.5 97 H71.5" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>
