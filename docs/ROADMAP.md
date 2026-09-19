@@ -35,7 +35,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 ## M4 — Real-world pass: apps + language folders (v0.2)
 Owner feedback 2026-09-19: judge icons in real scenes; Files and Settings must be excellent; Chrome keeps its
 official logo; language folders (Android, Go, Node, Python…) should show their logos; nothing macOS-like.
-- [ ] `tools/scene.ts` — real scenes through real GTK lookup: a directory as the Files grid (XDG special dirs,
+- [ ] `tools/scene.py` — real scenes through real GTK lookup: a directory as the Files grid (XDG special dirs,
       folder tags), the dock and the app grid, on the owner's dark setup and light
 - [ ] Local overlay (`install:local`, never committed): official Chrome / Chrome Dev icons linked from
       `/opt/google/*/product_logo_*`; language folders with the real brand marks (Simple Icons, CC0 paths)
@@ -48,6 +48,14 @@ official logo; language folders (Android, Go, Node, Python…) should show their
       inventory shows the owner actually uses
 - [ ] Devices: drive-harddisk, drive-removable-media, computer, phone, printer, camera
 - [ ] icon-critic SHIP on every new icon, reviewed in scenes
+
+## M4b — Status icons (symbolic, owner request 2026-09-19)
+Top-bar / panel status icons whose *state* reads at a glance (Wi-Fi, VPN, Bluetooth, volume, mic, battery,
+power profile, airplane, DND, privacy indicators…). Exception to rule 4, decided by the owner.
+- [ ] Research (names GNOME Shell 50 actually requests, symbolic recolouring classes, state language) → RESEARCH.md
+- [ ] ADR-005: symbolic icons ship as plain SVG (recolourable), not baked PNG; state colour via `success/warning/error` classes
+- [ ] Design the state language in DESIGN.md §8 (levels, off, acquiring, warning, critical; never colour alone)
+- [ ] Draw the status set; test in the real top bar (owner screenshot) on dark and light
 
 ## M5 — Release (v1.0)
 - [ ] `release` skill checklist complete: tarball, gnome-look listing text, GitHub release, install.sh
