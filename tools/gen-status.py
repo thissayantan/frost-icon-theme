@@ -218,7 +218,7 @@ SHIELD_D = ("M8 1L13 2.7v4c0 2.7-2 4.6-5 5.3C5 11.3 3 9.4 3 6.7V2.7z"
             "M8 3.1L11 4.1v2.6c0 1.7-1.2 2.9-3 3.4C6.2 9.6 5 8.4 5 6.7V4.1z")
 SHIELD = f'<path fill-rule="evenodd" {FG} d="{SHIELD_D}"/><path {FG} d="{rect(6, 4, 4, 3, 1.5)}{rect(7, 6, 2, 3)}"/>'
 SHIELD_LOW = SHIELD  # one shield, every state
-ICONS["network-vpn-symbolic"] = svg(SHIELD)
+ICONS["network-vpn-symbolic"] = svg(f'<g transform="translate(0 2)">{SHIELD}</g>')  # centred; badge/dot variants stay raised
 ICONS["network-vpn-acquiring-symbolic"] = acquiring(SHIELD_LOW)
 ICONS["network-vpn-disabled-symbolic"] = svg(
     f'<g opacity="{DIM}" clip-path="url(#cut)">{SHIELD}</g>' + g(thick(SLASH, 2)), cut_slash())
@@ -332,9 +332,16 @@ ICONS["screen-shared-symbolic"] = svg(
 # ── Quick-settings / indicators ───────────────────────────────────────────────
 RAYS = "".join(rect(x, y, 2, 2, 0.4) for x, y in [(1, 7), (13, 7), (7, 1), (7, 13), (3, 3), (11, 3), (3, 11), (11, 11)])
 ICONS["display-brightness-symbolic"] = svg(g(circle(8, 8, 3) + RAYS))
-MOON = f'<path fill-rule="evenodd" {FG} d="{circle(8, 8, 6.5)}{circle(11.2, 5.2, 5.6)}"/>'
-ICONS["night-light-symbolic"] = svg(f'<defs><clipPath id="c"><path d="{circle(8, 8, 6.5)}"/></clipPath></defs>'
-                                    f'<g clip-path="url(#c)">{MOON}</g>')
+def crescent(c1, r1, c2, r2):
+    """One closed path: the part of circle 1 outside circle 2 (no clip, no evenodd ghost ring)."""
+    (x1, y1), (x2, y2) = c1, c2
+    d = math.hypot(x2 - x1, y2 - y1)
+    a = (r1 * r1 - r2 * r2 + d * d) / (2 * d); h = math.sqrt(r1 * r1 - a * a)
+    mx, my = x1 + a * (x2 - x1) / d, y1 + a * (y2 - y1) / d
+    p1 = (mx + h * (y2 - y1) / d, my - h * (x2 - x1) / d); p2 = (mx - h * (y2 - y1) / d, my + h * (x2 - x1) / d)
+    return (f"M{f(p1[0])} {f(p1[1])}A{f(r1)} {f(r1)} 0 1 1 {f(p2[0])} {f(p2[1])}"
+            f"A{f(r2)} {f(r2)} 0 0 0 {f(p1[0])} {f(p1[1])}z")
+ICONS["night-light-symbolic"] = svg(g(crescent((8, 8), 6.5, (11.2, 5.2), 5.6)))
 PLANE = ("M7.1 1.6c0-.9 1.8-.9 1.8 0v4.3l5.6 3.3v1.7l-5.6-1.6v3.1l1.7 1.3v1.3L8 14.2l-2.6.8v-1.3l1.7-1.3V9.3"
          "l-5.6 1.6V9.2l5.6-3.3z")
 ICONS["airplane-mode-symbolic"] = svg(g(PLANE))

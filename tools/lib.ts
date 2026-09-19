@@ -243,7 +243,8 @@ export function derive(src: Source, size: number): string {
     remove(doc, "shadow", "glow", "frost", "rim");
     const plate = byId(doc, "plate");
     plate?.setAttribute("fill", "#FFFFFF");
-    plate?.setAttribute("fill-opacity", ".40");
+    // page family: a 40 % flap makes the pastel lower half too light for a white glyph — keep it at 20 %
+    plate?.setAttribute("fill-opacity", src.context === "mimetypes" ? ".20" : ".40");
     if (!hinted) thickenGlyph(doc, size);
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
