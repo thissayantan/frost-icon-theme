@@ -285,6 +285,7 @@ function sheet(doc: Document, size: number, hinted: boolean) {
   } else {
     // ≤ 32 px: translucent glass over a pastel is too pale for a white glyph — the glass goes solid tint
     remove(doc, "shadow", "glow", "frost", "depth", "rim");
+    byId(doc, "back")?.removeAttribute("mask"); // the page is opaque here; the mask's anti-aliased corner would notch the sheet
     if (size >= 32 && !hinted) thickenGlyph(doc, size, 1.3);
     byId(doc, "plate")?.setAttribute("fill", "url(#tint)");
     if (size <= 16) remove(doc, "back");
