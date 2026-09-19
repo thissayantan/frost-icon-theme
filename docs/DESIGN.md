@@ -42,7 +42,10 @@ whole icon, drop shadows on the glyph larger than σ 1, noise/grain, 3D perspect
 
 - Live area: 8 px padding → 112 × 112. Nothing but `shadow`/`glow` bleeds outside it.
 - **Back shape** sits upper-right: its bounding box ≈ 84 × 84, anchored at (36, 12).
-- **Plate** sits lower-left, overlapping the back shape by 45–60 % of its area: ≈ 80 × 72, anchored at (12, 44).
+- **Plate** sits lower-left, overlapping the back shape by 45–60 % of its area: 80 × 72, anchored at (16, 40)
+  (≈ 58 % overlap). At (12, 44) the plate centre sat so far off the back that a centred glyph hung over
+  bare glass and vanished on light backgrounds; at (16, 40) a ≤ 36 × 36 glyph centred on the plate (56, 76)
+  lies entirely over the back shape.
 - Folder family is the exception: back = folder silhouette full width (12 → 116), plate = lower
   62 % of the folder, full width, so it reads as the folder's front flap. Radii: back r12, flap top r10,
   flap bottom r12 (shared exactly with the back, so no back colour peeks round the corner). The tab rises
@@ -80,9 +83,9 @@ Glass: plate `#FFFFFF` (opacity per table above). Glyph: `#FFFFFF`. Shadow: `#00
 | 24, 22 | `back` (`lift`) `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size |
 | 16 | `back` `glyph` | silhouette + white glyph only |
 
-**Generic layout at ≤ 24 px** (rect back + a plate that leaves it): the plate is dropped too, the back
-grows to the live area (112 × 112, rx 28) and the glyph moves to its centre at 1.3×. A half-visible plate
-at 24 px is mud; a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
+**Generic layout at ≤ 32 px** (rect back + a plate that leaves it): the plate is dropped too, the back
+grows to the live area (112 × 112, rx 28) and the glyph moves to its centre at 1.6×. A half-visible plate
+at 24–32 px is mud; a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
 table above.
 
 **Pixel-grid hints.** A source may carry `<path id="back-shape-<size>">` / `<path id="plate-shape-<size>">`
@@ -114,6 +117,11 @@ opacity top stop, never add an outline.
   The same house (roof + body + door, same proportions) is the glyph wherever "home" appears (e.g. `go-home` apps icon).
 - **Places** — `user-trash`(+`-full`), `network-workgroup`, `user-bookmarks`.
 - **Mimetypes** — page silhouette back (graphite unless family colour applies), plate over lower half, type glyph.
+  Page: 84 × 112 at (22, 8), r12, top-right corner cut 24; plate = lower 58 px (y 62 → 120), flap radii
+  like the folder; glyph centred on the plate (64, 91). Template: `src/_templates/page.svg`.
+  Colours: graphite text/generic/executable, red PDF/video, pink image, violet audio/font, orange
+  archive/presentation, green script/spreadsheet, teal HTML, blue office document. `font-x-generic`'s
+  geometric "A" is a drawn symbol for type, not text.
 - **Core apps** — only generic GNOME apps (Files, Terminal, Settings, Text Editor, Calculator,
   System Monitor/Resources, Software, Tweaks, Disks, Extensions). No brand logos.
 

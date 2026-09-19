@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Hyaline user-trash — generic glass layout, palette token blue, glyph: bin with lid. Glyph centred on the plate (56, 76). -->
+  <defs>
+    <!-- palette token: blue (light → deep) -->
+    <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8CB8FF"/>
+      <stop offset="1" stop-color="#3F6DF5"/>
+    </linearGradient>
+    <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".28"/>
+    </linearGradient>
+    <linearGradient id="rim-stroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".70"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
+    </linearGradient>
+    <rect id="back-shape" x="36" y="12" width="84" height="84" rx="20" fill="url(#tint)"/>
+    <rect id="plate-shape" x="16" y="40" width="80" height="72" rx="18"/>
+    <!-- glyph hints for the ≤24 px squircle re-layout (units = pixels at that size) -->
+    <g id="glyph-16" transform="scale(8.0000)"><rect x="6" y="3" width="4" height="1" fill="#FFFFFF"/><rect x="4" y="4" width="8" height="1" fill="#FFFFFF"/><rect x="5" y="6" width="6" height="7" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="7" width="1" height="5" fill="#3F6DF5" fill-opacity=".55"/><rect x="9" y="7" width="1" height="5" fill="#3F6DF5" fill-opacity=".55"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><rect x="9" y="4" width="4" height="1" fill="#FFFFFF"/><rect x="5" y="5" width="12" height="2" fill="#FFFFFF"/><rect x="6" y="8" width="10" height="9" rx="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="9" y="10" width="1" height="5" fill="#3F6DF5" fill-opacity=".55"/><rect x="12" y="10" width="1" height="5" fill="#3F6DF5" fill-opacity=".55"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><rect x="10" y="5" width="4" height="1" fill="#FFFFFF"/><rect x="6" y="6" width="12" height="2" fill="#FFFFFF"/><rect x="7" y="9" width="10" height="10" rx="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="11" width="1" height="6" fill="#3F6DF5" fill-opacity=".55"/><rect x="13" y="11" width="1" height="6" fill="#3F6DF5" fill-opacity=".55"/></g>
+    <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
+    <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur-frost" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="blur-lift" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+    <mask id="outside-plate"><rect width="128" height="128" fill="#FFFFFF"/><use xlink:href="#plate-shape" fill="#000000"/></mask>
+  </defs>
+
+  <ellipse id="shadow" cx="64" cy="115" rx="40" ry="4" fill="#000000" opacity=".12" filter="url(#blur-shadow)"/>
+  <use id="glow" xlink:href="#back-shape" transform="translate(0 4)" opacity=".35" filter="url(#blur-glow)"/>
+  <use id="back" xlink:href="#back-shape"/>
+  <g id="frost" clip-path="url(#plate-clip)"><use xlink:href="#back-shape" filter="url(#blur-frost)"/></g>
+  <!-- lift: plate-only contact shadow, masked to outside the plate so the glass itself never greys -->
+  <g id="lift" mask="url(#outside-plate)">
+    <use xlink:href="#plate-shape" transform="translate(0 2)" fill="#000000" opacity=".08" filter="url(#blur-lift)"/>
+  </g>
+  <use id="plate" xlink:href="#plate-shape" fill="url(#plate-fill)"/>
+  <g id="rim" clip-path="url(#plate-clip)">
+    <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
+  </g>
+  <g id="glyph" transform="translate(4 -4)">
+    <rect x="46" y="59" width="12" height="7" rx="3" fill="#FFFFFF"/>
+    <rect x="36" y="64" width="32" height="6" rx="3" fill="#FFFFFF"/>
+    <path d="M39 73 H65 L62.6 96.6 a4 4 0 0 1 -4 3.4 H45.4 a4 4 0 0 1 -4 -3.4 Z" fill="#FFFFFF" fill-opacity=".78"/>
+    <rect x="46.5" y="78" width="4" height="15" rx="2" fill="#3F6DF5" fill-opacity=".55"/>
+    <rect x="53.5" y="78" width="4" height="15" rx="2" fill="#3F6DF5" fill-opacity=".55"/>
+  </g>
+</svg>

@@ -24,7 +24,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] `icon-critic` agent review passed; findings fixed
 
 ## M3 — Places + mimetypes (v0.1)
-- [ ] `user-trash`, `user-trash-full`, `user-bookmarks`, `network-workgroup`, `network-server`
+- [x] `user-trash`, `user-trash-full`, `user-bookmarks`, `network-workgroup`, `network-server`
 - [ ] Mimetypes (generic + top types): text-x-generic, application-x-generic, application-pdf, image-x-generic,
       audio-x-generic, video-x-generic, package-x-generic / archives, text-x-script, text-html,
       x-office-document, x-office-spreadsheet, x-office-presentation, application-x-executable, font-x-generic

@@ -138,7 +138,7 @@ const rectBox = (el: Element | null) =>
     : null;
 
 /**
- * ≤24 px, generic layout (rect back + rect plate that leaves the back): with the plate gone the glyph
+ * ≤32 px, generic layout (rect back + rect plate that leaves the back): with the plate gone the glyph
  * would hang off the back shape, so the back grows to the live area and the glyph moves to its centre.
  */
 function isGeneric(doc: Document): boolean {
@@ -157,7 +157,7 @@ function recentreOnBack(doc: Document, moveGlyph = true) {
   back!.setAttribute("width", "112"); back!.setAttribute("height", "112"); back!.setAttribute("rx", "28");
   if (!moveGlyph) return;
   const [cx, cy] = [plate[0] + plate[2] / 2, plate[1] + plate[3] / 2];
-  const k = 1.3;
+  const k = 1.6;
   const prev = glyph.getAttribute("transform") ?? "";
   glyph.setAttribute("transform", `translate(64 64) scale(${k}) translate(${-cx} ${-cy}) ${prev}`.trim());
 }
@@ -185,6 +185,11 @@ export function derive(src: Source, size: number): string {
   }
   if (size >= 64) {
     // full glass
+  } else if (size < 48 && isGeneric(doc)) {
+    // generic layout ≤ 32 px: a plate hanging off the back is mud at this size — squircle + centred glyph
+    remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
+    recentreOnBack(doc, !hinted);
+    if (!hinted) thickenGlyph(doc, size);
   } else if (size >= 32) {
     // A blurred glow wider than the pixel-hinted edge re-softens the silhouette on light backgrounds:
     // gone at 32, faint at 48.
@@ -192,10 +197,6 @@ export function derive(src: Source, size: number): string {
     else remove(doc, "shadow");
     setBlur(doc, "blur-glow", 4);
     byId(doc, "glow")?.setAttribute("opacity", ".15");
-  } else if (size >= 22 && isGeneric(doc)) {
-    remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
-    recentreOnBack(doc, !hinted);
-    if (!hinted) thickenGlyph(doc, size);
   } else if (size >= 22) {
     remove(doc, "shadow", "glow", "frost", "rim");
     const plate = byId(doc, "plate");
