@@ -232,36 +232,20 @@ ICONS["bluetooth-disabled-symbolic"] = svg(g(RUNE, dim=True, clip="cut") + g(thi
 RUNE_LOW = thick([(4, 4), (11, 8.5), (8, 11), (8, 1), (11, 3.5), (4, 8)], 2)
 ICONS["bluetooth-acquiring-symbolic"] = acquiring(f'<path d="{RUNE_LOW}" {FG}/>')
 
-# ── Volume: a soft, rounded speaker with up to three round-capped arcs, generously spaced (after the owner
-#    preferred the Windows 11 speaker over the stock one; a grille experiment read as a cocoon at 16 px).
-def roundpoly(pts, r):
-    n = len(pts); segs = []
-    for k in range(n):
-        p0, p1, p2 = pts[k - 1], pts[k], pts[(k + 1) % n]
-        def toward(a, b, d):
-            L = math.hypot(b[0] - a[0], b[1] - a[1]); d = min(d, L / 2)
-            return (a[0] + (b[0] - a[0]) * d / L, a[1] + (b[1] - a[1]) * d / L)
-        segs.append((toward(p1, p0, r), p1, toward(p1, p2, r)))
-    d = f"M{f(segs[0][0][0])} {f(segs[0][0][1])}"
-    for k, (a, p, b) in enumerate(segs):
-        if k: d += f"L{f(a[0])} {f(a[1])}"
-        d += f"Q{f(p[0])} {f(p[1])} {f(b[0])} {f(b[1])}"
-    return d + "z"
-
-
-def arc(cx, cy, r0, r1, a0, a1):
-    """An annular arc with round caps (sector + end discs) — draw inside one group so opacity has no seams."""
-    rc, rm = (r1 - r0) / 2, (r0 + r1) / 2
-    ends = [(cx + rm * math.sin(math.radians(a)), cy - rm * math.cos(math.radians(a))) for a in (a0, a1)]
-    return sector(cx, cy, r0, r1, a0, a1) + "".join(circle(x, y, rc) for x, y in ends)
-
-
-SPEAKER = roundpoly([(0.5, 6), (3, 6), (6, 3), (6, 13), (3, 10), (0.5, 10)], 1)
-WAVES = [arc(6, 8, 2, 4, 58, 122), arc(6, 8, 5, 7, 52, 128), arc(6, 8, 8, 10, 50, 130)]  # 2-px bands, whole radii
+# ── Volume: pixel-exact speaker (researched 2026-09-20 — Fluent/Windows 11, Adwaita, Material, SF Symbols all use
+#    a big solid speaker + few bold, evenly spaced waves at 16 px, drawn on the pixel grid). Heavy speaker (box + 45°
+#    stepped cone, rows 2–13), wave 1 = filled half-disc (Material's weight), waves 2–3 = 2-px arcs, 1-px gaps.
+#    Levels low/medium/high = 1/2/3 waves; unlit waves are not drawn (Windows way — dim waves cluttered it).
+SPEAKER = cells([".....#", "....##", "...###", ".#####", "######", "######",
+                 "######", "######", ".#####", "...###", "....##", ".....#"], 0, 2)
+WAVES = [
+    cells(["#.", "##", "##", "##", "##", "#."], 7, 5),                                         # half-disc
+    cells(["#..", "##.", ".##", ".##", ".##", ".##", ".##", ".##", "##.", "#.."], 10, 3),      # arc
+    cells(["#..", "##.", ".##"] + [".##"] * 8 + ["##.", "#.."], 13, 1),                       # outer arc
+]
 
 
 def volume(level):
-    """Unlit arcs are simply not drawn (as Windows 11) — dim arcs cluttered the 16-px speaker."""
     return svg(g(SPEAKER + "".join(WAVES[:level])))
 
 
