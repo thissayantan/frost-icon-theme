@@ -173,7 +173,7 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Charging | level fill untouched + a pixel bolt badge on the bottom-right corner (1-px moat) | bolt `success` |
 | Plugged in, not charging | level fill + a pixel plug badge on the corner | none |
 | Charged (100, on AC) | full fill (`success`) + a 2-px pixel check badge on the corner | fill + check `success` |
-| Volume | a speaker grille: five slats tracing a round driver, lit from the centre outward (low 1 · medium 3 · high 5) | none |
+| Volume | a soft rounded speaker + 1 · 2 · 3 round-capped arcs for low · medium · high — unlit arcs are *not drawn* (exception to the 35 % rule: dim arcs cluttered it) | none |
 | Mic in use (the top-bar indicator exists only while recording) | solid mic + two sound arcs lit by input level | whole icon `warning` (in-use colour) |
 | Over-amplified volume | full waves + "!" disc | `warning` |
 

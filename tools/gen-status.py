@@ -232,22 +232,43 @@ ICONS["bluetooth-disabled-symbolic"] = svg(g(RUNE, dim=True, clip="cut") + g(thi
 RUNE_LOW = thick([(4, 4), (11, 8.5), (8, 11), (8, 1), (11, 3.5), (4, 8)], 2)
 ICONS["bluetooth-acquiring-symbolic"] = acquiring(f'<path d="{RUNE_LOW}" {FG}/>')
 
-# ── Volume (owner's reference 2026-09-19): a speaker GRILLE — five rounded 2-px slats with 1-px gaps whose lengths
-#    trace a round driver. Level lights the slats from the centre outward (low 1, medium 3, high 5), rest at 35 %.
-GRILLE = [rect(5, 1, 6, 2, 1), rect(2, 4, 12, 2, 1), rect(1, 7, 14, 2, 1), rect(2, 10, 12, 2, 1), rect(5, 13, 6, 2, 1)]
-ORDER = [2, 1, 3, 0, 4]  # centre first, then outward
+# ── Volume: a soft, rounded speaker with up to three round-capped arcs, generously spaced (after the owner
+#    preferred the Windows 11 speaker over the stock one; a grille experiment read as a cocoon at 16 px).
+def roundpoly(pts, r):
+    n = len(pts); segs = []
+    for k in range(n):
+        p0, p1, p2 = pts[k - 1], pts[k], pts[(k + 1) % n]
+        def toward(a, b, d):
+            L = math.hypot(b[0] - a[0], b[1] - a[1]); d = min(d, L / 2)
+            return (a[0] + (b[0] - a[0]) * d / L, a[1] + (b[1] - a[1]) * d / L)
+        segs.append((toward(p1, p0, r), p1, toward(p1, p2, r)))
+    d = f"M{f(segs[0][0][0])} {f(segs[0][0][1])}"
+    for k, (a, p, b) in enumerate(segs):
+        if k: d += f"L{f(a[0])} {f(a[1])}"
+        d += f"Q{f(p[0])} {f(p[1])} {f(b[0])} {f(b[1])}"
+    return d + "z"
 
 
-def volume(lit_count):
-    lit = "".join(GRILLE[k] for k in ORDER[:lit_count])
-    dim = "".join(GRILLE[k] for k in ORDER[lit_count:])
-    return svg((g(lit) if lit else "") + (g(dim, dim=True) if dim else ""))
+def arc(cx, cy, r0, r1, a0, a1):
+    """An annular arc with round caps (sector + end discs) — draw inside one group so opacity has no seams."""
+    rc, rm = (r1 - r0) / 2, (r0 + r1) / 2
+    ends = [(cx + rm * math.sin(math.radians(a)), cy - rm * math.cos(math.radians(a))) for a in (a0, a1)]
+    return sector(cx, cy, r0, r1, a0, a1) + "".join(circle(x, y, rc) for x, y in ends)
 
 
-SPEAKER_ALL = "".join(GRILLE)
+SPEAKER = roundpoly([(0.5, 6), (3, 6), (6, 3), (6, 13), (3, 10), (0.5, 10)], 1)
+WAVES = [arc(6, 8, 2, 4, 58, 122), arc(6, 8, 5, 7, 52, 128), arc(6, 8, 8, 10, 50, 130)]  # 2-px bands, whole radii
+
+
+def volume(level):
+    """Unlit arcs are simply not drawn (as Windows 11) — dim arcs cluttered the 16-px speaker."""
+    return svg(g(SPEAKER + "".join(WAVES[:level])))
+
+
+SPEAKER_ALL = SPEAKER + "".join(WAVES)
 ICONS["audio-volume-low-symbolic"] = volume(1)
-ICONS["audio-volume-medium-symbolic"] = volume(3)
-ICONS["audio-volume-high-symbolic"] = volume(5)
+ICONS["audio-volume-medium-symbolic"] = volume(2)
+ICONS["audio-volume-high-symbolic"] = volume(3)
 ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER_ALL), badge_bang("warning"))
 ICONS["audio-volume-muted-symbolic"] = off(SPEAKER_ALL)
 
