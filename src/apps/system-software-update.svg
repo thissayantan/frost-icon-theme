@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline system-software-update — app family. Software Updater — a glass package with a white refresh ring. -->
+  <!-- Hyaline system-software-update — app family. Software Updater — a glass package (overhanging lid) with a white refresh ring. -->
   <defs>
     <!-- palette token: green (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,9 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M40 32h48a14 14 0 0 1 14 14v40a14 14 0 0 1 -14 14h-48a14 14 0 0 1 -14 -14v-40a14 14 0 0 1 14 -14z"/>
+    <path id="plate-shape" d="M28 32 H100 a6 6 0 0 1 6 6 v4 a6 6 0 0 1 -6 6 V90 a10 10 0 0 1 -10 10 H38 a10 10 0 0 1 -10 -10 V48 a6 6 0 0 1 -6 -6 v-4 a6 6 0 0 1 6 -6 z"/>
+    <!-- size hints -->
+    <g id="glyph-16" transform="scale(8.0000)"><path d="M10.9 8.2 A3 3 0 1 1 8.2 6.4" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/><path d="M7.4 4.9 L10.2 6.3 L7.6 8 Z" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +32,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M50 60 A16 16 0 0 1 78 57" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M78 72 A16 16 0 0 1 50 75" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M84 46 L84 62 L69 60 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/><path d="M44 86 L44 70 L59 72 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/></g>
+  <g id="glyph"><path d="M50 70 A16 16 0 0 1 78 67" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M78 82 A16 16 0 0 1 50 85" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M84 56 L84 72 L69 70 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/><path d="M44 96 L44 80 L59 82 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/></g>
 </svg>

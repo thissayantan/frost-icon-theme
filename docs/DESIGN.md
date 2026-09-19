@@ -134,7 +134,8 @@ opacity top stop, never add an outline.
   official Chrome lives in the local overlay). Anatomy: **back** = colour squircle (12,12 → 116,116, r28);
   **plate** = the app's own *object* in frosted glass, inside the back — never a generic square or disc unless the
   object is round (dial, globe, face, lifebuoy, ring chart); **glyph** = one white detail on the plate.
-  A plate is **one outline** (overlapping sub-paths make the rim draw seams). Strokes 8 main / 6 secondary.
+  A plate is **one outline** (overlapping sub-paths make the rim draw seams). The white detail may also stand
+  *behind* the plate's front edge (Files' sheet), clipped so only the part above the object shows. Strokes 8 main / 6 secondary.
   Not macOS: no 3D, no realism, no inset-screen-with-bezel, no iOS switch — flat colour, one glass object, one symbol.
   Colours (≤ 3 each): blue Files/Clocks/Disk Usage · green Settings/Tweaks/Updater (system) · graphite
   Terminal/Disks/Logs · violet Ghostty/Fonts/Extensions · orange Calculator/Software · pink Image Viewer/Characters

@@ -16,6 +16,8 @@
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
     <path id="plate-shape" d="M47 24h0a9 9 0 0 1 9 9v62a9 9 0 0 1 -9 9h0a9 9 0 0 1 -9 -9v-62a9 9 0 0 1 9 -9zM81 24h0a9 9 0 0 1 9 9v62a9 9 0 0 1 -9 9h0a9 9 0 0 1 -9 -9v-62a9 9 0 0 1 9 -9z"/>
+    <!-- size hints -->
+    <g id="glyph-16" transform="scale(8.0000)"><circle cx="5.9" cy="9.6" r="1.7" fill="#FFFFFF"/><circle cx="10.1" cy="6.4" r="1.7" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
