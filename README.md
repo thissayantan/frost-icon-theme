@@ -33,6 +33,8 @@ curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/
 # with the developer file-type fixes:
 curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh -s -- --mime
 ```
+Also on [gnome-look.org](https://www.gnome-look.org/p/2372226/).
+
 **Manual:** download `Frost-v*.tar.xz` from [Releases](https://github.com/thissayantan/frost-icon-theme/releases),
 extract it, and copy the `Frost` folder to `~/.local/share/icons/`.
 
