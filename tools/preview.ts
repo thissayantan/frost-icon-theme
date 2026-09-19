@@ -36,7 +36,7 @@ function entries(): Entry[] {
 }
 
 /** A busy, photo-like backdrop (deterministic, licence-free): soft colour fields + hard light/dark detail. */
-function wallpaperSvg(w: number, h: number): string {
+function wallpaperSvg(w: number, h: number, busy = true): string {
   let seed = 7;
   const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const hues = ["#1F4E79", "#E07A2E", "#3C8D5A", "#F2D16B", "#7A3B8C", "#0F2233", "#D94F4F", "#9FD3F2"];
@@ -45,7 +45,7 @@ function wallpaperSvg(w: number, h: number): string {
     blobs += `<circle cx="${(rnd() * w).toFixed(0)}" cy="${(rnd() * h).toFixed(0)}" r="${(20 + rnd() * 90).toFixed(0)}" fill="${hues[Math.floor(rnd() * hues.length)]}" opacity="${(0.35 + rnd() * 0.5).toFixed(2)}"/>`;
   }
   let detail = "";
-  for (let i = 0; i < Math.ceil((w * h) / 4000); i++) {
+  for (let i = 0; busy && i < Math.ceil((w * h) / 4000); i++) {
     const x = rnd() * w, y = rnd() * h, l = 10 + rnd() * 60, a = rnd() * 180;
     detail += `<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${l.toFixed(0)}" height="${(1 + rnd() * 4).toFixed(1)}" transform="rotate(${a.toFixed(0)} ${x.toFixed(0)} ${y.toFixed(0)})" fill="${rnd() > 0.5 ? "#FFFFFF" : "#000000"}" opacity="${(0.25 + rnd() * 0.5).toFixed(2)}"/>`;
   }
@@ -55,10 +55,10 @@ function wallpaperSvg(w: number, h: number): string {
     <rect width="${w}" height="${h}" fill="url(#sky)"/><g filter="url(#soft)">${blobs}</g>${detail}</svg>`;
 }
 
-async function backdrop(w: number, h: number): Promise<Buffer> {
+async function backdrop(w: number, h: number, busy = true): Promise<Buffer> {
   const file = flag("wallpaper");
   if (file) return sharp(file).resize(w, h, { fit: "cover" }).png().toBuffer();
-  return Buffer.from(new Resvg(wallpaperSvg(w, h)).render().asPng());
+  return Buffer.from(new Resvg(wallpaperSvg(w, h, busy)).render().asPng());
 }
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
@@ -118,14 +118,16 @@ async function grid(list: Entry[], size: number) {
   svg += "</svg>";
   const layers: OverlayOptions[] = [];
   const wp = BACKGROUNDS.findIndex((b) => !b.fill);
-  layers.push({ input: await backdrop(W, panelH), left: 0, top: wp * panelH });
+  layers.push({ input: await backdrop(W, panelH, false), left: 0, top: wp * panelH });
   let labels = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">`;
   for (const [p, bg] of BACKGROUNDS.entries()) {
     const y0 = p * panelH;
+    if (!bg.fill) labels += `<rect x="16" y="${y0 + 10}" width="170" height="26" rx="13" fill="#000000" fill-opacity=".35"/>`;
     labels += text(24, y0 + 28, `Hyaline — ${bg.name}`, bg.ink, 15, "start", 600);
     for (const [i, e] of list.entries()) {
       const cx = 24 + (i % cols) * cell, cy = y0 + title + Math.floor(i / cols) * (cell + labelH);
       layers.push({ input: await e.png(size, 1), left: cx + 28, top: cy + 20 });
+      if (!bg.fill) labels += `<rect x="${cx + cell / 2 - e.label.length * 3.1 - 8}" y="${cy + cell - 3}" width="${e.label.length * 6.2 + 16}" height="18" rx="9" fill="#000000" fill-opacity=".35"/>`;
       labels += text(cx + cell / 2, cy + cell + 10, e.label, bg.ink, 11, "middle", 400);
     }
   }
