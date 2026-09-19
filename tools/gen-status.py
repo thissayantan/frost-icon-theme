@@ -66,6 +66,36 @@ def thick(points, w=2.0, round_=True):
     return "".join(parts)
 
 
+def cells(rows, x0, y0):
+    """Pixel art → path: `rows` is a list of strings ('#' = on); merged into horizontal runs on whole pixels."""
+    d = ""
+    for j, row in enumerate(rows):
+        i = 0
+        while i < len(row):
+            if row[i] == "#":
+                k = i
+                while k < len(row) and row[k] == "#":
+                    k += 1
+                d += rect(x0 + i, y0 + j, k - i, 1)
+                i = k
+            else:
+                i += 1
+    return d
+
+
+def dilate(rows):
+    """Grow a pixel mask by 1 px in every direction (for a 1-px moat); returns rows padded by 1 on each side."""
+    h, w = len(rows), len(rows[0])
+    out = [["." for _ in range(w + 2)] for _ in range(h + 2)]
+    for j in range(h):
+        for i in range(w):
+            if rows[j][i] == "#":
+                for dj in (-1, 0, 1):
+                    for di in (-1, 0, 1):
+                        out[j + 1 + dj][i + 1 + di] = "#"
+    return ["".join(r) for r in out]
+
+
 # ── composition ──────────────────────────────────────────────────────────────
 def svg(body, defs=""):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">'
@@ -110,20 +140,20 @@ def cross(cx, cy, a=0.85, L=2.5):
     return poly(*[(cx + (x - y) * c, cy + (x + y) * c) for x, y in pts])
 
 
-def cut_badge(cx=12, cy=12, r=4):
+def cut_badge(cx=12, cy=12, r=4):  # the × (10..16) sits inside this disc + gap too
     """clip removing the badge disc + 1-px gap from the glyph."""
     return (f'<clipPath id="cutb"><path clip-rule="evenodd" fill-rule="evenodd" '
             f'd="M0 0H16V16H0z{circle(cx, cy, r + 1)}"/></clipPath>')
 
 
 def badge_bang(cls):
-    """8-px disc at (12,12) in the state colour, a 2-px '!' knocked out."""
-    return f'<path fill-rule="evenodd" class="{cls}" {FG} d="{circle(12, 12, 4)}{rect(11, 9, 2, 3.2)}{rect(11, 13.2, 2, 1.8)}"/>'
+    """8-px disc at (12,12) in the state colour, a 2-px '!' knocked out on whole rows (stem 3, gap 1, dot 2)."""
+    return f'<path fill-rule="evenodd" class="{cls}" {FG} d="{circle(12, 12, 4)}{rect(11, 9, 2, 3)}{rect(11, 13, 2, 2)}"/>'
 
 
 def badge_x():
     """A solid 2-px-armed × across 5 px (no disc) — reads as × at 16 px."""
-    return f'<path {FG} d="{cross(12.5, 12.5, 1.0, 3.0)}"/>'
+    return f'<path {FG} d="{cells(["##..##", ".####.", "..##..", "..##..", ".####.", "##..##"], 10, 10)}"/>'
 
 
 def with_badge(glyph_svg_part, badge, shrink=False):
@@ -161,24 +191,21 @@ ICONS["network-wireless-disabled-symbolic"] = off(WIFI_ALL)
 ICONS["network-wireless-offline-symbolic"] = with_badge(g(WIFI_ALL, dim=True), badge_x())
 ICONS["network-wireless-no-route-symbolic"] = with_badge(g(WIFI_ALL), badge_bang("warning"))
 ICONS["network-wireless-encrypted-symbolic"] = with_badge(
-    g(WIFI_ALL), f'<path fill-rule="evenodd" {FG} d="{rect(9, 11, 6, 5, 1)}{rect(10, 7.5, 4, 5, 2)}{rect(11.5, 9, 1, 3)}"/>')
+    g(WIFI_ALL), f'<path {FG} d="{cells([".###.", ".#.#.", "#####", "#####", "#####"], 10, 10)}"/>')
 ICONS["network-wireless-hotspot-symbolic"] = svg(g(
     circle(8, 8, 2) + sector(8, 8, 4, 6, 225, 315) + sector(8, 8, 4, 6, 45, 135) +
     sector(8, 8, 7, 8.5, 235, 305) + sector(8, 8, 7, 8.5, 55, 125)))
 
 # ── Wired: an ethernet port on whole pixels ───────────────────────────────────
-def port(x0, y0, w, h, ox, oy):
-    """Ethernet port: frame + opening (tab step) with every edge on whole pixels."""
-    return rect(x0, y0, w, h, 2.5) + poly((ox, oy + 4), (ox, oy + 1), (ox + 2, oy + 1), (ox + 2, oy - 1), (ox + 6, oy - 1),
-                                         (ox + 6, oy + 1), (ox + 8, oy + 1), (ox + 8, oy + 4))
-PORT = f'<path fill-rule="evenodd" {FG} d="{port(1, 2, 14, 12, 4, 6)}"/>'
-PORT13 = f'<path fill-rule="evenodd" {FG} d="{port(0, 1, 13, 11, 2.5, 5)}"/>'.replace("2.5,", "2.5,")
-PORT13 = f'<path fill-rule="evenodd" {FG} d="{port(0, 1, 13, 11, 3, 5)}"/>'
-PORTLOW = f'<path fill-rule="evenodd" {FG} d="{port(1, 1, 14, 10, 4, 5)}"/>'
+# Wired: an ethernet socket — 2-px frame + latch, whole pixels. Badged states keep it in place (only cut).
+PORT_D = rect(2, 3, 12, 10, 2) + rect(4, 5, 8, 6) + rect(6, 9, 4, 2)
+PORT = f'<path fill-rule="nonzero" {FG} d="{rect(2, 3, 12, 10, 2)}"/>'
+PORT = f'<path fill-rule="evenodd" {FG} d="{rect(2, 3, 12, 10, 2)}{rect(4, 5, 8, 6)}"/><path {FG} d="{rect(6, 9, 4, 2)}"/>'
+PORT_LOW = f'<path fill-rule="evenodd" {FG} d="{rect(2, 1, 12, 10, 2)}{rect(4, 3, 8, 6)}"/><path {FG} d="{rect(6, 7, 4, 2)}"/>'
 ICONS["network-wired-symbolic"] = svg(PORT)
-ICONS["network-wired-acquiring-symbolic"] = acquiring(PORTLOW)
-ICONS["network-wired-no-route-symbolic"] = with_badge(PORT13, badge_bang("warning"))
-ICONS["network-wired-disconnected-symbolic"] = with_badge(f'<g opacity="{DIM}">{PORT13}</g>', badge_x())
+ICONS["network-wired-acquiring-symbolic"] = acquiring(PORT_LOW)
+ICONS["network-wired-no-route-symbolic"] = with_badge(PORT, badge_bang("warning"))
+ICONS["network-wired-disconnected-symbolic"] = with_badge(f'<g opacity="{DIM}">{PORT}</g>', badge_x())
 ICONS["network-wired-offline-symbolic"] = ICONS["network-wired-disconnected-symbolic"]
 
 # ── VPN: a shield; keyhole is ONE sub-path (circle + slot merged, no evenodd bridge) ─
@@ -188,15 +215,18 @@ def keyhole(cx, cy, r, w, bottom):
             f"L{f(cx + w / 2)} {f(bottom)}L{f(cx - w / 2)} {f(bottom)}z")
 
 
-SHIELD_D = "M8 1L14 3v5c0 3.4-2.5 6-6 7C4.5 14 2 11.4 2 8V3z" + keyhole(8, 6.5, 1.8, 1.6, 11)
-SHIELD = f'<path fill-rule="evenodd" {FG} d="{SHIELD_D}"/>'
+SHIELD_OUT = "M8 1L14 3v5c0 3.4-2.5 6-6 7C4.5 14 2 11.4 2 8V3z"
+SHIELD_IN = "M8 3.1L12 4.4v3.6c0 2.4-1.6 4.2-4 5C5.6 12.2 4 10.4 4 8V4.4z"
+KEYHOLE = cells([".##.", ".##.", "..", ], 0, 0)  # placeholder, replaced below
+KEYHOLE = rect(7, 5, 2, 2) + rect(7, 7, 2, 3)
+SHIELD = f'<path fill-rule="evenodd" {FG} d="{SHIELD_OUT}{SHIELD_IN}"/><path {FG} d="{rect(6, 5, 4, 3, 1.5)}{rect(7, 7, 2, 3)}"/>'
+SHIELD_LOW = (f'<path fill-rule="evenodd" {FG} d="M8 0.5L13 2.2v3.8c0 2.6-2 4.4-5 5.3C5 10.4 3 8.6 3 6V2.2z'
+              f'M8 2.5L11 3.6v2.4c0 1.7-1.2 3-3 3.6C6.2 9 5 7.7 5 6V3.6z"/>')
 ICONS["network-vpn-symbolic"] = svg(SHIELD)
-SHIELD13 = f'<path fill-rule="evenodd" {FG} d="M7 1L12 3v4c0 3-2 5-5 6C4 12 2 10 2 7V3z{keyhole(7, 6, 1.6, 1.4, 9.5)}"/>'
-SHIELD_LOW = f'<path fill-rule="evenodd" {FG} d="M8 0.5L13 2.5v3.5c0 2.6-2 4.4-5 5.3C5 10.4 3 8.6 3 6V2.5z{keyhole(8, 5, 1.4, 1.2, 8.5)}"/>'
 ICONS["network-vpn-acquiring-symbolic"] = acquiring(SHIELD_LOW)
 ICONS["network-vpn-disabled-symbolic"] = svg(
     f'<g opacity="{DIM}" clip-path="url(#cut)">{SHIELD}</g>' + g(thick(SLASH, 2)), cut_slash())
-ICONS["network-vpn-no-route-symbolic"] = with_badge(SHIELD13, badge_bang("warning"))
+ICONS["network-vpn-no-route-symbolic"] = with_badge(SHIELD, badge_bang("warning"))
 
 # ── Bluetooth: the rune, 2-px ─────────────────────────────────────────────────
 RUNE = thick([(4, 5), (11.5, 10.5), (8, 14), (8, 2), (11.5, 5.5), (4, 11)], 2)
@@ -231,7 +261,7 @@ STAND = sector(8, 6, 5, 6.5, 100, 260) + rect(7, 12, 2, 2) + rect(4, 14, 8, 2, 1
 def mic(level):
     if level >= 3:
         return svg(g(CAPSULE + STAND))
-    rows = {0: 0, 1: 3, 2: 6}[level]
+    rows = {0: 0, 1: 4, 2: 6}[level]
     clip = f'<clipPath id="lvl"><path d="{rect(0, 10 - rows, 16, rows)}"/></clipPath>' if rows else ""
     lit = g(CAPSULE, clip="lvl") if rows else ""
     return svg(g(CAPSULE, dim=True) + lit + g(STAND), clip)
@@ -248,38 +278,36 @@ ICONS["audio-input-microphone-symbolic"] = mic(3)
 B_FRAME = rect(1, 3, 11, 10, 2) + rect(2, 4, 9, 8, 1)  # body x 1–12, inner x 2–11
 B_CAP = rect(12, 6, 2, 4, 1)
 FILL_X, FILL_Y, FILL_W, FILL_H = 3, 5, 7, 6  # 7-px fill track
-# Power marks: a HOLE in the fill where the fill reaches, drawn solid only over the empty part — so the fill's
-# right edge (the level) is always visible, at every percentage. Frame and terminal never change.
-BOLT = poly((8, 3.5), (4.5, 8.5), (7, 8.5), (6, 12.5), (9.8, 7), (7.4, 7))
-PLUG = rect(4, 4, 2, 2) + rect(8, 4, 2, 2) + rect(4, 6, 6, 3, 1) + rect(6, 9, 2, 3)  # 2-px prongs, 2-px gap
-CHECK = "M3.4 8.1L4.6 6.9L6.5 8.8L9.4 5.9L10.6 7.1L6.5 11.2z"
-BANG = rect(6, 5, 2, 3.5) + rect(6, 9.5, 2, 1.8)
+# Power marks are pixel BADGES on the body's bottom-right corner (like the "!"/× badges, and like Adwaita):
+# the frame and fill are cut by a 1-px moat around the mark, the fill itself is untouched — so the level reads
+# at every percentage and the mark keeps its shape.
+BOLT_M = ["...##", "..##.", ".##..", "#####", "..##.", ".##..", "##..."]   # x 11–16, y 9–16
+PLUG_M = ["#..#", "#..#", "####", "####", ".##.", ".##."]                # x 12–16, y 10–16
+CHECK_M = ["....##", "...##.", "#.##..", "###...", ".#...."]              # x 10–16, y 11–16
+BADGE_AT = {"charging": (BOLT_M, 11, 9), "plugged-in": (PLUG_M, 12, 10), "charged": (CHECK_M, 10, 11)}
+BANG = rect(6, 5, 2, 3) + rect(6, 9, 2, 2)
 
 
 def battery(level, state=""):
     """level 0..100 (step 10); state '' | 'charging' | 'plugged-in' | 'charged'."""
     critical = level <= 10 and not state
     klass = lambda c: f' class="{c}"' if c else ""
-    parts = [f'<path fill-rule="evenodd" {FG} d="{B_FRAME}{B_CAP}"/>']
     w = FILL_W if state == "charged" else round(FILL_W * level / 100)
     if level > 0 and w == 0:
         w = 1
-    mark = {"charging": BOLT, "plugged-in": PLUG, "charged": CHECK}.get(state, "")
-    defs = ""
+    body = [f'<path fill-rule="evenodd" {FG} d="{B_FRAME}{B_CAP}"/>']
     if critical:
-        parts.append(f'<path class="error" {FG} d="{BANG}"/>')
-    else:
+        body.append(f'<path class="error" {FG} d="{BANG}"/>')
+    elif w:
         cls = "warning" if level == 20 and not state else ("success" if state == "charged" else None)
-        if w:
-            fill = f'<path {FG}{klass(cls)} d="{rect(FILL_X, FILL_Y, w, FILL_H, 0.5)}"/>'
-            if mark:
-                defs += f'<clipPath id="hole"><path clip-rule="evenodd" fill-rule="evenodd" d="M0 0H16V16H0z{mark}"/></clipPath>'
-                fill = f'<g clip-path="url(#hole)">{fill}</g>'
-            parts.append(fill)
-        if mark and state != "charged":  # the mark itself, only where there is no fill
-            defs += f'<clipPath id="empty"><path d="{rect(FILL_X + w, 0, 16, 16)}"/></clipPath>'
-            parts.append(f'<g clip-path="url(#empty)"><path {FG}{klass("success" if state == "charging" else None)} d="{mark}"/></g>')
-    return svg("".join(parts), defs)
+        body.append(f'<path {FG}{klass(cls)} d="{rect(FILL_X, FILL_Y, w, FILL_H)}"/>')
+    if state not in BADGE_AT:
+        return svg("".join(body))
+    mask, x0, y0 = BADGE_AT[state]
+    moat = cells(dilate(mask), x0 - 1, y0 - 1)
+    defs = f'<clipPath id="moat"><path clip-rule="evenodd" fill-rule="evenodd" d="M0 0H16V16H0z{moat}"/></clipPath>'
+    mark_cls = {"charging": "success", "charged": "success"}.get(state)
+    return svg(f'<g clip-path="url(#moat)">{"".join(body)}</g><path{klass(mark_cls)} {FG} d="{cells(mask, x0, y0)}"/>', defs)
 
 
 for lv in range(0, 101, 10):
@@ -288,7 +316,7 @@ for lv in range(0, 101, 10):
     ICONS[f"battery-level-{lv}-plugged-in-symbolic"] = battery(lv, "plugged-in")
 ICONS["battery-level-100-charged-symbolic"] = battery(100, "charged")
 ICONS["battery-missing-symbolic"] = svg(
-    f'<g opacity="{DIM}"><path fill-rule="evenodd" {FG} d="{B_FRAME}{B_CAP}"/></g><path {FG} d="{BANG}"/>')
+    f'<g opacity="{DIM}"><path fill-rule="evenodd" {FG} d="{B_FRAME}{B_CAP}"/></g><path {FG} d="{BANG}"/>')  # whole-row '!'
 
 # ── Privacy / activity indicators — one colour (the Shell paints them itself) ──
 ICONS["camera-web-symbolic"] = svg(
