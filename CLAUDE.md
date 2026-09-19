@@ -40,6 +40,8 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
 - `bun run verify` — lint SVG sources, check naming/coverage, validate `index.theme`, run `tools/lookup.py`
 - `bun run install:local` — copy `dist/Frost` to `~/.local/share/icons/` and refresh the cache; installs the
   MIME add-on (`--no-mime` skips, `--undo-mime` removes)
+- `bun run pack` — `dist/Frost-v<version>.tar.xz` (theme + MIME add-on) for a release; `install.sh` installs it
+  (curl one-liner, `--mime`, `--system`, `--from DIR`, `--uninstall`)
 - `python3 tools/gen-mimetypes.py` — regenerate every file-type icon (+ its aliases) from the category/type tables
 - `bun run coverage` — regenerate `docs/COVERAGE.md` (shipped vs inherited, via real GTK lookup)
 - `bun run typecheck` — `tsc` over `tools/`

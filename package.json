@@ -12,6 +12,7 @@
     "verify": "bun tools/verify.ts",
     "coverage": "bun tools/coverage.ts",
     "install:local": "bun tools/install.ts",
+    "pack": "bun tools/pack.ts",
     "typecheck": "tsc -p .",
     "tag-folders": "bun tools/tag-folders.ts",
     "inventory": "bun tools/inventory.ts"
