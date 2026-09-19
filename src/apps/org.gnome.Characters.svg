@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Characters — app family. Characters — a glass card with a smiling face. -->
+  <!-- Hyaline org.gnome.Characters — app family. Characters — a round glass face, smiling. -->
   <defs>
-    <!-- palette token: yellow (light → deep) -->
+    <!-- palette token: pink (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFE17D"/>
-      <stop offset="1" stop-color="#FFAA1F"/>
+      <stop offset="0" stop-color="#FF93BC"/>
+      <stop offset="1" stop-color="#EE3A70"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M44 28 h40 a16 16 0 0 1 16 16 v40 a16 16 0 0 1 -16 16 h-40 a16 16 0 0 1 -16 -16 v-40 a16 16 0 0 1 16 -16 z"/>
+    <path id="plate-shape" d="M28 64a36 36 0 1 0 72 0a36 36 0 1 0 -72 0z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><circle cx="53" cy="56" r="5" fill="#FFFFFF"/><circle cx="75" cy="56" r="5" fill="#FFFFFF"/><path d="M48 72 Q64 88 80 72" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="glyph"><circle cx="53" cy="56" r="5" fill="#FFFFFF"/><circle cx="75" cy="56" r="5" fill="#FFFFFF"/><path d="M48 72 Q64 88 80 72" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

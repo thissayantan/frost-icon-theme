@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Loupe — app family. Image Viewer — a glass photo with mountains and sun. -->
+  <!-- Hyaline org.gnome.Loupe — app family. Image Viewer — a glass photo tilted 6°, with mountains and sun. -->
   <defs>
     <!-- palette token: pink (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M44 28 h40 a16 16 0 0 1 16 16 v40 a16 16 0 0 1 -16 16 h-40 a16 16 0 0 1 -16 -16 v-40 a16 16 0 0 1 16 -16 z"/>
+    <path id="plate-shape" d="M23.909 46.093Q22.654 34.158 34.588 32.904L86.304 27.469Q98.238 26.214 99.492 38.148L104.091 81.907Q105.346 93.842 93.412 95.096L41.696 100.531Q29.762 101.786 28.508 89.852z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><circle cx="78" cy="48" r="7" fill="#FFFFFF" fill-opacity=".78"/><path d="M38 90 L54 64 a4 4 0 0 1 7 0 L72 82 L76 76 a3.5 3.5 0 0 1 6 0 L92 90 Z" fill="#FFFFFF"/></g>
+  <g id="glyph"><g transform="rotate(-6 64 64)"><circle cx="80" cy="48" r="7" fill="#FFFFFF"/><path d="M36 88 L54 62 a4 4 0 0 1 7 0 L72 78 L77 72 a3.5 3.5 0 0 1 6 0 L92 88 Z" fill="#FFFFFF"/></g></g>
 </svg>

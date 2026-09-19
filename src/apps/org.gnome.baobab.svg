@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.baobab — app family. Disk Usage Analyzer — a glass disc with a pie slice. -->
+  <!-- Hyaline org.gnome.baobab — app family. Disk Usage Analyzer — a glass disc with a white slice. -->
   <defs>
-    <!-- palette token: orange (light → deep) -->
+    <!-- palette token: blue (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFC27E"/>
-      <stop offset="1" stop-color="#FF7430"/>
+      <stop offset="0" stop-color="#8CB8FF"/>
+      <stop offset="1" stop-color="#3F6DF5"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M28 64 a36 36 0 1 0 72 0 a36 36 0 1 0 -72 0 z"/>
+    <path id="plate-shape" d="M28 64a36 36 0 1 0 72 0a36 36 0 1 0 -72 0z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>

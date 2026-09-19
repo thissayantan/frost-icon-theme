@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.seahorse.Application — app family. Passwords and Keys — a glass disc with a key. -->
+  <!-- Hyaline org.gnome.seahorse.Application — app family. Passwords and Keys — a glass key with a white dot in its bow. -->
   <defs>
     <!-- palette token: yellow (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M28 64 a36 36 0 1 0 72 0 a36 36 0 1 0 -72 0 z"/>
+    <path id="plate-shape" d="M24 50a22 22 0 1 0 44 0a22 22 0 1 0 -44 0zM59.708 60.467Q58 58 60.121 55.879L63.879 52.121Q66 50 68.121 52.121L101.879 85.879Q104 88 104 91L104 97Q104 100 101 100L95 100Q92 100 90 98L90 98Q88 96 85 96L85 96Q82 96 82 93L82 93Q82 90 79 90L79 90Q76 90 76 87L76 87Q76 84 74.292 81.533z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><circle cx="52" cy="54" r="10" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M59 61 L84 86 M75 77 L81 71 M69 71 L74 66" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="glyph"><circle cx="42" cy="46" r="7" fill="#FFFFFF"/></g>
 </svg>

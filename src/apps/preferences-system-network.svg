@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline preferences-system-network — app family. Network — a glass card with linked nodes. -->
+  <!-- Hyaline preferences-system-network — app family. Network — three glass nodes with white links. -->
   <defs>
     <!-- palette token: teal (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M44 28 h40 a16 16 0 0 1 16 16 v40 a16 16 0 0 1 -16 16 h-40 a16 16 0 0 1 -16 -16 v-40 a16 16 0 0 1 16 -16 z"/>
+    <path id="plate-shape" d="M57 22h14a7 7 0 0 1 7 7v8a7 7 0 0 1 -7 7h-14a7 7 0 0 1 -7 -7v-8a7 7 0 0 1 7 -7zM31 82h14a7 7 0 0 1 7 7v8a7 7 0 0 1 -7 7h-14a7 7 0 0 1 -7 -7v-8a7 7 0 0 1 7 -7zM83 82h14a7 7 0 0 1 7 7v8a7 7 0 0 1 -7 7h-14a7 7 0 0 1 -7 -7v-8a7 7 0 0 1 7 -7z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><rect x="54" y="38" width="20" height="14" rx="4" fill="#FFFFFF"/><rect x="36" y="76" width="20" height="14" rx="4" fill="#FFFFFF"/><rect x="72" y="76" width="20" height="14" rx="4" fill="#FFFFFF"/><path d="M64 52 V64 M46 76 V64 H82 V76" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".78"/></g>
+  <g id="glyph"><path d="M64 46 V62 M38 80 V64 H90 V80" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

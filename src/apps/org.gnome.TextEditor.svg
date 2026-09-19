@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.TextEditor — app family. Text Editor — a glass page with text lines and a cursor. -->
+  <!-- Hyaline org.gnome.TextEditor — app family. Text Editor — a glass page with two lines and an I-beam cursor. -->
   <defs>
     <!-- palette token: yellow (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><rect x="46" y="46" width="30" height="6" rx="3" fill="#FFFFFF"/><rect x="46" y="60" width="36" height="6" rx="3" fill="#FFFFFF"/><rect x="46" y="74" width="22" height="6" rx="3" fill="#FFFFFF"/><rect x="72" y="70" width="5" height="16" rx="2.5" fill="#FFFFFF"/></g>
+  <g id="glyph"><rect x="46" y="48" width="32" height="6" rx="3" fill="#FFFFFF"/><rect x="46" y="62" width="20" height="6" rx="3" fill="#FFFFFF"/><path d="M74 62 V88 M69 62 H79 M69 88 H79" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

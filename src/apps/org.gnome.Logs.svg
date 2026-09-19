@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Logs — app family. Logs — a glass page with a bulleted list. -->
+  <!-- Hyaline org.gnome.Logs — app family. Logs — a glass page with a white bulleted list. -->
   <defs>
     <!-- palette token: graphite (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><circle cx="50" cy="48" r="4" fill="#FFFFFF"/><circle cx="50" cy="64" r="4" fill="#FFFFFF"/><circle cx="50" cy="80" r="4" fill="#FFFFFF"/><rect x="58" y="45" width="24" height="6" rx="3" fill="#FFFFFF" fill-opacity=".78"/><rect x="58" y="61" width="24" height="6" rx="3" fill="#FFFFFF" fill-opacity=".78"/><rect x="58" y="77" width="16" height="6" rx="3" fill="#FFFFFF" fill-opacity=".78"/></g>
+  <g id="glyph"><circle cx="50" cy="48" r="4" fill="#FFFFFF"/><circle cx="50" cy="64" r="4" fill="#FFFFFF"/><circle cx="50" cy="80" r="4" fill="#FFFFFF"/><rect x="58" y="45" width="24" height="6" rx="3" fill="#FFFFFF"/><rect x="58" y="61" width="24" height="6" rx="3" fill="#FFFFFF"/><rect x="58" y="77" width="16" height="6" rx="3" fill="#FFFFFF"/></g>
 </svg>

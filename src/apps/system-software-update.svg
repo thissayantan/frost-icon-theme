@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline system-software-update — app family. Software Updater — a glass disc with a refresh arrow. -->
+  <!-- Hyaline system-software-update — app family. Software Updater — a white arrow down into a glass tray. -->
   <defs>
-    <!-- palette token: teal (light → deep) -->
+    <!-- palette token: orange (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#86E3DC"/>
-      <stop offset="1" stop-color="#12A3B0"/>
+      <stop offset="0" stop-color="#FFC27E"/>
+      <stop offset="1" stop-color="#FF7430"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M28 64 a36 36 0 1 0 72 0 a36 36 0 1 0 -72 0 z"/>
+    <path id="plate-shape" d="M24 66 h20 l6 10 h28 l6 -10 h20 v24 a12 12 0 0 1 -12 12 h-56 a12 12 0 0 1 -12 -12 z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M86 66 A22 22 0 1 1 78 47" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M71 38 L88 42 L80 57 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/></g>
+  <g id="glyph"><path d="M64 26 V64 M50 51 L64 65 L78 51" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Calculator — app family. Calculator — a glass keypad with the four operators. -->
+  <!-- Hyaline org.gnome.Calculator — app family. Calculator — a glass calculator with a display and + =. -->
   <defs>
     <!-- palette token: orange (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M44 28 h40 a16 16 0 0 1 16 16 v40 a16 16 0 0 1 -16 16 h-40 a16 16 0 0 1 -16 -16 v-40 a16 16 0 0 1 16 -16 z"/>
+    <path id="plate-shape" d="M48 20h32a14 14 0 0 1 14 14v60a14 14 0 0 1 -14 14h-32a14 14 0 0 1 -14 -14v-60a14 14 0 0 1 14 -14z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M40 48 H56 M48 40 V56 M72 48 H88 M42 74 L54 86 M54 74 L42 86 M72 76 H88 M72 84 H88" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="glyph"><rect x="44" y="30" width="40" height="18" rx="5" fill="#FFFFFF"/><path d="M46 70 H62 M54 62 V78 M68 66 H84 M68 76 H84" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

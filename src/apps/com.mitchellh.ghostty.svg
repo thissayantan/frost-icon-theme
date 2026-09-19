@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline com.mitchellh.ghostty — app family. Ghostty — a glass ghost with white eyes (original drawing, not the Ghostty logo). -->
+  <!-- Hyaline com.mitchellh.ghostty — app family. Ghostty — an original glass ghost with white eyes (not the Ghostty logo). -->
   <defs>
     <!-- palette token: violet (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M36 60 a28 28 0 0 1 56 0 v38 q0 4 -4 2 l-6.5 -4.5 q-2.5 -1.7 -5 0 l-4.5 3.2 q-2 1.4 -4 0 l-4.5 -3.2 q-2.5 -1.7 -5 0 l-4.5 3.2 q-2 1.4 -4 0 l-4.5 -3.2 q-2.5 -1.7 -5 0 l-6.5 4.5 q-4 2 -4 -2 z"/>
+    <path id="plate-shape" d="M36 60 a28 28 0 0 1 56 0 v38 q0 6 -5 3 l-9.5 -7 q-3 -2 -6 0 l-5.5 4 q-2 1.5 -4 0 l-5.5 -4 q-3 -2 -6 0 l-9.5 7 q-5 3 -5 -3 z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>

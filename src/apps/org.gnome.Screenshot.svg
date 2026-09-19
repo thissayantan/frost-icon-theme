@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.Screenshot — app family. Screenshot — a glass card with selection corners. -->
+  <!-- Hyaline org.gnome.Screenshot — app family. Screenshot — a glass camera with a white lens ring. -->
   <defs>
-    <!-- palette token: blue (light → deep) -->
+    <!-- palette token: red (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#8CB8FF"/>
-      <stop offset="1" stop-color="#3F6DF5"/>
+      <stop offset="0" stop-color="#FF8E80"/>
+      <stop offset="1" stop-color="#EE3048"/>
     </linearGradient>
     <linearGradient id="plate-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/>
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M44 28 h40 a16 16 0 0 1 16 16 v40 a16 16 0 0 1 -16 16 h-40 a16 16 0 0 1 -16 -16 v-40 a16 16 0 0 1 16 -16 z"/>
+    <path id="plate-shape" d="M22 50 a10 10 0 0 1 10 -10 h14 l6 -8 h24 l6 8 h14 a10 10 0 0 1 10 10 v38 a10 10 0 0 1 -10 10 h-64 a10 10 0 0 1 -10 -10 z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M38 52 V40 H50 M78 40 H90 V52 M90 76 V88 H78 M50 88 H38 V76" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="64" cy="64" r="6" fill="#FFFFFF" fill-opacity=".78"/></g>
+  <g id="glyph"><circle cx="64" cy="68" r="14" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>

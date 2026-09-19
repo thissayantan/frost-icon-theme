@@ -168,7 +168,8 @@ function isApp(doc: Document): boolean {
 }
 
 function knockout(doc: Document) {
-  const deep = byId(doc, "tint")?.getElementsByTagName("stop")[1]?.getAttribute("stop-color") ?? "#000000";
+  let deep = byId(doc, "tint")?.getElementsByTagName("stop")[1]?.getAttribute("stop-color")?.toUpperCase() ?? "#000000";
+  if (deep === "#FFAA1F") deep = "#FF7430"; // yellow's deep is ~1.9:1 on white — use orange's deep for contrast
   const plate = byId(doc, "plate");
   plate?.setAttribute("fill", "#FFFFFF");
   plate?.removeAttribute("fill-opacity");
@@ -233,16 +234,16 @@ export function derive(src: Source, size: number): string {
     else remove(doc, "shadow");
     setBlur(doc, "blur-glow", 4);
     byId(doc, "glow")?.setAttribute("opacity", ".15");
+  } else if (isApp(doc)) {
+    // App family ≤ 24 px: knockout — the object plate goes solid white, the glyph takes the back's deep tint.
+    remove(doc, "shadow", "glow", "frost", "lift", "rim");
+    knockout(doc);
   } else if (size >= 22) {
     remove(doc, "shadow", "glow", "frost", "rim");
     const plate = byId(doc, "plate");
     plate?.setAttribute("fill", "#FFFFFF");
     plate?.setAttribute("fill-opacity", ".40");
     if (!hinted) thickenGlyph(doc, size);
-  } else if (isApp(doc)) {
-    // App family at 16 px: knockout — the object plate goes solid white, the glyph takes the back's deep tint.
-    remove(doc, "shadow", "glow", "frost", "lift", "rim");
-    knockout(doc);
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
     recentreOnBack(doc, size, !hinted);

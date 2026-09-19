@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline org.gnome.clocks — app family. Clocks — a glass dial with hands. -->
+  <!-- Hyaline org.gnome.clocks — app family. Clocks — a glass dial with white hands. -->
   <defs>
     <!-- palette token: blue (light → deep) -->
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
@@ -15,7 +15,7 @@
       <stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/>
     </linearGradient>
     <rect id="back-shape" x="12" y="12" width="104" height="104" rx="28" fill="url(#tint)"/>
-    <path id="plate-shape" d="M28 64 a36 36 0 1 0 72 0 a36 36 0 1 0 -72 0 z"/>
+    <path id="plate-shape" d="M28 64a36 36 0 1 0 72 0a36 36 0 1 0 -72 0z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -30,5 +30,5 @@
   <g id="rim" clip-path="url(#plate-clip)">
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
-  <g id="glyph"><path d="M64 64 V42 M64 64 L80 73" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="64" cy="64" r="5" fill="#FFFFFF"/></g>
+  <g id="glyph"><path d="M64 64 V42 M64 64 L80 73" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="64" cy="64" r="5" fill="#FFFFFF"/></g>
 </svg>
