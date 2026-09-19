@@ -35,9 +35,9 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 ## M4 — Real-world pass: apps + language folders (v0.2)
 Owner feedback 2026-09-19: judge icons in real scenes; Files and Settings must be excellent; Chrome keeps its
 official logo; language folders (Android, Go, Node, Python…) should show their logos; nothing macOS-like.
-- [ ] `tools/scene.py` — real scenes through real GTK lookup: a directory as the Files grid (XDG special dirs,
+- [x] `tools/scene.py` — real scenes through real GTK lookup: a directory as the Files grid (XDG special dirs,
       folder tags), the dock and the app grid, on the owner's dark setup and light
-- [ ] Local overlay (`install:local`, never committed): official Chrome / Chrome Dev icons linked from
+- [x] Local overlay (`install:local`, never committed): official Chrome / Chrome Dev icons linked from
       `/opt/google/*/product_logo_*`; language folders with the real brand marks (Simple Icons, CC0 paths)
       on the Hyaline folder — kept in git-ignored `local/`
 - [ ] `tools/tag-folders.ts` — tag `~/Android`, `~/go` and project folders by marker file
