@@ -27,9 +27,9 @@
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
-    <g id="glyph-16" transform="scale(8.0000)"><path d="M5 10 L11 7 M5 10 L11 12" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="1" stroke-linecap="round"/><circle cx="5" cy="10" r="1.3" fill="#FFFFFF"/><circle cx="11" cy="7" r="1.3" fill="#FFFFFF"/><circle cx="11" cy="12" r="1.3" fill="#FFFFFF"/></g>
-    <g id="glyph-22" transform="scale(5.8182)"><path d="M8.5 15 L13.5 12.5 M8.5 15 L13.5 17.5" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="1.1" stroke-linecap="round"/><circle cx="8.5" cy="15" r="1.5" fill="#FFFFFF"/><circle cx="13.5" cy="12.5" r="1.5" fill="#FFFFFF"/><circle cx="13.5" cy="17.5" r="1.5" fill="#FFFFFF"/></g>
-    <g id="glyph-24" transform="scale(5.3333)"><path d="M9.5 16 L14.5 13.5 M9.5 16 L14.5 18.5" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="1.2" stroke-linecap="round"/><circle cx="9.5" cy="16" r="1.6" fill="#FFFFFF"/><circle cx="14.5" cy="13.5" r="1.6" fill="#FFFFFF"/><circle cx="14.5" cy="18.5" r="1.6" fill="#FFFFFF"/></g>
+    <g id="glyph-16" transform="scale(8.0000)"><path d="M5 10 L11 7 M5 10 L11 12" fill="none" stroke="#FFFFFF" stroke-width="1"/><rect x="4" y="9" width="2" height="2" fill="#FFFFFF"/><rect x="10" y="6" width="2" height="2" fill="#FFFFFF"/><rect x="10" y="11" width="2" height="2" fill="#FFFFFF"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><path d="M7.5 15.5 L13.5 12.5 M7.5 15.5 L13.5 17.5" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="1.1" stroke-linecap="round"/><rect x="6" y="14" width="3" height="3" rx="1" fill="#FFFFFF"/><rect x="12" y="11" width="3" height="3" rx="1" fill="#FFFFFF"/><rect x="12" y="16" width="3" height="3" rx="1" fill="#FFFFFF"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><path d="M9.5 16.5 L15.5 13.5 M9.5 16.5 L15.5 18.5" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="1.2" stroke-linecap="round"/><rect x="8" y="15" width="3" height="3" rx="1" fill="#FFFFFF"/><rect x="14" y="12" width="3" height="3" rx="1" fill="#FFFFFF"/><rect x="14" y="17" width="3" height="3" rx="1" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -45,7 +45,7 @@
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
   <g id="glyph">
-    <path d="M52 84 L76 72 M52 84 L76 96" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="5" stroke-linecap="round"/>
-    <g fill="#FFFFFF"><circle cx="52" cy="84" r="7"/><circle cx="76" cy="71" r="7"/><circle cx="76" cy="97" r="7"/></g>
+    <path d="M52 84 L76 72 M52 84 L76 96" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="6.5" stroke-linecap="round"/>
+    <g fill="#FFFFFF"><circle cx="52" cy="84" r="8"/><circle cx="76" cy="71" r="8"/><circle cx="76" cy="97" r="8"/></g>
   </g>
 </svg>

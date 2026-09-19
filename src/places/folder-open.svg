@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
-  <!-- Hyaline folder-family template (the style anchor). The flap is the frosted plate.
-       Special folders: add a glyph centred on the flap (flap centre = 64,84). -->
+  <!-- Hyaline folder-open — folder family; the flap leans forward (a parallelogram kept inside the back) to read as open. -->
   <defs>
     <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#8CB8FF"/>
@@ -16,13 +15,17 @@
     </linearGradient>
     <path id="back-shape" fill="url(#tint)"
           d="M12 32 a12 12 0 0 1 12 -12 h22 c6 0 7.5 10 15 10 h43 a12 12 0 0 1 12 12 v58 a12 12 0 0 1 -12 12 h-80 a12 12 0 0 1 -12 -12 z"/>
-    <path id="plate-shape" d="M22 64 a10 10 0 0 1 9.8 -8 H112 a8 8 0 0 1 7.8 9.7 L113 104 a10.5 10.5 0 0 1 -10.3 8 H22 a10 10 0 0 1 -10 -10 Z"/>
+    <path id="plate-shape" d="M30 56 H106 Q116 56 114.586 65.899 L109.697 100.121 Q108 112 96 112 H24 Q12 112 13.697 100.121 L18.586 65.899 Q20 56 30 56 Z"/>
     <!-- pixel-grid hints: derive() swaps these in at 16/22/24/32/48 px (DESIGN §4) -->
     <path id="back-shape-16" d="M8 28 a12 12 0 0 1 12 -12 H56 V32 H108 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H20 a12 12 0 0 1 -12 -12 Z"/>
     <path id="back-shape-22" d="M11.636 29.091 a11.636 11.636 0 0 1 11.636 -11.636 H46.545 c6.051 0 7.564 11.636 15.127 11.636 H104.727 a11.636 11.636 0 0 1 11.636 11.636 V98.909 a11.636 11.636 0 0 1 -11.636 11.636 H23.273 a11.636 11.636 0 0 1 -11.636 -11.636 Z"/>
     <path id="back-shape-24" d="M10.667 26.667 a10.667 10.667 0 0 1 10.667 -10.667 H45.333 c5.973 0 7.467 10.667 14.933 10.667 H106.667 a10.667 10.667 0 0 1 10.667 10.667 V101.333 a10.667 10.667 0 0 1 -10.667 10.667 H21.333 a10.667 10.667 0 0 1 -10.667 -10.667 Z"/>
     <path id="back-shape-32" d="M12 32 a12 12 0 0 1 12 -12 H46 c6.4 0 8 12 16 12 H104 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H24 a12 12 0 0 1 -12 -12 Z"/>
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
+    <path id="plate-shape-22" d="M25.018 58.182 H111.709 Q116.364 58.182 115.598 62.773 L109.071 101.937 Q107.636 110.545 98.909 110.545 H20.364 Q11.636 110.545 13.071 101.937 L19.598 62.773 Q20.364 58.182 25.018 58.182 Z"/>
+    <path id="plate-shape-24" d="M22.933 58.667 H113.067 Q117.333 58.667 116.7 62.886 L110.52 104.089 Q109.333 112 101.333 112 H18.667 Q10.667 112 11.853 104.089 L18.034 62.886 Q18.667 58.667 22.933 58.667 Z"/>
+    <path id="plate-shape-32" d="M26 56 H110 Q116 56 115.151 61.94 L109.414 102.101 Q108 112 98 112 H22 Q12 112 13.414 102.101 L19.151 61.94 Q20 56 26 56 Z"/>
+    <path id="plate-shape-48" d="M25.333 56 H110.667 Q117.333 56 116.391 62.6 L110.842 101.441 Q109.333 112 98.667 112 H21.333 Q10.667 112 12.175 101.441 L17.724 62.6 Q18.667 56 25.333 56 Z"/>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>

@@ -27,7 +27,7 @@
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
-    <g id="glyph-16" transform="scale(8.0000)"><rect x="7" y="7" width="2" height="6" fill="#FFFFFF"/><rect x="5" y="9" width="6" height="2" fill="#FFFFFF"/></g>
+    <g id="glyph-16" transform="scale(8.0000)"><rect x="7" y="6" width="2" height="6" fill="#FFFFFF"/><rect x="5" y="8" width="6" height="2" fill="#FFFFFF"/></g>
     <g id="glyph-22" transform="scale(5.8182)"><rect x="10" y="11" width="2" height="6" fill="#FFFFFF"/><rect x="8" y="13" width="6" height="2" fill="#FFFFFF"/></g>
     <g id="glyph-24" transform="scale(5.3333)"><rect x="11" y="12" width="2" height="8" fill="#FFFFFF"/><rect x="8" y="15" width="8" height="2" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>

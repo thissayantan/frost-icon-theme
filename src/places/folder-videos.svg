@@ -27,7 +27,7 @@
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
-    <g id="glyph-16" transform="scale(8.0000)"><path d="M6 6.5 V12.5 L11 9.5 Z" fill="#FFFFFF"/></g>
+    <g id="glyph-16" transform="scale(8.0000)"><path d="M6 6 V13 L10.5 9.5 Z" fill="#FFFFFF"/></g>
     <g id="glyph-22" transform="scale(5.8182)"><path d="M8.5 11 V18 L14.5 14.5 Z" fill="#FFFFFF"/></g>
     <g id="glyph-24" transform="scale(5.3333)"><path d="M9.5 12 V20 L16 16 Z" fill="#FFFFFF"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
@@ -45,6 +45,6 @@
     <use xlink:href="#plate-shape" fill="none" stroke="url(#rim-stroke)" stroke-width="3"/>
   </g>
   <g id="glyph">
-    <path d="M58 72 L58 96 L78 84 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M57 70 L57 98 L80 84 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
   </g>
 </svg>

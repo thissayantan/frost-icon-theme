@@ -27,27 +27,11 @@
     <path id="plate-shape-32" d="M12 66 a10 10 0 0 1 10 -10 H106 a10 10 0 0 1 10 10 V100 a12 12 0 0 1 -12 12 H24 a12 12 0 0 1 -12 -12 Z"/>
     <path id="back-shape-48" d="M10.667 29.333 a10.667 10.667 0 0 1 10.667 -10.667 H44 c5.867 0 7.333 10.667 14.667 10.667 H105.333 a12 12 0 0 1 12 12 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
     <path id="plate-shape-48" d="M10.667 65.333 a9.333 9.333 0 0 1 9.333 -9.333 H108 a9.333 9.333 0 0 1 9.333 9.333 V100 a12 12 0 0 1 -12 12 H22.667 a12 12 0 0 1 -12 -12 Z"/>
-    <!-- glyph hints: roof / body / door on whole pixels -->
-    <g id="glyph-32">
-      <path d="M52 64 H76 L84 84 H44 Z" fill="#FFFFFF"/>
-      <rect x="48" y="84" width="32" height="20" rx="4" fill="#FFFFFF" fill-opacity=".78"/>
-      <rect x="60" y="84" width="8" height="12" fill="#3F6DF5" fill-opacity=".55"/>
-    </g>
-    <g id="glyph-22">
-      <path d="M52.364 64 H75.636 L87.273 81.455 H40.727 Z" fill="#FFFFFF"/>
-      <rect x="46.545" y="81.455" width="34.909" height="23.273" rx="2.909" fill="#FFFFFF" fill-opacity=".8"/>
-      <rect x="58.182" y="81.455" width="11.636" height="17.455" fill="#3F6DF5" fill-opacity=".6"/>
-    </g>
-    <g id="glyph-24">
-      <path d="M53.333 64 H74.667 L85.333 80 H42.667 Z" fill="#FFFFFF"/>
-      <rect x="48" y="80" width="32" height="26.667" rx="2.667" fill="#FFFFFF" fill-opacity=".8"/>
-      <rect x="58.667" y="80" width="10.667" height="16" fill="#3F6DF5" fill-opacity=".6"/>
-    </g>
-    <g id="glyph-16">
-      <path d="M48 48 H80 L96 64 H32 Z" fill="#FFFFFF"/>
-      <rect x="40" y="64" width="48" height="32" rx="4" fill="#FFFFFF" fill-opacity=".85"/>
-      <rect x="56" y="64" width="16" height="24" fill="#3F6DF5" fill-opacity=".6"/>
-    </g>
+    <!-- glyph hints: drawn on the target pixel grid (units = pixels at that size) -->
+    <g id="glyph-16" transform="scale(8.0000)"><path d="M6 6 H10 L12 9 H4 Z" fill="#FFFFFF"/><rect x="5" y="9" width="6" height="3" fill="#FFFFFF" fill-opacity=".78"/><rect x="7" y="9" width="2" height="2" fill="#3F6DF5" fill-opacity=".55"/></g>
+    <g id="glyph-22" transform="scale(5.8182)"><path d="M9 11 H13 L15 14 H7 Z" fill="#FFFFFF"/><rect x="8" y="14" width="6" height="4" fill="#FFFFFF" fill-opacity=".78"/><rect x="10" y="14" width="2" height="2" fill="#3F6DF5" fill-opacity=".55"/></g>
+    <g id="glyph-24" transform="scale(5.3333)"><path d="M10 12 H14 L16 16 H8 Z" fill="#FFFFFF"/><rect x="9" y="16" width="6" height="4" fill="#FFFFFF" fill-opacity=".78"/><rect x="11" y="16" width="2" height="3" fill="#3F6DF5" fill-opacity=".55"/></g>
+    <g id="glyph-32" transform="scale(4.0000)"><path d="M13 16 H19 L21 21 H11 Z" fill="#FFFFFF"/><rect x="12" y="21" width="8" height="5" rx="1" fill="#FFFFFF" fill-opacity=".78"/><rect x="15" y="21" width="2" height="3" fill="#3F6DF5" fill-opacity=".55"/></g>
     <clipPath id="plate-clip"><use xlink:href="#plate-shape"/></clipPath>
     <filter id="blur-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="blur-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
