@@ -117,3 +117,14 @@ Verified against the installed GNOME Shell 50.1 JS (extracted from `libshell-18.
 - Error red is 2.82:1 on #1E1E22 — use error as a fill + shape ("!"), never thin strokes; never colour alone.
 - Sources: gnome-shell js/ui/status/{system,network,volume}.js, src/st/st-icon-theme.c, st-theme-node.c;
   docs.gtk.org/gtk4/icon-format.html; GNOME HIG UI icons; KDE HIG monochrome icons.
+
+## Live mic indicator (explored 2026-09-19, parked by the owner)
+- The top-bar mic icon (`InputIndicator`, `js/ui/status/volume.js`) is **static**: `microphone-sensitivity-*` is picked
+  from the input-volume *slider*, not live audio; it shows only while some source-output exists, skipping
+  `org.gnome.VolumeControl` and `org.PulseAudio.pavucontrol` (Settings' own level meter). The live moving bar people
+  remember is Settings → Sound, not the top bar.
+- A live, animated indicator would need a Shell extension (an icon theme cannot animate or read audio). Verified
+  feasible: GJS + GStreamer 1.28 `pulsesrc ! audio/x-raw,rate=16000,channels=1 ! level interval=50ms ! fakesink`
+  with `stream-properties` `application.id=org.gnome.VolumeControl` (so the Shell ignores the meter) gave ~20
+  peak updates/s at ~4 % CPU for a standalone test process. Hook point: `Main.panel.statusArea.quickSettings
+  ._volumeInput._indicator` (St.Icon, visibility bound to "an app is recording").
