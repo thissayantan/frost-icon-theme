@@ -26,8 +26,28 @@
   - https://www.phoronix.com/news/GTK-4.22-SVG-2026
 - Qt's QtSvg implements SVG 1.2 Tiny → no filters. KDE/Qt apps would drop blur entirely.
 - ⇒ ADR-001: author SVG, ship PNG (+@2x).
-- **To verify in M1:** render one filter-heavy SVG through GTK by name (tools/lookup.py + screenshot)
-  to record what actually happens; update this file with the result.
+- **Verified (M1, 2026-09-19):** a filter-heavy source (`user-home.svg`: 4 × feGaussianBlur, clip-path,
+  `<use>`) placed in a scratch `Type=Scalable` theme, looked up by name through `Gtk.IconTheme` (returns an
+  `IconPaintable`) and rendered with `GskCairoRenderer.render_texture` at 256 px, is visually
+  indistinguishable from resvg's render — blur, clip and gradients all survive in GTK 4.22 (the SVG goes
+  through glycin/librsvg 2.61, not the GtkSvg engine). ADR-001 still stands: Qt/QtSvg (Tiny 1.2) has no
+  filters, GTK3 apps depend on the pixbuf loader, and PNG makes all of them identical.
+  Repro: `Gtk.Snapshot()` → `paintable.snapshot(snap, 256, 256)` → `Gsk.CairoRenderer().realize_for_display(...)`
+  → `render_texture(node, rect)` → `save_to_png`.
+
+## Pipeline notes (M1)
+- `index.theme`: `@2x` directories go **only** in `ScaledDirectories=`, not also in `Directories=` —
+  that is what the spec says and what Papirus does. Verify enforces it.
+- GNOME Tweaks lists any directory under an icon path that contains an `index.theme`
+  (`gtweak/tweaks/tweak_group_appearance.py::_get_valid_icon_themes`) — no other requirement.
+- `tools/lookup.py --search-path dist` prepends `dist/` to GTK's search path, so verify tests the build
+  before it is installed; GTK resolves `@2x` lookups to the `…@2x/` PNGs as expected.
+- resvg-js cannot find fonts by a CSS fallback list with unknown first entries in our setup; preview
+  labels use a single installed family (`Ubuntu Sans`).
+- A `σ 5` contact shadow centred at y 119 is visibly clipped by the 128 canvas edge (hard line under the
+  icon). Keep `cy + ry + 2σ ≤ 128`.
+- White glyph + white plate on `#FAFAFB`: anything that hangs outside the back shape disappears at
+  every size. Solved with `lift` (≥ 32 px) and the generic small-size re-layout (≤ 24 px), see DESIGN §1/§4.
 
 ## Icon theme mechanics
 - Freedesktop Icon Theme Spec (v0.11): lookup = current theme → `Inherits` chain → `hicolor`;
