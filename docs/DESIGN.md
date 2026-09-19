@@ -76,6 +76,11 @@ opacity top stop, never add an outline.
 
 - **Folders** — `folder` + special folders: glyph on the flap (documents, download, music,
   pictures, videos, templates, publicshare, desktop, user-home, remote, drag-accept).
+- **`user-home` glyph (owner-specified)** — the house from `docs/references/user-home-glyph.png`,
+  translated to glass: rounded **trapezoid roof** (narrow top, wide eaves) in solid white, **box body**
+  below it in white 78 %, and a small **door** tucked directly under the roof line in the `deep` tint at
+  55 %. No chimney, no windows, no outline. Seed art: `src/places/user-home.svg` — refine, don't replace.
+  The same house (roof + body + door, same proportions) is the glyph wherever "home" appears (e.g. `go-home` apps icon).
 - **Places** — `user-trash`(+`-full`), `network-workgroup`, `user-bookmarks`.
 - **Mimetypes** — page silhouette back (graphite unless family colour applies), plate over lower half, type glyph.
 - **Core apps** — only generic GNOME apps (Files, Terminal, Settings, Text Editor, Calculator,
