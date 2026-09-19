@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Ask real GTK 4 which file it would load for icon names in a given theme.
 
-Usage: python3 tools/lookup.py <theme> <icon-name> [<icon-name> ...] [--sizes 16,24,48,128] [--json]
+Usage: python3 tools/lookup.py <theme> <icon-name> [<icon-name> ...] [--sizes 16,24,48,128]
+                              [--search-path DIR] [--json]
+
+--search-path DIR prepends DIR to GTK's icon search path (e.g. dist/ to test a build before install).
 
 Exit code 1 if any name resolves to nothing. Names resolving outside the theme's own
 directory are reported as "inherited" (expected only for icons Hyaline doesn't ship).
@@ -16,11 +19,15 @@ from gi.repository import Gtk  # noqa: E402
 
 
 def main() -> int:
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    sizes = [16, 24, 48, 128]
-    if "--sizes" in sys.argv:
-        sizes = [int(s) for s in sys.argv[sys.argv.index("--sizes") + 1].split(",")]
-        args = [a for a in args if a != sys.argv[sys.argv.index("--sizes") + 1]]
+    argv = sys.argv[1:]
+    opts = {}
+    for key in ("--sizes", "--search-path"):
+        if key in argv:
+            i = argv.index(key)
+            opts[key] = argv[i + 1]
+            del argv[i : i + 2]
+    args = [a for a in argv if not a.startswith("--")]
+    sizes = [int(s) for s in opts.get("--sizes", "16,24,48,128").split(",")]
     as_json = "--json" in sys.argv
     if len(args) < 2:
         print(__doc__)
@@ -29,6 +36,8 @@ def main() -> int:
 
     Gtk.init()
     theme = Gtk.IconTheme.new()
+    if "--search-path" in opts:
+        theme.set_search_path([opts["--search-path"], *theme.get_search_path()])
     theme.set_theme_name(theme_name)
 
     results, missing = [], False
