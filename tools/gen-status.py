@@ -249,25 +249,23 @@ ICONS["audio-volume-high-symbolic"] = volume(3)
 ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER + "".join(WAVES)), badge_bang("warning"))
 ICONS["audio-volume-muted-symbolic"] = off(SPEAKER + "".join(WAVES))
 
-# ── Microphone: SOLID capsule, level = lit rows from the bottom, rest at 35 % (same language as volume) ─
-CAPSULE = rect(5, 1, 6, 9, 3)
-STAND = sector(8, 6, 5, 6.5, 100, 260) + rect(7, 12, 2, 2) + rect(4, 14, 8, 2, 1)
+# ── Microphone: ALWAYS a solid mic (it is in use whenever the Shell shows it); the input-volume level is three
+#    signal bars beside it — lit full, the rest at 35 % (the same level language as the volume waves).
+#    (A capsule "filled from the bottom" read as "the mic is only half working" — owner feedback 2026-09-19.)
+MIC = rect(1, 1, 6, 9, 3) + sector(4, 6, 4.5, 6, 100, 260) + rect(3, 12, 2, 2) + rect(1, 14, 6, 2, 1)
+MIC_BARS = [rect(11, 10, 1, 3), rect(13, 7, 1, 6), rect(15, 4, 1, 9)]  # 1-px bars, 1-px gaps, clear of the stand
 
 
 def mic(level):
-    if level >= 3:
-        return svg(g(CAPSULE + STAND))
-    rows = {0: 0, 1: 4, 2: 6}[level]
-    clip = f'<clipPath id="lvl"><path d="{rect(0, 10 - rows, 16, rows)}"/></clipPath>' if rows else ""
-    lit = g(CAPSULE, clip="lvl") if rows else ""
-    return svg(g(CAPSULE, dim=True) + lit + g(STAND), clip)
+    lit, dim = "".join(MIC_BARS[:level]), "".join(MIC_BARS[level:])
+    return svg(g(MIC) + (g(lit) if lit else "") + (g(dim, dim=True) if dim else ""))
 
 
 ICONS["microphone-sensitivity-low-symbolic"] = mic(1)
 ICONS["microphone-sensitivity-medium-symbolic"] = mic(2)
 ICONS["microphone-sensitivity-high-symbolic"] = mic(3)
-ICONS["microphone-sensitivity-muted-symbolic"] = off(CAPSULE + STAND)
-ICONS["audio-input-microphone-symbolic"] = mic(3)
+ICONS["microphone-sensitivity-muted-symbolic"] = off(MIC + "".join(MIC_BARS))
+ICONS["audio-input-microphone-symbolic"] = svg(g(MIC + "".join(MIC_BARS)))
 
 # ── Battery: 1-px frame on whole pixels; the level is NEVER covered. Charging/plug marks
 #    replace the terminal cap to the right of the body instead of cutting the fill. ─────────────
