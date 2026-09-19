@@ -120,11 +120,14 @@ function setBlur(doc: Document, filterId: string, sigma: number) {
   blur?.setAttribute("stdDeviation", String(sigma));
 }
 
-/** Minimum glyph stroke at small sizes: 2 px at target size, expressed in 128-canvas units. */
-function thickenGlyph(doc: Document, size: number) {
+/**
+ * Minimum glyph stroke at small sizes: 2 px at target size, expressed in 128-canvas units.
+ * `scale` is any enlargement applied afterwards (the generic re-layout), so the result is still 2 px.
+ */
+function thickenGlyph(doc: Document, size: number, scale = 1) {
   const glyph = byId(doc, "glyph");
   if (!glyph) return;
-  const min = (2 * 128) / size;
+  const min = (2 * 128) / size / scale;
   const nodes = [glyph, ...Array.from(glyph.getElementsByTagName("*"))];
   for (const n of nodes) {
     const w = n.getAttribute("stroke-width");
@@ -132,13 +135,16 @@ function thickenGlyph(doc: Document, size: number) {
   }
 }
 
+/** Glyph enlargement in the small-size generic re-layout (DESIGN §4). */
+const RELAYOUT_SCALE = 2;
+
 const rectBox = (el: Element | null) =>
   el?.tagName === "rect"
     ? ["x", "y", "width", "height"].map((a) => Number(el.getAttribute(a) ?? 0)) as [number, number, number, number]
     : null;
 
 /**
- * ≤32 px, generic layout (rect back + rect plate that leaves the back): with the plate gone the glyph
+ * ≤48 px, generic layout (rect back + rect plate that leaves the back): with the plate gone the glyph
  * would hang off the back shape, so the back grows to the live area and the glyph moves to its centre.
  */
 function isGeneric(doc: Document): boolean {
@@ -161,7 +167,7 @@ function recentreOnBack(doc: Document, size: number, moveGlyph = true) {
   if (!moveGlyph) return;
   // Generic glyphs are centred at plate centre + (2, −2) = (58, 74) so they clear the back's r20 corner.
   const [cx, cy] = [plate[0] + plate[2] / 2 + 2, plate[1] + plate[3] / 2 - 2];
-  const k = 2.0;
+  const k = RELAYOUT_SCALE;
   const prev = glyph.getAttribute("transform") ?? "";
   glyph.setAttribute("transform", `translate(64 64) scale(${k}) translate(${-cx} ${-cy}) ${prev}`.trim());
 }
@@ -189,11 +195,11 @@ export function derive(src: Source, size: number): string {
   }
   if (size >= 64) {
     // full glass
-  } else if (size < 48 && isGeneric(doc)) {
-    // generic layout ≤ 32 px: a plate hanging off the back is mud at this size — squircle + centred glyph
+  } else if (size <= 48 && isGeneric(doc)) {
+    // generic layout ≤ 48 px: a plate hanging off the back is mud at this size — squircle + centred glyph
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
     recentreOnBack(doc, size, !hinted);
-    if (!hinted) thickenGlyph(doc, size);
+    if (!hinted) thickenGlyph(doc, size, RELAYOUT_SCALE);
   } else if (size >= 32) {
     // A blurred glow wider than the pixel-hinted edge re-softens the silhouette on light backgrounds:
     // gone at 32, faint at 48.
@@ -210,7 +216,7 @@ export function derive(src: Source, size: number): string {
   } else {
     remove(doc, "shadow", "glow", "frost", "lift", "plate", "rim");
     recentreOnBack(doc, size, !hinted);
-    if (!hinted) thickenGlyph(doc, size);
+    if (!hinted) thickenGlyph(doc, size, isGeneric(doc) ? RELAYOUT_SCALE : 1);
   }
   return serializer.serializeToString(doc as any);
 }

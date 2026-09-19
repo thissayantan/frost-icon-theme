@@ -84,9 +84,9 @@ Glass: plate `#FFFFFF` (opacity per table above). Glyph: `#FFFFFF`. Shadow: `#00
 | 24, 22 | `back` (`lift`) `plate` `glyph` | flat: plate at fixed 40 %, no blur, glyph thickened to 2 px at target size |
 | 16 | `back` `glyph` | silhouette + white glyph only |
 
-**Generic layout at ≤ 32 px** (rect back + a plate that leaves it): the plate is dropped too, the back
+**Generic layout at ≤ 48 px** (rect back + a plate that leaves it): the plate is dropped too, the back
 grows to the live area (112 × 112, rx 28) and the glyph (≤ 32) moves to its centre at 2×. A half-visible plate
-at 24–32 px is mud; a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
+at 24–48 px is mud (white-on-white on light, grey on dark); a solid tinted squircle with a white glyph is crisp. Folder and page families keep the
 table above.
 
 **Pixel-grid hints.** A source may carry `<path id="back-shape-<size>">` / `<path id="plate-shape-<size>">`
@@ -116,7 +116,8 @@ opacity top stop, never add an outline.
   = glyph width 40, body 32 wide, door 10 × 11. Hand-hinted at 16/22/24/32 (`glyph-<size>`) so roof, body and
   door stay separate pixels. Seed art: `src/places/user-home.svg` — refine, don't replace.
   The same house (roof + body + door, same proportions) is the glyph wherever "home" appears (e.g. `go-home` apps icon).
-- **Places** — `user-trash`(+`-full`), `network-workgroup`, `user-bookmarks`.
+- **Places** — `user-trash`(+`-full`), `network-workgroup`, `network-server`, `user-bookmarks` (generic glass
+  layout; blue trash, yellow bookmarks, teal network).
 - **Mimetypes** — page silhouette back (graphite unless family colour applies), plate over lower half, type glyph.
   Page: 84 × 112 at (22, 8), r12, top-right corner cut 24; plate = lower 58 px (y 62 → 120), flap radii
   like the folder; glyph centred on the plate (64, 91). Template: `src/_templates/page.svg`.
