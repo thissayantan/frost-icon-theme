@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (v0.3.1)
+## v0.3.1 — 2026-09-21
 - **Fix:** `folders`, `filetypes` and `icons` colour overrides were ignored (only `palette` worked).
 - **Colour builder page** — pick colours with live, exact previews of the real icons; download the file or copy
   one install command. `install.sh --colors` also takes a builder link or the URL of a JSON file.
