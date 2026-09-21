@@ -32,8 +32,6 @@
   indistinguishable from resvg's render — blur, clip and gradients all survive in GTK 4.22 (the SVG goes
   through glycin/librsvg 2.61, not the GtkSvg engine). ADR-001 still stands: Qt/QtSvg (Tiny 1.2) has no
   filters, GTK3 apps depend on the pixbuf loader, and PNG makes all of them identical.
-  Repro: `Gtk.Snapshot()` → `paintable.snapshot(snap, 256, 256)` → `Gsk.CairoRenderer().realize_for_display(...)`
-  → `render_texture(node, rect)` → `save_to_png`.
 
 ## Pipeline notes (M1)
 - `index.theme`: `@2x` directories go **only** in `ScaledDirectories=`, not also in `Directories=` —
@@ -61,13 +59,6 @@
   or broken symlinks — seen repeatedly with third-party themes on this machine. Lint for it.
 - App icon names: `Icon=` key in `/usr/share/applications/*.desktop`, `~/.local/share/applications`,
   `/var/lib/flatpak/exports/share/applications`, `/var/lib/snapd/desktop/applications`.
-
-## Owner context
-- Currently uses **Folio**: `~/.local/share/icons/Folio`, a symlink overlay
-  (`Inherits=Papirus,Adwaita,hicolor`) with Adwaita folders + official Chrome Dev logo.
-- Rejected before (too busy / inconsistent): Infinity Glass, Papirus folders, Pure, Reversal,
-  Cool-Dark, Haptic, Paper, the aura-glass theme suite. Wants **clean, minimal, sleek**.
-- Uses dark mode, blue accent, Dash to Panel, Blur My Shell.
 
 ## Mimetype lookup order (verified M3, GTK 4.22)
 - A file's `GThemedIcon` carries names like `[image-png, image-x-generic, image-png-symbolic]`.
@@ -118,16 +109,10 @@ Verified against the installed GNOME Shell 50.1 JS (extracted from `libshell-18.
 - Sources: gnome-shell js/ui/status/{system,network,volume}.js, src/st/st-icon-theme.c, st-theme-node.c;
   docs.gtk.org/gtk4/icon-format.html; GNOME HIG UI icons; KDE HIG monochrome icons.
 
-## Live mic indicator (explored 2026-09-19, parked by the owner)
-- The top-bar mic icon (`InputIndicator`, `js/ui/status/volume.js`) is **static**: `microphone-sensitivity-*` is picked
-  from the input-volume *slider*, not live audio; it shows only while some source-output exists, skipping
-  `org.gnome.VolumeControl` and `org.PulseAudio.pavucontrol` (Settings' own level meter). The live moving bar people
-  remember is Settings → Sound, not the top bar.
-- A live, animated indicator would need a Shell extension (an icon theme cannot animate or read audio). Verified
-  feasible: GJS + GStreamer 1.28 `pulsesrc ! audio/x-raw,rate=16000,channels=1 ! level interval=50ms ! fakesink`
-  with `stream-properties` `application.id=org.gnome.VolumeControl` (so the Shell ignores the meter) gave ~20
-  peak updates/s at ~4 % CPU for a standalone test process. Hook point: `Main.panel.statusArea.quickSettings
-  ._volumeInput._indicator` (St.Icon, visibility bound to "an app is recording").
+## Live mic indicator (parked by the owner, 2026-09-19)
+- The top-bar mic icon is static (`microphone-sensitivity-*` follows the input-volume slider, not live audio).
+  A live meter needs a Shell extension: GStreamer `pulsesrc ! level` with `application.id=org.gnome.VolumeControl`
+  (so the Shell ignores it) worked at ~20 updates/s, ~4 % CPU. Hook: `quickSettings._volumeInput._indicator`.
 
 ## File types (M4c, 2026-09-20)
 **What GIO really asks for** (`Gio.content_type_get_icon`, shared-mime-info on Ubuntu 26.04):
