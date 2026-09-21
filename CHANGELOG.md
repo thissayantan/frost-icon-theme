@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased (v0.3.0 / v0.4.0)
+## v0.3.0 — 2026-09-21
+KDE Plasma, COSMIC and your own colours.
+
 - **KDE Plasma 6** — tray icons now follow KDE's colour scheme (they were drawn black), crisp at the tray's 22 px;
   Plasma's own tray names (network, battery, Bluetooth, notifications) and KDE apps (Dolphin, Konsole, Kate,
   Okular, Gwenview, Spectacle, Discover…) resolve to Frost; new art for Ark, Elisa, KDE Connect and Info Center.
