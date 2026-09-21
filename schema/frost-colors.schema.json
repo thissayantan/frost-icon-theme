@@ -1,0 +1,761 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/schema/frost-colors.schema.json",
+  "title": "Frost colours",
+  "description": "Recolour the Frost icon theme. Leave out anything you want to keep. Install with: sh install.sh --colors frost.colors.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "description": "Format version."
+    },
+    "palette": {
+      "type": "object",
+      "description": "Recolour a palette colour everywhere it is used.",
+      "additionalProperties": false,
+      "properties": {
+        "blue": {
+          "$ref": "#/$defs/colour"
+        },
+        "teal": {
+          "$ref": "#/$defs/colour"
+        },
+        "green": {
+          "$ref": "#/$defs/colour"
+        },
+        "yellow": {
+          "$ref": "#/$defs/colour"
+        },
+        "orange": {
+          "$ref": "#/$defs/colour"
+        },
+        "red": {
+          "$ref": "#/$defs/colour"
+        },
+        "pink": {
+          "$ref": "#/$defs/colour"
+        },
+        "violet": {
+          "$ref": "#/$defs/colour"
+        },
+        "graphite": {
+          "$ref": "#/$defs/colour"
+        }
+      }
+    },
+    "folders": {
+      "$ref": "#/$defs/colour",
+      "description": "Every folder (Home, Documents, Downloads…)."
+    },
+    "filetypes": {
+      "description": "One colour for every file type, or a colour per kind of file.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/colour"
+        },
+        {
+          "type": "object",
+          "description": "Per kind of file.",
+          "additionalProperties": false,
+          "properties": {
+            "archive": {
+              "$ref": "#/$defs/colour"
+            },
+            "audio": {
+              "$ref": "#/$defs/colour"
+            },
+            "binary": {
+              "$ref": "#/$defs/colour"
+            },
+            "calendar": {
+              "$ref": "#/$defs/colour"
+            },
+            "certificate": {
+              "$ref": "#/$defs/colour"
+            },
+            "config": {
+              "$ref": "#/$defs/colour"
+            },
+            "contact": {
+              "$ref": "#/$defs/colour"
+            },
+            "container": {
+              "$ref": "#/$defs/colour"
+            },
+            "database": {
+              "$ref": "#/$defs/colour"
+            },
+            "diff": {
+              "$ref": "#/$defs/colour"
+            },
+            "disc": {
+              "$ref": "#/$defs/colour"
+            },
+            "document": {
+              "$ref": "#/$defs/colour"
+            },
+            "ebook": {
+              "$ref": "#/$defs/colour"
+            },
+            "executable": {
+              "$ref": "#/$defs/colour"
+            },
+            "font": {
+              "$ref": "#/$defs/colour"
+            },
+            "git": {
+              "$ref": "#/$defs/colour"
+            },
+            "image": {
+              "$ref": "#/$defs/colour"
+            },
+            "json": {
+              "$ref": "#/$defs/colour"
+            },
+            "key": {
+              "$ref": "#/$defs/colour"
+            },
+            "lock": {
+              "$ref": "#/$defs/colour"
+            },
+            "log": {
+              "$ref": "#/$defs/colour"
+            },
+            "mail": {
+              "$ref": "#/$defs/colour"
+            },
+            "markdown": {
+              "$ref": "#/$defs/colour"
+            },
+            "package": {
+              "$ref": "#/$defs/colour"
+            },
+            "pdf": {
+              "$ref": "#/$defs/colour"
+            },
+            "presentation": {
+              "$ref": "#/$defs/colour"
+            },
+            "script": {
+              "$ref": "#/$defs/colour"
+            },
+            "source": {
+              "$ref": "#/$defs/colour"
+            },
+            "spreadsheet": {
+              "$ref": "#/$defs/colour"
+            },
+            "text": {
+              "$ref": "#/$defs/colour"
+            },
+            "video": {
+              "$ref": "#/$defs/colour"
+            }
+          }
+        }
+      ]
+    },
+    "icons": {
+      "type": "object",
+      "description": "One specific icon, by its icon name.",
+      "additionalProperties": false,
+      "properties": {
+        "application-certificate": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-epub+zip": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-gzip": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-java-archive": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-json": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-msword": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-pdf": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-pgp-encrypted": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-pgp-keys": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-pgp-signature": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-pkix-cert": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-rtf": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-sql": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-toml": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.android.package-archive": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.appimage": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.dart": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.debian.binary-package": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.efi.img": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.efi.iso": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.flatpak.ref": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.ms-excel": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.ms-powerpoint": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.oasis.opendocument.presentation": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.oasis.opendocument.spreadsheet": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.oasis.opendocument.text": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.openxmlformats-officedocument.presentationml.presentation": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.openxmlformats-officedocument.wordprocessingml.document": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.rar": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.snap": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-vnd.sqlite3": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-7z-compressed": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-bzip2": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-compressed-tar": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-desktop": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-executable": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-ipynb+json": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-msdownload": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-msi": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-pem-key": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-perl": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-php": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-pkcs12": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-powershell": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-rpm": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-ruby": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-shellscript": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-tar": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-x509-ca-cert": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-xz": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-xz-compressed-tar": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-x-zstd-compressed-tar": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-xml": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-yaml": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-zip": {
+          "$ref": "#/$defs/colour"
+        },
+        "application-zstd": {
+          "$ref": "#/$defs/colour"
+        },
+        "ark": {
+          "$ref": "#/$defs/colour"
+        },
+        "audio-flac": {
+          "$ref": "#/$defs/colour"
+        },
+        "audio-mp4": {
+          "$ref": "#/$defs/colour"
+        },
+        "audio-mpeg": {
+          "$ref": "#/$defs/colour"
+        },
+        "audio-ogg": {
+          "$ref": "#/$defs/colour"
+        },
+        "audio-vnd.wave": {
+          "$ref": "#/$defs/colour"
+        },
+        "audio-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "btop": {
+          "$ref": "#/$defs/colour"
+        },
+        "com.mattjakeman.ExtensionManager": {
+          "$ref": "#/$defs/colour"
+        },
+        "com.mitchellh.ghostty": {
+          "$ref": "#/$defs/colour"
+        },
+        "com.system76.CosmicPlayer": {
+          "$ref": "#/$defs/colour"
+        },
+        "desktop-security-center": {
+          "$ref": "#/$defs/colour"
+        },
+        "elisa": {
+          "$ref": "#/$defs/colour"
+        },
+        "firmware-updater": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-documents": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-download": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-drag-accept": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-music": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-open": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-pictures": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-publicshare": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-remote": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-templates": {
+          "$ref": "#/$defs/colour"
+        },
+        "folder-videos": {
+          "$ref": "#/$defs/colour"
+        },
+        "font-otf": {
+          "$ref": "#/$defs/colour"
+        },
+        "font-ttf": {
+          "$ref": "#/$defs/colour"
+        },
+        "font-woff": {
+          "$ref": "#/$defs/colour"
+        },
+        "font-woff2": {
+          "$ref": "#/$defs/colour"
+        },
+        "font-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "htop": {
+          "$ref": "#/$defs/colour"
+        },
+        "hwinfo": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-avif": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-bmp": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-gif": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-heif": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-jpeg": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-png": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-svg+xml": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-tiff": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-webp": {
+          "$ref": "#/$defs/colour"
+        },
+        "image-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "kdeconnect": {
+          "$ref": "#/$defs/colour"
+        },
+        "media-optical": {
+          "$ref": "#/$defs/colour"
+        },
+        "message-rfc822": {
+          "$ref": "#/$defs/colour"
+        },
+        "net.nokyan.Resources": {
+          "$ref": "#/$defs/colour"
+        },
+        "network-server": {
+          "$ref": "#/$defs/colour"
+        },
+        "network-workgroup": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Calculator": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Characters": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.DiskUtility": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Logs": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Loupe": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Nautilus": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Papers": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Ptyxis": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Screenshot": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Settings": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Software": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Sysprof": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.TextEditor": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.Yelp": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.baobab": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.clocks": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.font-viewer": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.seahorse.Application": {
+          "$ref": "#/$defs/colour"
+        },
+        "org.gnome.tweaks": {
+          "$ref": "#/$defs/colour"
+        },
+        "package-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "preferences-desktop-locale": {
+          "$ref": "#/$defs/colour"
+        },
+        "preferences-system-network": {
+          "$ref": "#/$defs/colour"
+        },
+        "snap-store": {
+          "$ref": "#/$defs/colour"
+        },
+        "system-software-update": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-calendar": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-css": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-csv": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-html": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-javascript": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-markdown": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-plain": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-rust": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-tab-separated-values": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-vcard": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-c++hdr": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-c++src": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-chdr": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-csharp": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-csrc": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-dockerfile": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-dotenv": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-gitconfig": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-go": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-gomod": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-gosum": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-hcl": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-iniconf": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-java": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-kotlin": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-lockfile": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-log": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-lua": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-makefile": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-patch": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-preview": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-protobuf": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-python": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-script": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-scss": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-ssh-public-key": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-swift": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-tsx": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-typescript": {
+          "$ref": "#/$defs/colour"
+        },
+        "text-x-vim": {
+          "$ref": "#/$defs/colour"
+        },
+        "user-bookmarks": {
+          "$ref": "#/$defs/colour"
+        },
+        "user-desktop": {
+          "$ref": "#/$defs/colour"
+        },
+        "user-home": {
+          "$ref": "#/$defs/colour"
+        },
+        "user-trash": {
+          "$ref": "#/$defs/colour"
+        },
+        "user-trash-full": {
+          "$ref": "#/$defs/colour"
+        },
+        "video-mp4": {
+          "$ref": "#/$defs/colour"
+        },
+        "video-quicktime": {
+          "$ref": "#/$defs/colour"
+        },
+        "video-vnd.avi": {
+          "$ref": "#/$defs/colour"
+        },
+        "video-webm": {
+          "$ref": "#/$defs/colour"
+        },
+        "video-x-generic": {
+          "$ref": "#/$defs/colour"
+        },
+        "video-x-matroska": {
+          "$ref": "#/$defs/colour"
+        },
+        "win11-clipboard-history": {
+          "$ref": "#/$defs/colour"
+        },
+        "x-office-addressbook": {
+          "$ref": "#/$defs/colour"
+        },
+        "x-office-calendar": {
+          "$ref": "#/$defs/colour"
+        },
+        "x-office-document": {
+          "$ref": "#/$defs/colour"
+        },
+        "x-office-presentation": {
+          "$ref": "#/$defs/colour"
+        },
+        "x-office-spreadsheet": {
+          "$ref": "#/$defs/colour"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "colour": {
+      "description": "A CSS colour (\"coral\", \"#E8573C\", \"rgb(232 87 60)\", \"oklch(0.68 0.17 35)\") used as the mid-tone — Frost derives the glass gradient — or {\"light\", \"deep\"} for both gradient ends.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 3
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "light",
+            "deep"
+          ],
+          "properties": {
+            "light": {
+              "type": "string"
+            },
+            "deep": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

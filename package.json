@@ -2,7 +2,7 @@
   "name": "frost",
   "version": "0.2.0",
   "private": true,
-  "description": "Frost \u2014 frosted-glass icon theme for Linux",
+  "description": "Frost — frosted-glass icon theme for Linux",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -15,12 +15,16 @@
     "pack": "bun tools/pack.ts",
     "typecheck": "tsc -p .",
     "tag-folders": "bun tools/tag-folders.ts",
-    "inventory": "bun tools/inventory.ts"
+    "inventory": "bun tools/inventory.ts",
+    "test": "bun test tools",
+    "colors": "bun tools/colors.ts"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "@types/bun": "^1.4.2",
+    "@types/culori": "^4.0.1",
     "@xmldom/xmldom": "^0.9.12",
+    "culori": "^4.0.2",
     "sharp": "^0.35.4",
     "typescript": "^7.0.2"
   }

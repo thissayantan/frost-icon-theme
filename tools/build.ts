@@ -3,8 +3,9 @@ import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { CONTEXTS, SCALES, SIZES, SYMBOLIC_22_DIR, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, derive, dirName, pad22, sources, symbolicSources, type Source } from "./lib";
+import { CONTEXTS, SCALES, SIZES, SYMBOLIC_22_DIR, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, derive, dirName, flag, pad22, sources, symbolicSources, type Source } from "./lib";
 import { lint } from "./lint";
+import { applyColors, type Resolved } from "./colors";
 
 export const VERSION = (await Bun.file(join(import.meta.dir, "../package.json")).json()).version as string;
 
@@ -16,6 +17,9 @@ export async function renderPng(src: Source, size: number, scale: number): Promi
   return sharp(raw).png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer();
 }
 
+/** Set when the build applies a colour config (ADR-007); noted in index.theme's Comment. */
+let custom: Resolved | null = null;
+
 export function indexTheme(contexts: string[], symbolic = existsSync(join(THEME_DIR, SYMBOLIC_DIR))): string {
   // The fixed 22 px status directory comes first: at 22 px (KDE's tray) it is an exact match and wins over
   // the scalable 16 px one; every other size still resolves to the 16 px art.
@@ -23,7 +27,7 @@ export function indexTheme(contexts: string[], symbolic = existsSync(join(THEME_
   const lines = [
     "[Icon Theme]",
     `Name=${THEME}`,
-    `Comment=Frosted-glass icons — clean, minimal (v${VERSION})`,
+    `Comment=Frosted-glass icons — clean, minimal (v${VERSION}${custom ? ", custom colours" : ""})`,
     // breeze after Adwaita: KDE apps' own names (kate, okular…) fall back to KDE's art when Papirus is absent
     "Inherits=Papirus,Adwaita,breeze,hicolor",
     "Example=folder",
@@ -119,14 +123,29 @@ export async function build(): Promise<{ icons: number; files: number; deduped: 
   }
 
   writeFileSync(join(THEME_DIR, "index.theme"), indexTheme(contexts, symbolic.length > 0));
-  const cache = Bun.spawnSync(["gtk-update-icon-cache", "-f", "-t", "-q", THEME_DIR]);
-  if (cache.exitCode !== 0 || !existsSync(join(THEME_DIR, "icon-theme.cache"))) {
-    throw new Error(`gtk-update-icon-cache failed: ${cache.stderr.toString()}`);
-  }
+  // The colour config travels with the theme, so an upgrade can offer to re-apply it.
+  if (custom) copyFileSync(custom.file, join(THEME_DIR, "frost-colors.json"));
+  // GTK's cache speeds lookups up; KDE and COSMIC ignore it, and their distros may not ship the tool.
+  if (Bun.which("gtk-update-icon-cache")) {
+    const cache = Bun.spawnSync(["gtk-update-icon-cache", "-f", "-t", "-q", THEME_DIR]);
+    if (cache.exitCode !== 0 || !existsSync(join(THEME_DIR, "icon-theme.cache"))) {
+      throw new Error(`gtk-update-icon-cache failed: ${cache.stderr.toString()}`);
+    }
+  } else console.warn("build: gtk-update-icon-cache not found — skipping the GTK icon cache (the theme works without it)");
   return { icons: list.length + symbolic.length, files, deduped };
 }
 
+/** `--colors FILE|PRESET` (ADR-007): recolour this build. Exits with the config's problems if it is invalid. */
+export function useColors(arg: string | undefined): Resolved | null {
+  if (!arg) return null;
+  try { custom = applyColors(arg); } catch (e) { console.error(`✗ ${(e as Error).message}`); process.exit(1); }
+  for (const w of custom.warnings) console.warn(`⚠ ${w}`);
+  console.log(`colours: ${custom.file}`);
+  return custom;
+}
+
 if (import.meta.main) {
+  useColors(flag("colors"));
   const t = performance.now();
   const { icons, files, deduped } = await build();
   console.log(`build: ${icons} icons → ${files} files in dist/${THEME}, ${deduped} identical linked (${((performance.now() - t) / 1000).toFixed(1)}s)`);

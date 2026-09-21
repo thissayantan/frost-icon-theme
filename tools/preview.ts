@@ -1,12 +1,13 @@
 // Contact sheet of the *built* PNGs: rows = icons, column groups = light / dark / wallpaper backgrounds.
 //   bun run preview [--only a,b] [--size 256 | --sizes 16,24] [--scale 2] [--zoom 3] [--templates | --from-src]
+//                   [--colors FILE|PRESET]  (renders sources with a colour config, ADR-007; implies --from-src)
 //                   [--grid] [--wallpaper file.jpg] [--out path.png]
 import { Resvg } from "@resvg/resvg-js";
 import sharp, { type OverlayOptions } from "sharp";
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { DIST, SRC, THEME_DIR, dirName, flag, sources, type Source } from "./lib";
-import { renderPng } from "./build";
+import { renderPng, useColors } from "./build";
 
 const BACKGROUNDS = [
   { name: "light", fill: "#FAFAFB", ink: "#55575E" },
@@ -24,7 +25,7 @@ function entries(): Entry[] {
       return { label: `template: ${t}`, png: (size, scale) => renderPng(src, size, scale) };
     });
   }
-  if (process.argv.includes("--from-src")) {
+  if (process.argv.includes("--from-src") || flag("colors")) {
     // Same derive + render path as the build, in memory — for iterating without touching dist/.
     return sources(only).map((s) => ({ label: s.name, png: (size, scale) => renderPng(s, size, scale) }));
   }
@@ -137,6 +138,7 @@ async function grid(list: Entry[], size: number) {
 }
 
 if (import.meta.main) {
+  useColors(flag("colors"));
   const list = entries();
   if (!list.length) throw new Error("no icons matched");
   const single = flag("size");

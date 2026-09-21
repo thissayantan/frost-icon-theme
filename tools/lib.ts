@@ -1,5 +1,6 @@
 // Shared helpers for the Frost pipeline: paths, palette, source discovery, size derivation.
 import { DOMParser, XMLSerializer } from "@xmldom/xmldom";
+import { converter, formatHex, wcagContrast } from "culori";
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
 
@@ -98,10 +99,15 @@ export function sources(only?: string[]): Source[] {
   return list.sort((a, b) => order(a) - order(b) || a.name.localeCompare(b.name));
 }
 
+/** The folder family: every folder-shaped place icon (the `folders` colour override targets these). */
+export function isFolder(s: Source): boolean {
+  return s.context === "places" && (s.name.startsWith("folder") || s.name === "user-home" || s.name === "user-desktop");
+}
+
 /** Sheet order: folder anchor first, then the folder family, places, mimetypes, the rest. */
 function order(s: Source): number {
   if (s.name === "folder") return 0;
-  if (s.name.startsWith("folder") || s.name === "user-home" || s.name === "user-desktop") return 1;
+  if (isFolder(s)) return 1;
   return { places: 2, mimetypes: 3, devices: 4, apps: 5 }[s.context] ?? 9;
 }
 
@@ -114,6 +120,7 @@ export function aliases(): Aliases {
 
 // ── size derivation (DESIGN §4, ADR-003) ─────────────────────────────────────
 const parser = new DOMParser();
+const toOklch = converter("oklch");
 const serializer = new XMLSerializer();
 
 function byId(doc: Document, id: string): Element | null {
@@ -176,7 +183,7 @@ function isApp(doc: Document): boolean {
 
 function knockout(doc: Document) {
   let deep = byId(doc, "tint")?.getElementsByTagName("stop")[1]?.getAttribute("stop-color")?.toUpperCase() ?? "#000000";
-  if (deep === "#FFAA1F") deep = "#FF7430"; // yellow's deep is ~1.9:1 on white — use orange's deep for contrast
+  deep = knockoutInk(deep);
   const plate = byId(doc, "plate");
   plate?.setAttribute("fill", "#FFFFFF");
   plate?.removeAttribute("fill-opacity");
@@ -186,6 +193,18 @@ function knockout(doc: Document) {
     if (n.getAttribute("data-keep-white")) continue; // hand-drawn small glyph meant to stay white on the tint
     for (const a of ["fill", "stroke"]) if (n.getAttribute(a)?.toUpperCase() === "#FFFFFF") n.setAttribute(a, deep);
   }
+}
+
+/**
+ * The glyph colour on a knockout's white plate must read on white. Built-in yellow's deep (~1.9:1) borrows
+ * orange's deep; any other ink under 3:1 (a light user colour) is darkened in OKLCH until it reaches 3:1.
+ */
+function knockoutInk(deep: string): string {
+  if (deep === "#FFAA1F") return "#FF7430";
+  const c = toOklch(deep);
+  if (!c) return deep;
+  while (wcagContrast(formatHex(c), "#FFFFFF") < 3 && c.l > 0.05) c.l -= 0.02;
+  return formatHex(c).toUpperCase();
 }
 
 /** A hinted glyph is already drawn for the re-laid-out back, so only the back moves. */
@@ -211,10 +230,15 @@ function recentreOnBack(doc: Document, size: number, moveGlyph = true) {
  * Return the SVG to render for a logical size. @2x renders use the same variant as @1x
  * (48@2x = 96 px with 48 px detail).
  */
+/** User colour overrides (ADR-007, tools/colors.ts) — a text substitution of palette hex values per icon. */
+let recolor: ((src: Source, svg: string) => string) | null = null;
+export function setRecolor(f: typeof recolor) { recolor = f; }
+const read = (src: Source, file: string) => (recolor ? recolor(src, readFileSync(file, "utf8")) : readFileSync(file, "utf8"));
+
 export function derive(src: Source, size: number): string {
   const override = src.overrides.get(size);
-  if (override) return readFileSync(override, "utf8");
-  const doc = parser.parseFromString(readFileSync(src.file, "utf8"), "image/svg+xml") as unknown as Document;
+  if (override) return read(src, override);
+  const doc = parser.parseFromString(read(src, src.file), "image/svg+xml") as unknown as Document;
   // Pixel-grid hints: <path id="back-shape-24"> replaces #back-shape's geometry at 24 px (and 24@2x).
   for (const id of ["back-shape", "plate-shape"]) {
     const hint = byId(doc, `${id}-${size}`), base = byId(doc, id);

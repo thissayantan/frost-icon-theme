@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/frost-colors.schema.json",
+  "version": 1,
+  "folders": "coral",
+  "palette": {
+    "blue": "coral",
+    "teal": "#F0A868",
+    "violet": "#E52B50",
+    "pink": "salmon"
+  }
+}
