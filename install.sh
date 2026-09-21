@@ -7,8 +7,9 @@
 #   (default)       download the latest release and install to ~/.local/share/icons/Frost
 #   --mime          also install the per-user MIME add-on (real types for lock files, .env, Dockerfiles,
 #                   TypeScript, keys, go.mod…) to ~/.local/share/mime/packages/frost.xml
-#   --colors X      build Frost in your own colours from a frost.colors.json file, or a preset name
-#                   (warm). Needs Bun; asks before installing anything. See the README, "Make it yours".
+#   --colors X      build Frost in your own colours. X is a frost.colors.json file, a link from the colour
+#                   builder (https://thissayantan.github.io/frost-icon-theme/), a URL of a JSON file, or a
+#                   preset: warm, forest, ocean, pastel, mono. Needs Bun; asks before installing anything.
 #   --yes           answer yes to the --colors questions (for scripts; nothing is asked otherwise)
 #   --system        install to /usr/share/icons instead (uses sudo)
 #   --version V     install release V instead of the latest
@@ -46,7 +47,7 @@ while [ $# -gt 0 ]; do
     --from) shift; FROM="${1:-}"; [ -n "$FROM" ] || die "--from needs a directory" ;;
     --source) shift; SOURCE="${1:-}"; [ -n "$SOURCE" ] || die "--source needs a directory" ;;
     --uninstall) MODE="uninstall" ;;
-    -h|--help) sed -n '2,20p' "$0" 2>/dev/null | sed 's/^# \{0,1\}//'; exit 0 ;;
+    -h|--help) sed -n '2,21p' "$0" 2>/dev/null | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) die "unknown option: $1 (try --help)" ;;
   esac
   shift
@@ -95,9 +96,29 @@ fi
 # ── custom colours: build from source with the user's config (ADR-007) ────────
 if [ -n "$COLORS" ]; then
   [ -z "$FROM" ] || die "--colors builds the theme itself; it can't be combined with --from"
-  if [ -f "$COLORS" ]; then COLORS="$(cd "$(dirname "$COLORS")" && pwd)/$(basename "$COLORS")"; KIND="your file $COLORS"
-  else KIND="the preset \"$COLORS\""; fi
   command -v curl >/dev/null 2>&1 || die "curl is required"
+  case "$COLORS" in
+    http://*|https://*)
+      code="$(printf '%s' "$COLORS" | sed -n 's/.*[?#&]c=\([A-Za-z0-9_-]*\).*/\1/p')"
+      if [ -n "$code" ]; then
+        # a colour-builder link carries the whole config in ?c= (URL-safe base64): decode it here, no download
+        command -v base64 >/dev/null 2>&1 || die "base64 is required to read a colour-builder link"
+        pad="$(printf '%s' "$code" | wc -c)"; pad=$(( (4 - pad % 4) % 4 ))
+        { printf '%s' "$code" | tr '_-' '/+'; printf '%*s' "$pad" '' | tr ' ' '='; } | base64 -d > "$TMP/frost-colors.json" 2>/dev/null \
+          || die "that colour-builder link is damaged — copy it again"
+        KIND="your colour-builder link"
+      else
+        curl -fsSL "$COLORS" -o "$TMP/frost-colors.json" || die "could not download $COLORS"
+        KIND="the file at $COLORS"
+      fi
+      # catch a wrong link now, before anything is installed (the build checks every key and colour later)
+      [ "$(tr -d ' \t\r\n' < "$TMP/frost-colors.json" | cut -c1)" = "{" ] \
+        || die "$COLORS didn't give a colours file (frost.colors.json). Check the link, or use the colour builder."
+      COLORS="$TMP/frost-colors.json" ;;
+    *)
+      if [ -f "$COLORS" ]; then COLORS="$(cd "$(dirname "$COLORS")" && pwd)/$(basename "$COLORS")"; KIND="your file $COLORS"
+      else KIND="the preset \"$COLORS\""; fi ;;
+  esac
   command -v tar >/dev/null 2>&1 || die "tar is required"
   HAVE_BUN=0; command -v bun >/dev/null 2>&1 && HAVE_BUN=1
   [ -x "$HOME/.bun/bin/bun" ] && { HAVE_BUN=1; PATH="$HOME/.bun/bin:$PATH"; }
