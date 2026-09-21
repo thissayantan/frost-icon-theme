@@ -55,3 +55,5 @@ layers.push({ input: Buffer.from(new Resvg(labels, { font: { loadSystemFonts: tr
 const out = flag("out") ?? join(ROOT, "docs/colors.png");
 await sharp(Buffer.from(new Resvg(bg).render().asPng())).composite(layers).png({ compressionLevel: 9 }).toFile(out);
 console.log(`colors-sheet: ${rows.length} rows × ${ICONS.length} icons → ${out.replace(ROOT + "/", "")}`);
+// A landscape copy (the light panel only) for articles and store galleries.
+if (!flag("out")) await sharp(out).extract({ left: 0, top: 0, width: W * S, height: panelH * S }).toFile(join(ROOT, "docs/colors-wide.png"));

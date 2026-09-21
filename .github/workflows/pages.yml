@@ -3,7 +3,7 @@ name: colour builder page
 on:
   push:
     branches: [main]
-    paths: [site/**, tools/**, src/**, presets/**, schema/**, docs/DESIGN.md, package.json, bun.lock]
+    paths: [site/**, tools/**, src/**, presets/**, schema/**, docs/DESIGN.md, docs/*.png, package.json, bun.lock]
   workflow_dispatch:
 permissions:
   contents: read
