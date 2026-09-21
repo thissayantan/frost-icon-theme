@@ -197,13 +197,14 @@ function knockout(doc: Document) {
 
 /**
  * The glyph colour on a knockout's white plate must read on white. Built-in yellow's deep (~1.9:1) borrows
- * orange's deep; any other ink under 3:1 (a light user colour) is darkened in OKLCH until it reaches 3:1.
+ * orange's deep (2.7:1); any other ink under 2.5:1 (a light user colour) is darkened in OKLCH until it reaches 2.7:1.
  */
 function knockoutInk(deep: string): string {
   if (deep === "#FFAA1F") return "#FF7430";
   const c = toOklch(deep);
   if (!c) return deep;
-  while (wcagContrast(formatHex(c), "#FFFFFF") < 3 && c.l > 0.05) c.l -= 0.02;
+  if (wcagContrast(deep, "#FFFFFF") >= 2.5) return deep;
+  while (wcagContrast(formatHex(c), "#FFFFFF") < 2.7 && c.l > 0.05) c.l -= 0.02;
   return formatHex(c).toUpperCase();
 }
 
