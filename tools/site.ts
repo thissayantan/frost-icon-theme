@@ -52,6 +52,8 @@ export function buildSite() {
   };
   writeFileSync(join(OUT, "data.json"), JSON.stringify(data));
   for (const f of readdirSync(join(ROOT, "site"))) cpSync(join(ROOT, "site", f), join(OUT, f), { recursive: true });
+  // Pages used to publish docs/ as-is; keep its images at the same URLs for anything that links them.
+  for (const f of readdirSync(join(ROOT, "docs")).filter((f) => f.endsWith(".png"))) cpSync(join(ROOT, "docs", f), join(OUT, f));
   const res = Bun.spawnSync(["bun", "build", join(ROOT, "tools/site/app.ts"), "--target=browser", "--minify", "--outfile", join(OUT, "app.js")]);
   if (res.exitCode !== 0) throw new Error(`bundling the page failed:\n${res.stderr.toString()}`);
   console.log(`site: ${Object.keys(icons).length} icons, ${data.categories.length} kinds, ${Object.keys(presets).length} presets → dist/site`);
