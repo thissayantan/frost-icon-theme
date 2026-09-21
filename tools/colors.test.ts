@@ -33,3 +33,30 @@ test("validation: good configs pass, mistakes say what is wrong", () => {
   expect(validate({ filetypes: { jsn: "red" } })[0]).toContain('did you mean "json"');
   expect(validate({ version: 2 })[0]).toContain("version 1");
 });
+
+test("folders / filetypes / icons recolour only what they name", async () => {
+  const { writeFileSync, mkdtempSync, readFileSync } = await import("node:fs");
+  const { join } = await import("node:path");
+  const { tmpdir } = await import("node:os");
+  const { resolve } = await import("./colors");
+  const { sources } = await import("./lib");
+  const dir = mkdtempSync(join(tmpdir(), "frost-colors-"));
+  const file = join(dir, "c.json");
+  writeFileSync(file, JSON.stringify({ folders: "#8A93A3", filetypes: { json: "seagreen" }, icons: { "org.gnome.Calculator": "teal" } }));
+  const r = resolve(file);
+  const src = (n: string) => sources([n])[0];
+  const changed = (n: string) => { const s = src(n), t = readFileSync(s.file, "utf8"); return r.recolor(s, t) !== t; };
+  expect(changed("folder")).toBe(true);
+  expect(changed("user-home")).toBe(true);
+  expect(changed("application-json")).toBe(true);
+  expect(changed("org.gnome.Calculator")).toBe(true);
+  expect(changed("text-markdown")).toBe(false);
+  expect(changed("org.gnome.Settings")).toBe(false);
+});
+
+test("a config survives the builder link encoding", async () => {
+  const { encodeConfig, decodeConfig } = await import("./colors-core");
+  const c = { version: 1 as const, description: "Ünïcode ✓", folders: "coral", filetypes: { json: "#2E8B57" } };
+  expect(decodeConfig(encodeConfig(c))).toEqual(c);
+  expect(encodeConfig(c)).toMatch(/^[A-Za-z0-9_-]+$/);
+});

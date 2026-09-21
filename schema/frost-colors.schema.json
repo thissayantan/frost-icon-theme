@@ -13,6 +13,10 @@
       "const": 1,
       "description": "Format version."
     },
+    "description": {
+      "type": "string",
+      "description": "A note for yourself: what this colour set is."
+    },
     "palette": {
       "type": "object",
       "description": "Recolour a palette colour everywhere it is used.",
