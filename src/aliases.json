@@ -118,22 +118,26 @@
   "network-wireless-signal-none-symbolic": [
     "network-wireless-0",
     "network-wireless-0-symbolic",
-    "network-wireless-connected-00"
+    "network-wireless-connected-00",
+    "network-wireless-0-locked"
   ],
   "network-wireless-signal-weak-symbolic": [
     "network-wireless-20",
     "network-wireless-20-symbolic",
-    "network-wireless-connected-20"
+    "network-wireless-connected-20",
+    "network-wireless-20-locked"
   ],
   "network-wireless-signal-ok-symbolic": [
     "network-wireless-40",
     "network-wireless-40-symbolic",
-    "network-wireless-connected-40"
+    "network-wireless-connected-40",
+    "network-wireless-40-locked"
   ],
   "network-wireless-signal-good-symbolic": [
     "network-wireless-60",
     "network-wireless-60-symbolic",
-    "network-wireless-connected-60"
+    "network-wireless-connected-60",
+    "network-wireless-60-locked"
   ],
   "network-wireless-signal-excellent-symbolic": [
     "network-wireless-80",
@@ -141,11 +145,14 @@
     "network-wireless-connected-80",
     "network-wireless-100",
     "network-wireless-100-symbolic",
-    "network-wireless-connected-100"
+    "network-wireless-connected-100",
+    "network-wireless-80-locked",
+    "network-wireless-100-locked"
   ],
   "network-wireless-offline-symbolic": [
     "network-wireless-disconnected",
-    "network-wireless-disconnected-symbolic"
+    "network-wireless-disconnected-symbolic",
+    "network-wireless-unavailable"
   ],
   "network-wired-symbolic": [
     "network-wired-activated",
@@ -336,7 +343,13 @@
     "cosmic-applet-battery-display-brightness-high-symbolic"
   ],
   "network-wireless-no-route-symbolic": [
-    "network-wireless-error-symbolic"
+    "network-wireless-error-symbolic",
+    "network-wireless-0-limited",
+    "network-wireless-20-limited",
+    "network-wireless-40-limited",
+    "network-wireless-60-limited",
+    "network-wireless-80-limited",
+    "network-wireless-100-limited"
   ],
   "com.system76.CosmicPlayer": [
     "org.gnome.Showtime",
@@ -508,5 +521,19 @@
   ],
   "font-otf": [
     "application-x-font-otf"
+  ],
+  "network-wired-offline-symbolic": [
+    "network-unavailable",
+    "network-wired-unavailable",
+    "network-offline",
+    "network-offline-symbolic",
+    "network-unavailable-symbolic"
+  ],
+  "network-wireless-disabled-symbolic": [
+    "network-wireless-off"
+  ],
+  "network-wired-no-route-symbolic": [
+    "network-limited",
+    "network-wired-limited"
   ]
 }
