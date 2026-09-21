@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frost colours</title>
+  <meta name="description" content="Pick your own colours for the Frost icon theme, see the real icons change, and install them with one command.">
+  <link rel="icon" href="icons/folder.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:wght@400;500;600;700&family=Ubuntu+Sans+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="https://github.com/thissayantan/frost-icon-theme"><img src="icons/folder.svg" alt="" width="28" height="28">Frost</a>
+    <a class="gh" href="https://github.com/thissayantan/frost-icon-theme">GitHub</a>
+  </header>
+
+  <div class="intro">
+    <h1>Make Frost yours</h1>
+    <p class="lede">Pick a colour for anything you want to change. The preview shows Frost's real icons, recoloured exactly
+      as the installer will draw them. Everything you leave alone keeps Frost's colours.</p>
+  </div>
+
+  <main class="layout">
+    <section class="controls" aria-label="Colours">
+
+      <div class="group first">
+        <h2>Start from</h2>
+        <div class="presets" id="presets" role="radiogroup" aria-label="Start from"></div>
+        <p class="hint" id="preset-note"></p>
+      </div>
+
+      <div class="group">
+        <h2>Folders</h2>
+        <p class="hint">Home, Documents, Downloads and every other folder.</p>
+        <div id="folders"></div>
+      </div>
+
+      <div class="group">
+        <h2>File types</h2>
+        <p class="hint">One colour for all of them, or a colour per kind of file.</p>
+        <div id="filetypes-all"></div>
+        <details class="more" id="kinds-wrap">
+          <summary>Colour each kind of file</summary>
+          <div class="kinds" id="kinds"></div>
+        </details>
+      </div>
+
+      <div class="group">
+        <h2>Frost's colours</h2>
+        <p class="hint">Swap one of Frost's nine colours everywhere it is used: apps, places and file types.</p>
+        <div id="palette"></div>
+      </div>
+
+      <div class="group">
+        <h2>One icon</h2>
+        <p class="hint">Give a single icon its own colour. Type part of its name, like <em>calculator</em> or <em>home</em>.</p>
+        <div class="search">
+          <input id="icon-search" list="icon-names" placeholder="Icon name" autocomplete="off" aria-label="Icon name">
+          <datalist id="icon-names"></datalist>
+          <button id="icon-add" type="button">Add</button>
+        </div>
+        <div id="icons"></div>
+      </div>
+    </section>
+
+    <section class="output" aria-label="Preview and install">
+      <div class="stage" id="stage" data-bg="wallpaper">
+        <div class="stage-bar">
+          <div class="bg-switch" role="radiogroup" aria-label="Background">
+            <button type="button" data-bg="light" role="radio">Light</button>
+            <button type="button" data-bg="dark" role="radio">Dark</button>
+            <button type="button" data-bg="wallpaper" role="radio" aria-checked="true">Wallpaper</button>
+          </div>
+        </div>
+        <div class="window">
+          <div class="grid" id="stage-files"></div>
+        </div>
+        <div class="dock" id="stage-apps"></div>
+      </div>
+
+      <div class="install">
+        <h2>Install</h2>
+        <p class="hint" id="install-hint"></p>
+        <div class="cmd"><code id="cmd"></code><button type="button" id="copy-cmd">Copy</button></div>
+        <ul class="warnings" id="warnings"></ul>
+        <div class="actions">
+          <button type="button" id="download">Download frost.colors.json</button>
+          <button type="button" id="copy-link">Copy link to these colours</button>
+          <label class="import">Open a colours file<input type="file" id="import" accept=".json,application/json"></label>
+          <button type="button" id="reset" class="quiet">Start over</button>
+        </div>
+        <details class="json">
+          <summary>See the file</summary>
+          <pre id="json"></pre>
+        </details>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
