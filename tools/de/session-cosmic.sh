@@ -15,7 +15,7 @@ DISPLAY=:99 cosmic-comp >/tmp/comp.log 2>&1 &
 sleep 8
 export WAYLAND_DISPLAY=$(ls "$XDG_RUNTIME_DIR" | grep -m1 '^wayland-[0-9]*$')
 echo "wayland: $WAYLAND_DISPLAY"
-cosmic-settings-daemon >/dev/null 2>&1 &
+cosmic-settings-daemon >/dev/null 2>&1 &   # needs the compositor; light mode is not applied yet (dark only)
 cosmic-panel >/tmp/panel.log 2>&1 &
 shot panel 15
 mkdir -p ~/Documents ~/Downloads ~/Music ~/Pictures ~/Videos ~/project && cd ~/project && touch package.json README.md bun.lock .env Dockerfile main.go notes.txt photo.png song.mp3 clip.mp4 archive.zip && cd

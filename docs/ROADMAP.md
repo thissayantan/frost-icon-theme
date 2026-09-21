@@ -29,7 +29,9 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 
 ## M7 — COSMIC
 - [x] `com.system76.Cosmic*` app and `cosmic-applet-*` panel aliases; CosmicPlayer art — icon-critic SHIP
-- [ ] COSMIC in Docker (`tools/de/run.sh cosmic`) — panel + Files screenshots
+- [x] COSMIC in Docker (`tools/de/run.sh cosmic`) — panel, dock and Files screenshots (dark). Light mode is not
+      applied in the container yet (cosmic-settings-daemon builds the theme only inside a full session) —
+      check light in a Tier 2 VM
 
 ## M8 — Custom colours (v0.4)
 - [x] `frost.colors.json` + generated JSON Schema; `tools/colors.ts` (OKLCH mid-tone derivation, unit-tested)

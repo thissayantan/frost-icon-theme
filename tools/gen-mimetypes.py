@@ -280,7 +280,7 @@ cat("git", "teal", "branch: two commits and a fork",
 T = {}
 def t(name, category, label=None, *aliases): T[name] = (category, label, list(aliases))
 # generics (no label): what unknown subtypes fall back to
-t("text-x-generic", "text", None)
+t("text-x-generic", "text", None, "application-x-zerosize")  # empty files: COSMIC asks for x-zerosize
 t("application-x-generic", "binary", None, "application-octet-stream")
 t("text-x-script", "script", None)
 t("x-office-document", "document", None)

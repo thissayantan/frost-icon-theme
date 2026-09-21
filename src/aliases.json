@@ -43,7 +43,8 @@
     "battery-100",
     "battery-100-symbolic",
     "cosmic-applet-battery-level-100-symbolic",
-    "cosmic-applet-battery-level-100-limited-symbolic"
+    "cosmic-applet-battery-level-100-limited-symbolic",
+    "battery-symbolic"
   ],
   "battery-level-70-symbolic": [
     "battery-good-symbolic",
@@ -358,6 +359,23 @@
     "video-player",
     "multimedia-video-player"
   ],
+  "network-wired-offline-symbolic": [
+    "network-unavailable",
+    "network-wired-unavailable",
+    "network-offline",
+    "network-offline-symbolic",
+    "network-unavailable-symbolic"
+  ],
+  "network-wireless-disabled-symbolic": [
+    "network-wireless-off"
+  ],
+  "network-wired-no-route-symbolic": [
+    "network-limited",
+    "network-wired-limited"
+  ],
+  "text-x-generic": [
+    "application-x-zerosize"
+  ],
   "application-x-generic": [
     "application-octet-stream"
   ],
@@ -521,19 +539,5 @@
   ],
   "font-otf": [
     "application-x-font-otf"
-  ],
-  "network-wired-offline-symbolic": [
-    "network-unavailable",
-    "network-wired-unavailable",
-    "network-offline",
-    "network-offline-symbolic",
-    "network-unavailable-symbolic"
-  ],
-  "network-wireless-disabled-symbolic": [
-    "network-wireless-off"
-  ],
-  "network-wired-no-route-symbolic": [
-    "network-limited",
-    "network-wired-limited"
   ]
 }

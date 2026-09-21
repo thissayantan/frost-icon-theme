@@ -2,7 +2,7 @@
 FROM fedora:44
 RUN dnf -y install --setopt=install_weak_deps=False --setopt=max_parallel_downloads=10 --setopt=fastestmirror=True \
       cosmic-comp cosmic-panel cosmic-applets cosmic-files cosmic-settings-daemon cosmic-icon-theme cosmic-bg \
-      papirus-icon-theme mesa-dri-drivers dbus-daemon dbus-tools xorg-x11-server-Xvfb ImageMagick procps-ng \
+      papirus-icon-theme mesa-dri-drivers dbus-daemon dbus-tools xorg-x11-server-Xvfb ImageMagick procps-ng libxkbcommon-x11 \
       google-noto-sans-fonts \
  && dnf clean all
 RUN useradd -m tester
