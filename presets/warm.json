@@ -1,6 +1,7 @@
 {
   "$schema": "../schema/frost-colors.schema.json",
   "version": 1,
+  "description": "Warm tones: coral folders, apricot, amaranth and salmon in place of Frost's cool colours.",
   "folders": "coral",
   "palette": {
     "blue": "coral",

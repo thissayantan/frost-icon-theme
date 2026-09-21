@@ -1,0 +1,16 @@
+{
+  "$schema": "../schema/frost-colors.schema.json",
+  "version": 1,
+  "description": "Soft pastels: lavender folders and gentle, chalky colours everywhere.",
+  "folders": "#A99BE0",
+  "palette": {
+    "blue": "#A99BE0",
+    "teal": "#86C7C0",
+    "green": "#8CC9A0",
+    "orange": "#EBA884",
+    "red": "#E88E98",
+    "pink": "#E59AC0",
+    "violet": "#B98FE0",
+    "graphite": "#A2A8B5"
+  }
+}

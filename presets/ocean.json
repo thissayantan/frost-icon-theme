@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/frost-colors.schema.json",
+  "version": 1,
+  "description": "Sea blues and teals: deep-water folders, lagoon and indigo accents.",
+  "folders": "#2F80D1",
+  "palette": {
+    "blue": "#2F80D1",
+    "green": "#1FA39A",
+    "violet": "#4B5BC4",
+    "pink": "#2BA9C9",
+    "orange": "#3E7FB8"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "../schema/frost-colors.schema.json",
+  "version": 1,
+  "description": "One quiet grey for everything: folders and files, with colour left only to app icons.",
+  "folders": "#8A93A3",
+  "filetypes": "#8A93A3"
+}

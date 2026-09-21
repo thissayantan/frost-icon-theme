@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/frost-colors.schema.json",
+  "version": 1,
+  "description": "Greens and earth: sage folders, moss, terracotta and bark instead of blues and violets.",
+  "folders": "#6FA47E",
+  "palette": {
+    "blue": "#6FA47E",
+    "teal": "#4E9C8A",
+    "violet": "#9C7A54",
+    "pink": "#C8745A",
+    "red": "#B8563E"
+  }
+}
