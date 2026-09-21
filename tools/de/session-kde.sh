@@ -11,12 +11,12 @@ if [ "${1:-}" != inner ]; then
   exec dbus-run-session sh "$0" inner
 fi
 pipewire >/dev/null 2>&1 & sleep 1; wireplumber >/dev/null 2>&1 & pipewire-pulse >/dev/null 2>&1 &
-Xvfb :99 -screen 0 1440x900x24 >/dev/null 2>&1 & sleep 2
-DISPLAY=:99 kwin_wayland --x11-display :99 --no-lockscreen --width 1440 --height 900 >/tmp/kwin.log 2>&1 &
+Xvfb :99 -screen 0 $((1440 * ${SCALE:-1}))x$((900 * ${SCALE:-1}))x24 >/dev/null 2>&1 & sleep 2
+DISPLAY=:99 kwin_wayland --x11-display :99 --no-lockscreen --width $((1440 * ${SCALE:-1})) --height $((900 * ${SCALE:-1})) >/tmp/kwin.log 2>&1 &
 sleep 6
-export WAYLAND_DISPLAY=wayland-0 QT_QPA_PLATFORM=wayland
+export WAYLAND_DISPLAY=wayland-0 QT_QPA_PLATFORM=wayland QT_SCALE_FACTOR=${SCALE:-1}
 # services D-Bus starts on demand (activity manager, kded) need the display too, or plasmashell waits forever
-dbus-update-activation-environment WAYLAND_DISPLAY QT_QPA_PLATFORM XDG_RUNTIME_DIR DISPLAY=:99
+dbus-update-activation-environment WAYLAND_DISPLAY QT_QPA_PLATFORM QT_SCALE_FACTOR XDG_RUNTIME_DIR DISPLAY=:99
 plasma-apply-colorscheme "${SCHEME:-BreezeDark}" >/tmp/scheme.log 2>&1 || echo "colour scheme: $(tail -1 /tmp/scheme.log)"
 # a Home worth looking at: special folders and a small project
 mkdir -p ~/Desktop ~/Documents ~/Downloads ~/Music ~/Pictures ~/Videos ~/Templates ~/Public ~/project

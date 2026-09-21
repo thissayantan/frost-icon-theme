@@ -105,6 +105,8 @@ into PNGs (16–256 px, `@2x`), so it looks the same in GTK 4, GTK 3, Qt/KDE app
   Player and Screenshot plus the panel's battery, Bluetooth and notification icons are covered.
 - Status icons are plain symbolic SVG, recoloured by GNOME Shell, KDE and COSMIC alike.
 
+![Frost in Dolphin on KDE Plasma 6](docs/kde-dolphin.png)
+
 <details><summary>Every size is checked, not just the big one</summary>
 
 ![Selected icons at 16, 24, 48 and 128 px](docs/preview-sizes.png)
