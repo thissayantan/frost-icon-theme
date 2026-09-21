@@ -45,7 +45,11 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
   (curl one-liner, `--mime`, `--system`, `--from DIR`, `--uninstall`)
 - `python3 tools/gen-mimetypes.py` — regenerate every file-type icon (+ its aliases) from the category/type tables
 - `bun run coverage` — regenerate `docs/COVERAGE.md` (shipped vs inherited, via real GTK lookup)
-- `bun run typecheck` — `tsc` over `tools/`
+- `bun run typecheck` — `tsc` over `tools/`; `bun run test` — unit tests (colour maths, config validation)
+- `bun tools/colors.ts schema|check FILE` — regenerate the colours JSON Schema / validate a config (ADR-007)
+- `bun tools/colors-sheet.ts` — `docs/colors.png` (Frost + every preset, light and dark) for the README
+- `bun tools/site.ts [--serve]` — the colour builder page → `dist/site/` (GitHub Pages via `.github/workflows/pages.yml`)
+- `sh tools/de/run.sh kde|cosmic [light|dark]` — screenshots of Frost in real Plasma 6 / COSMIC (Docker)
 - `bun run preview --from-src` renders sources in memory (no dist); `--grid --out docs/preview.png` makes the README shot
 
 ## Layout

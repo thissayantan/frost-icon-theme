@@ -105,6 +105,10 @@ new colour means rendering again.
    installer only if missing, downloads the tagged source, builds, installs over `~/.local/share/icons/Frost`
    and keeps the config inside the theme so an upgrade can offer to re-apply it. Same theme name — nobody has
    to switch themes. `presets/` holds ready-made configs.
+5. The colour builder page (`site/`, `tools/site/app.ts`, GitHub Pages) imports the same `tools/colors-core.ts` and
+   recolours the same `derive(src, 128)` SVGs the build renders, so its preview is exact. It encodes the config
+   into its own link (`?c=` URL-safe base64 JSON); `install.sh --colors <that link>` decodes it locally — one
+   command, nothing hosted. Any other URL is downloaded and must be a JSON object.
 **Cost.** A custom build needs Bun and ~100 MB of downloads, once; the build takes 1–3 minutes.
 
 ## index.theme shape (generated)

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased (v0.3.1)
+- **Fix:** `folders`, `filetypes` and `icons` colour overrides were ignored (only `palette` worked).
+- **Colour builder page** — pick colours with live, exact previews of the real icons; download the file or copy
+  one install command. `install.sh --colors` also takes a builder link or the URL of a JSON file.
+- Presets `forest`, `ocean`, `pastel` and `mono` join `warm`; a picture of each in the README.
+
 ## v0.3.0 — 2026-09-21
 KDE Plasma, COSMIC and your own colours.
 

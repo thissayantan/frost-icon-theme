@@ -40,6 +40,14 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] `install.sh --colors` with consent prompt + official Bun installer — tested in a clean container
       (accepted and declined); ADR-007; README "Make it yours"
 
+## M9 — Colour builder (v0.3.1)
+- [x] Fix: folders / filetypes / icons overrides (object-identity bug) + tests for each
+- [x] Presets forest, ocean, pastel, mono; `docs/colors.png`; README "Make it yours" with examples
+- [x] `install.sh --colors <builder link | JSON URL>`; early check that a link is a colours file
+- [x] Colour builder page (`site/`, shares `colors-core.ts`), checked in headless Chrome (desktop + phone, clicks)
+- [ ] Enable GitHub Pages (Settings → Pages → GitHub Actions) and push — owner go-ahead
+- [ ] Release v0.3.1 (the override fix is in v0.3.0's source used by `--colors`) — owner go-ahead
+
 ## Open
 - [ ] Devices: drive-harddisk, drive-removable-media, computer, phone, printer, camera
 - [ ] icon-critic SHIP on every new icon, reviewed in scenes

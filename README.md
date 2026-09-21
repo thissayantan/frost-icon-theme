@@ -49,31 +49,51 @@ Papirus, then Adwaita.
 **Uninstall:** `sh install.sh --uninstall` (removes the theme and the MIME add-on), then pick another icon theme.
 
 ## Make it yours
-Prefer coral folders, or a green JSON icon? Put the colours you want in a small `frost.colors.json` and install
-with `--colors`:
+Prefer coral folders, a green JSON icon or everything in soft pastels? **[Open the colour builder](https://thissayantan.github.io/frost-icon-theme/)**,
+pick colours while the real icons change in front of you, and copy the one command it gives you.
+
+![Frost's own colours and the five presets, on light and dark](docs/colors.png)
+
+**Ready-made sets** — one flag each:
+
+| Preset | What it does |
+|---|---|
+| `warm` | coral folders; apricot, amaranth and salmon in place of Frost's cool colours |
+| `forest` | sage folders; moss, terracotta and bark instead of blues and violets |
+| `ocean` | deep-water blue folders; lagoon teal and indigo accents |
+| `pastel` | lavender folders; soft, chalky colours everywhere |
+| `mono` | one quiet grey for every folder and file; apps keep their colour |
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh -s -- --colors warm
+```
+
+**Your own colours** — a small `frost.colors.json`, written by the builder or by hand:
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/schema/frost-colors.schema.json",
   "folders": "coral",
   "filetypes": { "json": "seagreen", "markdown": "#E8573C" },
-  "palette": { "violet": "#E52B50" }
+  "palette": { "violet": "#E52B50" },
+  "icons": { "user-home": "gold" }
 }
 ```
 ```sh
-curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh -s -- --colors frost.colors.json
-# or a ready-made set: --colors warm   (coral, apricot, amaranth, salmon)
+sh install.sh --colors frost.colors.json          # a file
+sh install.sh --colors 'https://…/?c=…'           # a link from the colour builder (your colours are inside it)
+sh install.sh --colors https://…/my.colors.json   # a file on the web, e.g. a gist
 ```
-- **One colour is enough.** Use any CSS colour (`coral`, `#E8573C`, `rgb(…)`, `oklch(…)`); Frost works out the
-  glass gradient from it. Want exact control? Give `{ "light": "#FFD1C2", "deep": "#C2410C" }`.
-- **Change only what you name.** `folders` for every folder, `filetypes` for all file types or one kind
-  (`json`, `markdown`, `archive`, `image`, …), `palette` to swap one of Frost's colours everywhere, `icons` for a
-  single icon (`"user-home": "gold"`). Everything else keeps Frost's colours.
-- **Your editor helps.** The `$schema` line gives autocomplete and flags typos; the installer also says
-  *did you mean "folders"?* and warns when a colour is too light for the white symbols.
-- **What happens:** the installer explains every step and asks first. Custom colours are drawn on your
-  machine, so it downloads the source and uses [Bun](https://bun.sh) (installed for you only if you say yes),
-  takes a minute or two, then installs over `~/.local/share/icons/Frost`. It remembers your file, so upgrading
-  asks whether to re-apply it. Back to standard colours: run the normal one-liner.
+- **One colour is enough.** Any CSS colour works (`coral`, `#E8573C`, `rgb(…)`, `oklch(…)`); Frost works out the
+  glass gradient from it. For exact control give both ends: `{ "light": "#FFD1C2", "deep": "#C2410C" }`.
+- **Change only what you name.** `folders` for every folder; `filetypes` for all file types or one kind (`json`,
+  `markdown`, `archive`, `image`…); `palette` swaps one of Frost's nine colours everywhere; `icons` targets one
+  icon. Everything else keeps Frost's colours.
+- **Mistakes are caught.** The `$schema` line gives your editor autocomplete; the installer says *did you mean
+  "folders"?* and warns when a colour is too light for the white symbols on top.
+- **What the installer does:** it explains every step and asks first. Custom colours are drawn on your machine,
+  so it downloads the source and uses [Bun](https://bun.sh) (installed only if you say yes), takes a minute or
+  two, and installs over `~/.local/share/icons/Frost`. It keeps your colours inside the theme, so an upgrade asks
+  whether to re-apply them. Back to Frost's own colours: run the plain one-liner.
 
 ## Compatibility
 Made on **GNOME 50 / GTK 4.22, Ubuntu 26.04**; also made for **KDE Plasma 6** and **COSMIC**. The glass is baked
