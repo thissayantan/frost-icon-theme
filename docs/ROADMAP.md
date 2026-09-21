@@ -25,7 +25,8 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
 - [x] New art: ark, elisa, kdeconnect, hwinfo — icon-critic SHIP
 - [x] `verify` resolves every name through KIconLoader (flatpak runtime) and Qt (PySide6 via uv)
 - [x] Plasma 6 in Docker (`tools/de/run.sh kde`): desktop, tray, Dolphin, System Settings, light + dark
-- [ ] Release v0.3.0 (owner go-ahead); confirm the gnome-look listing sits in "Full Icon Themes" (KDE Store)
+- [x] Release v0.3.0 (2026-09-21, with custom colours): GitHub release + one-liners tested live in a clean container
+- [ ] gnome-look: upload the v0.3.0 tarball, update the text; confirm the category is "Full Icon Themes" (KDE Store)
 
 ## M7 — COSMIC
 - [x] `com.system76.Cosmic*` app and `cosmic-applet-*` panel aliases; CosmicPlayer art — icon-critic SHIP
@@ -33,7 +34,7 @@ Tick items (`[x]`) as they land. A milestone is done only when every box is tick
       applied in the container yet (cosmic-settings-daemon builds the theme only inside a full session) —
       check light in a Tier 2 VM
 
-## M8 — Custom colours (v0.4)
+## M8 — Custom colours (shipped in v0.3.0)
 - [x] `frost.colors.json` + generated JSON Schema; `tools/colors.ts` (OKLCH mid-tone derivation, unit-tested)
 - [x] `data-category` on file types; `derive()` substitution; `build`/`preview --colors`; `presets/warm.json`
 - [x] `install.sh --colors` with consent prompt + official Bun installer — tested in a clean container
