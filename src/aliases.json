@@ -39,34 +39,54 @@
     "trash-full"
   ],
   "battery-level-100-symbolic": [
-    "battery-full-symbolic"
+    "battery-full-symbolic",
+    "battery-100",
+    "battery-100-symbolic"
   ],
   "battery-level-70-symbolic": [
-    "battery-good-symbolic"
+    "battery-good-symbolic",
+    "battery-070",
+    "battery-070-symbolic"
   ],
   "battery-level-20-symbolic": [
-    "battery-low-symbolic"
+    "battery-low-symbolic",
+    "battery-020",
+    "battery-020-symbolic"
   ],
   "battery-level-10-symbolic": [
-    "battery-caution-symbolic"
+    "battery-caution-symbolic",
+    "battery-010",
+    "battery-010-symbolic"
   ],
   "battery-level-0-symbolic": [
-    "battery-empty-symbolic"
+    "battery-empty-symbolic",
+    "battery-000",
+    "battery-000-symbolic"
   ],
   "battery-level-100-charging-symbolic": [
-    "battery-full-charging-symbolic"
+    "battery-full-charging-symbolic",
+    "battery-100-charging",
+    "battery-100-charging-symbolic"
   ],
   "battery-level-70-charging-symbolic": [
-    "battery-good-charging-symbolic"
+    "battery-good-charging-symbolic",
+    "battery-070-charging",
+    "battery-070-charging-symbolic"
   ],
   "battery-level-20-charging-symbolic": [
-    "battery-low-charging-symbolic"
+    "battery-low-charging-symbolic",
+    "battery-020-charging",
+    "battery-020-charging-symbolic"
   ],
   "battery-level-10-charging-symbolic": [
-    "battery-caution-charging-symbolic"
+    "battery-caution-charging-symbolic",
+    "battery-010-charging",
+    "battery-010-charging-symbolic"
   ],
   "battery-level-0-charging-symbolic": [
-    "battery-empty-charging-symbolic"
+    "battery-empty-charging-symbolic",
+    "battery-000-charging",
+    "battery-000-charging-symbolic"
   ],
   "battery-level-100-charged-symbolic": [
     "battery-full-charged-symbolic"
@@ -234,5 +254,192 @@
   ],
   "font-otf": [
     "application-x-font-otf"
+  ],
+  "network-wireless-signal-none-symbolic": [
+    "network-wireless-0",
+    "network-wireless-0-symbolic",
+    "network-wireless-connected-00"
+  ],
+  "network-wireless-signal-weak-symbolic": [
+    "network-wireless-20",
+    "network-wireless-20-symbolic",
+    "network-wireless-connected-20"
+  ],
+  "network-wireless-signal-ok-symbolic": [
+    "network-wireless-40",
+    "network-wireless-40-symbolic",
+    "network-wireless-connected-40"
+  ],
+  "network-wireless-signal-good-symbolic": [
+    "network-wireless-60",
+    "network-wireless-60-symbolic",
+    "network-wireless-connected-60"
+  ],
+  "network-wireless-signal-excellent-symbolic": [
+    "network-wireless-80",
+    "network-wireless-80-symbolic",
+    "network-wireless-connected-80",
+    "network-wireless-100",
+    "network-wireless-100-symbolic",
+    "network-wireless-connected-100"
+  ],
+  "network-wireless-offline-symbolic": [
+    "network-wireless-disconnected",
+    "network-wireless-disconnected-symbolic"
+  ],
+  "network-wired-symbolic": [
+    "network-wired-activated",
+    "network-wired-activated-symbolic"
+  ],
+  "network-wired-disconnected-symbolic": [
+    "network-wired-disconnected"
+  ],
+  "airplane-mode-symbolic": [
+    "network-flightmode-on",
+    "network-flightmode-on-symbolic"
+  ],
+  "battery-level-30-symbolic": [
+    "battery-030",
+    "battery-030-symbolic"
+  ],
+  "battery-level-30-charging-symbolic": [
+    "battery-030-charging",
+    "battery-030-charging-symbolic"
+  ],
+  "battery-level-40-symbolic": [
+    "battery-040",
+    "battery-040-symbolic"
+  ],
+  "battery-level-40-charging-symbolic": [
+    "battery-040-charging",
+    "battery-040-charging-symbolic"
+  ],
+  "battery-level-50-symbolic": [
+    "battery-050",
+    "battery-050-symbolic"
+  ],
+  "battery-level-50-charging-symbolic": [
+    "battery-050-charging",
+    "battery-050-charging-symbolic"
+  ],
+  "battery-level-60-symbolic": [
+    "battery-060",
+    "battery-060-symbolic"
+  ],
+  "battery-level-60-charging-symbolic": [
+    "battery-060-charging",
+    "battery-060-charging-symbolic"
+  ],
+  "battery-level-80-symbolic": [
+    "battery-080",
+    "battery-080-symbolic"
+  ],
+  "battery-level-80-charging-symbolic": [
+    "battery-080-charging",
+    "battery-080-charging-symbolic"
+  ],
+  "battery-level-90-symbolic": [
+    "battery-090",
+    "battery-090-symbolic"
+  ],
+  "battery-level-90-charging-symbolic": [
+    "battery-090-charging",
+    "battery-090-charging-symbolic"
+  ],
+  "battery-missing-symbolic": [
+    "battery-missing"
+  ],
+  "bluetooth-active-symbolic": [
+    "network-bluetooth-activated-symbolic",
+    "network-bluetooth-activated",
+    "network-bluetooth-symbolic"
+  ],
+  "bluetooth-disabled-symbolic": [
+    "network-bluetooth-inactive-symbolic",
+    "network-bluetooth-inactive"
+  ],
+  "notifications-symbolic": [
+    "notification-active",
+    "notification-inactive",
+    "notification-active-symbolic",
+    "notification-inactive-symbolic"
+  ],
+  "notifications-disabled-symbolic": [
+    "notifications-disabled"
+  ],
+  "audio-volume-high-symbolic": [
+    "audio-volume-high"
+  ],
+  "audio-volume-medium-symbolic": [
+    "audio-volume-medium"
+  ],
+  "audio-volume-low-symbolic": [
+    "audio-volume-low"
+  ],
+  "audio-volume-muted-symbolic": [
+    "audio-volume-muted"
+  ],
+  "org.gnome.Ptyxis": [
+    "utilities-terminal",
+    "org.kde.konsole"
+  ],
+  "org.gnome.Calculator": [
+    "accessories-calculator",
+    "org.kde.kcalc"
+  ],
+  "org.gnome.Settings": [
+    "preferences-system",
+    "systemsettings"
+  ],
+  "net.nokyan.Resources": [
+    "utilities-system-monitor",
+    "org.kde.plasma-systemmonitor"
+  ],
+  "org.gnome.Yelp": [
+    "help-browser",
+    "org.kde.khelpcenter"
+  ],
+  "org.gnome.Screenshot": [
+    "spectacle",
+    "org.kde.spectacle"
+  ],
+  "org.gnome.Papers": [
+    "okular",
+    "org.kde.okular"
+  ],
+  "org.gnome.Loupe": [
+    "gwenview",
+    "org.kde.gwenview"
+  ],
+  "org.gnome.Software": [
+    "plasmadiscover",
+    "org.kde.discover"
+  ],
+  "org.gnome.DiskUtility": [
+    "partitionmanager",
+    "org.kde.partitionmanager"
+  ],
+  "org.gnome.baobab": [
+    "filelight",
+    "org.kde.filelight"
+  ],
+  "org.gnome.TextEditor": [
+    "kate",
+    "kwrite",
+    "org.kde.kate",
+    "org.kde.kwrite",
+    "accessories-text-editor"
+  ],
+  "org.gnome.Nautilus": [
+    "org.kde.dolphin",
+    "system-file-manager"
+  ],
+  "org.gnome.Characters": [
+    "accessories-character-map",
+    "org.kde.kcharselect"
+  ],
+  "org.gnome.Logs": [
+    "utilities-log-viewer",
+    "org.kde.ksystemlog"
   ]
 }
