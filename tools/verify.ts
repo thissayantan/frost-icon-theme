@@ -87,7 +87,8 @@ for (const f of walk(THEME_DIR)) {
   const base = f.slice(f.lastIndexOf("/") + 1);
   if (base === "index.theme" || base === "icon-theme.cache") continue;
   const symbolic = rel.startsWith(SYMBOLIC_DIR + "/") || rel.startsWith(SYMBOLIC_22_DIR + "/");
-  if (symbolic ? !base.endsWith("-symbolic.svg") : !base.endsWith(".png")) fail(`dist: ${rel} — PNG only, except *-symbolic.svg in ${SYMBOLIC_DIR}[-22] (ADR-001/005)`);
+  // symbolic dirs: real files are *-symbolic.svg (lint); alias links may carry KDE tray names without the suffix
+  if (symbolic ? !base.endsWith(".svg") || (!base.endsWith("-symbolic.svg") && !lstatSync(f).isSymbolicLink()) : !base.endsWith(".png")) fail(`dist: ${rel} — PNG only, except *-symbolic.svg in ${SYMBOLIC_DIR}[-22] (ADR-001/005)`);
   if (!NAME_RE.test(base)) fail(`dist: ${rel} has a name gtk-update-icon-cache will reject`);
   const l = lstatSync(f);
   if (l.isSymbolicLink()) {
@@ -129,6 +130,27 @@ if (names.length) {
 const probe = Bun.spawnSync(["python3", join(ROOT, "tools/mime-probe.py")]);
 process.stdout.write(probe.stdout.toString());
 if (probe.exitCode !== 0) fail(`mime-probe failed ${probe.stderr.toString().trim()}`);
+
+// 7. KDE and Qt: the same names through KIconLoader (org.kde.Platform flatpak) and QIcon.fromTheme (PySide6 via uv).
+//    Skipped with a note when the runtime or uv is missing, so contributors without them can still verify.
+const has = (cmd: string[]) => Bun.spawnSync(cmd).exitCode === 0;
+if (has(["flatpak", "info", "org.kde.Platform//6.10"])) {
+  const res = Bun.spawnSync(["sh", join(ROOT, "tools/kdelookup.sh")], { stdin: Buffer.from(names.join("\n")) });
+  const rows = res.stdout.toString().trim().split("\n").map((l) => l.split("\t"));
+  const own = join(DIST, ".kcfg/share/icons", THEME) + "/";
+  for (const [n, path] of rows) if (!path?.startsWith(own)) fail(`kde: ${n} resolved to ${path || "nothing"}`);
+  console.log(`kde: ${rows.length} names through KIconLoader → ${rows.filter(([, p]) => p?.startsWith(own)).length} from Frost`);
+} else console.log("kde: skipped (flatpak runtime org.kde.Platform//6.10 not installed)");
+if (has(["uv", "--version"])) {
+  const res = Bun.spawnSync(["uv", "run", "-q", "--with", "PySide6-Essentials", "python", join(ROOT, "tools/qtlookup.py"), DIST],
+    { stdin: Buffer.from(names.join("\n")), env: { ...process.env, QT_QPA_PLATFORM: "offscreen" } });
+  if (res.exitCode !== 0) fail(`qt: qtlookup.py failed: ${res.stderr.toString().trim().slice(0, 300)}`);
+  else {
+    const rows: { name: string; found: boolean }[] = JSON.parse(res.stdout.toString());
+    for (const r of rows) if (!r.found) fail(`qt: QIcon.fromTheme("${r.name}") found nothing in Frost`);
+    console.log(`qt: ${rows.length} names through QIcon.fromTheme → ${rows.filter((r) => r.found).length} found (@1x and @2x)`);
+  }
+} else console.log("qt: skipped (uv not installed)");
 
 for (const e of errors) console.error(`✗ ${e}`);
 console.log(`verify: ${list.length} icons, ${(bytes / 1048576).toFixed(1)} MB — ${errors.length ? `${errors.length} problem(s)` : "ok"}`);

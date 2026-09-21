@@ -37,7 +37,8 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
 - `bun install` — toolchain (resvg-js, sharp, @xmldom/xmldom)
 - `bun run build` — `src/**/*.svg` → `dist/Frost/` PNGs at every size + `index.theme` + cache
 - `bun run preview` — contact sheet `dist/preview/sheet.png` (light + dark rows, all sizes)
-- `bun run verify` — lint SVG sources, check naming/coverage, validate `index.theme`, run `tools/lookup.py`
+- `bun run verify` — lint SVG sources, check naming/coverage, validate `index.theme`, run `tools/lookup.py` (GTK),
+  `tools/kdelookup.sh` (KIconLoader via the `org.kde.Platform` flatpak) and `tools/qtlookup.py` (Qt, PySide6 via uv)
 - `bun run install:local` — copy `dist/Frost` to `~/.local/share/icons/` and refresh the cache; installs the
   MIME add-on (`--no-mime` skips, `--undo-mime` removes)
 - `bun run pack` — `dist/Frost-v<version>.tar.xz` (theme + MIME add-on) for a release; `install.sh` installs it
