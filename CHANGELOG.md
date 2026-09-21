@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased (v0.3.0 / v0.4.0)
+- **KDE Plasma 6** — tray icons now follow KDE's colour scheme (they were drawn black), crisp at the tray's 22 px;
+  Plasma's own tray names (network, battery, Bluetooth, notifications) and KDE apps (Dolphin, Konsole, Kate,
+  Okular, Gwenview, Spectacle, Discover…) resolve to Frost; new art for Ark, Elisa, KDE Connect and Info Center.
+- **COSMIC** — COSMIC Files, Terminal, Settings, Edit, Store and Screenshot, the panel's battery, Bluetooth and
+  notification applets, and new art for COSMIC Player (also GNOME's video player).
+- **Your colours** — `frost.colors.json` recolours folders, file types, a palette colour or single icons from one
+  CSS colour each; `install.sh --colors FILE|warm` builds and installs it after asking. JSON Schema for editors.
+- `verify` looks every name up through GTK, KDE's KIconLoader and Qt; `tools/de/run.sh` shows Frost in real
+  Plasma and COSMIC desktops in Docker.
+
 ## v0.2.0 — 2026-09-20
 The first public release. **Licensed MIT** (icons and tools).
 
