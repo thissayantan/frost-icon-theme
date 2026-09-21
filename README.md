@@ -79,8 +79,8 @@ curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/
 Made on **GNOME 50 / GTK 4.22, Ubuntu 26.04**; also made for **KDE Plasma 6** and **COSMIC**. The glass is baked
 into PNGs (16–256 px, `@2x`), so it looks the same in GTK 4, GTK 3, Qt/KDE apps and the GNOME Shell app grid.
 - **KDE Plasma:** pick Frost in *System Settings → Colours & Themes → Icons*. Tray icons follow your colour
-  scheme, drawn crisp at the tray's 22 px. Dolphin, Konsole, Kate,
-  Okular, Gwenview, Spectacle, Discover, Ark, Elisa, KDE Connect and more are covered; KDE's own logo stays KDE's.
+  scheme, drawn crisp at the tray's 22 px. Dolphin, Konsole, Kate, Okular, Gwenview, Spectacle, Discover, Ark,
+  Elisa, KDE Connect and more are covered; KDE's own logo stays KDE's.
 - **COSMIC:** pick Frost in *Settings → Desktop → Appearance*. COSMIC Files, Terminal, Settings, Edit, Store,
   Player and Screenshot plus the panel's battery, Bluetooth and notification icons are covered.
 - Status icons are plain symbolic SVG, recoloured by GNOME Shell, KDE and COSMIC alike.
