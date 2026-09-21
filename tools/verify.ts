@@ -2,7 +2,7 @@
 // and a real GTK lookup (tools/lookup.py) of every shipped name and alias.
 import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
-import { CONTEXTS, DIST, NAME_RE, ROOT, SCALES, SIZES, SRC, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, dirName, sources, symbolicSources, walk } from "./lib";
+import { CONTEXTS, DIST, NAME_RE, ROOT, SCALES, SIZES, SRC, SYMBOLIC_22_DIR, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, dirName, sources, symbolicSources, walk } from "./lib";
 import { lint } from "./lint";
 
 const BUDGET_MB = 40; // ADR-001 (v0.1: 25 MB) → ADR-006: 134 file types, mostly 256@2x art
@@ -56,6 +56,12 @@ else {
       if (!existsSync(join(THEME_DIR, d))) fail(`index.theme: ${d} listed but missing on disk`);
       continue;
     }
+    if (d === SYMBOLIC_22_DIR) {
+      if (s.get("Type") !== "Fixed" || s.get("Size") !== "22") fail(`index.theme: [${d}] must be Type=Fixed, Size=22`);
+      if (dirs.indexOf(d) > dirs.indexOf(SYMBOLIC_DIR)) fail(`index.theme: ${d} must be listed before ${SYMBOLIC_DIR} (exact 22 px match first)`);
+      if (!existsSync(join(THEME_DIR, d))) fail(`index.theme: ${d} listed but missing on disk`);
+      continue;
+    }
     if (!existsSync(join(THEME_DIR, d))) fail(`index.theme: ${d} listed but missing on disk`);
     const size = Number(s.get("Size"));
     if (!Number.isInteger(size) || size <= 0) fail(`index.theme: [${d}] Size must be a positive integer`);
@@ -80,8 +86,8 @@ for (const f of walk(THEME_DIR)) {
   const rel = relative(THEME_DIR, f);
   const base = f.slice(f.lastIndexOf("/") + 1);
   if (base === "index.theme" || base === "icon-theme.cache") continue;
-  const symbolic = rel.startsWith(SYMBOLIC_DIR + "/");
-  if (symbolic ? !base.endsWith("-symbolic.svg") : !base.endsWith(".png")) fail(`dist: ${rel} — PNG only, except *-symbolic.svg in ${SYMBOLIC_DIR} (ADR-001/005)`);
+  const symbolic = rel.startsWith(SYMBOLIC_DIR + "/") || rel.startsWith(SYMBOLIC_22_DIR + "/");
+  if (symbolic ? !base.endsWith("-symbolic.svg") : !base.endsWith(".png")) fail(`dist: ${rel} — PNG only, except *-symbolic.svg in ${SYMBOLIC_DIR}[-22] (ADR-001/005)`);
   if (!NAME_RE.test(base)) fail(`dist: ${rel} has a name gtk-update-icon-cache will reject`);
   const l = lstatSync(f);
   if (l.isSymbolicLink()) {

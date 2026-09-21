@@ -3,7 +3,7 @@ import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { CONTEXTS, SCALES, SIZES, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, derive, dirName, sources, symbolicSources, type Source } from "./lib";
+import { CONTEXTS, SCALES, SIZES, SYMBOLIC_22_DIR, SYMBOLIC_DIR, THEME, THEME_DIR, aliases, derive, dirName, pad22, sources, symbolicSources, type Source } from "./lib";
 import { lint } from "./lint";
 
 export const VERSION = (await Bun.file(join(import.meta.dir, "../package.json")).json()).version as string;
@@ -17,13 +17,30 @@ export async function renderPng(src: Source, size: number, scale: number): Promi
 }
 
 export function indexTheme(contexts: string[], symbolic = existsSync(join(THEME_DIR, SYMBOLIC_DIR))): string {
-  const dirs = (scale: number) => [...SIZES.flatMap((s) => contexts.map((c) => dirName(s, scale, c))), ...(scale === 1 && symbolic ? [SYMBOLIC_DIR] : [])];
+  // The fixed 22 px status directory comes first: at 22 px (KDE's tray) it is an exact match and wins over
+  // the scalable 16 px one; every other size still resolves to the 16 px art.
+  const dirs = (scale: number) => [...SIZES.flatMap((s) => contexts.map((c) => dirName(s, scale, c))), ...(scale === 1 && symbolic ? [SYMBOLIC_22_DIR, SYMBOLIC_DIR] : [])];
   const lines = [
     "[Icon Theme]",
     `Name=${THEME}`,
     `Comment=Frosted-glass icons — clean, minimal (v${VERSION})`,
-    "Inherits=Papirus,Adwaita,hicolor",
+    // breeze after Adwaita: KDE apps' own names (kate, okular…) fall back to KDE's art when Papirus is absent
+    "Inherits=Papirus,Adwaita,breeze,hicolor",
     "Example=folder",
+    // KDE: recolour the symbolic SVGs through their current-color-scheme stylesheet (ADR-005), and its size defaults
+    "FollowsColorScheme=true",
+    "DesktopDefault=48",
+    "DesktopSizes=16,22,24,32,48,64,96,128,256",
+    "ToolbarDefault=22",
+    "ToolbarSizes=16,22,24,32,48",
+    "MainToolbarDefault=22",
+    "MainToolbarSizes=16,22,24,32,48",
+    "SmallDefault=16",
+    "SmallSizes=16,22,24,32,48",
+    "PanelDefault=48",
+    "PanelSizes=16,22,24,32,48,64,96,128,256",
+    "DialogDefault=32",
+    "DialogSizes=16,22,24,32,48,64,96,128,256",
     "",
     `Directories=${dirs(1).join(",")}`,
     `ScaledDirectories=${dirs(2).join(",")}`,
@@ -34,6 +51,7 @@ export function indexTheme(contexts: string[], symbolic = existsSync(join(THEME_
     if (scale === 2) lines.push("Scale=2");
     lines.push(`Context=${CONTEXTS[c]}`, "Type=Fixed", "");
   }
+  if (symbolic) lines.push(`[${SYMBOLIC_22_DIR}]`, "Size=22", "Context=Status", "Type=Fixed", "");
   if (symbolic) lines.push(`[${SYMBOLIC_DIR}]`, "Size=16", "MinSize=8", "MaxSize=512", "Context=Status", "Type=Scalable", "");
   return lines.join("\n");
 }
@@ -76,7 +94,12 @@ export async function build(): Promise<{ icons: number; files: number; deduped: 
   const symbolic = symbolicSources();
   if (symbolic.length) {
     mkdirSync(join(THEME_DIR, SYMBOLIC_DIR), { recursive: true });
-    for (const s of symbolic) { copyFileSync(s.file, join(THEME_DIR, SYMBOLIC_DIR, `${s.name}.svg`)); files++; }
+    mkdirSync(join(THEME_DIR, SYMBOLIC_22_DIR), { recursive: true });
+    for (const s of symbolic) {
+      copyFileSync(s.file, join(THEME_DIR, SYMBOLIC_DIR, `${s.name}.svg`));
+      writeFileSync(join(THEME_DIR, SYMBOLIC_22_DIR, `${s.name}.svg`), pad22(readFileSync(s.file, "utf8")));
+      files += 2;
+    }
   }
 
   // ADR-004: aliases are relative symlinks next to their target.
@@ -84,7 +107,7 @@ export async function build(): Promise<{ icons: number; files: number; deduped: 
   const symNames = new Set(symbolic.map((s) => s.name));
   for (const [target, names] of Object.entries(aliases())) {
     if (symNames.has(target)) {
-      for (const n of names) symlinkSync(`${target}.svg`, join(THEME_DIR, SYMBOLIC_DIR, `${n}.svg`));
+      for (const n of names) for (const d of [SYMBOLIC_DIR, SYMBOLIC_22_DIR]) symlinkSync(`${target}.svg`, join(THEME_DIR, d, `${n}.svg`));
       continue;
     }
     const src = byName.get(target);

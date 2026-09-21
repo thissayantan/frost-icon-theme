@@ -5,14 +5,23 @@ Why a generator: families like battery (34 states) and signal bars are parametri
 Rules the output obeys (GNOME Shell 50 St recolouring, see RESEARCH.md):
   16×16 canvas · filled shapes only (St ignores strokes) · recolour classes only `success|warning|error`
   · dimmed parts via group opacity .35 (no seams) · gaps around slashes/badges via clip-path geometry.
+One file serves every desktop (ADR-005): GTK/St override `fill` with `!important`, KDE rewrites the
+`current-color-scheme` stylesheet that `fill="currentColor"` follows, COSMIC tints the alpha mask.
 Run: python3 tools/gen-status.py   (writes src/status/, prints the count)
 """
 import math
 import os
+import re
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "src", "status")
 DIM = ".35"
-FG = 'fill="#000000"'
+FG = 'fill="currentColor"'
+# KDE colour-scheme classes paired with the GTK state classes; KIconLoader replaces this <style> body.
+SCHEME = {None: "ColorScheme-Text", "success": "ColorScheme-PositiveText", "warning": "ColorScheme-NeutralText",
+          "error": "ColorScheme-NegativeText"}
+STYLE = ('<style id="current-color-scheme" type="text/css">.ColorScheme-Text{color:#232629}'
+         '.ColorScheme-PositiveText{color:#27ae60}.ColorScheme-NeutralText{color:#f67400}'
+         '.ColorScheme-NegativeText{color:#da4453}</style>')
 
 
 def f(v):
@@ -358,11 +367,22 @@ ICONS["power-profile-power-saver-symbolic"] = svg(g(
     "M5.2 12.3l5.5-5.5.8.8-5.5 5.5z"))
 
 
+def color_scheme(doc):
+    """Give every painted path its KDE colour-scheme class (next to any GTK state class) and add the stylesheet."""
+    def tag(m):
+        cls = re.search(r' class="(\w+)"', m.group(0))
+        state = cls.group(1) if cls else None
+        t = m.group(0).replace(cls.group(0), "") if cls else m.group(0)
+        return t.replace("<path", f'<path class="{(state + " ") if state else ""}{SCHEME[state]}"', 1)
+    doc = re.sub(r"<path[^>]*" + re.escape(FG) + r"[^>]*>", tag, doc)
+    return doc.replace('viewBox="0 0 16 16">', 'viewBox="0 0 16 16">' + STYLE, 1)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, body in ICONS.items():
         with open(os.path.join(OUT, f"{name}.svg"), "w") as fh:
-            fh.write(body)
+            fh.write(color_scheme(body))
     print(f"gen-status: {len(ICONS)} symbolic icons → src/status/")
 
 

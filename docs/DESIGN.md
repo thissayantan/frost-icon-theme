@@ -208,6 +208,13 @@ Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!".
 Every coloured state also changes *shape* ("!", ×, bolt, slash) — never colour alone (WCAG 1.4.1). Privacy
 indicators (camera, mic in use, screen share) stay one colour: the Shell already paints them.
 
+**One file, every desktop.** Each painted path is `fill="currentColor"` with a KDE colour-scheme class beside the
+GTK state class (`class="success ColorScheme-PositiveText"`, plain shapes `ColorScheme-Text`), and the file carries
+`<style id="current-color-scheme">`. GNOME Shell and GTK override the fill (`!important`), KDE rewrites the style
+block, COSMIC tints the alpha mask (so COSMIC shows state by shape only — which the language above already
+guarantees). KDE's tray asks for 22 px: the build pads the 16 px art onto a 22 px canvas (`symbolic/status-22`)
+instead of scaling it ×1.375, so pixels stay on the grid.
+
 ## 7. Quality bar (checklist per icon)
 - [ ] Reads instantly at 48 px on light and dark
 - [ ] Recognisable at 16 px

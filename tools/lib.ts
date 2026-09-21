@@ -20,6 +20,13 @@ export const CONTEXTS: Record<string, string> = {
 };
 /** Symbolic status icons (ADR-005): plain recolourable SVG, copied as-is into this directory. */
 export const SYMBOLIC_DIR = "symbolic/status";
+/** The same art on a 22 px canvas (16 px glyph, 3 px margin) for KDE's 22 px tray — crisp instead of scaled ×1.375. */
+export const SYMBOLIC_22_DIR = "symbolic/status-22";
+export function pad22(svg: string): string {
+  const style = svg.match(/<style id="current-color-scheme"[^]*?<\/style>/)?.[0] ?? "";
+  const inner = svg.replace(/^<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "").replace(style, "");
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">${style}<g transform="translate(3 3)">${inner}</g></svg>\n`;
+}
 export function symbolicSources(): { name: string; file: string }[] {
   return walk(join(SRC, "status")).filter((f) => f.endsWith(".svg"))
     .map((file) => ({ name: file.slice(file.lastIndexOf("/") + 1, -4), file }))

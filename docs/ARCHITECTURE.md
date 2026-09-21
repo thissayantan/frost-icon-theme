@@ -59,6 +59,11 @@ recoloured and would break light/dark and accent handling.
 `symbolic/status/` (`Type=Scalable`, `Size=16`). They obey what St can recolour: 16×16, filled shapes only,
 classes `success|warning|error` only, dimming via group opacity, gaps via clip geometry. Lint enforces it.
 **Cost.** State colours are the Shell's (St defaults: success #4e9a06, warning #f5793e, error #cc0000), not ours.
+**Amendment (v0.3, KDE).** KDE ignores GTK's `-symbolic` recolouring and would draw these black. Tested with real
+GTK 3, GTK 4 and Qt renders: one file works everywhere when paths use `fill="currentColor"` + `ColorScheme-*`
+classes and a `current-color-scheme` stylesheet (St/GTK inject `fill: … !important`, which wins; KIconLoader
+rewrites the stylesheet, `currentColor` follows). `index.theme` sets `FollowsColorScheme=true`. A fixed
+`symbolic/status-22` directory, listed first, carries the same art padded to 22 px for KDE's tray.
 
 ### ADR-006 — File types: generated sheet family, drawn labels, per-user MIME add-on
 **Context.** The owner's Files showed every JSON as a terminal (`application-json` → `text-x-script`), lock

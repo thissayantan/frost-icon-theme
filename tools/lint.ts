@@ -6,6 +6,7 @@ import { CONTEXTS, NAME_RE, REQUIRED_LAYERS, ROOT, SRC, aliases, allowedColours,
 
 const COLOUR_ATTRS = ["fill", "stroke", "stop-color", "flood-color", "lighting-color", "color"];
 const NON_COLOURS = new Set(["none", "currentColor", "inherit", "transparent"]);
+const STATUS_CLASSES = new Set(["success", "warning", "error", "ColorScheme-Text", "ColorScheme-PositiveText", "ColorScheme-NeutralText", "ColorScheme-NegativeText"]);
 
 export function lint(): string[] {
   const errors: string[] = [];
@@ -25,9 +26,16 @@ export function lint(): string[] {
     if (!/viewBox="0 0 16 16"/.test(text)) err(file, 'viewBox must be "0 0 16 16"');
     if (/<(filter|linearGradient|radialGradient|mask|text|image|line|polyline)\b/.test(text)) err(file, "filters, gradients, masks, text, images, line/polyline are not allowed (St/GTK can't recolour them)");
     if (/\bstroke(-width)?="(?!none)/.test(text)) err(file, "strokes are not recoloured by GNOME Shell — use filled outlines");
+    // One file for every desktop: GTK/St state classes + KDE colour-scheme classes (ADR-005).
     for (const m of text.matchAll(/class="([^"]*)"/g)) {
-      for (const c of m[1].split(/\s+/)) if (!["success", "warning", "error"].includes(c)) err(file, `class "${c}" — only success|warning|error recolour`);
+      for (const c of m[1].split(/\s+/)) if (!STATUS_CLASSES.has(c)) err(file, `class "${c}" — only success|warning|error and ColorScheme-* recolour`);
     }
+    for (const m of text.matchAll(/<style\b[^>]*>/g)) if (!/id="current-color-scheme"/.test(m[0])) err(file, 'the only <style> allowed is id="current-color-scheme"');
+    for (const m of text.matchAll(/<path\b[^>]*>/g)) {
+      if (/\bfill="(?!currentColor|none)/.test(m[0]) && !/clip-rule/.test(m[0])) err(file, 'paths paint with fill="currentColor" (KDE follows the colour scheme through it)');
+      if (/fill="currentColor"/.test(m[0]) && !/ColorScheme-/.test(m[0])) err(file, "painted path without a ColorScheme-* class stays black in KDE");
+    }
+    if (!/<style id="current-color-scheme"/.test(text)) err(file, 'missing <style id="current-color-scheme"> (KDE recolouring)');
   }
 
   const files = [...walk(join(SRC, "_templates")), ...Object.keys(CONTEXTS).flatMap((c) => walk(join(SRC, c)))];
