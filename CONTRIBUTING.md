@@ -17,7 +17,11 @@ Brand logos (Firefox, Chrome, VS Code, Spotify…) are **never** redrawn — the
 3. **File types are generated** — edit the category/type tables in `tools/gen-mimetypes.py`, then run
    `python3 tools/gen-mimetypes.py`. Status icons come from `tools/gen-status.py`. Don't hand-edit their SVGs.
 4. Check it: `bun run preview --from-src --only <name> --sizes 16,24,48,128` on light *and* dark.
-5. `bun run verify` must pass.
+5. `bun run verify` must pass. It looks every name up through GTK, KDE's KIconLoader (needs the
+   `org.kde.Platform` flatpak runtime) and Qt (needs [uv](https://docs.astral.sh/uv/)); missing tools are skipped.
+6. Use palette colours only — users recolour through `frost.colors.json` (ADR-007), which swaps palette hex
+   values per icon, so an ad-hoc hex would escape their colours.
+7. To see it in real desktops: `sh tools/de/run.sh kde` (Plasma 6 in Docker, screenshots in `dist/preview/de/`).
 
 ## Commits
 `<gitmoji> <type>(<scope>): <imperative subject>` — e.g. `✨ feat(apps): add Weather`, `🐛 fix(status): …`,

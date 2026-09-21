@@ -17,7 +17,7 @@ docs/DESIGN.md tokens ─────┘   ┌───────────�
                                             │
                               dist/Frost/{16,22,24,32,48,64,96,128,256}x…/{context}/*.png
                               dist/Frost/…@2x/…
-                              dist/Frost/index.theme  (Inherits=Papirus,Adwaita,hicolor)
+                              dist/Frost/index.theme  (Inherits=Papirus,Adwaita,breeze,hicolor)
                               dist/preview/sheet.png
 ```
 
@@ -86,13 +86,35 @@ and a tinted-glass-sheet construction (DESIGN §6, §6b).
    `tools/mime-probe.py` in a temp `XDG_DATA_HOME`.
 **Cost.** A second system touch point (per-user only, owner-approved), and generated SVGs must not be hand-edited.
 
+### ADR-007 — User colours: a JSON config, rebuilt on the user's machine
+**Context.** People asked for other folder colours (warm tones, any hex) — taste differs, and the glass look
+is a gradient with fixed alphas that nobody should have to hand-tune. Frost ships baked PNGs (ADR-001), so a
+new colour means rendering again.
+**Decision.**
+1. One file, `frost.colors.json`, validated by a generated JSON Schema (`schema/frost-colors.schema.json`,
+   editors autocomplete it). Keys: `palette.<token>` (everywhere), `folders`, `filetypes` (all, or per kind),
+   `icons.<name>`; the most specific wins, anything left out keeps Frost's colour, unknown keys fail with a
+   "did you mean". New features add top-level keys; `version` allows migrations.
+2. A value is any CSS colour, taken as the gradient's **mid-tone**; the light and deep ends are derived with the
+   OKLCH offsets of the two nearest built-in hues, so a built-in mid-tone reproduces its own pair (unit test).
+   `{light, deep}` sets both ends. Alphas, glass and white glyphs are never exposed.
+3. `tools/colors.ts` turns the config into a per-icon hex substitution applied inside `derive()` — after lint,
+   before render — keyed by each icon's `#tint` token, its folder-ness, or its generated `data-category`.
+   Knockout inks under 2.5:1 on white are darkened so small sizes stay legible.
+4. `install.sh --colors FILE|PRESET` explains every step, asks on the terminal, installs Bun with its official
+   installer only if missing, downloads the tagged source, builds, installs over `~/.local/share/icons/Frost`
+   and keeps the config inside the theme so an upgrade can offer to re-apply it. Same theme name — nobody has
+   to switch themes. `presets/` holds ready-made configs.
+**Cost.** A custom build needs Bun and ~100 MB of downloads, once; the build takes 1–3 minutes.
+
 ## index.theme shape (generated)
 ```ini
 [Icon Theme]
 Name=Frost
 Comment=Frosted-glass icons — clean, minimal
-Inherits=Papirus,Adwaita,hicolor
+Inherits=Papirus,Adwaita,breeze,hicolor
 Example=folder
+FollowsColorScheme=true                            # KDE: recolour the symbolic SVGs (ADR-005)
 Directories=16x16/places,22x22/places,…          # @1x only
 ScaledDirectories=16x16@2x/places,22x22@2x/places,…  # @2x only (spec; Papirus does the same)
 

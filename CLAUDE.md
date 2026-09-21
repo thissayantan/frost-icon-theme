@@ -14,7 +14,7 @@ right in GTK3, Qt/KDE apps and the GNOME Shell app grid.
 
 ## Ground rules
 1. **Minimal first.** Fewer, better icons beat broad coverage. Anything not shipped falls back
-   through `Inherits=Papirus,Adwaita,hicolor` — that is a feature, not a gap.
+   through `Inherits=Papirus,Adwaita,breeze,hicolor` — that is a feature, not a gap.
 2. **Never copy the reference art.** The uibits / Kristaps Elsiņš Figma set (CC BY 4.0) is
    *inspiration only*. Draw original geometry. Credit it in README regardless.
 3. **No trademarked logos redrawn or redistributed** (Chrome, Firefox, VS Code, Spotify…).

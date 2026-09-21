@@ -1,7 +1,8 @@
 # Frost
 
 **A frosted-glass icon theme for Linux** — folders, apps, 134 file types and top-bar status icons, each one a
-vivid colour seen through a soft pane of frosted glass, with a crisp white symbol on top.
+vivid colour seen through a soft pane of frosted glass, with a crisp white symbol on top. For GNOME, KDE Plasma
+and COSMIC, in Frost's colours or [yours](#make-it-yours).
 
 ![Frost in a Files window, dark and light](docs/hero.png)
 
@@ -9,7 +10,8 @@ vivid colour seen through a soft pane of frosted glass, with a crisp white symbo
 curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh
 ```
 Then pick **Frost** in *GNOME Tweaks → Appearance → Icons* (or run
-`gsettings set org.gnome.desktop.interface icon-theme 'Frost'`).
+`gsettings set org.gnome.desktop.interface icon-theme 'Frost'`); on KDE, *System Settings → Colours & Themes →
+Icons*; on COSMIC, *Settings → Desktop → Appearance*.
 
 ## Why Frost
 - **One glass language everywhere** — the same two shapes and a glyph for folders, places, apps and files.
@@ -46,10 +48,42 @@ Papirus, then Adwaita.
 
 **Uninstall:** `sh install.sh --uninstall` (removes the theme and the MIME add-on), then pick another icon theme.
 
+## Make it yours
+Prefer coral folders, or a green JSON icon? Put the colours you want in a small `frost.colors.json` and install
+with `--colors`:
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/schema/frost-colors.schema.json",
+  "folders": "coral",
+  "filetypes": { "json": "seagreen", "markdown": "#E8573C" },
+  "palette": { "violet": "#E52B50" }
+}
+```
+```sh
+curl -fsSL https://raw.githubusercontent.com/thissayantan/frost-icon-theme/main/install.sh | sh -s -- --colors frost.colors.json
+# or a ready-made set: --colors warm   (coral, apricot, amaranth, salmon)
+```
+- **One colour is enough.** Use any CSS colour (`coral`, `#E8573C`, `rgb(…)`, `oklch(…)`); Frost works out the
+  glass gradient from it. Want exact control? Give `{ "light": "#FFD1C2", "deep": "#C2410C" }`.
+- **Change only what you name.** `folders` for every folder, `filetypes` for all file types or one kind
+  (`json`, `markdown`, `archive`, `image`, …), `palette` to swap one of Frost's colours everywhere, `icons` for a
+  single icon (`"user-home": "gold"`). Everything else keeps Frost's colours.
+- **Your editor helps.** The `$schema` line gives autocomplete and flags typos; the installer also says
+  *did you mean "folders"?* and warns when a colour is too light for the white symbols.
+- **What happens:** the installer explains every step and asks first. Custom colours are drawn on your
+  machine, so it downloads the source and uses [Bun](https://bun.sh) (installed for you only if you say yes),
+  takes a minute or two, then installs over `~/.local/share/icons/Frost`. It remembers your file, so upgrading
+  asks whether to re-apply it. Back to standard colours: run the normal one-liner.
+
 ## Compatibility
-Made and tested on **GNOME 50 / GTK 4.22, Ubuntu 26.04**. The glass is baked into PNGs (16–256 px, `@2x`), so
-it looks the same in GTK 4, GTK 3, Qt/KDE apps and the GNOME Shell app grid. Status icons are plain symbolic SVG
-so the shell can recolour them.
+Made on **GNOME 50 / GTK 4.22, Ubuntu 26.04**; also made for **KDE Plasma 6** and **COSMIC**. The glass is baked
+into PNGs (16–256 px, `@2x`), so it looks the same in GTK 4, GTK 3, Qt/KDE apps and the GNOME Shell app grid.
+- **KDE Plasma:** pick Frost in *System Settings → Colours & Themes → Icons*. Tray icons follow your colour
+  scheme, drawn crisp at the tray's 22 px. Dolphin, Konsole, Kate,
+  Okular, Gwenview, Spectacle, Discover, Ark, Elisa, KDE Connect and more are covered; KDE's own logo stays KDE's.
+- **COSMIC:** pick Frost in *Settings → Desktop → Appearance*. COSMIC Files, Terminal, Settings, Edit, Store,
+  Player and Screenshot plus the panel's battery, Bluetooth and notification icons are covered.
+- Status icons are plain symbolic SVG, recoloured by GNOME Shell, KDE and COSMIC alike.
 
 <details><summary>Every size is checked, not just the big one</summary>
 
@@ -77,7 +111,8 @@ Requires [Bun](https://bun.sh) and Python 3.
 ```sh
 bun install
 bun run build           # src/**/*.svg → dist/Frost (PNG @1x/@2x, aliases, index.theme, icon cache)
-bun run verify          # lint + index.theme checks + real GTK lookup of every shipped name
+bun run verify          # lint + index.theme checks + real GTK, KDE (KIconLoader) and Qt lookup of every name
+bun run build --colors presets/warm.json   # a custom-colour build (preview first: bun run preview --colors warm)
 bun run install:local   # → ~/.local/share/icons/Frost (+ MIME add-on)
 bun run pack            # → dist/Frost-v<version>.tar.xz
 ```
