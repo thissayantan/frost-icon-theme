@@ -12,7 +12,7 @@ export const VERSION = (await Bun.file(join(import.meta.dir, "../package.json"))
 /** Render one icon at a logical size and scale, exactly as it ships. */
 export async function renderPng(src: Source, size: number, scale: number): Promise<Buffer> {
   const svg = derive(src, size);
-  const px = size * scale;
+  const px = Math.round(size * scale); // resvg ignores a fractional width and falls back to the SVG size
   const raw = new Resvg(svg, { fitTo: { mode: "width", value: px }, font: { loadSystemFonts: false } }).render().asPng();
   return sharp(raw).png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer();
 }
