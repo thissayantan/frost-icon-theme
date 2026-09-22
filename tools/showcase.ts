@@ -1,6 +1,6 @@
 // docs/showcase.png — the whole range in one landscape picture: folders & places, every app, file types, and the
 // top-bar status icons, rendered through the real build path. For store galleries (gnome-look / KDE Store) and posts.
-//   bun tools/showcase.ts [--out docs/showcase.png]
+//   bun tools/showcase.ts [--scale 1.25] [--out docs/showcase.png]
 import { Resvg } from "@resvg/resvg-js";
 import sharp, { type OverlayOptions } from "sharp";
 import { readFileSync } from "node:fs";
@@ -8,7 +8,7 @@ import { join } from "node:path";
 import { renderPng } from "./build";
 import { ROOT, SRC, flag, sources } from "./lib";
 
-const S = 2; // HD
+const S = Number(flag("scale") ?? 1.25); // 2000 px wide: the most gnome-look / KDE Store galleries take
 const W = 1600, H = 900, M = 56, ICON = 64, CELL = 82, ROW = 104, HEAD = 38;
 const BG = ["#23262E", "#16181D"], INK = "#F2F2F5", SUB = "#9AA0AC";
 
@@ -57,7 +57,7 @@ async function section(title: string, names: string[], rows: number) {
   const list = names.slice(0, perRow * rows);
   await Promise.all(list.map(async (n, i) => {
     const png = await renderPng(byName.get(n)!, ICON, S);
-    layers.push({ input: png, left: (M + (i % perRow) * CELL) * S, top: (y + Math.floor(i / perRow) * ROW) * S });
+    layers.push({ input: png, left: Math.round((M + (i % perRow) * CELL) * S), top: Math.round((y + Math.floor(i / perRow) * ROW) * S) });
   }));
   y += Math.ceil(list.length / perRow) * ROW;
 }
@@ -68,7 +68,7 @@ await section("File types", pick(FILES), 2);
 labels += text(M, y + 18, "Top-bar status icons, recoloured by the desktop", SUB, 14, 500);
 y += HEAD + 6;
 const SYM = 28, SCELL = (W - 2 * M) / STATUS.length;
-STATUS.forEach((n, i) => layers.push({ input: statusPng(n, SYM * S), left: Math.round((M + i * SCELL) * S), top: y * S }));
+STATUS.forEach((n, i) => layers.push({ input: statusPng(n, SYM * S), left: Math.round((M + i * SCELL) * S), top: Math.round(y * S) }));
 
 const bg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W * S}" height="${H * S}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">` +
   `<stop offset="0" stop-color="${BG[0]}"/><stop offset="1" stop-color="${BG[1]}"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>`;
