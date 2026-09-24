@@ -62,22 +62,6 @@ def poly(*pts):
     return "M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts) + "z"
 
 
-def roundpoly(pts, r):
-    """A closed polygon with every corner rounded to radius `r` (quadratic joins) — one subpath."""
-    n = len(pts); segs = []
-    for k in range(n):
-        p0, p1, p2 = pts[k - 1], pts[k], pts[(k + 1) % n]
-        def toward(a, b, d):
-            L = math.hypot(b[0] - a[0], b[1] - a[1]); d = min(d, L / 2)
-            return (a[0] + (b[0] - a[0]) * d / L, a[1] + (b[1] - a[1]) * d / L)
-        segs.append((toward(p1, p0, r), p1, toward(p1, p2, r)))
-    d = f"M{f(segs[0][0][0])} {f(segs[0][0][1])}"
-    for k, (a, p, b) in enumerate(segs):
-        if k:
-            d += f"L{f(a[0])} {f(a[1])}"
-        d += f"Q{f(p[0])} {f(p[1])} {f(b[0])} {f(b[1])}"
-    return d + "z"
-
 
 def thick(points, w=2.0, round_=True):
     """A 'stroke' as filled geometry: one quad per segment (+ round joins/caps). Put in a group for opacity."""
@@ -258,33 +242,28 @@ ICONS["bluetooth-disabled-symbolic"] = svg(g(RUNE, dim=True, clip="cut") + g(thi
 RUNE_LOW = thick([(4, 4), (11, 8.5), (8, 11), (8, 1), (11, 3.5), (4, 8)], 2)
 ICONS["bluetooth-acquiring-symbolic"] = acquiring(f'<path d="{RUNE_LOW}" {FG}/>')
 
-# ── Volume (redrawn 2026-09-24): smooth geometry, not pixel art — the same file is shown at 16 px in the bar, 22 px
-#    in KDE's tray and 32 px in GNOME's OSD ($large_icon_size since GNOME 42), where stair-stepped pixels were
-#    obvious. Measured against Adwaita (box + 45° cone + annular waves centred on the throat) and Breeze.
-#    Every band edge lands on a whole pixel along the equator (x = 3 + r → 7|9, 10|12, 13|15: 2-px bands, 1-px
-#    gaps), and the waves are clipped at x = 7 so their inner ends are vertical on a pixel boundary instead of
-#    radial tips that fuse with the cone face at x = 6. Half-angles keep the outermost tip a pixel clear of the
-#    canvas (8 − 12·sin 35° = 1.1). Levels low/medium/high = 1/2/3 waves (owner's choice); unlit waves not drawn.
-SPEAKER = roundpoly([(0, 6), (3, 6), (6, 3), (6, 13), (3, 10), (0, 10)], 1)
-WAVES = [sector(3, 8, r0, r1, 90 - a, 90 + a) for r0, r1, a in ((4, 6, 55), (7, 9, 48), (10, 12, 35))]
-WAVE_CLIP = '<clipPath id="waves"><path d="M7 0H16V16H7z"/></clipPath>'  # vertical ends, 1-px gap from the cone
+# ── Volume (owner's design, 2026-09-24): a waveform, not a speaker cone. Five bars on whole pixels (2 px wide at
+#    x 1/4/7/10/13, 1-px gaps, round ends), the level is the amplitude, and muting flattens the wave to a single
+#    line. Vertical bars are the one shape that stays crisp at 16, 22, 32 and 96 px — the cone never did. Muted
+#    carries the desktop's error colour and over-amplified its warning colour, but each also changes shape (flat
+#    line / squared-off bars clipped at the ceiling), so the meaning survives where colour is flattened (COSMIC)
+#    or unavailable (§8, WCAG 1.4.1).
+BAR_W, BAR_X, BAR_GAP = 2, 1, 3
+def wave(heights, r=1.0):
+    """Five bars centred on y=8; even heights keep every edge on a whole pixel."""
+    return "".join(rect(BAR_X + i * BAR_GAP, 8 - h / 2, BAR_W, h, min(r, h / 2 - 0.25) if r else 0)
+                   for i, h in enumerate(heights))
 
 
-def volume(level):
-    return svg(g(SPEAKER) + g("".join(WAVES[:level]), clip="waves"), WAVE_CLIP)
-
-
-ICONS["audio-volume-low-symbolic"] = volume(1)
-ICONS["audio-volume-medium-symbolic"] = volume(2)
-ICONS["audio-volume-high-symbolic"] = volume(3)
-# Over-amplified: the badge (+ its 1-px moat) reaches x≈8 at the equator, so it severs any wave past the first.
-# This state keeps wave 1 only — the "!" disc is what carries the meaning.
-ICONS["audio-volume-overamplified-symbolic"] = svg(
-    f'<g clip-path="url(#cutb)">{g(SPEAKER)}{g(WAVES[0], clip="waves")}</g>' + badge_bang("warning"),
-    cut_badge() + WAVE_CLIP)
-# Muted: the speaker alone under the slash. Dimming three waves as well turned the 16-px icon into grey texture,
-# and §8 already says unlit waves are not drawn.
-ICONS["audio-volume-muted-symbolic"] = off(SPEAKER)
+ICONS["audio-volume-low-symbolic"] = svg(g(wave([4, 6, 8, 6, 4])))
+ICONS["audio-volume-medium-symbolic"] = svg(g(wave([4, 10, 12, 10, 4])))
+ICONS["audio-volume-high-symbolic"] = svg(g(wave([6, 12, 14, 12, 6])))
+# Over-amplified: every bar rails at the ceiling with square tops — a clipped signal. The flat line across all
+# five bars is the shape cue, so it still reads where the warning colour is flattened.
+ICONS["audio-volume-overamplified-symbolic"] = svg(g(wave([14, 14, 14, 14, 14], r=0), cls="warning"))
+# Muted: the wave gone flat, in the error colour. A 4-px bar, not a 2-px line: the desktop's red is only ~3:1 on
+# a dark panel (every neutral icon is 18:1), so the state needs the extra ink to hold its own in the bar.
+ICONS["audio-volume-muted-symbolic"] = svg(g(rect(1, 6, 14, 4, 2), cls="error"))
 
 # ── Microphone (owner decisions 2026-09-19 and 2026-09-24): the Shell shows this indicator ONLY while an app is
 #    recording, so the whole icon is drawn in the in-use colour (`warning` = orange, GNOME's privacy colour) — clear

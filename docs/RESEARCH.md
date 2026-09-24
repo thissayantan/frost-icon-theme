@@ -109,7 +109,19 @@ Verified against the installed GNOME Shell 50.1 JS (extracted from `libshell-18.
 - Sources: gnome-shell js/ui/status/{system,network,volume}.js, src/st/st-icon-theme.c, st-theme-node.c;
   docs.gtk.org/gtk4/icon-format.html; GNOME HIG UI icons; KDE HIG monochrome icons.
 
-## Speaker and microphone redraw (2026-09-24)
+## Volume: waveform, not a speaker (owner's design, 2026-09-24)
+The redrawn cone below was smooth but, in the owner's words, generic, and its muted state (dim wedge + slash) was
+badly balanced at OSD size. Three replacements were mocked up and rendered at 16/32/96 before choosing
+(`dist/preview/volume-ideas.png`): a waveform, a front-facing driver with parenthesis waves, and a rotary knob.
+- The **driver** collapses to a donut at 16 px (ring + cone + screws is too much detail) and reads as a record or
+  a power button; one-sided waves fight its symmetry.
+- The **knob** loses its ticks and pointer at 16 px and reads as a settings gear; pointer angle is the least
+  glanceable way to show a level in a panel.
+- The **waveform** wins on the one axis that defeated the cone: vertical bars land on whole pixels at every size,
+  so nothing blurs at 16 and nothing stair-steps at 96. Level maps to amplitude, and muting flattens the wave —
+  no slash to misalign. No mainstream theme ships this, which is the point.
+
+## Speaker and microphone redraw (2026-09-24, cone retired the same day)
 The owner saw a stair-stepped speaker in GNOME's volume OSD: `audio-volume-*` was pixel art (`cells()`), fine at
 16 px and blocky at every multiple. Measured from upstream sources before redrawing:
 - **GNOME Shell's OSD icon is 32 px**, not 96: `$large_icon_size` = `$base_icon_size * 2` since GNOME 42

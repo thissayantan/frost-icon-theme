@@ -189,7 +189,7 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 |---|---|---|
 | Normal / on | full glyph | none — the bar stays calm |
 | Level (signal, volume, mic, battery) | lit part full, remaining part at 35 % (mic: the capsule fills from the bottom, unlit at 55 % — orange at 35 % vanishes on a dark panel) | none |
-| Off (user turned it off) | glyph at 35 % with a 1-px gap + a 2-px `\` slash | none |
+| Off (user turned it off) | glyph at 35 % with a 1-px gap + a 2-px `\` slash (volume is the exception: the wave goes flat instead) | none |
 | Connecting | glyph at 35 % + three dots | none |
 | Connected, no internet | full glyph + "!" disc bottom-right | `warning` |
 | Unavailable / no network | glyph at 35 % + a solid 2-px "×" | none |
@@ -198,12 +198,16 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Charging | level fill untouched + a pixel bolt badge on the bottom-right corner (1-px moat) | bolt `success` |
 | Plugged in, not charging | level fill + a pixel plug badge on the corner | none |
 | Charged (100, on AC) | full fill (`success`) + a 2-px pixel check badge on the corner | fill + check `success` |
-| Volume | smooth speaker (box x0–3 + 45° cone, face x6) + three 2-px annular waves centred on the throat (3, 8), radii 4–6 / 7–9 / 10–12, clipped to x ≥ 7 so their inner ends are vertical on the grid; low · medium · high = 1 · 2 · 3 waves, unlit waves *not drawn*; muted shows the speaker alone | none |
+| Volume | a **waveform**, not a speaker: five 2-px bars at x 1/4/7/10/13 with round ends, centred on y 8, heights even so every edge is on the grid. low · medium · high = amplitudes [4,6,8,6,4] · [4,10,12,10,4] · [6,12,14,12,6]. Muted flattens the wave to one 4-px bar (§ below) | none |
 | Mic in use (the top-bar indicator exists only while recording) | centred mic: capsule x5–11 y1–11 (r3), cradle (8, 8) r4–6 swept 110°–250° so the arms clear the capsule, stem x7–9 y14–16; the capsule fills from the bottom with the level | whole icon `warning` (in-use colour) |
-| Over-amplified volume | speaker + the innermost wave + "!" disc (the badge moat would sever any wave past the first) | `warning` |
+| Over-amplified volume | every bar railed at the ceiling with square tops [14 × 5] — a clipped signal, a different shape from *high*, not just a heavier one | `warning` |
 
 Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!". `network-wired-offline` and
 `-disconnected` are identical on purpose (both mean "no cable/link").
+
+Muted volume is the one state that carries colour as well as shape: a flat 4-px bar in `error`. It is 4 px, not 2,
+because the desktop's red sits near 3:1 on a dark panel while neutral icons are ~18:1 — the ink makes up the
+difference. It still reads with the colour stripped, which is what COSMIC does.
 
 Every coloured state also changes *shape* ("!", ×, bolt, slash) — never colour alone (WCAG 1.4.1). Privacy
 indicators (camera, mic in use, screen share) stay one colour: the Shell already paints them.
