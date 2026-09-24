@@ -277,10 +277,10 @@ def volume(level):
 ICONS["audio-volume-low-symbolic"] = volume(1)
 ICONS["audio-volume-medium-symbolic"] = volume(2)
 ICONS["audio-volume-high-symbolic"] = volume(3)
-# Over-amplified: the badge (+ its 1-px moat) would carve the outer wave into a floating hook, so this state keeps
-# the inner two waves only — the "!" disc is what carries the meaning.
+# Over-amplified: the badge (+ its 1-px moat) reaches x≈8 at the equator, so it severs any wave past the first.
+# This state keeps wave 1 only — the "!" disc is what carries the meaning.
 ICONS["audio-volume-overamplified-symbolic"] = svg(
-    f'<g clip-path="url(#cutb)">{g(SPEAKER)}{g(WAVES[0] + WAVES[1], clip="waves")}</g>' + badge_bang("warning"),
+    f'<g clip-path="url(#cutb)">{g(SPEAKER)}{g(WAVES[0], clip="waves")}</g>' + badge_bang("warning"),
     cut_badge() + WAVE_CLIP)
 # Muted: the speaker alone under the slash. Dimming three waves as well turned the 16-px icon into grey texture,
 # and §8 already says unlit waves are not drawn.
@@ -296,7 +296,7 @@ ICONS["audio-volume-muted-symbolic"] = off(SPEAKER)
 #    (105°–255°) so they cannot fuse with it, and the unlit part sits at 55 %: orange at 35 % disappears on a dark
 #    panel (≈2:1).
 MIC_CAPSULE = rect(5, 1, 6, 10, 3)
-MIC_BODY = sector(8, 8, 4, 6, 105, 255) + rect(7, 14, 2, 2)  # cradle (2-px wall) + stem, both ending on pixels
+MIC_BODY = sector(8, 8, 4, 6, 110, 250) + rect(7, 14, 2, 2)  # cradle (2-px wall) + stem, both ending on pixels
 MIC_ALL = MIC_CAPSULE + MIC_BODY
 MIC_LEVELS = {0: 8, 1: 4, 2: 1}  # low / medium / high: the capsule is solid from this whole-pixel row downwards
 MIC_DIM = ".55"

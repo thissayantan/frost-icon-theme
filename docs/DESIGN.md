@@ -199,8 +199,8 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Plugged in, not charging | level fill + a pixel plug badge on the corner | none |
 | Charged (100, on AC) | full fill (`success`) + a 2-px pixel check badge on the corner | fill + check `success` |
 | Volume | smooth speaker (box x0–3 + 45° cone, face x6) + three 2-px annular waves centred on the throat (3, 8), radii 4–6 / 7–9 / 10–12, clipped to x ≥ 7 so their inner ends are vertical on the grid; low · medium · high = 1 · 2 · 3 waves, unlit waves *not drawn*; muted shows the speaker alone | none |
-| Mic in use (the top-bar indicator exists only while recording) | centred mic: capsule x5–11 y1–11 (r3), cradle (8, 8) r4–6 swept 105°–255° so the arms clear the capsule, stem x7–9 y14–16; the capsule fills from the bottom with the level | whole icon `warning` (in-use colour) |
-| Over-amplified volume | full waves + "!" disc | `warning` |
+| Mic in use (the top-bar indicator exists only while recording) | centred mic: capsule x5–11 y1–11 (r3), cradle (8, 8) r4–6 swept 110°–250° so the arms clear the capsule, stem x7–9 y14–16; the capsule fills from the bottom with the level | whole icon `warning` (in-use colour) |
+| Over-amplified volume | speaker + the innermost wave + "!" disc (the badge moat would sever any wave past the first) | `warning` |
 
 Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!". `network-wired-offline` and
 `-disconnected` are identical on purpose (both mean "no cable/link").
