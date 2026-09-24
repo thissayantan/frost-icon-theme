@@ -62,6 +62,23 @@ def poly(*pts):
     return "M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts) + "z"
 
 
+def roundpoly(pts, r):
+    """A closed polygon with every corner rounded to radius `r` (quadratic joins) — one subpath."""
+    n = len(pts); segs = []
+    for k in range(n):
+        p0, p1, p2 = pts[k - 1], pts[k], pts[(k + 1) % n]
+        def toward(a, b, d):
+            L = math.hypot(b[0] - a[0], b[1] - a[1]); d = min(d, L / 2)
+            return (a[0] + (b[0] - a[0]) * d / L, a[1] + (b[1] - a[1]) * d / L)
+        segs.append((toward(p1, p0, r), p1, toward(p1, p2, r)))
+    d = f"M{f(segs[0][0][0])} {f(segs[0][0][1])}"
+    for k, (a, p, b) in enumerate(segs):
+        if k:
+            d += f"L{f(a[0])} {f(a[1])}"
+        d += f"Q{f(p[0])} {f(p[1])} {f(b[0])} {f(b[1])}"
+    return d + "z"
+
+
 def thick(points, w=2.0, round_=True):
     """A 'stroke' as filled geometry: one quad per segment (+ round joins/caps). Put in a group for opacity."""
     parts = []
@@ -241,48 +258,65 @@ ICONS["bluetooth-disabled-symbolic"] = svg(g(RUNE, dim=True, clip="cut") + g(thi
 RUNE_LOW = thick([(4, 4), (11, 8.5), (8, 11), (8, 1), (11, 3.5), (4, 8)], 2)
 ICONS["bluetooth-acquiring-symbolic"] = acquiring(f'<path d="{RUNE_LOW}" {FG}/>')
 
-# ── Volume: pixel-exact speaker (researched 2026-09-20 — Fluent/Windows 11, Adwaita, Material, SF Symbols all use
-#    a big solid speaker + few bold, evenly spaced waves at 16 px, drawn on the pixel grid). Heavy speaker (box + 45°
-#    stepped cone, rows 2–13), wave 1 = filled half-disc (Material's weight), waves 2–3 = 2-px arcs, 1-px gaps.
-#    Levels low/medium/high = 1/2/3 waves; unlit waves are not drawn (Windows way — dim waves cluttered it).
-SPEAKER = cells([".....#", "....##", "...###", ".#####", "######", "######",
-                 "######", "######", ".#####", "...###", "....##", ".....#"], 0, 2)
-WAVES = [
-    cells(["#.", "##", "##", "##", "##", "#."], 7, 5),                                         # half-disc
-    cells(["#..", "##.", ".##", ".##", ".##", ".##", ".##", ".##", "##.", "#.."], 10, 3),      # arc
-    cells(["#..", "##.", ".##"] + [".##"] * 8 + ["##.", "#.."], 13, 1),                       # outer arc
-]
+# ── Volume (redrawn 2026-09-24): smooth geometry, not pixel art — the same file is shown at 16 px in the bar, 22 px
+#    in KDE's tray and 32 px in GNOME's OSD ($large_icon_size since GNOME 42), where stair-stepped pixels were
+#    obvious. Measured against Adwaita (box + 45° cone + annular waves centred on the throat) and Breeze.
+#    Every band edge lands on a whole pixel along the equator (x = 3 + r → 7|9, 10|12, 13|15: 2-px bands, 1-px
+#    gaps), and the waves are clipped at x = 7 so their inner ends are vertical on a pixel boundary instead of
+#    radial tips that fuse with the cone face at x = 6. Half-angles keep the outermost tip a pixel clear of the
+#    canvas (8 − 12·sin 35° = 1.1). Levels low/medium/high = 1/2/3 waves (owner's choice); unlit waves not drawn.
+SPEAKER = roundpoly([(0, 6), (3, 6), (6, 3), (6, 13), (3, 10), (0, 10)], 1)
+WAVES = [sector(3, 8, r0, r1, 90 - a, 90 + a) for r0, r1, a in ((4, 6, 55), (7, 9, 48), (10, 12, 35))]
+WAVE_CLIP = '<clipPath id="waves"><path d="M7 0H16V16H7z"/></clipPath>'  # vertical ends, 1-px gap from the cone
 
 
 def volume(level):
-    return svg(g(SPEAKER + "".join(WAVES[:level])))
+    return svg(g(SPEAKER) + g("".join(WAVES[:level]), clip="waves"), WAVE_CLIP)
 
 
-SPEAKER_ALL = SPEAKER + "".join(WAVES)
 ICONS["audio-volume-low-symbolic"] = volume(1)
 ICONS["audio-volume-medium-symbolic"] = volume(2)
 ICONS["audio-volume-high-symbolic"] = volume(3)
-ICONS["audio-volume-overamplified-symbolic"] = with_badge(g(SPEAKER_ALL), badge_bang("warning"))
-ICONS["audio-volume-muted-symbolic"] = off(SPEAKER_ALL)
+# Over-amplified: the badge (+ its 1-px moat) would carve the outer wave into a floating hook, so this state keeps
+# the inner two waves only — the "!" disc is what carries the meaning.
+ICONS["audio-volume-overamplified-symbolic"] = svg(
+    f'<g clip-path="url(#cutb)">{g(SPEAKER)}{g(WAVES[0] + WAVES[1], clip="waves")}</g>' + badge_bang("warning"),
+    cut_badge() + WAVE_CLIP)
+# Muted: the speaker alone under the slash. Dimming three waves as well turned the 16-px icon into grey texture,
+# and §8 already says unlit waves are not drawn.
+ICONS["audio-volume-muted-symbolic"] = off(SPEAKER)
 
-# ── Microphone (owner decision 2026-09-19): the Shell shows this indicator ONLY while an app is recording, so the
-#    whole icon is drawn in the in-use colour (`warning` = orange, GNOME's privacy colour) — clear under Dash to
-#    Panel too, whose panel does not get Yaru's `.privacy-indicator` CSS colour. Shape: a solid mic + two sound arcs
-#    (as Yaru), the input level lit arc by arc (low: both dim, medium: one, high: both). Muted = neutral + slash.
-MIC = rect(1, 1, 6, 9, 3) + sector(4, 6, 4.5, 6, 100, 260) + rect(3, 12, 2, 2) + rect(1, 14, 6, 2, 1)
-MIC_ARCS = [sector(4, 5.5, 7.5, 9.2, 55, 125), sector(4, 5.5, 10.5, 12, 58, 122)]  # 1-px gaps from the stand
+# ── Microphone (owner decisions 2026-09-19 and 2026-09-24): the Shell shows this indicator ONLY while an app is
+#    recording, so the whole icon is drawn in the in-use colour (`warning` = orange, GNOME's privacy colour) — clear
+#    under Dash to Panel too, whose panel does not get Yaru's `.privacy-indicator` CSS colour. (Trade-off: Settings
+#    ▸ Sound shows the same names, so the mic reads orange there too; `audio-input-microphone` stays neutral.)
+#    Redrawn centred and symmetric (the old capsule sat at x 1–7 and its arcs left the canvas): capsule, U cradle,
+#    stem, no foot bar (as Adwaita, Material, Fluent). The input level fills the capsule from the bottom like a
+#    meter (Adwaita's idiom), so the silhouette never moves. The cradle arms start below the capsule's widest row
+#    (105°–255°) so they cannot fuse with it, and the unlit part sits at 55 %: orange at 35 % disappears on a dark
+#    panel (≈2:1).
+MIC_CAPSULE = rect(5, 1, 6, 10, 3)
+MIC_BODY = sector(8, 8, 4, 6, 105, 255) + rect(7, 14, 2, 2)  # cradle (2-px wall) + stem, both ending on pixels
+MIC_ALL = MIC_CAPSULE + MIC_BODY
+MIC_LEVELS = {0: 8, 1: 4, 2: 1}  # low / medium / high: the capsule is solid from this whole-pixel row downwards
+MIC_DIM = ".55"
 
 
 def mic(level, live=True):
-    lit, dim = "".join(MIC_ARCS[:level]), "".join(MIC_ARCS[level:])
+    """Solid mic; the capsule above the level line drops to 55 %, the rest stays full strength."""
     cls = "warning" if live else None
-    return svg(g(MIC, cls=cls) + (g(lit, cls=cls) if lit else "") + (g(dim, dim=True, cls=cls) if dim else ""))
+    top = MIC_LEVELS[level]
+    if top == 1:
+        return svg(g(MIC_ALL, cls=cls))
+    clip = f'<clipPath id="lit"><path d="{rect(5, top, 6, 11 - top)}"/></clipPath>'
+    unlit = f'<g opacity="{MIC_DIM}">{g(MIC_CAPSULE, cls=cls)}</g>'
+    return svg(g(MIC_BODY, cls=cls) + unlit + g(MIC_CAPSULE, cls=cls, clip="lit"), clip)
 
 
 ICONS["microphone-sensitivity-low-symbolic"] = mic(0)
 ICONS["microphone-sensitivity-medium-symbolic"] = mic(1)
 ICONS["microphone-sensitivity-high-symbolic"] = mic(2)
-ICONS["microphone-sensitivity-muted-symbolic"] = off(MIC + "".join(MIC_ARCS))
+ICONS["microphone-sensitivity-muted-symbolic"] = off(MIC_ALL)
 ICONS["audio-input-microphone-symbolic"] = mic(2, live=False)  # device icon (Settings, lists): not "in use"
 
 # ── Battery: 1-px frame on whole pixels; the level is NEVER covered. Charging/plug marks

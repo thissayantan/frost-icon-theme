@@ -188,7 +188,7 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | State | How it looks | Colour |
 |---|---|---|
 | Normal / on | full glyph | none — the bar stays calm |
-| Level (signal, volume, mic, battery) | lit part full, remaining part at 35 % (mic: solid mic, level = lit sound arcs) | none |
+| Level (signal, volume, mic, battery) | lit part full, remaining part at 35 % (mic: the capsule fills from the bottom, unlit at 55 % — orange at 35 % vanishes on a dark panel) | none |
 | Off (user turned it off) | glyph at 35 % with a 1-px gap + a 2-px `\` slash | none |
 | Connecting | glyph at 35 % + three dots | none |
 | Connected, no internet | full glyph + "!" disc bottom-right | `warning` |
@@ -198,8 +198,8 @@ Monochrome, recoloured by the Shell; 16 × 16 grid, filled shapes only. **The st
 | Charging | level fill untouched + a pixel bolt badge on the bottom-right corner (1-px moat) | bolt `success` |
 | Plugged in, not charging | level fill + a pixel plug badge on the corner | none |
 | Charged (100, on AC) | full fill (`success`) + a 2-px pixel check badge on the corner | fill + check `success` |
-| Volume | pixel-exact speaker (box + stepped cone) + filled half-disc + two 2-px arcs; low · medium · high = 1 · 2 · 3 waves, unlit waves *not drawn* (Fluent/Windows way) | none |
-| Mic in use (the top-bar indicator exists only while recording) | solid mic + two sound arcs lit by input level | whole icon `warning` (in-use colour) |
+| Volume | smooth speaker (box x0–3 + 45° cone, face x6) + three 2-px annular waves centred on the throat (3, 8), radii 4–6 / 7–9 / 10–12, clipped to x ≥ 7 so their inner ends are vertical on the grid; low · medium · high = 1 · 2 · 3 waves, unlit waves *not drawn*; muted shows the speaker alone | none |
+| Mic in use (the top-bar indicator exists only while recording) | centred mic: capsule x5–11 y1–11 (r3), cradle (8, 8) r4–6 swept 105°–255° so the arms clear the capsule, stem x7–9 y14–16; the capsule fills from the bottom with the level | whole icon `warning` (in-use colour) |
 | Over-amplified volume | full waves + "!" disc | `warning` |
 
 Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!". `network-wired-offline` and
@@ -207,6 +207,11 @@ Battery fill: 9 columns (20 % → 1 … 100 % → 9); 10 % and 0 % show the "!".
 
 Every coloured state also changes *shape* ("!", ×, bolt, slash) — never colour alone (WCAG 1.4.1). Privacy
 indicators (camera, mic in use, screen share) stay one colour: the Shell already paints them.
+
+**Smooth, not pixel art.** The same file is drawn at 16 px in the bar, 22 px in KDE's tray and 32 px in GNOME's
+volume OSD (`$large_icon_size` since GNOME 42; older shells and Cinnamon use 96). Stair-stepped pixel art was
+obvious at those sizes, so status art is vector: flat edges on whole pixels, arcs as filled annular sectors (a
+stroke would be dropped by St and by KDE), only radii on halves. Minimum feature 2 px, minimum gap 1 px (GNOME HIG); a badge and its 1-px moat may force a state to drop its outermost element rather than have it carved into a fragment.
 
 **One file, every desktop.** Each painted path is `fill="currentColor"` with a KDE colour-scheme class beside the
 GTK state class (`class="success ColorScheme-PositiveText"`, plain shapes `ColorScheme-Text`), and the file carries

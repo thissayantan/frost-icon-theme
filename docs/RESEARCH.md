@@ -109,6 +109,28 @@ Verified against the installed GNOME Shell 50.1 JS (extracted from `libshell-18.
 - Sources: gnome-shell js/ui/status/{system,network,volume}.js, src/st/st-icon-theme.c, st-theme-node.c;
   docs.gtk.org/gtk4/icon-format.html; GNOME HIG UI icons; KDE HIG monochrome icons.
 
+## Speaker and microphone redraw (2026-09-24)
+The owner saw a stair-stepped speaker in GNOME's volume OSD: `audio-volume-*` was pixel art (`cells()`), fine at
+16 px and blocky at every multiple. Measured from upstream sources before redrawing:
+- **GNOME Shell's OSD icon is 32 px**, not 96: `$large_icon_size` = `$base_icon_size * 2` since GNOME 42
+  (`data/theme/gnome-shell-sass/_variables.scss`, `widgets/_osd.scss`). 96 px (6×) still applies to GNOME ≤ 41 and
+  Cinnamon. Both are integer multiples of 16, so whole and half coordinates stay sharp.
+- **Adwaita** `audio-volume-high-symbolic`: one silhouette, box x0–3/y5–11 (r≈2) + 45° cone to x7/y1–15; waves are
+  2-px annular sectors centred (6, 8) at r 4–6 and 8–10, sweeps ±34–48°, semicircular ends. Levels dim the outer
+  wave (`fill-opacity .35/.67`) instead of removing it; muted adds a × rather than a slash.
+- **Breeze 16**: same construction with 1-px bands (they grey out at 100 %), centre (8, 8), **radial** arc ends, and
+  a 1-px slash with a measured 0.93-px moat. 22 px is redrawn, not scaled.
+- **Adwaita's mic** shows sensitivity by filling the capsule from the bottom (the rest at `fill-opacity .67`), which
+  keeps the silhouette identical across levels — Frost now does the same at 35 %.
+- HIG rules applied: GNOME "2-px features, avoid 1 px, align to the pixel grid"; KDE "16-px monochrome icons should
+  not use the top or bottom 2 pixels", badges ≥ 5 px with a 1-px moat.
+- Three 2-px waves do not fit beside a wide speaker at 16 px (every upstream set ships two). The owner wanted three,
+  so the body is narrower (box x1–4, face x7) and the bands are 1.6 px with 0.8-px gaps.
+- Arcs must be filled annular sectors: St and KIconLoader recolour `fill` only, and butt-capped arc ends splay at
+  ±50° and blur at 16 px.
+  Sources: developer.gnome.org/hig/guidelines/ui-icons.html · develop.kde.org/hig/icons/monochrome/ ·
+  gitlab.gnome.org/GNOME/adwaita-icon-theme · github.com/KDE/breeze-icons · gitlab.gnome.org/GNOME/gnome-shell
+
 ## Live mic indicator (parked by the owner, 2026-09-19)
 - The top-bar mic icon is static (`microphone-sensitivity-*` follows the input-volume slider, not live audio).
   A live meter needs a Shell extension: GStreamer `pulsesrc ! level` with `application.id=org.gnome.VolumeControl`
